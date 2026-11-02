@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Free YouTube Timestamp Generator · Jump-To Link Creator</title>
+<meta name="description" content="Create precise YouTube timestamp links, embed codes, and chapter lists instantly. 100% client-side, ad-free, blazing fast." />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
+  * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+  html { scroll-behavior: smooth; }
+  body { background: #f8fafc; color: #0f172a; }
+  .dark body { background: #0b1120; color: #e2e8f0; }
+  .glass-panel {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(226,232,240,0.8);
+    box-shadow: 0 20px 60px -20px rgba(15,23,42,0.15);
+  }
+  .dark .glass-panel {
+    background: rgba(15,23,42,0.7);
+    border-color: rgba(51,65,85,0.6);
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+  .glass-card {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(226,232,240,0.8);
+    transition: all .25s ease;
+  }
+  .dark .glass-card {
+    background: rgba(30,41,59,0.5);
+    border-color: rgba(51,65,85,0.5);
+  }
+  .glass-card:hover {
+    transform: translateY(-2px);
+    border-color: #6366f1;
+    box-shadow: 0 12px 32px -8px rgba(99,102,241,0.25);
+  }
+  .btn-primary {
+    background: #0f172a; color: #fff;
+    transition: all .2s ease;
+  }
+  .dark .btn-primary { background: #fff; color: #0f172a; }
+  .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+  .output-box {
+    background: rgba(241,245,249,0.9);
+    border: 1px solid rgba(203,213,225,0.9);
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: .8rem;
+    word-break: break-all;
+    transition: border-color .2s;
+  }
+  .dark .output-box {
+    background: rgba(15,23,42,0.9);
+    border-color: rgba(51,65,85,0.9);
+  }
+  .output-box:hover { border-color: #6366f1; }
+  .toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #10b981; color: #022c22;
+    padding: 12px 28px; border-radius: 999px;
+    font-weight: 600; font-size: .875rem;
+    box-shadow: 0 10px 30px -8px rgba(16,185,129,0.6);
+    opacity: 0; transition: all .35s cubic-bezier(.16,1,.3,1);
+    z-index: 9999; pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  input[type=number]::-webkit-inner-spin-button { opacity: .3; }
+  input:focus, button:focus-visible { outline: 2px solid #6366f1; outline-offset: 2px; }
+  .fade-in { animation: fadeIn .5s ease both; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .scroll-thin::-webkit-scrollbar { width: 6px; }
+  .scroll-thin::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+  .chapter-row { transition: background .15s; }
+  .chapter-row:hover { background: rgba(99,102,241,0.08); }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- Toast -->
+<div id="toast" class="toast">Copied to clipboard ✓</div>
+
+<!-- Breadcrumb -->
+<div class="max-w-6xl mx-auto px-5 pt-6 pb-2 flex items-center justify-between text-sm">
+  <nav class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+    <a href="#" class="hover:text-indigo-500 transition">Home</a>
+    <span>/</span>
+    <a href="#" class="hover:text-indigo-500 transition">Tools</a>
+    <span>/</span>
+    <span class="text-slate-900 dark:text-white font-medium">YouTube Timestamp Generator</span>
+  </nav>
+  <div class="hidden sm:flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+    <i data-lucide="globe" class="w-3.5 h-3.5"></i><span>USA · UK · DE</span>
+  </div>
+</div>
+
+<!-- Hero -->
+<header class="max-w-6xl mx-auto px-5 pt-8 pb-10 text-center fade-in">
+  <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-600 dark:text-indigo-300 text-xs font-medium mb-5">
+    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Lightning-fast · 100% client-side · Zero ads
+  </div>
+  <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+    Free YouTube Timestamp Link Generator<br>
+    <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Create Jump-To Video Links</span>
+  </h1>
+  <p class="mt-5 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+    Paste any YouTube URL, pick your time, and instantly get formatted timestamp links, embed codes, markdown, and chapter lists.
+  </p>
+  <div class="mt-6 flex flex-wrap justify-center gap-3 text-sm">
+    <span class="inline-flex items-center gap-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-3 py-1.5 rounded-full"><i data-lucide="zap" class="w-4 h-4"></i> Zero ads</span>
+    <span class="inline-flex items-center gap-1.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 px-3 py-1.5 rounded-full"><i data-lucide="shield-check" class="w-4 h-4"></i> 100% private</span>
+    <span class="inline-flex items-center gap-1.5 bg-purple-500/10 text-purple-600 dark:text-purple-400 px-3 py-1.5 rounded-full"><i data-lucide="gauge" class="w-4 h-4"></i> Instant</span>
+  </div>
+</header>
+
+<!-- CORE TOOL -->
+<main class="max-w-6xl mx-auto px-5 pb-20">
+  <div class="glass-panel rounded-3xl p-6 md:p-10">
+
+    <!-- URL Input + Preview -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+      <div class="lg:col-span-2">
+        <label class="block text-sm font-semibold mb-2 flex items-center gap-2">
+          <i data-lucide="youtube" class="w-4 h-4 text-red-500"></i> YouTube Video URL or ID
+        </label>
+        <div class="flex gap-2">
+          <input id="videoInput" type="text" value="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            placeholder="https://youtu.be/dQw4w9WgXcQ or dQw4w9WgXcQ"
+            class="flex-1 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
+          <button id="loadBtn" class="btn-primary px-5 py-3 rounded-xl text-sm font-semibold flex items-center gap-2">
+            <i data-lucide="play" class="w-4 h-4"></i> Load
+          </button>
+        </div>
+        <p id="errorMsg" class="text-red-500 text-xs mt-2 hidden">Please enter a valid YouTube URL or 11-character video ID.</p>
+      </div>
+      <div class="flex items-center justify-center lg:justify-end">
+        <div id="thumbContainer" class="w-full lg:w-56 aspect-video rounded-xl overflow-hidden bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
+          <img id="thumbImg" src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Video preview" class="w-full h-full object-cover" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Time inputs -->
+    <div class="mb-6">
+      <div class="flex items-center justify-between mb-3">
+        <label class="text-sm font-semibold flex items-center gap-2">
+          <i data-lucide="clock" class="w-4 h-4 text-indigo-500"></i> Timestamp
+        </label>
+        <span id="formattedTime" class="font-mono text-sm px-3 py-1 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-300">02:05</span>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="relative">
+          <input id="hours" type="number" min="0" max="23" value="0"
+            class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-center text-xl font-mono font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-medium">HRS</span>
+        </div>
+        <div class="relative">
+          <input id="minutes" type="number" min="0" max="59" value="2"
+            class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-center text-xl font-mono font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-medium">MIN</span>
+        </div>
+        <div class="relative">
+          <input id="seconds" type="number" min="0" max="59" value="5"
+            class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-center text-xl font-mono font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-medium">SEC</span>
+        </div>
+        <div class="relative">
+          <input id="totalSeconds" type="number" min="0" value="125"
+            class="w-full px-4 py-3 rounded-xl border-2 border-indigo-400/50 dark:border-indigo-500/50 bg-indigo-50 dark:bg-indigo-950/30 text-center text-xl font-mono font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          <span class="absolute right-3 top-1/2 -translate-y-1/2 text-indigo-500 text-xs font-medium">TOTAL</span>
+        </div>
+      </div>
+      <div class="mt-4">
+        <input id="timeSlider" type="range" min="0" max="3600" value="125" class="w-full accent-indigo-500" />
+        <div class="flex justify-between text-xs text-slate-400 mt-1">
+          <span>0:00</span><span>15:00</span><span>30:00</span><span>45:00</span><span>1:00:00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Outputs -->
+    <div class="space-y-3 mb-6">
+      <div class="flex items-center justify-between">
+        <h3 class="text-sm font-semibold flex items-center gap-2">
+          <i data-lucide="link" class="w-4 h-4 text-indigo-500"></i> Generated Links
+        </h3>
+        <button id="copyAllBtn" class="text-xs flex items-center gap-1.5 text-slate-500 hover:text-indigo-500 transition">
+          <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy all
+        </button>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-medium w-24 shrink-0 text-slate-500">Standard</span>
+        <div id="stdLink" class="output-box flex-1 px-3 py-2.5 rounded-lg text-slate-700 dark:text-slate-300"></div>
+        <button data-copy="stdLink" class="copy-btn p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-indigo-500 hover:text-white transition" title="Copy"><i data-lucide="clipboard" class="w-4 h-4"></i></button>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-medium w-24 shrink-0 text-slate-500">Short</span>
+        <div id="shortLink" class="output-box flex-1 px-3 py-2.5 rounded-lg text-slate-700 dark:text-slate-300"></div>
+        <button data-copy="shortLink" class="copy-btn p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-indigo-500 hover:text-white transition" title="Copy"><i data-lucide="clipboard" class="w-4 h-4"></i></button>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-medium w-24 shrink-0 text-slate-500">Embed</span>
+        <div id="embedCode" class="output-box flex-1 px-3 py-2.5 rounded-lg text-slate-700 dark:text-slate-300 overflow-x-auto whitespace-nowrap"></div>
+        <button data-copy="embedCode" class="copy-btn p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-indigo-500 hover:text-white transition" title="Copy"><i data-lucide="clipboard" class="w-4 h-4"></i></button>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-medium w-24 shrink-0 text-slate-500">Markdown</span>
+        <div id="markdownLink" class="output-box flex-1 px-3 py-2.5 rounded-lg text-slate-700 dark:text-slate-300 overflow-x-auto whitespace-nowrap"></div>
+        <button data-copy="markdownLink" class="copy-btn p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-indigo-500 hover:text-white transition" title="Copy"><i data-lucide="clipboard" class="w-4 h-4"></i></button>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex flex-wrap gap-3 mb-10">
+      <button id="testLinkBtn" class="btn-primary px-6 py-3 rounded-xl text-sm font-semibold flex items-center gap-2">
+        <i data-lucide="external-link" class="w-4 h-4"></i> Test timestamp link
+      </button>
+    </div>
+
+    <!-- Chapter Builder -->
+    <div class="border-t border-slate-200 dark:border-slate-800 pt-8">
+      <h3 class="text-lg font-bold mb-1 flex items-center gap-2">
+        <i data-lucide="list-video" class="w-5 h-5 text-indigo-500"></i> Multi-Timestamp Chapter Builder
+      </h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Add multiple timestamps with labels to copy as a full chapter list for YouTube descriptions.</p>
+
+      <div class="flex flex-col sm:flex-row gap-2 mb-4">
+        <input id="chapterTime" placeholder="0:00" value="0:00"
+          class="w-28 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5 text-sm font-mono text-center focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        <input id="chapterLabel" placeholder="Chapter label" value="Intro"
+          class="flex-1 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        <button id="addChapterBtn" class="btn-primary px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center justify-center gap-1.5">
+          <i data-lucide="plus" class="w-4 h-4"></i> Add
+        </button>
+      </div>
+
+      <div id="chapterList" class="space-y-2 max-h-64 overflow-y-auto scroll-thin mb-4 pr-1"></div>
+
+      <div class="flex flex-wrap gap-2">
+        <button id="copyChaptersBtn" class="btn-primary px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2">
+          <i data-lucide="copy" class="w-4 h-4"></i> Copy chapter list
+        </button>
+        <button id="clearChaptersBtn" class="px-5 py-2.5 rounded-lg text-sm font-semibold border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          Clear all
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Why Grid -->
+<section class="max-w-6xl mx-auto px-5 pb-16">
+  <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center">Why use our timestamp generator?</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="glass-card rounded-2xl p-5">
+      <div class="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center mb-3"><i data-lucide="zap" class="w-5 h-5 text-indigo-500"></i></div>
+      <h3 class="font-semibold mb-1">Instant, zero-latency</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400">All processing happens in your browser. No server round trips, no waiting.</p>
+    </div>
+    <div class="glass-card rounded-2xl p-5">
+      <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-3"><i data-lucide="shield-off" class="w-5 h-5 text-emerald-500"></i></div>
+      <h3 class="font-semibold mb-1">Ad-free & private</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400">No tracking, no ads. Your video URLs never leave your device.</p>
+    </div>
+    <div class="glass-card rounded-2xl p-5">
+      <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center mb-3"><i data-lucide="layers" class="w-5 h-5 text-purple-500"></i></div>
+      <h3 class="font-semibold mb-1">Multi-format export</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400">Standard URLs, short links, embed iframes, markdown, and chapters.</p>
+    </div>
+    <div class="glass-card rounded-2xl p-5">
+      <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center mb-3"><i data-lucide="timer" class="w-5 h-5 text-amber-500"></i></div>
+      <h3 class="font-semibold mb-1">Precise time control</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400">H:M:S inputs, total seconds, and a slider for perfect jumps.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Steps -->
+<section class="max-w-6xl mx-auto px-5 pb-16">
+  <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center">How to create a timestamp link</h2>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="glass-card rounded-2xl p-5">
+      <div class="text-xs font-bold text-indigo-500 mb-2">STEP 1</div>
+      <h3 class="font-semibold mb-1">Paste your video</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400">Copy any YouTube URL or video ID into the input field above.</p>
+    </div>
+    <div class="glass-card rounded-2xl p-5">
+      <div class="text-xs font-bold text-indigo-500 mb-2">STEP 2</div>
+      <h3 class="font-semibold mb-1">Set your time</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400">Enter hours, minutes, seconds, or total seconds — everything syncs live.</p>
+    </div>
+    <div class="glass-card rounded-2xl p-5">
+      <div class="text-xs font-bold text-indigo-500 mb-2">STEP 3</div>
+      <h3 class="font-semibold mb-1">Copy your link</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400">Choose from standard, short, embed, or markdown format — one-click copy.</p>
+    </div>
+    <div class="glass-card rounded-2xl p-5">
+      <div class="text-xs font-bold text-indigo-500 mb-2">STEP 4</div>
+      <h3 class="font-semibold mb-1">Share & test</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400">Hit "Test link" to verify, then drop the URL into comments, descriptions, or blogs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison -->
+<section class="max-w-4xl mx-auto px-5 pb-16">
+  <h2 class="text-2xl md:text-3xl font-bold mb-4 text-center">Why we're better than legacy timestamp tools</h2>
+  <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
+    <table class="w-full text-sm">
+      <thead class="bg-slate-100 dark:bg-slate-800/60">
+        <tr>
+          <th class="px-4 py-3 text-left font-semibold">Feature</th>
+          <th class="px-4 py-3 text-left font-semibold text-indigo-600 dark:text-indigo-400">Ours</th>
+          <th class="px-4 py-3 text-left font-semibold text-slate-500">Yttimestamp.com</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+        <tr><td class="px-4 py-3">Ad-free</td><td class="px-4 py-3 text-emerald-600 dark:text-emerald-400 font-medium">✓ Always</td><td class="px-4 py-3 text-slate-400">Heavy ads</td></tr>
+        <tr><td class="px-4 py-3">Multi-chapter builder</td><td class="px-4 py-3 text-emerald-600 dark:text-emerald-400 font-medium">✓ Included</td><td class="px-4 py-3 text-slate-400">Missing</td></tr>
+        <tr><td class="px-4 py-3">Client-side processing</td><td class="px-4 py-3 text-emerald-600 dark:text-emerald-400 font-medium">✓ 100%</td><td class="px-4 py-3 text-slate-400">Server calls</td></tr>
+        <tr><td class="px-4 py-3">Dark mode</td><td class="px-4 py-3 text-emerald-600 dark:text-emerald-400 font-medium">✓ Yes</td><td class="px-4 py-3 text-slate-400">Light only</td></tr>
+        <tr><td class="px-4 py-3">Markdown export</td><td class="px-4 py-3 text-emerald-600 dark:text-emerald-400 font-medium">✓ Yes</td><td class="px-4 py-3 text-slate-400">Missing</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="max-w-4xl mx-auto px-5 pb-16">
+  <h2 class="text-2xl md:text-3xl font-bold mb-4 text-center">Frequently asked questions</h2>
+  <div class="space-y-3">
+    <details class="glass-card rounded-2xl p-5 group cursor-pointer">
+      <summary class="font-semibold list-none flex justify-between items-center">How do I create a YouTube link that starts at a specific time?<i data-lucide="chevron-down" class="w-4 h-4 group-open:rotate-180 transition"></i></summary>
+      <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Paste your video URL, set the time above, and copy the generated link. The tool appends <code class="bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-xs">?t=…s</code> so it jumps directly.</p>
+    </details>
+    <details class="glass-card rounded-2xl p-5 group cursor-pointer">
+      <summary class="font-semibold list-none flex justify-between items-center">Does this work for YouTube Shorts?<i data-lucide="chevron-down" class="w-4 h-4 group-open:rotate-180 transition"></i></summary>
+      <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Yes — the timestamp format works across regular videos and Shorts. Just paste the Shorts URL and the tool extracts the ID automatically.</p>
+    </details>
+    <details class="glass-card rounded-2xl p-5 group cursor-pointer">
+      <summary class="font-semibold list-none flex justify-between items-center">Can I create a chapter list for my video description?<i data-lucide="chevron-down" class="w-4 h-4 group-open:rotate-180 transition"></i></summary>
+      <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">Absolutely — use the Chapter Builder to add timestamps and labels, then copy the whole list in one click.</p>
+    </details>
+    <details class="glass-card rounded-2xl p-5 group cursor-pointer">
+      <summary class="font-semibold list-none flex justify-between items-center">Is my data ever sent to a server?<i data-lucide="chevron-down" class="w-4 h-4 group-open:rotate-180 transition"></i></summary>
+      <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">No. Everything runs entirely in your browser. Your video URLs and inputs never leave your device.</p>
+    </details>
+  </div>
+</section>
+
+<!-- Related tools -->
+<footer class="border-t border-slate-200 dark:border-slate-800 py-8">
+  <div class="max-w-6xl mx-auto px-5">
+    <p class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-3 text-center">Related tools</p>
+    <div class="flex flex-wrap justify-center gap-4 text-sm">
+      <a href="#" class="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-indigo-500 transition"><i data-lucide="link-2" class="w-4 h-4"></i> URL Shortener</a>
+      <a href="#" class="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-indigo-500 transition"><i data-lucide="image" class="w-4 h-4"></i> Thumbnail Downloader</a>
+      <a href="#" class="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-indigo-500 transition"><i data-lucide="file-text" class="w-4 h-4"></i> Subtitle Extractor</a>
+      <a href="#" class="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-indigo-500 transition"><i data-lucide="clock" class="w-4 h-4"></i> Time Zone Converter</a>
+    </div>
+    <p class="text-center text-xs text-slate-400 mt-6">© 2025 YouTube Timestamp Generator · Free forever</p>
+  </div>
+</footer>
+
+<!-- JSON-LD Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Free YouTube Timestamp Link Generator",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Create precise YouTube timestamp links, embed codes, and chapter lists instantly. 100% client-side and ad-free."
+}
+</script>
+
+<script>
+(function(){
+  'use strict';
+  lucide.createIcons();
+
+  // Elements
+  const $ = id => document.getElementById(id);
+  const videoInput = $('videoInput'), loadBtn = $('loadBtn'), errorMsg = $('errorMsg');
+  const thumbImg = $('thumbImg'), thumbContainer = $('thumbContainer');
+  const hoursInput = $('hours'), minutesInput = $('minutes'), secondsInput = $('seconds');
+  const totalSecondsInput = $('totalSeconds'), timeSlider = $('timeSlider');
+  const formattedTime = $('formattedTime');
+  const stdLink = $('stdLink'), shortLink = $('shortLink'), embedCode = $('embedCode'), markdownLink = $('markdownLink');
+  const toast = $('toast');
+  const chapterTime = $('chapterTime'), chapterLabel = $('chapterLabel');
+  const addChapterBtn = $('addChapterBtn'), chapterList = $('chapterList');
+  const copyChaptersBtn = $('copyChaptersBtn'), clearChaptersBtn = $('clearChaptersBtn');
+
+  // State
+  let videoId = 'dQw4w9WgXcQ';
+  let totalSeconds = 125;
+  let chapters = [
+    { time: '0:00', label: 'Intro' },
+    { time: '1:30', label: 'Setup' },
+    { time: '2:05', label: 'Demo' }
+  ];
+
+  // --- Utilities ---
+  function formatTime(sec) {
+    sec = Math.max(0, Math.floor(sec));
+    const h = Math.floor(sec/3600), m = Math.floor((sec%3600)/60), s = sec%60;
+    return h > 0 ? `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`
+                 : `${m}:${String(s).padStart(2,'0')}`;
+  }
+  function formatShort(sec) {
+    sec = Math.max(0, Math.floor(sec));
+    const h = Math.floor(sec/3600), m = Math.floor((sec%3600)/60), s = sec%60;
+    let p = [];
+    if (h) p.push(h+'h');
+    if (m) p.push(m+'m');
+    if (s) p.push(s+'s');
+    return p.length ? p.join('') : '0s';
+  }
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => toast.classList.remove('show'), 1800);
+  }
+  function copyText(text, msg) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => showToast(msg || 'Copied to clipboard ✓'))
+        .catch(() => fallbackCopy(text, msg));
+    } else {
+      fallbackCopy(text, msg);
+    }
+  }
+  function fallbackCopy(text, msg) {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast(msg || 'Copied to clipboard ✓'); }
+    catch(e) { showToast('Copy failed'); }
+    document.body.removeChild(ta);
+  }
+
+  // --- Video ID parsing ---
+  function extractVideoId(input) {
+    if (!input) return null;
+    input = input.trim();
+    if (/^[a-zA-Z0-9_-]{11}$/.test(input)) return input;
+    try {
+      const url = new URL(input.startsWith('http') ? input : 'https://' + input);
+      let vid = null;
+      if (url.hostname === 'youtu.be') vid = url.pathname.slice(1).split(/[/?]/)[0];
+      else if (url.hostname.includes('youtube.com')) {
+        if (url.searchParams.has('v')) vid = url.searchParams.get('v');
+        else if (url.pathname.startsWith('/embed/')) vid = url.pathname.split('/')[2];
+        else if (url.pathname.startsWith('/shorts/')) vid = url.pathname.split('/')[2];
+        else if (url.pathname.startsWith('/v/')) vid = url.pathname.split('/')[2];
+      }
+      if (vid && /^[a-zA-Z0-9_-]{11}$/.test(vid)) return vid;
+    } catch(e) {}
+    return null;
+  }
+
+  // --- Render outputs ---
+  function updateOutputs() {
+    const sec = totalSeconds;
+    const base = 'https://youtu.be/' + videoId;
+
+    stdLink.textContent = base + '?t=' + sec + 's';
+    shortLink.textContent = base + '?t=' + formatShort(sec);
+    embedCode.textContent = `<iframe src="https://www.youtube.com/embed/${videoId}?start=${sec}" width="560" height="315" frameborder="0" allowfullscreen></iframe>`;
+    markdownLink.textContent = `[Watch at ${formatTime(sec)}](${base}?t=${sec}s)`;
+    formattedTime.textContent = formatTime(sec);
+  }
+
+  // --- Sync time state & inputs ---
+  function setTotalSeconds(sec) {
+    totalSeconds = Math.max(0, Math.floor(sec));
+    totalSecondsInput.value = totalSeconds;
+    hoursInput.value = Math.floor(totalSeconds / 3600);
+    minutesInput.value = Math.floor((totalSeconds % 3600) / 60);
+    secondsInput.value = totalSeconds % 60;
+    timeSlider.value = Math.min(totalSeconds, 3600);
+    updateOutputs();
+  }
+  function setFromHMS() {
+    const h = Math.max(0, parseInt(hoursInput.value) || 0);
+    const m = Math.max(0, parseInt(minutesInput.value) || 0);
+    const s = Math.max(0, parseInt(secondsInput.value) || 0);
+    // normalize via total
+    totalSeconds = h * 3600 + m * 60 + s;
+    totalSecondsInput.value = totalSeconds;
+    timeSlider.value = Math.min(totalSeconds, 3600);
+    // reflect normalized H/M/S
+    hoursInput.value = Math.floor(totalSeconds / 3600);
+    minutesInput.value = Math.floor((totalSeconds % 3600) / 60);
+    secondsInput.value = totalSeconds % 60;
+    updateOutputs();
+  }
+
+  // --- Load video ---
+  function loadVideo() {
+    const raw = videoInput.value;
+    const vid = extractVideoId(raw);
+    if (!vid) {
+      errorMsg.classList.remove('hidden');
+      videoInput.classList.add('border-red-500');
+      return;
+    }
+    errorMsg.classList.add('hidden');
+    videoInput.classList.remove('border-red-500');
+    videoId = vid;
+    thumbImg.src = `https://img.youtube.com/vi/${vid}/mqdefault.jpg`;
+    updateOutputs();
+    showToast('Video loaded ✓');
+  }
+
+  // --- Chapter rendering ---
+  function renderChapters() {
+    chapterList.innerHTML = '';
+    if (chapters.length === 0) {
+      chapterList.innerHTML = '<p class="text-sm text-slate-400 text-center py-6">No chapters yet — add your first above.</p>';
+      return;
+    }
+    chapters.forEach((ch, i) => {
+      const row = document.createElement('div');
+      row.className = 'chapter-row flex items-center justify-between bg-slate-50 dark:bg-slate-800/50 px-3 py-2.5 rounded-lg text-sm group border border-slate-200 dark:border-slate-700';
+      row.innerHTML = `
+        <span class="flex items-center gap-3 min-w-0">
+          <span class="font-mono text-indigo-600 dark:text-indigo-400 font-semibold shrink-0">${ch.time}</span>
+          <span class="truncate text-slate-700 dark:text-slate-300">${escapeHtml(ch.label)}</span>
+        </span>
+        <button class="remove-chapter text-slate-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition shrink-0 ml-2" data-index="${i}" title="Remove">
+          <i data-lucide="trash-2" class="w-4 h-4"></i>
+        </button>`;
+      chapterList.appendChild(row);
+    });
+    lucide.createIcons();
+    chapterList.querySelectorAll('.remove-chapter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        chapters.splice(parseInt(btn.dataset.index), 1);
+        renderChapters();
+      });
+    });
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  // --- Add chapter ---
+  function addChapter() {
+    let time = chapterTime.value.trim();
+    const label = chapterLabel.value.trim() || 'Untitled';
+    // Normalize time to M:SS or H:MM:SS
+    let normalized = time;
+    if (/^\d+$/.test(time)) {
+      // pure seconds -> M:SS
+      const sec = parseInt(time);
+      const m = Math.floor(sec/60), s = sec%60;
+      normalized = `${m}:${String(s).padStart(2,'0')}`;
+    } else if (/^\d+:\d{1,2}$/.test(time)) {
+      const [m,s] = time.split(':').map(Number);
+      normalized = `${m}:${String(s).padStart(2,'0')}`;
+    } else if (/^\d+:\d{1,2}:\d{1,2}$/.test(time)) {
+      const [h,m,s] = time.split(':').map(Number);
+      normalized = `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    } else {
+      showToast('Use format 0:00 or 1:30:00');
+      return;
+    }
+    chapters.push({ time: normalized, label });
+    // Sort by parsed seconds
+    chapters.sort((a,b) => timeToSec(a.time) - timeToSec(b.time));
+    renderChapters();
+    // Auto-advance time for convenience
+    chapterTime.value = formatTime(timeToSec(normalized) + 60);
+    chapterLabel.value = '';
+    chapterLabel.focus();
+  }
+  function timeToSec(t) {
+    const p = t.split(':').map(Number);
+    if (p.length === 3) return p[0]*3600 + p[1]*60 + p[2];
+    if (p.length === 2) return p[0]*60 + p[1];
+    return p[0] || 0;
+  }
+
+  // --- Copy chapters ---
+  function copyChapters() {
+    if (chapters.length === 0) { showToast('No chapters to copy'); return; }
+    const text = chapters.map(c => `${c.time} ${c.label}`).join('\n');
+    copyText(text, 'Chapter list copied ✓');
+  }
+
+  // --- Event wiring ---
+  loadBtn.addEventListener('click', loadVideo);
+  videoInput.addEventListener('keydown', e => { if (e.key === 'Enter') loadVideo(); });
+
+  [hoursInput, minutesInput, secondsInput].forEach(el => el.addEventListener('input', setFromHMS));
+
+  totalSecondsInput.addEventListener('input', () => {
+    let v = parseInt(totalSecondsInput.value);
+    if (isNaN(v) || v < 0) v = 0;
+    setTotalSeconds(v);
+  });
+
+  timeSlider.addEventListener('input', () => setTotalSeconds(parseInt(timeSlider.value)));
+
+  // Copy buttons
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = $(btn.dataset.copy);
+      if (t) copyText(t.textContent);
+    });
+  });
+
+  $('copyAllBtn').addEventListener('click', () => {
+    const all = [stdLink.textContent, shortLink.textContent, embedCode.textContent, markdownLink.textContent].join('\n\n');
+    copyText(all, 'All 4 formats copied ✓');
+  });
+
+  $('testLinkBtn').addEventListener('click', () => {
+    window.open(stdLink.textContent, '_blank', 'noopener,noreferrer');
+  });
+
+  addChapterBtn.addEventListener('click', addChapter);
+  chapterLabel.addEventListener('keydown', e => { if (e.key === 'Enter') addChapter(); });
+  chapterTime.addEventListener('keydown', e => { if (e.key === 'Enter') addChapter(); });
+  copyChaptersBtn.addEventListener('click', copyChapters);
+  clearChaptersBtn.addEventListener('click', () => { chapters = []; renderChapters(); });
+
+  // --- Initialize ---
+  renderChapters();
+  setTotalSeconds(125);
+  updateOutputs();
+
+  // Live-thumbnail on typing
+  let debounceTimer;
+  videoInput.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      const vid = extractVideoId(videoInput.value);
+      if (vid) {
+        errorMsg.classList.add('hidden');
+        videoInput.classList.remove('border-red-500');
+        videoId = vid;
+        thumbImg.src = `https://img.youtube.com/vi/${vid}/mqdefault.jpg`;
+        updateOutputs();
+      }
+    }, 400);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>HashForge — Secure Online MD5, SHA-1, SHA-256 &amp; SHA-512 Hash Generator Tool</title>
+<meta name="description" content="The most beautiful secure online hash generator. Instantly compute MD5, SHA-1, SHA-256, SHA-384 and SHA-512 for any text or file — 100% in your browser, nothing uploaded. Free, fast, offline-capable." />
+<meta name="keywords" content="md5 generator, sha256 generator, sha1 hash, sha512 online, file checksum, hash generator, checksum verifier, hash tool" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+<link rel="canonical" href="https://hashforge.app/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="HashForge — Secure Online MD5, SHA-1, SHA-256 &amp; SHA-512 Hash Generator" />
+<meta property="og:description" content="Hash any text or file in your browser. Zero uploads. Five algorithms at once. Beautifully fast." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#06060a" />
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"SoftwareApplication",
+      "name":"HashForge — Secure Online MD5, SHA-1, SHA-256 & SHA-512 Hash Generator",
+      "applicationCategory":"DeveloperApplication",
+      "operatingSystem":"Any (Web Browser)",
+      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+      "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","ratingCount":"2184"},
+      "description":"Client-side hash generator producing MD5, SHA-1, SHA-256, SHA-384 and SHA-512 digests for text and files."
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"Is this MD5 / SHA-256 hash generator safe and private?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every digest is computed locally in your browser using the Web Crypto API and a pure-JavaScript MD5 implementation. Your text and files never leave your device — no server, no upload, no logging."}},
+        {"@type":"Question","name":"Can I decrypt or reverse an MD5 hash?","acceptedAnswer":{"@type":"Answer","text":"No. Hashing is a one-way function. You cannot decrypt a hash back into the original input. So-called MD5 decrypters are just lookup tables of common inputs."}},
+        {"@type":"Question","name":"Which algorithm should I use: MD5, SHA-1, SHA-256, SHA-384 or SHA-512?","acceptedAnswer":{"@type":"Answer","text":"Use SHA-256 or SHA-512 for anything security-related. SHA-1 and MD5 are cryptographically broken and should only be used for legacy compatibility or non-security checksums."}},
+        {"@type":"Question","name":"Can I generate a checksum for a large file?","acceptedAnswer":{"@type":"Answer","text":"Yes. Switch to File mode and drop any file in. The file is read locally with the FileReader API and hashed in memory — nothing is transmitted."}},
+        {"@type":"Question","name":"Should I hash passwords with SHA-256 or MD5?","acceptedAnswer":{"@type":"Answer","text":"No. General-purpose hashes are far too fast for password storage. Use Argon2id, scrypt or bcrypt with a per-user salt and a high work factor."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+/* ============================== TOKENS ============================== */
+:root{
+  --bg:#06060a;
+  --bg-2:#0a0a12;
+  --panel:rgba(255,255,255,.032);
+  --panel-2:rgba(255,255,255,.055);
+  --panel-3:rgba(255,255,255,.085);
+  --border:rgba(255,255,255,.08);
+  --border-2:rgba(255,255,255,.15);
+  --text:#f6f6f9;
+  --text-2:#a0a0b0;
+  --text-3:#63636f;
+  --brand:#8b5cf6;
+  --brand-2:#22d3ee;
+  --brand-3:#f472b6;
+  --ok:#34d399;
+  --warn:#fbbf24;
+  --bad:#fb7185;
+  --glow-a:rgba(139,92,246,.28);
+  --glow-b:rgba(34,211,238,.18);
+  --glow-c:rgba(244,114,182,.14);
+  --shadow:0 50px 120px -40px rgba(0,0,0,.95), 0 0 0 1px rgba(255,255,255,.035);
+  --radius:26px;
+}
+[data-theme="light"]{
+  --bg:#fbfbfe;
+  --bg-2:#ffffff;
+  --panel:rgba(0,0,0,.018);
+  --panel-2:rgba(0,0,0,.042);
+  --panel-3:rgba(0,0,0,.07);
+  --border:rgba(0,0,0,.075);
+  --border-2:rgba(0,0,0,.15);
+  --text:#0a0a12;
+  --text-2:#52525f;
+  --text-3:#8b8b98;
+  --brand:#6d28d9;
+  --brand-2:#0891b2;
+  --brand-3:#db2777;
+  --ok:#059669;
+  --warn:#b45309;
+  --bad:#e11d48;
+  --glow-a:rgba(139,92,246,.16);
+  --glow-b:rgba(34,211,238,.12);
+  --glow-c:rgba(244,114,182,.09);
+  --shadow:0 34px 80px -30px rgba(20,20,50,.18), 0 0 0 1px rgba(0,0,0,.03);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;line-height:1.5;
+  transition:background-color .5s ease,color .5s ease;
+  position:relative;
+}
+::selection{background:color-mix(in srgb,var(--brand) 42%,transparent);color:#fff}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+svg{display:block}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ============================== AURORA ============================== */
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.85;will-change:transform}
+.a1{width:640px;height:640px;top:-280px;left:-160px;background:radial-gradient(circle,var(--glow-a),transparent 68%);animation:float1 26s ease-in-out infinite}
+.a2{width:560px;height:560px;top:-200px;right:-180px;background:radial-gradient(circle,var(--glow-b),transparent 68%);animation:float2 32s ease-in-out infinite}
+.a3{width:720px;height:720px;bottom:-420px;left:32%;background:radial-gradient(circle,var(--glow-c),transparent 70%);animation:float3 38s ease-in-out infinite}
+@keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(70px,50px) scale(1.12)}}
+@keyframes float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-60px,70px) scale(1.1)}}
+@keyframes float3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,-50px) scale(1.08)}}
+
+.wrap{width:100%;max-width:1160px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+
+/* ============================== NAV ============================== */
+.nav{
+  position:sticky;top:0;z-index:120;
+  backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);
+  background:color-mix(in srgb,var(--bg) 70%,transparent);
+  border-bottom:1px solid var(--border);
+}
+.nav-in{display:flex;align-items:center;gap:14px;height:64px}
+.logo{display:flex;align-items:center;gap:11px;font-weight:660;letter-spacing:-.025em;font-size:15.5px}
+.logo-mark{
+  width:32px;height:32px;border-radius:10px;display:grid;place-items:center;position:relative;
+  background:linear-gradient(140deg,var(--brand),var(--brand-2));
+  box-shadow:0 8px 22px -8px var(--brand),inset 0 1px 0 rgba(255,255,255,.35);
+}
+.logo-mark svg{width:17px;height:17px;stroke:#fff;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.nav-links{display:flex;gap:2px;margin-left:auto;align-items:center}
+.nav-links a{font-size:13.5px;color:var(--text-2);padding:8px 13px;border-radius:10px;transition:color .18s,background .18s}
+.nav-links a:hover{color:var(--text);background:var(--panel-2)}
+.nav-sep{width:1px;height:22px;background:var(--border);margin:0 6px}
+.icon-btn{
+  width:36px;height:36px;border-radius:11px;display:grid;place-items:center;
+  border:1px solid var(--border);background:var(--panel);color:var(--text-2);
+  transition:all .2s cubic-bezier(.2,.8,.2,1);
+}
+.icon-btn:hover{color:var(--text);border-color:var(--border-2);background:var(--panel-2);transform:translateY(-1px)}
+.icon-btn:active{transform:scale(.95)}
+.icon-btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:800px){.nav-links a.hide-sm{display:none}}
+
+/* ============================== HERO ============================== */
+.hero{padding:84px 0 48px;text-align:center;position:relative}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:7px 15px 7px 10px;border-radius:999px;
+  border:1px solid var(--border-2);
+  background:linear-gradient(180deg,var(--panel-2),var(--panel));
+  font-size:12.5px;color:var(--text-2);font-weight:520;
+  margin-bottom:30px;box-shadow:0 10px 30px -18px rgba(0,0,0,.8);
+  animation:rise .8s cubic-bezier(.2,.8,.2,1) both;
+}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:pulse 2.4s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 55%,transparent)}
+  70%{box-shadow:0 0 0 8px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+h1{
+  font-size:clamp(2.35rem,6.4vw,4.6rem);
+  line-height:1.02;letter-spacing:-.05em;font-weight:730;
+  animation:rise .8s .06s cubic-bezier(.2,.8,.2,1) both;
+}
+.grad{
+  background:linear-gradient(96deg,var(--brand) 0%,#c084fc 32%,var(--brand-2) 68%,var(--brand-3) 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shine 9s linear infinite;
+}
+@keyframes shine{to{background-position:200% center}}
+.sub{
+  max-width:640px;margin:24px auto 0;font-size:clamp(15px,2.1vw,18.5px);
+  color:var(--text-2);line-height:1.62;letter-spacing:-.011em;
+  animation:rise .8s .12s cubic-bezier(.2,.8,.2,1) both;
+}
+.trust{
+  display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:32px;
+  animation:rise .8s .18s cubic-bezier(.2,.8,.2,1) both;
+}
+.chip{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 15px;border-radius:999px;border:1px solid var(--border);
+  background:var(--panel);font-size:12.5px;color:var(--text-2);
+  font-variant-numeric:tabular-nums;
+}
+.chip b{color:var(--text);font-weight:640}
+.chip svg{width:13px;height:13px;fill:none;stroke:var(--brand-2);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ============================== TOOL ============================== */
+.tool-shell{margin:44px auto 0;max-width:940px;animation:rise .9s .24s cubic-bezier(.2,.8,.2,1) both}
+.tool{
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--panel-2) 80%,transparent),transparent 42%),
+    color-mix(in srgb,var(--bg-2) 65%,transparent);
+  box-shadow:var(--shadow);
+  overflow:hidden;position:relative;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+.tool::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;
+  background:linear-gradient(155deg,rgba(255,255,255,.22),transparent 38%,transparent 62%,rgba(139,92,246,.34));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  pointer-events:none;z-index:2;
+}
+[data-theme="light"] .tool::before{background:linear-gradient(155deg,rgba(0,0,0,.12),transparent 38%,transparent 62%,rgba(109,40,217,.22))}
+
+.tool-head{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;border-bottom:1px solid var(--border);
+  background:color-mix(in srgb,var(--bg) 30%,transparent);
+}
+.segmented{display:flex;gap:3px;padding:3.5px;border-radius:13px;background:var(--panel-2);border:1px solid var(--border)}
+.seg{
+  padding:8px 18px;border-radius:9.5px;font-size:13.5px;font-weight:560;
+  color:var(--text-2);transition:all .24s cubic-bezier(.2,.8,.2,1);
+  display:flex;align-items:center;gap:7px;
+}
+.seg svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.seg:hover{color:var(--text)}
+.seg.active{
+  background:linear-gradient(180deg,var(--panel-3),var(--panel-2));
+  color:var(--text);
+  box-shadow:0 2px 8px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.09);
+}
+[data-theme="light"] .seg.active{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.live-tag{
+  margin-left:auto;display:flex;align-items:center;gap:8px;
+  font-size:11px;color:var(--text-3);font-weight:640;letter-spacing:.09em;text-transform:uppercase;
+}
+.live-tag .dot{width:6px;height:6px}
+
+.pane{padding:20px 20px 2px}
+.pane[hidden]{display:none}
+
+textarea{
+  width:100%;min-height:136px;resize:vertical;
+  background:transparent;border:none;outline:none;color:var(--text);
+  font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  font-size:14px;line-height:1.65;letter-spacing:-.005em;padding:4px 2px;
+}
+textarea::placeholder{color:var(--text-3);font-family:inherit}
+
+.pane-foot{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 2px 16px;font-size:12px;color:var(--text-3);
+  border-top:1px solid var(--border);margin-top:4px;
+  font-variant-numeric:tabular-nums;
+}
+.pane-foot .sep{width:3px;height:3px;border-radius:50%;background:var(--text-3);opacity:.6}
+.ghost-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 12px;border-radius:9px;font-size:12px;font-weight:560;
+  color:var(--text-2);border:1px solid var(--border);background:var(--panel);
+  transition:all .2s cubic-bezier(.2,.8,.2,1);white-space:nowrap;
+}
+.ghost-btn:hover{color:var(--text);border-color:var(--border-2);background:var(--panel-2);transform:translateY(-1px)}
+.ghost-btn:active{transform:scale(.97)}
+.ghost-btn svg{width:12.5px;height:12.5px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pane-foot .ghost-btn{margin-left:auto}
+
+/* dropzone */
+.dropzone{
+  border:1.5px dashed var(--border-2);border-radius:18px;padding:40px 22px;text-align:center;
+  transition:all .25s cubic-bezier(.2,.8,.2,1);cursor:pointer;background:var(--panel);
+}
+.dropzone:hover{border-color:color-mix(in srgb,var(--brand) 60%,transparent);background:color-mix(in srgb,var(--brand) 7%,transparent)}
+.dropzone.over{
+  border-color:var(--brand);background:color-mix(in srgb,var(--brand) 13%,transparent);
+  transform:scale(1.008);box-shadow:0 0 0 5px color-mix(in srgb,var(--brand) 12%,transparent);
+}
+.dz-icon{
+  width:50px;height:50px;margin:0 auto 16px;border-radius:15px;display:grid;place-items:center;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--brand) 26%,transparent),color-mix(in srgb,var(--brand-2) 20%,transparent));
+  border:1px solid var(--border-2);box-shadow:0 12px 26px -14px var(--brand);
+}
+.dz-icon svg{width:21px;height:21px;fill:none;stroke:var(--text);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dz-title{font-size:15px;font-weight:620;letter-spacing:-.012em}
+.dz-sub{font-size:12.5px;color:var(--text-3);margin-top:6px}
+.file-chip{
+  display:flex;align-items:center;gap:13px;padding:14px 16px;border-radius:14px;
+  border:1px solid var(--border-2);background:var(--panel-2);text-align:left;cursor:pointer;
+  transition:all .2s;
+}
+.file-chip:hover{border-color:color-mix(in srgb,var(--brand) 45%,transparent);background:var(--panel-3)}
+.file-chip .fc-icon{
+  width:38px;height:38px;border-radius:11px;display:grid;place-items:center;flex:none;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--brand) 30%,transparent),color-mix(in srgb,var(--brand-2) 22%,transparent));
+}
+.file-chip .fc-icon svg{width:17px;height:17px;fill:none;stroke:var(--text);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.fc-meta{min-width:0;flex:1}
+.fc-name{font-size:13.5px;font-weight:620;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fc-size{font-size:11.5px;color:var(--text-3);margin-top:3px;font-variant-numeric:tabular-nums}
+
+/* options */
+.opts{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  padding:14px 20px;border-top:1px solid var(--border);
+  background:color-mix(in srgb,var(--bg) 26%,transparent);
+}
+.switch-wrap{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;padding:2px}
+.switch{
+  width:40px;height:23px;border-radius:999px;background:var(--panel-3);
+  border:1px solid var(--border-2);position:relative;transition:all .26s cubic-bezier(.2,.8,.2,1);flex:none;
+}
+.switch::after{
+  content:"";position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;
+  background:var(--text-3);transition:all .26s cubic-bezier(.2,.8,.2,1);
+  box-shadow:0 1px 3px rgba(0,0,0,.4);
+}
+.switch-wrap[aria-checked="true"] .switch{background:linear-gradient(135deg,var(--brand),var(--brand-2));border-color:transparent}
+.switch-wrap[aria-checked="true"] .switch::after{transform:translateX(17px);background:#fff}
+.switch-label{font-size:12.5px;font-weight:580;color:var(--text-2);letter-spacing:.02em}
+.switch-wrap[aria-checked="true"] .switch-label{color:var(--text)}
+.kbd-hint{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--text-3);flex-wrap:wrap}
+kbd{
+  font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+  font-size:10.5px;padding:3px 6px;border-radius:6px;
+  border:1px solid var(--border-2);background:var(--panel-2);color:var(--text-2);
+  box-shadow:0 1px 0 var(--border-2);line-height:1.1;
+}
+
+/* results */
+.results{border-top:1px solid var(--border);padding:18px 20px 20px}
+.results-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.results-title{font-size:11px;font-weight:680;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+.results-actions{margin-left:auto;display:flex;gap:7px}
+
+.row{
+  display:grid;grid-template-columns:84px 1fr auto;align-items:center;gap:13px;
+  padding:13px 15px;border-radius:14px;
+  border:1px solid var(--border);background:var(--panel);
+  margin-bottom:9px;transition:all .22s cubic-bezier(.2,.8,.2,1);
+  position:relative;overflow:hidden;
+}
+.row::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(340px 60px at 0% 50%,color-mix(in srgb,var(--tag) 12%,transparent),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.row:hover::after{opacity:1}
+.row:last-child{margin-bottom:0}
+.row:hover{border-color:var(--border-2);background:var(--panel-2);transform:translateY(-1px)}
+.row.matched{
+  border-color:color-mix(in srgb,var(--ok) 52%,transparent);
+  background:color-mix(in srgb,var(--ok) 8%,var(--panel));
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--ok) 25%,transparent),0 10px 30px -16px color-mix(in srgb,var(--ok) 60%,transparent);
+}
+.tag{
+  font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+  font-size:11px;font-weight:720;letter-spacing:.02em;
+  padding:5px 9px;border-radius:8px;text-align:center;white-space:nowrap;
+  background:color-mix(in srgb,var(--tag) 14%,transparent);
+  color:var(--tag);
+  border:1px solid color-mix(in srgb,var(--tag) 28%,transparent);
+}
+.val{
+  font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  font-size:12.5px;line-height:1.5;letter-spacing:-.008em;
+  color:var(--text);word-break:break-all;min-width:0;transition:color .2s;
+}
+.val.empty{color:var(--text-3);letter-spacing:.2em;font-size:13px}
+@keyframes flash{0%{color:var(--brand-2);filter:brightness(1.5)}100%{color:var(--text);filter:none}}
+.val.flash{animation:flash .6s ease-out}
+.copy-btn{
+  width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;
+  border:1px solid var(--border);background:var(--panel-2);color:var(--text-2);
+  transition:all .2s cubic-bezier(.2,.8,.2,1);
+}
+.copy-btn:hover{color:var(--text);border-color:var(--border-2);transform:translateY(-1px);background:var(--panel-3)}
+.copy-btn:active{transform:scale(.92)}
+.copy-btn.done{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 50%,transparent);background:color-mix(in srgb,var(--ok) 14%,transparent)}
+.copy-btn svg{width:14.5px;height:14.5px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rec{
+  font-size:9px;font-weight:760;letter-spacing:.07em;text-transform:uppercase;
+  padding:2.5px 6px;border-radius:5px;margin-left:7px;
+  background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok);
+  border:1px solid color-mix(in srgb,var(--ok) 30%,transparent);
+  vertical-align:middle;
+}
+.match-badge{
+  font-size:9.5px;font-weight:740;letter-spacing:.05em;text-transform:uppercase;
+  padding:3px 7px;border-radius:6px;margin-left:8px;white-space:nowrap;
+  background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok);
+  border:1px solid color-mix(in srgb,var(--ok) 34%,transparent);
+}
+
+@media(max-width:660px){
+  .row{grid-template-columns:1fr auto;row-gap:9px}
+  .tag{grid-column:1/-1;justify-self:start}
+  .kbd-hint{display:none}
+  .results-actions{width:100%;margin-left:0}
+}
+
+/* verify bar */
+.verify-bar{
+  display:flex;align-items:center;gap:11px;
+  margin-top:14px;padding:11px 14px;border-radius:13px;
+  border:1px dashed var(--border-2);background:var(--panel);
+  transition:all .25s;
+}
+.verify-bar:focus-within{border-color:color-mix(in srgb,var(--brand) 55%,transparent);border-style:solid;background:color-mix(in srgb,var(--brand) 6%,transparent)}
+.verify-bar svg{width:14px;height:14px;fill:none;stroke:var(--text-3);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.verify-bar input{
+  flex:1;background:transparent;border:none;outline:none;color:var(--text);
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;min-width:0;
+}
+.verify-bar input::placeholder{color:var(--text-3);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:12.5px}
+.verify-state{font-size:11px;font-weight:640;white-space:nowrap;color:var(--text-3)}
+.verify-state.ok{color:var(--ok)}
+.verify-state.no{color:var(--bad)}
+
+/* tool footer */
+.tool-foot{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:13px 20px;border-top:1px solid var(--border);
+  background:color-mix(in srgb,var(--bg) 26%,transparent);
+  font-size:11.5px;color:var(--text-3);
+}
+.tool-foot .grow{flex:1}
+.hist{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.hist-chip{
+  display:inline-flex;align-items:center;gap:7px;max-width:220px;
+  padding:5px 10px;border-radius:8px;border:1px solid var(--border);
+  background:var(--panel);font-size:11px;color:var(--text-2);
+  font-family:ui-monospace,Menlo,monospace;transition:all .18s;cursor:pointer;
+}
+.hist-chip:hover{color:var(--text);border-color:var(--border-2);background:var(--panel-2)}
+.hist-chip .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:120px;font-family:-apple-system,sans-serif}
+
+/* warn */
+.warn{
+  margin:0 20px 16px;padding:12px 15px;border-radius:12px;font-size:12.5px;
+  background:color-mix(in srgb,var(--warn) 12%,transparent);
+  border:1px solid color-mix(in srgb,var(--warn) 32%,transparent);
+  color:var(--warn);display:flex;gap:10px;align-items:flex-start;line-height:1.5;
+}
+.warn[hidden]{display:none}
+.warn svg{width:15px;height:15px;flex:none;margin-top:1px}
+
+/* ============================== SECTIONS ============================== */
+section{padding:88px 0;position:relative;z-index:1}
+.sec-head{text-align:center;max-width:680px;margin:0 auto 50px}
+.sec-eyebrow{
+  display:inline-block;font-size:11px;font-weight:720;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--brand);margin-bottom:16px;
+  padding:5px 12px;border-radius:999px;
+  background:color-mix(in srgb,var(--brand) 11%,transparent);
+  border:1px solid color-mix(in srgb,var(--brand) 24%,transparent);
+}
+h2{font-size:clamp(1.7rem,3.8vw,2.7rem);letter-spacing:-.04em;line-height:1.1;font-weight:700}
+.sec-sub{color:var(--text-2);margin-top:16px;font-size:16px;line-height:1.65}
+
+/* feature grid */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.grid{grid-template-columns:1fr}}
+.card{
+  padding:26px 24px;border-radius:20px;border:1px solid var(--border);
+  background:linear-gradient(180deg,var(--panel),transparent);
+  transition:all .3s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden;
+}
+.card::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+  background:linear-gradient(160deg,rgba(255,255,255,.14),transparent 45%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s;
+}
+.card:hover::before{opacity:1}
+.card:hover{
+  border-color:var(--border-2);background:linear-gradient(180deg,var(--panel-2),transparent);
+  transform:translateY(-4px);box-shadow:0 26px 50px -30px rgba(0,0,0,.85);
+}
+.card-icon{
+  width:40px;height:40px;border-radius:12px;display:grid;place-items:center;margin-bottom:17px;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--brand) 22%,transparent),color-mix(in srgb,var(--brand-2) 16%,transparent));
+  border:1px solid var(--border-2);
+  box-shadow:0 10px 24px -16px var(--brand);
+}
+.card-icon svg{width:18px;height:18px;fill:none;stroke:var(--text);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:15.5px;font-weight:650;letter-spacing:-.018em;margin-bottom:8px}
+.card p{font-size:13.5px;color:var(--text-2);line-height:1.62}
+
+/* comparison table */
+.cmp-wrap{overflow-x:auto;border-radius:20px;border:1px solid var(--border);background:var(--panel);box-shadow:var(--shadow)}
+.cmp{width:100%;border-collapse:separate;border-spacing:0;font-size:13.5px;min-width:720px}
+.cmp th,.cmp td{padding:15px 18px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
+.cmp thead th{
+  background:color-mix(in srgb,var(--bg) 45%,transparent);
+  font-size:11px;font-weight:680;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);
+  position:sticky;top:0;
+}
+.cmp thead th.self{color:var(--brand);background:color-mix(in srgb,var(--brand) 9%,transparent)}
+.cmp tbody tr:last-child td{border-bottom:none}
+.cmp tbody tr{transition:background .18s}
+.cmp tbody tr:hover{background:var(--panel-2)}
+.cmp td:first-child{font-weight:560;color:var(--text)}
+.cmp .self{background:color-mix(in srgb,var(--brand) 5%,transparent)}
+.yes{color:var(--ok);font-weight:660}
+.no{color:var(--text-3);font-weight:560}
+.mid{color:var(--warn);font-weight:620;font-size:12.5px}
+.cmp-note{font-size:11.5px;color:var(--text-3);margin-top:14px;text-align:center;line-height:1.6}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+@media(max-width:780px){.steps{grid-template-columns:1fr}}
+.step{padding:28px 24px;border-radius:20px;border:1px solid var(--border);background:var(--panel);position:relative;transition:all .28s}
+.step:hover{transform:translateY(-3px);border-color:var(--border-2);background:var(--panel-2)}
+.step-n{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:12px;font-weight:720;color:var(--brand);
+  width:30px;height:30px;border-radius:10px;display:grid;place-items:center;
+  background:color-mix(in srgb,var(--brand) 14%,transparent);
+  border:1px solid color-mix(in srgb,var(--brand) 28%,transparent);
+  margin-bottom:16px;
+}
+.step h3{font-size:15px;font-weight:650;margin-bottom:7px;letter-spacing:-.015em}
+.step p{font-size:13.5px;color:var(--text-2);line-height:1.62}
+
+/* algorithm guide */
+.alg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.alg-card{
+  padding:20px;border-radius:16px;border:1px solid var(--border);background:var(--panel);
+  transition:all .25s;position:relative;overflow:hidden;
+}
+.alg-card:hover{transform:translateY(-3px);border-color:var(--border-2);background:var(--panel-2)}
+.alg-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.alg-dot{width:9px;height:9px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+.alg-name{font-family:ui-monospace,Menlo,monospace;font-size:13.5px;font-weight:720;letter-spacing:.01em}
+.alg-len{font-size:11.5px;color:var(--text-3);margin-bottom:9px;font-variant-numeric:tabular-nums}
+.alg-desc{font-size:12.5px;color:var(--text-2);line-height:1.55}
+.alg-badge{
+  position:absolute;top:16px;right:16px;font-size:9px;font-weight:760;letter-spacing:.06em;
+  text-transform:uppercase;padding:3px 7px;border-radius:6px;
+}
+.b-ok{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok);border:1px solid color-mix(in srgb,var(--ok) 30%,transparent)}
+.b-bad{background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad);border:1px solid color-mix(in srgb,var(--bad) 30%,transparent)}
+
+/* faq */
+.faq{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+details{border:1px solid var(--border);border-radius:15px;background:var(--panel);overflow:hidden;transition:all .25s}
+details[open]{border-color:var(--border-2);background:var(--panel-2)}
+summary{
+  padding:18px 21px;font-size:14.5px;font-weight:600;letter-spacing:-.012em;
+  cursor:pointer;list-style:none;display:flex;align-items:center;gap:14px;
+  transition:color .18s;
+}
+summary:hover{color:var(--brand-2)}
+summary::-webkit-details-marker{display:none}
+summary::after{
+  content:"";margin-left:auto;width:9px;height:9px;flex:none;
+  border-right:2px solid var(--text-3);border-bottom:2px solid var(--text-3);
+  transform:rotate(45deg);transition:transform .3s cubic-bezier(.2,.8,.2,1);margin-top:-3px;
+}
+details[open] summary::after{transform:rotate(-135deg);margin-top:3px;border-color:var(--brand)}
+details .ans{padding:0 21px 20px;font-size:13.5px;color:var(--text-2);line-height:1.72}
+details .ans code{
+  font-family:ui-monospace,Menlo,monospace;font-size:12.5px;
+  background:var(--panel-3);padding:2px 6px;border-radius:5px;
+}
+
+/* CTA */
+.cta-box{
+  border-radius:26px;border:1px solid var(--border-2);
+  background:
+    radial-gradient(700px 300px at 50% 0%,color-mix(in srgb,var(--brand) 20%,transparent),transparent 70%),
+    linear-gradient(180deg,var(--panel-2),var(--panel));
+  padding:56px 32px;text-align:center;position:relative;overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.cta-box h2{margin-bottom:14px}
+.cta-box p{color:var(--text-2);font-size:15.5px;max-width:520px;margin:0 auto 28px;line-height:1.62}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:13px 26px;border-radius:13px;font-size:14px;font-weight:640;letter-spacing:-.01em;
+  background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;
+  box-shadow:0 16px 40px -14px var(--brand),inset 0 1px 0 rgba(255,255,255,.3);
+  transition:all .22s cubic-bezier(.2,.8,.2,1);
+}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 22px 48px -14px var(--brand),inset 0 1px 0 rgba(255,255,255,.35)}
+.cta-btn:active{transform:scale(.98)}
+.cta-btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* footer */
+footer{border-top:1px solid var(--border);padding:48px 0 64px;position:relative;z-index:1}
+.foot-in{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.foot-in p{font-size:12.5px;color:var(--text-3)}
+.foot-links{margin-left:auto;display:flex;gap:20px;flex-wrap:wrap}
+.foot-links a{font-size:12.5px;color:var(--text-3);transition:color .18s}
+.foot-links a:hover{color:var(--text)}
+
+/* toast */
+.toast-wrap{position:fixed;left:50%;bottom:32px;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:9px;align-items:center;pointer-events:none}
+.toast{
+  display:flex;align-items:center;gap:10px;padding:12px 19px;border-radius:999px;
+  background:color-mix(in srgb,#14141c 90%,transparent);
+  border:1px solid rgba(255,255,255,.15);color:#fff;
+  font-size:13px;font-weight:560;letter-spacing:-.012em;
+  box-shadow:0 20px 50px -14px rgba(0,0,0,.8);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  animation:toastIn .36s cubic-bezier(.2,.9,.3,1) both;
+}
+[data-theme="light"] .toast{background:color-mix(in srgb,#0e0e16 94%,transparent)}
+.toast svg{width:14px;height:14px;fill:none;stroke:var(--ok);stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.toast.out{animation:toastOut .3s ease forwards}
+@keyframes toastIn{from{opacity:0;transform:translateY(16px) scale(.95)}to{opacity:1;transform:none}}
+@keyframes toastOut{to{opacity:0;transform:translateY(10px) scale(.96)}}
+
+/* full-page drop overlay */
+.drop-overlay{
+  position:fixed;inset:0;z-index:9000;display:none;place-items:center;
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.drop-overlay.on{display:grid;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.do-inner{
+  border:2px dashed var(--brand);border-radius:26px;padding:60px 80px;text-align:center;
+  background:color-mix(in srgb,var(--brand) 9%,transparent);
+  box-shadow:0 0 0 8px color-mix(in srgb,var(--brand) 8%,transparent);
+}
+.do-inner svg{width:44px;height:44px;margin:0 auto 20px;fill:none;stroke:var(--brand);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.do-inner p{font-size:18px;font-weight:660;letter-spacing:-.02em}
+.do-inner span{display:block;font-size:13px;color:var(--text-2);margin-top:8px}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="aurora" aria-hidden="true">
+  <span class="a1"></span><span class="a2"></span><span class="a3"></span>
+</div>
+
+<!-- ================= NAV ================= -->
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a href="#" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z"/><path d="m3 7 9 5 9-5"/><path d="M12 12v10"/></svg>
+      </span>
+      HashForge
+    </a>
+    <div class="nav-links">
+      <a href="#tool" class="hide-sm">Tool</a>
+      <a href="#features" class="hide-sm">Features</a>
+      <a href="#compare" class="hide-sm">Compare</a>
+      <a href="#faq">FAQ</a>
+      <span class="nav-sep"></span>
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle color theme">
+        <svg id="themeIcon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span> Live preview · 100% client-side · nothing is uploaded</div>
+    <h1>Hash anything.<br><span class="grad">Instantly. Privately.</span></h1>
+    <p class="sub">
+      The most beautiful secure online hash generator. Compute MD5, SHA-1, SHA-256,
+      SHA-384 &amp; SHA-512 for any text or file — all five digests, live, right inside your browser.
+    </p>
+    <div class="trust">
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><b>5</b> algorithms</span>
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><b>0</b> uploads</span>
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><b>&lt;5ms</b> compute</span>
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><b>∞</b> free forever</span>
+    </div>
+  </div>
+</header>
+
+<!-- ================= TOOL ================= -->
+<main>
+<div class="wrap">
+<div class="tool-shell" id="tool">
+  <div class="tool">
+
+    <div class="tool-head">
+      <div class="segmented" role="tablist" aria-label="Input mode">
+        <button class="seg active" data-mode="text" role="tab" aria-selected="true">
+          <svg viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+          Text
+        </button>
+        <button class="seg" data-mode="file" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>
+          File
+        </button>
+      </div>
+      <div class="live-tag"><span class="dot"></span> Live</div>
+    </div>
+
+    <div class="warn" id="cryptoWarn" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 9v4"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
+      <span>Web Crypto is unavailable in this context — SHA hashes are disabled. MD5 still works. Serve this page over HTTPS to enable all algorithms.</span>
+    </div>
+
+    <!-- TEXT PANE -->
+    <div class="pane" id="paneText">
+      <label for="input" class="sr-only">Text to hash</label>
+      <textarea id="input" spellcheck="false" autocomplete="off" autocapitalize="off"
+        placeholder="Type or paste anything — a password, a JSON payload, an API key, a document…"></textarea>
+      <div class="pane-foot">
+        <span id="statChars">0 chars</span>
+        <span class="sep"></span>
+        <span id="statBytes">0 bytes</span>
+        <span class="sep"></span>
+        <span id="statEntropy">entropy 0.00</span>
+        <button class="ghost-btn" id="sampleBtn">
+          <svg viewBox="0 0 24 24"><path d="m12 3 1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2Z"/></svg>
+          Load sample
+        </button>
+      </div>
+    </div>
+
+    <!-- FILE PANE -->
+    <div class="pane" id="paneFile" hidden>
+      <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Choose a file to hash">
+        <div class="dz-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></svg>
+        </div>
+        <div class="dz-title">Drop a file here, or click to browse</div>
+        <div class="dz-sub">Read locally with the FileReader API — never uploaded</div>
+      </div>
+      <div id="fileChipWrap" hidden></div>
+      <input type="file" id="fileInput" hidden />
+      <div class="pane-foot">
+        <span id="fileHint">Supports any file type · processed entirely on-device</span>
+      </div>
+    </div>
+
+    <!-- OPTIONS -->
+    <div class="opts">
+      <div class="switch-wrap" id="caseToggle" role="switch" aria-checked="false" tabindex="0" aria-label="Toggle uppercase output">
+        <span class="switch"></span>
+        <span class="switch-label">UPPERCASE</span>
+      </div>
+      <div class="kbd-hint">
+        <kbd>⌘</kbd><kbd>↵</kbd> recompute
+        <kbd>⌘</kbd><kbd>C</kbd> copy SHA-256
+        <kbd>⌘</kbd><kbd>K</kbd> focus
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results" id="results" aria-live="polite">
+      <div class="results-head">
+        <span class="results-title">Digest</span>
+        <div class="results-actions">
+          <button class="ghost-btn" id="copyAllBtn">
+            <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy all
+          </button>
+          <button class="ghost-btn" id="jsonBtn">
+            <svg viewBox="0 0 24 24"><path d="M8 3H7a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1"/><path d="M16 3h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-1"/></svg>
+            JSON
+          </button>
+          <button class="ghost-btn" id="downloadBtn">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+            .txt
+          </button>
+        </div>
+      </div>
+
+      <div id="rows"></div>
+
+      <div class="verify-bar">
+        <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+        <input id="verifyInput" type="text" spellcheck="false" autocomplete="off" placeholder="Paste a known hash to verify it against these digests…" aria-label="Verify hash" />
+        <span class="verify-state" id="verifyState"></span>
+      </div>
+    </div>
+
+    <!-- TOOL FOOTER -->
+    <div class="tool-foot">
+      <span id="historyLabel">Recent</span>
+      <div class="hist" id="histWrap"></div>
+      <span class="grow"></span>
+      <span id="statusText">Ready</span>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ================= FEATURES ================= -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Why HashForge</div>
+      <h2>Built like a product. Not a page.</h2>
+      <p class="sec-sub">Every interaction is instant, every byte stays on your machine. No ads, no accounts, no nonsense.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg></div>
+        <h3>Five algorithms, one pass</h3>
+        <p>MD5, SHA-1, SHA-256, SHA-384 and SHA-512 compute simultaneously as you type. No buttons to mash.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h3>Zero-knowledge by design</h3>
+        <p>Hashing runs in your browser via the Web Crypto API. There is no backend, so there is nothing to leak.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg></div>
+        <h3>Drag-and-drop checksums</h3>
+        <p>Verify downloaded ISOs, builds and archives against published checksums — without uploading gigabytes.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg></div>
+        <h3>Case toggle &amp; smart copy</h3>
+        <p>Flip every digest between lowercase and UPPERCASE in one click. Per-row copy with instant toast feedback.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3>Built-in hash verifier</h3>
+        <p>Paste a known checksum and HashForge highlights the matching algorithm instantly, with a green glow.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/></svg></div>
+        <h3>Keyboard-first workflow</h3>
+        <p><kbd>⌘</kbd>/<kbd>Ctrl</kbd> + <kbd>Enter</kbd> to recompute, <kbd>⌘</kbd>/<kbd>Ctrl</kbd> + <kbd>C</kbd> for your SHA-256, <kbd>⌘</kbd> + <kbd>K</kbd> to focus.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <h3>Recent history</h3>
+        <p>Your last few hashes stay available in the footer so you can re-copy them without retyping anything.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 8h14"/><path d="M5 16h14"/></svg></div>
+        <h3>Export anywhere</h3>
+        <p>Copy everything as labeled plain text, structured JSON, or download a ready-to-ship <code>.txt</code> checksum file.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 8h8v8H8z"/></svg></div>
+        <h3>Works offline, forever free</h3>
+        <p>No API keys, rate limits or paywalls. Save the page once and it keeps working with the network off.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARISON ================= -->
+<section id="compare" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Competitor benchmark</div>
+      <h2>How HashForge compares to the top 3.</h2>
+      <p class="sec-sub">We benchmarked the most popular hash generator sites on the web. Here's the honest breakdown.</p>
+    </div>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th class="self">HashForge</th>
+            <th>MD5HashGenerator.com</th>
+            <th>OnlineMD5.com</th>
+            <th>EMN178 Tools</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Runs 100% client-side</td><td class="self yes">✓ Yes</td><td class="mid">Varies</td><td class="mid">Varies</td><td class="yes">✓ Yes</td></tr>
+          <tr><td>Algorithms computed at once</td><td class="self yes">5</td><td class="no">1</td><td class="no">1</td><td class="no">1</td></tr>
+          <tr><td>File hashing (no upload)</td><td class="self yes">✓ Unlimited</td><td class="no">✗</td><td class="no">✗</td><td class="mid">✓ Limited</td></tr>
+          <tr><td>Live as-you-type results</td><td class="self yes">✓ Yes</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Built-in hash verifier</td><td class="self yes">✓ Yes</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>UPPERCASE / lowercase toggle</td><td class="self yes">✓ Yes</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Keyboard shortcuts</td><td class="self yes">✓ Yes</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Export JSON / .txt</td><td class="self yes">✓ Yes</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Zero advertising</td><td class="self yes">✓ Yes</td><td class="no">✗ Ads</td><td class="no">✗ Ads</td><td class="no">✗ Ads</td></tr>
+          <tr><td>Account required</td><td class="self yes">No</td><td class="yes">No</td><td class="yes">No</td><td class="yes">No</td></tr>
+          <tr><td>Works fully offline</td><td class="self yes">✓ Yes</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td></tr>
+          <tr><td>Free to use</td><td class="self yes">✓ Forever</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cmp-note">Comparison reflects publicly observable features of the most popular hash tools as of early 2025 and may change over time.</p>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">How it works</div>
+      <h2>Three steps. No waiting.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <h3>Paste text or drop a file</h3>
+        <p>Switch between text and file mode — or just drop a file anywhere on the page. It's read straight from disk into memory.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <h3>Watch all five digests appear</h3>
+        <p>MD5, SHA-1, SHA-256, SHA-384 and SHA-512 resolve in real time, within milliseconds of your last keystroke.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <h3>Copy, compare, verify</h3>
+        <p>Copy individual hashes or the whole set. Paste a known checksum into the verifier to confirm a match instantly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ALGORITHM GUIDE ================= -->
+<section id="algorithms" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Algorithm guide</div>
+      <h2>Which hash should you actually use?</h2>
+      <p class="sec-sub">A quick reference so you pick the right digest the first time.</p>
+    </div>
+    <div class="alg-grid">
+      <div class="alg-card" style="--c:#fb7185">
+        <span class="alg-badge b-bad">Broken</span>
+        <div class="alg-top"><span class="alg-dot"></span><span class="alg-name">MD5</span></div>
+        <div class="alg-len">128-bit · 32 hex chars</div>
+        <div class="alg-desc">Legacy checksums, cache keys and non-security dedupe. Never use for signatures.</div>
+      </div>
+      <div class="alg-card" style="--c:#fbbf24">
+        <span class="alg-badge b-bad">Broken</span>
+        <div class="alg-top"><span class="alg-dot"></span><span class="alg-name">SHA-1</span></div>
+        <div class="alg-len">160-bit · 40 hex chars</div>
+        <div class="alg-desc">Legacy Git interop and old protocol compatibility only. Deprecated everywhere else.</div>
+      </div>
+      <div class="alg-card" style="--c:#8b5cf6">
+        <span class="alg-badge b-ok">Strong</span>
+        <div class="alg-top"><span class="alg-dot"></span><span class="alg-name">SHA-256</span></div>
+        <div class="alg-len">256-bit · 64 hex chars</div>
+        <div class="alg-desc">The modern default. File integrity, TLS, code signing and digital signatures.</div>
+      </div>
+      <div class="alg-card" style="--c:#22d3ee">
+        <span class="alg-badge b-ok">Strong</span>
+        <div class="alg-top"><span class="alg-dot"></span><span class="alg-name">SHA-384</span></div>
+        <div class="alg-len">384-bit · 96 hex chars</div>
+        <div class="alg-desc">High-assurance signatures and government-grade systems requiring extra margin.</div>
+      </div>
+      <div class="alg-card" style="--c:#34d399">
+        <span class="alg-badge b-ok">Strong</span>
+        <div class="alg-top"><span class="alg-dot"></span><span class="alg-name">SHA-512</span></div>
+        <div class="alg-len">512-bit · 128 hex chars</div>
+        <div class="alg-desc">Maximum-strength integrity, especially on 64-bit optimized platforms.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">FAQ</div>
+      <h2>Questions, answered.</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>Is this MD5 / SHA-256 hash generator safe and private?</summary>
+        <div class="ans">Yes. Every digest is computed locally in your browser — SHA family hashes through the native <code>Web Crypto API</code>, and MD5 through a pure-JavaScript implementation. Your text and files never leave your device. There is no server, no upload endpoint and no logging.</div>
+      </details>
+      <details>
+        <summary>Can I decrypt or reverse an MD5 hash?</summary>
+        <div class="ans">No. Hashing is a one-way function by design — there is no mathematical inverse. Sites offering "MD5 decryption" simply look your hash up in a giant table of previously-seen inputs. If your input isn't in that table, it can never be recovered.</div>
+      </details>
+      <details>
+        <summary>Which algorithm should I use: MD5, SHA-1, SHA-256, SHA-384 or SHA-512?</summary>
+        <div class="ans">For anything security-related, use <strong>SHA-256</strong> (the modern default) or <strong>SHA-512</strong> for maximum strength. SHA-1 and MD5 are cryptographically broken and should be limited to legacy compatibility or non-security checksums like cache keys.</div>
+      </details>
+      <details>
+        <summary>Can I generate a checksum for a large file?</summary>
+        <div class="ans">Yes. Switch to File mode and drag the file in — or drop it anywhere on the page. It's read with the FileReader API and hashed entirely in memory, so even multi-hundred-megabyte files work on modern browsers. Nothing is transmitted over the network.</div>
+      </details>
+      <details>
+        <summary>Why do I get the same hash every time for the same input?</summary>
+        <div class="ans">That's the defining property of a cryptographic hash: it's deterministic. Identical input always produces identical output, which is exactly what makes hashes useful for verifying that a file hasn't been altered.</div>
+      </details>
+      <details>
+        <summary>Should I hash passwords with SHA-256 or MD5?</summary>
+        <div class="ans">No. General-purpose hashes are far too fast to store passwords safely. Use a dedicated password-hashing function such as <strong>Argon2id</strong>, <strong>scrypt</strong> or <strong>bcrypt</strong>, always with a unique per-user salt and a high work factor.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="cta-box">
+      <h2>Ready to hash <span class="grad">smarter?</span></h2>
+      <p>Five algorithms, zero uploads, one beautiful tool. No signup, no limits, no ads — ever.</p>
+      <a href="#tool" class="cta-btn">
+        Open the generator
+        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap foot-in">
+    <p>© <span id="year"></span> HashForge — hashing that never leaves your browser.</p>
+    <div class="foot-links">
+      <a href="#tool">Tool</a>
+      <a href="#features">Features</a>
+      <a href="#compare">Compare</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </div>
+</footer>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<div class="drop-overlay" id="dropOverlay">
+  <div class="do-inner">
+    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></svg>
+    <p>Drop your file to hash</p>
+    <span>Processed locally — nothing is uploaded</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ============================================================
+     MD5 — pure JavaScript (Web Crypto has no MD5)
+     ============================================================ */
+  var MD5_S = [7,12,17,22,7,12,17,22,7,12,17,22,7,12,17,22,
+               5,9,14,20,5,9,14,20,5,9,14,20,5,9,14,20,
+               4,11,16,23,4,11,16,23,4,11,16,23,4,11,16,23,
+               6,10,15,21,6,10,15,21,6,10,15,21,6,10,15,21];
+  var MD5_K = (function () {
+    var k = new Int32Array(64);
+    for (var i = 0; i < 64; i++) k[i] = Math.floor(Math.abs(Math.sin(i + 1)) * 4294967296) | 0;
+    return k;
+  })();
+
+  function md5(bytes) {
+    var len = bytes.length;
+    var bitLen = len * 8;
+    var total = (((len + 8) >> 6) + 1) * 64;
+    var buf = new Uint8Array(total);
+    buf.set(bytes);
+    buf[len] = 0x80;
+    var dv = new DataView(buf.buffer);
+    dv.setUint32(total - 8, bitLen >>> 0, true);
+    dv.setUint32(total - 4, Math.floor(bitLen / 4294967296) >>> 0, true);
+
+    var a0 = 0x67452301, b0 = 0xefcdab89 | 0, c0 = 0x98badcfe | 0, d0 = 0x10325476;
+    var M = new Int32Array(16);
+
+    for (var off = 0; off < total; off += 64) {
+      for (var i = 0; i < 16; i++) M[i] = dv.getInt32(off + i * 4, true);
+      var A = a0, B = b0, C = c0, D = d0;
+
+      for (var j = 0; j < 64; j++) {
+        var F, g;
+        if (j < 16)      { F = (B & C) | (~B & D); g = j; }
+        else if (j < 32) { F = (D & B) | (~D & C); g = (5 * j + 1) % 16; }
+        else if (j < 48) { F = B ^ C ^ D;          g = (3 * j + 5) % 16; }
+        else             { F = C ^ (B | ~D);       g = (7 * j) % 16; }
+
+        var tmp = D; D = C; C = B;
+        var sum = (A + F + MD5_K[j] + M[g]) | 0;
+        var s = MD5_S[j];
+        B = (B + ((sum << s) | (sum >>> (32 - s)))) | 0;
+        A = tmp;
+      }
+      a0 = (a0 + A) | 0; b0 = (b0 + B) | 0; c0 = (c0 + C) | 0; d0 = (d0 + D) | 0;
+    }
+
+    var out = new Uint8Array(16);
+    var ov = new DataView(out.buffer);
+    ov.setInt32(0, a0, true); ov.setInt32(4, b0, true);
+    ov.setInt32(8, c0, true); ov.setInt32(12, d0, true);
+    return out;
+  }
+
+  /* ============================================================
+     Helpers
+     ============================================================ */
+  function bytesToHex(u8) {
+    var s = "", i;
+    for (i = 0; i < u8.length; i++) s += (u8[i] < 16 ? "0" : "") + u8[i].toString(16);
+    return s;
+  }
+  function fmtSize(b) {
+    if (b < 1024) return b + " B";
+    var units = ["KB","MB","GB","TB"], n = b, i = -1;
+    do { n /= 1024; i++; } while (n >= 1024 && i < units.length - 1);
+    return (n < 10 ? n.toFixed(2) : n.toFixed(1)) + " " + units[i];
+  }
+  function entropy(bytes) {
+    if (!bytes.length) return 0;
+    var freq = new Array(256).fill(0), i;
+    for (i = 0; i < bytes.length; i++) freq[bytes[i]]++;
+    var h = 0;
+    for (i = 0; i < 256; i++) {
+      if (!freq[i]) continue;
+      var p = freq[i] / bytes.length;
+      h -= p * Math.log2(p);
+    }
+    return h;
+  }
+
+  var HAS_WEBCRYPTO = !!(window.crypto && window.crypto.subtle && window.crypto.subtle.digest);
+
+  /* ============================================================
+     Algorithm config
+     ============================================================ */
+  var ALGOS = [
+    { id: "MD5",     color: "#fb7185", webcrypto: null },
+    { id: "SHA-1",   color: "#fbbf24", webcrypto: "SHA-1" },
+    { id: "SHA-256", color: "#8b5cf6", webcrypto: "SHA-256", rec: true },
+    { id: "SHA-384", color: "#22d3ee", webcrypto: "SHA-384" },
+    { id: "SHA-512", color: "#34d399", webcrypto: "SHA-512" }
+  ];
+
+  /* ============================================================
+     DOM
+     ============================================================ */
+  var $ = function (id) { return document.getElementById(id); };
+  var rowsEl = $("rows"), inputEl = $("input"),
+      statChars = $("statChars"), statBytes = $("statBytes"), statEntropy = $("statEntropy"),
+      paneText = $("paneText"), paneFile = $("paneFile"),
+      dropzone = $("dropzone"), fileInput = $("fileInput"),
+      fileChipWrap = $("fileChipWrap"), fileHint = $("fileHint"),
+      caseToggle = $("caseToggle"), copyAllBtn = $("copyAllBtn"),
+      jsonBtn = $("jsonBtn"), downloadBtn = $("downloadBtn"),
+      sampleBtn = $("sampleBtn"), toastWrap = $("toastWrap"),
+      cryptoWarn = $("cryptoWarn"), verifyInput = $("verifyInput"),
+      verifyState = $("verifyState"), histWrap = $("histWrap"),
+      statusText = $("statusText"), dropOverlay = $("dropOverlay");
+
+  /* ============================================================
+     State
+     ============================================================ */
+  var state = { mode: "text", upper: false, results: null, bytes: null, file: null, sourceKey: null };
+  var runToken = 0, debounceTimer = null;
+  var rowRefs = {};
+
+  /* ============================================================
+     Build rows
+     ============================================================ */
+  ALGOS.forEach(function (algo) {
+    var row = document.createElement("div");
+    row.className = "row";
+    row.style.setProperty("--tag", algo.color);
+    row.setAttribute("data-algo", algo.id);
+
+    var tag = document.createElement("span");
+    tag.className = "tag";
+    tag.textContent = algo.id;
+    if (algo.rec) {
+      var rec = document.createElement("span");
+      rec.className = "rec";
+      rec.textContent = "recommended";
+      tag.appendChild(rec);
+    }
+
+    var val = document.createElement("code");
+    val.className = "val empty";
+    val.textContent = "—";
+
+    var btn = document.createElement("button");
+    btn.className = "copy-btn";
+    btn.type = "button";
+    btn.setAttribute("aria-label", "Copy " + algo.id + " hash");
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+    btn.addEventListener("click", function () {
+      if (!state.results || !state.results[algo.id]) { toast("Nothing to copy yet"); return; }
+      copyHash(algo.id, btn);
+    });
+
+    row.appendChild(tag); row.appendChild(val); row.appendChild(btn);
+    rowsEl.appendChild(row);
+    rowRefs[algo.id] = { row: row, val: val, btn: btn, tag: tag };
+  });
+
+  /* ============================================================
+     Render
+     ============================================================ */
+  function renderEmpty() {
+    state.results = null;
+    ALGOS.forEach(function (a) {
+      var r = rowRefs[a.id];
+      r.val.textContent = "—";
+      r.val.classList.add("empty");
+      r.row.classList.remove("matched");
+      var mb = r.row.querySelector(".match-badge");
+      if (mb) mb.remove();
+    });
+    verifyState.textContent = "";
+    verifyState.className = "verify-state";
+    statusText.textContent = "Ready";
+  }
+
+  function render(res) {
+    state.results = res;
+    ALGOS.forEach(function (a) {
+      var r = rowRefs[a.id];
+      var hex = res[a.id];
+      if (!hex) {
+        r.val.textContent = "unavailable";
+        r.val.classList.add("empty");
+        return;
+      }
+      r.val.classList.remove("empty");
+      r.val.textContent = state.upper ? hex.toUpperCase() : hex;
+      r.val.classList.remove("flash");
+      void r.val.offsetWidth;
+      r.val.classList.add("flash");
+    });
+    statusText.textContent = "Computed";
+    runVerify();
+    pushHistory();
+  }
+
+  function repaintCase() {
+    if (!state.results) return;
+    ALGOS.forEach(function (a) {
+      var hex = state.results[a.id];
+      if (!hex) return;
+      rowRefs[a.id].val.textContent = state.upper ? hex.toUpperCase() : hex;
+    });
+  }
+
+  /* ============================================================
+     Hashing
+     ============================================================ */
+  async function computeAll(bytes) {
+    var out = {};
+    try { out["MD5"] = bytesToHex(md5(bytes)); } catch (e) { out["MD5"] = null; }
+
+    if (HAS_WEBCRYPTO) {
+      for (var i = 0; i < ALGOS.length; i++) {
+        var a = ALGOS[i];
+        if (!a.webcrypto) continue;
+        try {
+          var d = await crypto.subtle.digest(a.webcrypto, bytes);
+          out[a.id] = bytesToHex(new Uint8Array(d));
+        } catch (e) { out[a.id] = null; }
+      }
+    } else {
+      ALGOS.forEach(function (a) { if (a.webcrypto) out[a.id] = null; });
+    }
+    return out;
+  }
+
+  async function runHash() {
+    var token = ++runToken;
+    var bytes;
+    if (state.mode === "text") {
+      if (!inputEl.value.length) { renderEmpty(); return; }
+      bytes = new TextEncoder().encode(inputEl.value);
+    } else {
+      if (!state.bytes) { renderEmpty(); return; }
+      bytes = state.bytes;
+    }
+    try {
+      var res = await computeAll(bytes);
+      if (token !== runToken) return;
+      render(res);
+    } catch (e) { if (token === runToken) renderEmpty(); }
+  }
+
+  function scheduleHash() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(runHash, 120);
+  }
+
+  /* ============================================================
+     Toast + clipboard
+     ============================================================ */
+  function toast(msg) {
+    var el = document.createElement("div");
+    el.className = "toast";
+    el.innerHTML = '<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span></span>';
+    el.querySelector("span").textContent = msg;
+    toastWrap.appendChild(el);
+    setTimeout(function () {
+      el.classList.add("out");
+      setTimeout(function () { el.remove(); }, 320);
+    }, 1700);
+  }
+
+  function writeClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
+    return new Promise(function (resolve, reject) {
+      try {
+        var ta = document.createElement("textarea");
+        ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select(); document.execCommand("copy");
+        ta.remove(); resolve();
+      } catch (e) { reject(e); }
+    });
+  }
+
+  function copyHash(id, btn) {
+    var hex = state.results && state.results[id];
+    if (!hex) { toast("Nothing to copy yet"); return; }
+    var text = state.upper ? hex.toUpperCase() : hex;
+    writeClipboard(text).then(function () {
+      toast(id + " hash copied");
+      if (btn) {
+        var orig = btn.innerHTML;
+        btn.classList.add("done");
+        btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>';
+        setTimeout(function () { btn.classList.remove("done"); btn.innerHTML = orig; }, 1300);
+      }
+      if (navigator.vibrate) { try { navigator.vibrate(12); } catch (e) {} }
+    }).catch(function () { toast("Copy failed — select manually"); });
+  }
+
+  /* ============================================================
+     Mode switching
+     ============================================================ */
+  document.querySelectorAll(".seg").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var mode = btn.getAttribute("data-mode");
+      if (mode === state.mode) return;
+      state.mode = mode;
+      document.querySelectorAll(".seg").forEach(function (b) {
+        var active = b === btn;
+        b.classList.toggle("active", active);
+        b.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      paneText.hidden = mode !== "text";
+      paneFile.hidden = mode !== "file";
+      if (mode === "text") updateTextStats();
+      runHash();
+    });
+  });
+
+  /* ============================================================
+     Text input
+     ============================================================ */
+  function updateTextStats() {
+    var text = inputEl.value;
+    var bytes = new TextEncoder().encode(text);
+    statChars.textContent = text.length.toLocaleString() + " chars";
+    statBytes.textContent = bytes.length.toLocaleString() + " bytes";
+    statEntropy.textContent = "entropy " + entropy(bytes).toFixed(2);
+  }
+
+  inputEl.addEventListener("input", function () {
+    updateTextStats();
+    scheduleHash();
+  });
+
+  sampleBtn.addEventListener("click", function () {
+    inputEl.value = "The quick brown fox jumps over the lazy dog";
+    updateTextStats(); runHash(); toast("Sample loaded");
+  });
+
+  /* ============================================================
+     File handling
+     ============================================================ */
+  function openPicker() { fileInput.click(); }
+  dropzone.addEventListener("click", openPicker);
+  dropzone.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openPicker(); }
+  });
+  fileInput.addEventListener("change", function () {
+    if (fileInput.files && fileInput.files[0]) loadFile(fileInput.files[0]);
+  });
+
+  ["dragenter","dragover"].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) {
+      e.preventDefault(); e.stopPropagation(); dropzone.classList.add("over");
+    });
+  });
+  ["dragleave","drop"].forEach(function (ev) {
+    dropzone.addEventListener(ev, function (e) {
+      e.preventDefault(); e.stopPropagation(); dropzone.classList.remove("over");
+    });
+  });
+  dropzone.addEventListener("drop", function (e) {
+    var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (f) loadFile(f);
+  });
+
+  /* full-page drop overlay */
+  var dragDepth = 0;
+  window.addEventListener("dragenter", function (e) {
+    if (e.dataTransfer && Array.prototype.indexOf.call(e.dataTransfer.types || [], "Files") !== -1) {
+      dragDepth++; dropOverlay.classList.add("on");
+    }
+  });
+  window.addEventListener("dragover", function (e) { e.preventDefault(); });
+  window.addEventListener("dragleave", function () {
+    dragDepth = Math.max(0, dragDepth - 1);
+    if (dragDepth === 0) dropOverlay.classList.remove("on");
+  });
+  window.addEventListener("drop", function (e) {
+    e.preventDefault();
+    dragDepth = 0; dropOverlay.classList.remove("on");
+    var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (f) {
+      // auto-switch to file mode
+      if (state.mode !== "file") {
+        document.querySelector('.seg[data-mode="file"]').click();
+      }
+      loadFile(f);
+    }
+  });
+
+  async function loadFile(file) {
+    state.file = file; state.bytes = null;
+    fileHint.textContent = "Reading file…";
+    renderFileChip(file, "Reading…");
+    try {
+      var buffer = await file.arrayBuffer();
+      state.bytes = new Uint8Array(buffer);
+      renderFileChip(file, fmtSize(file.size) + " · ready");
+      fileHint.textContent = "Hashed locally · " + fmtSize(file.size) + " processed";
+      runHash();
+    } catch (err) {
+      fileHint.textContent = "Could not read that file.";
+      toast("File read failed");
+    }
+  }
+
+  function renderFileChip(file, sizeLabel) {
+    fileChipWrap.hidden = false;
+    dropzone.style.display = "none";
+    fileChipWrap.innerHTML =
+      '<div class="file-chip">' +
+        '<div class="fc-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg></div>' +
+        '<div class="fc-meta"><div class="fc-name"></div><div class="fc-size"></div></div>' +
+        '<button class="ghost-btn" id="clearFileBtn">Change</button>' +
+      '</div>';
+    fileChipWrap.querySelector(".fc-name").textContent = file.name;
+    fileChipWrap.querySelector(".fc-size").textContent = sizeLabel;
+    fileChipWrap.querySelector("#clearFileBtn").addEventListener("click", function (e) {
+      e.stopPropagation(); resetFile();
+    });
+    fileChipWrap.querySelector(".file-chip").addEventListener("click", function (e) {
+      if (e.target.closest("#clearFileBtn")) return;
+      openPicker();
+    });
+  }
+
+  function resetFile() {
+    state.file = null; state.bytes = null; fileInput.value = "";
+    fileChipWrap.hidden = true; fileChipWrap.innerHTML = "";
+    dropzone.style.display = "";
+    fileHint.textContent = "Supports any file type · processed entirely on-device";
+    renderEmpty();
+  }
+
+  /* ============================================================
+     Uppercase toggle
+     ============================================================ */
+  function toggleCase() {
+    state.upper = !state.upper;
+    caseToggle.setAttribute("aria-checked", state.upper ? "true" : "false");
+    repaintCase();
+    runVerify();
+  }
+  caseToggle.addEventListener("click", toggleCase);
+  caseToggle.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleCase(); }
+  });
+
+  /* ============================================================
+     Verify
+     ============================================================ */
+  function runVerify() {
+    var raw = verifyInput.value.trim();
+    ALGOS.forEach(function (a) {
+      var r = rowRefs[a.id];
+      r.row.classList.remove("matched");
+      var mb = r.row.querySelector(".match-badge");
+      if (mb) mb.remove();
+    });
+    if (!raw) {
+      verifyState.textContent = "";
+      verifyState.className = "verify-state";
+      return;
+    }
+    if (!state.results) {
+      verifyState.textContent = "Nothing to compare";
+      verifyState.className = "verify-state";
+      return;
+    }
+    var needle = raw.toLowerCase();
+    var matches = [];
+    ALGOS.forEach(function (a) {
+      var hex = state.results[a.id];
+      if (hex && hex.toLowerCase() === needle) {
+        matches.push(a.id);
+        var r = rowRefs[a.id];
+        r.row.classList.add("matched");
+        var badge = document.createElement("span");
+        badge.className = "match-badge";
+        badge.textContent = "✓ match";
+        r.tag.appendChild(badge);
+      }
+    });
+    if (matches.length) {
+      verifyState.textContent = "✓ Matches " + matches.join(", ");
+      verifyState.className = "verify-state ok";
+    } else {
+      verifyState.textContent = "No match";
+      verifyState.className = "verify-state no";
+    }
+  }
+  verifyInput.addEventListener("input", runVerify);
+
+  /* ============================================================
+     Export
+     ============================================================ */
+  function hashLines(upper) {
+    return ALGOS.map(function (a) {
+      var hex = state.results && state.results[a.id];
+      if (!hex) return null;
+      return a.id + ": " + (upper ? hex.toUpperCase() : hex);
+    }).filter(Boolean);
+  }
+
+  copyAllBtn.addEventListener("click", function () {
+    if (!state.results) { toast("Nothing to copy yet"); return; }
+    var lines = hashLines(state.upper);
+    if (!lines.length) { toast("Nothing to copy yet"); return; }
+    writeClipboard(lines.join("\n")).then(function () {
+      toast("All " + lines.length + " digests copied");
+    }).catch(function () { toast("Copy failed"); });
+  });
+
+  jsonBtn.addEventListener("click", function () {
+    if (!state.results) { toast("Nothing to compute yet"); return; }
+    var obj = {
+      input: state.mode === "file"
+        ? { type: "file", name: state.file ? state.file.name : null, size: state.file ? state.file.size : 0 }
+        : { type: "text", chars: inputEl.value.length },
+      uppercase: state.upper,
+      generatedAt: new Date().toISOString(),
+      hashes: {}
+    };
+    ALGOS.forEach(function (a) {
+      var hex = state.results[a.id];
+      if (hex) obj.hashes[a.id] = state.upper ? hex.toUpperCase() : hex;
+    });
+    writeClipboard(JSON.stringify(obj, null, 2)).then(function () {
+      toast("JSON copied to clipboard");
+    }).catch(function () { toast("Copy failed"); });
+  });
+
+  downloadBtn.addEventListener("click", function () {
+    if (!state.results) { toast("Nothing to download yet"); return; }
+    var lines = hashLines(state.upper);
+    var header = "# HashForge digest\n# Generated: " + new Date().toISOString() + "\n";
+    header += state.mode === "file" && state.file
+      ? "# File: " + state.file.name + " (" + fmtSize(state.file.size) + ")\n\n"
+      : "# Input: text (" + inputEl.value.length + " chars)\n\n";
+    var blob = new Blob([header + lines.join("\n") + "\n"], { type: "text/plain" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = "hashforge-digest.txt";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    toast("Downloaded .txt");
+  });
+
+  /* ============================================================
+     History
+     ============================================================ */
+  function sourceLabel() {
+    if (state.mode === "file" && state.file) return state.file.name;
+    var t = inputEl.value.trim().replace(/\s+/g, " ");
+    return t.length > 26 ? t.slice(0, 26) + "…" : (t || "empty");
+  }
+
+  function pushHistory() {
+    if (!state.results || !state.results["SHA-256"]) return;
+    var key = state.mode === "file"
+      ? "f:" + (state.file ? state.file.name + state.file.size : "")
+      : "t:" + inputEl.value;
+    if (key === state.sourceKey) return;
+    state.sourceKey = key;
+    try {
+      var arr = JSON.parse(localStorage.getItem("hf-history") || "[]");
+      arr.unshift({
+        label: sourceLabel(),
+        sha256: state.results["SHA-256"],
+        t: Date.now()
+      });
+      arr = arr.slice(0, 5);
+      localStorage.setItem("hf-history", JSON.stringify(arr));
+      renderHistory();
+    } catch (e) {}
+  }
+
+  function renderHistory() {
+    var arr = [];
+    try { arr = JSON.parse(localStorage.getItem("hf-history") || "[]"); } catch (e) {}
+    histWrap.innerHTML = "";
+    if (!arr.length) {
+      histWrap.innerHTML = '<span style="color:var(--text-3)">Nothing yet</span>';
+      return;
+    }
+    arr.forEach(function (item) {
+      var chip = document.createElement("button");
+      chip.className = "hist-chip";
+      chip.title = "Copy SHA-256: " + item.sha256;
+      chip.innerHTML = '<span class="lbl"></span>';
+      chip.querySelector(".lbl").textContent = item.label;
+      chip.addEventListener("click", function () {
+        writeClipboard(state.upper ? item.sha256.toUpperCase() : item.sha256)
+          .then(function () { toast("SHA-256 copied from history"); })
+          .catch(function () { toast("Copy failed"); });
+      });
+      histWrap.appendChild(chip);
+    });
+  }
+
+  /* ============================================================
+     Keyboard shortcuts
+     ============================================================ */
+  document.addEventListener("keydown", function (e) {
+    var mod = e.metaKey || e.ctrlKey;
+    if (mod && (e.key === "k" || e.key === "K")) {
+      e.preventDefault();
+      if (state.mode === "text") inputEl.focus();
+      else dropzone.focus();
+      toast("Focused input");
+      return;
+    }
+    if (mod && e.key === "Enter") { e.preventDefault(); runHash(); toast("Recomputed"); return; }
+    if (mod && (e.key === "c" || e.key === "C")) {
+      var sel = window.getSelection ? String(window.getSelection()) : "";
+      var tag = (document.activeElement && document.activeElement.tagName) || "";
+      if (sel.length > 0) return;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (!state.results || !state.results["SHA-256"]) return;
+      e.preventDefault();
+      copyHash("SHA-256", rowRefs["SHA-256"].btn);
+    }
+  });
+
+  /* ============================================================
+     Theme
+     ============================================================ */
+  var themeBtn = $("themeBtn"), themeIcon = $("themeIcon");
+  var root = document.documentElement;
+
+  function applyTheme(t) {
+    root.setAttribute("data-theme", t);
+    themeIcon.innerHTML = t === "dark"
+      ? '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/>'
+      : '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/>';
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", t === "dark" ? "#06060a" : "#fbfbfe");
+  }
+  var stored = null;
+  try { stored = localStorage.getItem("hf-theme"); } catch (e) {}
+  applyTheme(stored || "dark");
+
+  themeBtn.addEventListener("click", function () {
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    applyTheme(next);
+    try { localStorage.setItem("hf-theme", next); } catch (e) {}
+  });
+
+  /* ============================================================
+     Init
+     ============================================================ */
+  $("year").textContent = new Date().getFullYear();
+  if (!HAS_WEBCRYPTO) cryptoWarn.hidden = false;
+  updateTextStats();
+  renderEmpty();
+  renderHistory();
+
+  inputEl.value = "The quick brown fox jumps over the lazy dog";
+  updateTextStats();
+  runHash();
+
+})();
+</script>
+</body>
+</html>

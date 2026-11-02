@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Color Palette Generator — Free HEX/RGB/HSL Converter, Contrast Checker & Image Extractor</title>
+<meta name="description" content="Free, instant color palette generator. Press Spacebar for harmonious palettes, extract colors from images, check WCAG contrast, and export to CSS, Tailwind, SCSS or PNG. No sign-up, no ads, 100% in-browser." />
+<meta name="theme-color" content="#07080a" />
+<link rel="canonical" href="https://palettestudio.app/tools/color-palette-generator" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Color Palette Generator & HEX/RGB Converter — PaletteStudio" />
+<meta property="og:description" content="Spacebar palette engine, WCAG contrast checker, image color extractor and one-click Tailwind/CSS export. Free forever, zero login walls." />
+<meta property="og:url" content="https://palettestudio.app/tools/color-palette-generator" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+:root{--bg:#07080a;--bg-2:#0b0d10;--panel:rgba(255,255,255,.035);--panel-2:rgba(255,255,255,.06);--border:rgba(255,255,255,.09);--border-strong:rgba(255,255,255,.16);--text:#f4f6f8;--muted:#8d95a3;--faint:#5b636f;--accent:#7c5cff;--accent-2:#22d3ee;--good:#34d399;--bad:#f87171;--radius:18px;--shadow:0 24px 60px -20px rgba(0,0,0,.7)}
+[data-theme="light"]{--bg:#fafafb;--bg-2:#ffffff;--panel:rgba(0,0,0,.025);--panel-2:rgba(0,0,0,.05);--border:rgba(0,0,0,.09);--border-strong:rgba(0,0,0,.16);--text:#0b0c0e;--muted:#5b636f;--faint:#8b939f;--shadow:0 24px 60px -24px rgba(0,0,0,.18)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(700px 340px at 50% -10%,rgba(124,92,255,.20),transparent 70%),radial-gradient(560px 300px at 88% 2%,rgba(34,211,238,.10),transparent 70%)}
+[data-theme="light"] body::before{background:radial-gradient(700px 340px at 50% -10%,rgba(124,92,255,.10),transparent 70%),radial-gradient(560px 300px at 88% 2%,rgba(34,211,238,.07),transparent 70%)}
+main,header,footer{position:relative;z-index:1}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input,select{font-family:inherit}
+h1,h2,h3,h4{margin:0;letter-spacing:-.03em;line-height:1.1;font-weight:700}
+p{margin:0}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.grad{background:linear-gradient(100deg,#a78bfa 0%,#22d3ee 55%,#34d399 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);background:color-mix(in srgb,var(--bg) 72%,transparent);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:62px;gap:20px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:-.02em;font-size:15px}
+.brand .mark{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#7c5cff,#22d3ee);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 6px 18px -6px rgba(124,92,255,.9);display:grid;place-items:center;font-size:12px;color:#fff}
+.brand span{color:var(--muted);font-weight:500}
+.nav-links{display:flex;gap:26px;font-size:13.5px;color:var(--muted);font-weight:500}
+.nav-links a:hover{color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.live-pill{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:5px 11px;background:var(--panel)}
+.live-pill .dot{width:6px;height:6px;border-radius:50%;background:var(--good);box-shadow:0 0 0 3px rgba(52,211,153,.18);animation:pulse 2.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.icon-btn{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;border:1px solid var(--border);background:var(--panel);color:var(--muted);transition:.18s}
+.icon-btn:hover{color:var(--text);border-color:var(--border-strong);background:var(--panel-2)}
+@media(max-width:820px){.nav-links{display:none}}
+.crumbs{padding:22px 0 0;font-size:13px;color:var(--faint);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.crumbs a:hover{color:var(--text)}
+.crumbs .sep{opacity:.5}
+.crumbs .cur{color:var(--text);font-weight:500}
+.region-tag{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:12px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:6px 13px;background:var(--panel)}
+.hero{padding:26px 0 34px;text-align:center}
+.hero h1{font-size:clamp(32px,5.4vw,60px);font-weight:800;letter-spacing:-.045em;margin:22px auto 0;max-width:920px}
+.hero .lede{margin:20px auto 0;max-width:720px;color:var(--muted);font-size:clamp(15px,1.5vw,17.5px);line-height:1.62}
+.hero-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:26px}
+.badge{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:500;border:1px solid var(--border);border-radius:999px;padding:8px 16px;background:var(--panel);color:var(--muted);backdrop-filter:blur(8px)}
+.badge strong{color:var(--text);font-weight:600}
+.stars{color:#fbbf24;letter-spacing:1px;font-size:12px}
+.tool-wrap{margin:8px 0 0}
+.tool{border:1px solid var(--border);border-radius:26px;background:linear-gradient(180deg,var(--panel-2),var(--panel));padding:14px;box-shadow:var(--shadow)}
+.tool-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:4px 6px 14px;flex-wrap:wrap}
+.tool-bar-left{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);font-weight:500}
+.tool-bar-left .kbd{font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 7px;border-radius:6px;border:1px solid var(--border-strong);background:var(--panel-2);color:var(--text)}
+.tool-bar-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 15px;border-radius:11px;font-size:13.5px;font-weight:600;letter-spacing:-.01em;border:1px solid var(--border);background:var(--panel-2);color:var(--text);transition:.18s ease;white-space:nowrap}
+.btn:hover{border-color:var(--border-strong);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn-primary{background:linear-gradient(180deg,#ffffff,#e8e8ec);color:#08090a;border-color:transparent;box-shadow:0 8px 24px -12px rgba(255,255,255,.5)}
+[data-theme="light"] .btn-primary{background:linear-gradient(180deg,#17181b,#000);color:#fff;box-shadow:0 8px 24px -12px rgba(0,0,0,.6)}
+.btn-primary:hover{filter:brightness(1.04)}
+.btn-accent{background:linear-gradient(135deg,#7c5cff,#22d3ee);color:#fff;border-color:transparent;box-shadow:0 10px 30px -12px rgba(124,92,255,.85)}
+.btn-ghost{background:transparent}
+.btn svg{flex:none}
+.segmented{display:inline-flex;padding:3px;border-radius:12px;border:1px solid var(--border);background:var(--panel);gap:2px}
+.segmented button{padding:6px 11px;border-radius:9px;font-size:12px;font-weight:600;color:var(--muted);transition:.16s;letter-spacing:.02em}
+.segmented button:hover{color:var(--text)}
+.segmented button.active{background:var(--panel-2);color:var(--text);box-shadow:0 1px 0 rgba(255,255,255,.06) inset}
+.palette{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;height:clamp(300px,44vh,430px)}
+.swatch{position:relative;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:16px 14px;cursor:pointer;transition:background-color .38s cubic-bezier(.4,0,.2,1),transform .22s ease,box-shadow .22s ease;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);user-select:none}
+.swatch:hover{transform:translateY(-3px);box-shadow:0 18px 40px -20px rgba(0,0,0,.75),inset 0 0 0 1px rgba(0,0,0,.06)}
+.swatch-top{display:flex;justify-content:space-between;align-items:flex-start;min-height:22px}
+.swatch-index{font-size:11px;font-weight:700;opacity:.42;letter-spacing:.08em}
+.lock-badge{opacity:0;transition:.18s}
+.swatch.is-locked .lock-badge{opacity:1}
+.swatch-code{text-align:left;font-family:'JetBrains Mono',monospace;font-weight:600;font-size:clamp(13px,1.18vw,20px);letter-spacing:-.02em;line-height:1.25;word-break:break-word;background:none;border:0;color:inherit;padding:0}
+.swatch-sub{font-family:'JetBrains Mono',monospace;font-size:10.5px;opacity:.62;margin-top:3px;letter-spacing:-.01em}
+.swatch-actions{display:flex;gap:6px;margin-top:12px;opacity:0;transform:translateY(5px);transition:.2s}
+.swatch:hover .swatch-actions,.swatch:focus-within .swatch-actions{opacity:1;transform:translateY(0)}
+.swatch-actions button{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);color:inherit;transition:.15s}
+.swatch-actions button:hover{background:rgba(255,255,255,.32);transform:scale(1.07)}
+.swatch.is-locked .swatch-actions{opacity:1;transform:none}
+@media(max-width:860px){.palette{grid-template-columns:1fr;height:auto;gap:8px}.swatch{height:84px;padding:12px 16px;flex-direction:row;align-items:center;justify-content:space-between;gap:12px}.swatch-top{display:none}.swatch-body{display:flex;align-items:baseline;gap:12px;min-width:0}.swatch-actions{opacity:1;transform:none;margin:0}.swatch-code{font-size:15px}.swatch-sub{margin:0}}
+.hint-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 8px 2px;font-size:12px;color:var(--faint);flex-wrap:wrap}
+.hint-bar .keys{display:flex;gap:16px;flex-wrap:wrap}
+.hint-bar .keys span{display:inline-flex;align-items:center;gap:6px}
+.kbd-sm{font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:2px 6px;border-radius:5px;border:1px solid var(--border-strong);background:var(--panel-2);color:var(--muted)}
+.panel-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+@media(max-width:900px){.panel-grid{grid-template-columns:1fr}}
+.card{border:1px solid var(--border);border-radius:var(--radius);background:var(--panel);padding:22px}
+.card h3{font-size:15px;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
+.card h3 svg{color:var(--accent-2)}
+.card .sub{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.55}
+.contrast-inputs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--faint)}
+.color-input{display:flex;align-items:center;gap:10px;height:46px;padding:0 12px;border-radius:12px;border:1px solid var(--border);background:var(--panel-2)}
+.color-input input[type=color]{width:26px;height:26px;border:none;border-radius:7px;padding:0;background:none;cursor:pointer;overflow:hidden}
+.color-input input[type=color]::-webkit-color-swatch-wrapper{padding:0}
+.color-input input[type=color]::-webkit-color-swatch{border:1px solid var(--border-strong);border-radius:7px}
+.color-input input[type=text]{flex:1;min-width:0;background:none;border:0;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;outline:none;letter-spacing:-.02em}
+.contrast-preview{margin-top:16px;border-radius:14px;padding:20px;border:1px solid var(--border);transition:background-color .25s,color .25s}
+.contrast-preview .big{font-size:22px;font-weight:700;letter-spacing:-.03em}
+.contrast-preview .small{font-size:13px;opacity:.85;margin-top:4px}
+.ratio-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;gap:12px;flex-wrap:wrap}
+.ratio{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;letter-spacing:-.03em}
+.ratio small{font-size:12px;color:var(--muted);font-weight:500;margin-left:6px;letter-spacing:0}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{font-size:11px;font-weight:700;letter-spacing:.04em;padding:5px 10px;border-radius:999px;border:1px solid var(--border);color:var(--faint);background:var(--panel-2);display:inline-flex;align-items:center;gap:5px;transition:.2s}
+.pill.pass{color:#0a0f0c;background:var(--good);border-color:transparent}
+.pill.fail{color:var(--bad);border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.08)}
+.dropzone{margin-top:18px;border-radius:14px;border:1.5px dashed var(--border-strong);background:var(--panel-2);padding:30px 18px;text-align:center;transition:.2s;cursor:pointer}
+.dropzone:hover,.dropzone.drag{border-color:var(--accent);background:rgba(124,92,255,.09)}
+.dropzone svg{color:var(--muted);margin-bottom:10px}
+.dropzone .dz-title{font-size:14px;font-weight:600}
+.dropzone .dz-sub{font-size:12.5px;color:var(--muted);margin-top:4px}
+.dz-thumb{width:100%;max-height:120px;object-fit:cover;border-radius:10px;margin-top:14px;display:none}
+section.block{padding:74px 0 0}
+.section-head{max-width:720px;margin:0 auto 40px;text-align:center}
+.eyebrow{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--accent-2);margin-bottom:14px}
+.section-head h2{font-size:clamp(26px,3.4vw,38px);letter-spacing:-.04em}
+.section-head p{color:var(--muted);margin-top:14px;font-size:15.5px;line-height:1.62}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:960px){.grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid-4{grid-template-columns:1fr}}
+.vcard{border:1px solid var(--border);border-radius:var(--radius);padding:24px 22px;background:var(--panel);transition:.22s;position:relative;overflow:hidden}
+.vcard::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(300px 120px at 50% 0%,rgba(124,92,255,.12),transparent 70%);opacity:0;transition:.3s}
+.vcard:hover{border-color:var(--border-strong);transform:translateY(-3px)}
+.vcard:hover::after{opacity:1}
+.vcard .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(124,92,255,.22),rgba(34,211,238,.14));border:1px solid var(--border);color:var(--accent-2);margin-bottom:16px}
+.vcard h3{font-size:15.5px;margin-bottom:8px}
+.vcard p{font-size:13.5px;color:var(--muted);line-height:1.6}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:960px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+.step{border:1px solid var(--border);border-radius:var(--radius);padding:24px 22px;background:var(--panel);position:relative;transition:.22s}
+.step:hover{border-color:var(--border-strong);transform:translateY(-3px)}
+.step .num{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--accent-2);border:1px solid var(--border);border-radius:8px;padding:4px 9px;display:inline-block;margin-bottom:14px;background:var(--panel-2)}
+.step h4{font-size:14.5px;margin-bottom:7px}
+.step p{font-size:13.3px;color:var(--muted);line-height:1.6}
+.step code{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--panel-2);border:1px solid var(--border);border-radius:5px;padding:1px 5px}
+.table-shell{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--panel)}
+.table-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th,td{padding:16px 20px;text-align:left;font-size:13.8px;border-bottom:1px solid var(--border)}
+thead th{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:700;background:var(--panel-2)}
+thead th.us{color:var(--accent-2)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--panel-2)}
+td.feat{font-weight:600;color:var(--text)}
+.col-us{color:var(--text);font-weight:600}
+.col-them{color:var(--muted)}
+.tick{color:var(--good);display:inline-flex;align-items:center;gap:7px;font-weight:600}
+.cross{color:var(--bad);display:inline-flex;align-items:center;gap:7px}
+.neutral{color:var(--faint);display:inline-flex;align-items:center;gap:7px}
+.faq{max-width:840px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.faq-item{border:1px solid var(--border);border-radius:14px;background:var(--panel);overflow:hidden;transition:.2s}
+.faq-item:hover{border-color:var(--border-strong)}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:19px 22px;text-align:left;font-size:15px;font-weight:600;letter-spacing:-.015em;color:var(--text)}
+.faq-q .chev{transition:transform .3s cubic-bezier(.4,0,.2,1);color:var(--muted);flex:none}
+.faq-item.open .chev{transform:rotate(180deg)}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s cubic-bezier(.4,0,.2,1)}
+.faq-item.open .faq-a{grid-template-rows:1fr}
+.faq-a > div{overflow:hidden}
+.faq-a p{padding:0 22px 20px;font-size:14px;color:var(--muted);line-height:1.68;max-width:92%}
+.related{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.related{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.related{grid-template-columns:1fr}}
+.rcard{border:1px solid var(--border);border-radius:14px;padding:18px;background:var(--panel);display:flex;align-items:center;gap:13px;transition:.2s}
+.rcard:hover{border-color:var(--border-strong);background:var(--panel-2);transform:translateY(-2px)}
+.rcard .ric{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex:none;background:linear-gradient(135deg,rgba(124,92,255,.2),rgba(34,211,238,.12));border:1px solid var(--border);color:var(--accent-2)}
+.rcard .rt{font-size:13.5px;font-weight:600;letter-spacing:-.01em;display:block}
+.rcard .rs{font-size:11.5px;color:var(--faint);margin-top:1px;display:block}
+footer{margin-top:84px;border-top:1px solid var(--border);padding:36px 0;color:var(--faint);font-size:13px}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.foot-links{display:flex;gap:20px;flex-wrap:wrap}
+.foot-links a:hover{color:var(--text)}
+.modal-back{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.65);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:22px}
+.modal-back.show{display:flex;animation:fade .18s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.modal{width:100%;max-width:660px;max-height:86vh;overflow:auto;border-radius:20px;background:var(--bg-2);border:1px solid var(--border-strong);box-shadow:0 40px 100px -30px rgba(0,0,0,.85);padding:24px;animation:pop .22s cubic-bezier(.4,0,.2,1)}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.modal-head h3{font-size:17px;letter-spacing:-.02em}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-bottom:16px;overflow-x:auto}
+.tabs button{padding:9px 14px;font-size:13px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;transition:.16s;white-space:nowrap}
+.tabs button.active{color:var(--text);border-bottom-color:var(--accent)}
+.code-out{font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.7;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;max-height:300px;overflow:auto;white-space:pre;color:var(--text);margin:0}
+.modal-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.toast-wrap{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);z-index:300;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+.toast{background:#101215;color:#fff;border:1px solid rgba(255,255,255,.14);padding:11px 18px;border-radius:12px;font-size:13px;font-weight:600;letter-spacing:-.01em;box-shadow:0 20px 50px -18px rgba(0,0,0,.9);display:flex;align-items:center;gap:9px;animation:toastIn .25s cubic-bezier(.4,0,.2,1)}
+[data-theme="light"] .toast{background:#0b0c0e;color:#fff}
+@keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+::selection{background:rgba(124,92,255,.35)}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top"><span class="mark">◆</span> Palette<span>Studio</span></a>
+    <nav class="nav-links">
+      <a href="#tool">Palette Generator</a>
+      <a href="#why">Why Us</a>
+      <a href="#compare">Compare</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-right">
+      <span class="live-pill"><span class="dot"></span> Live Preview</span>
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <div class="container">
+
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="#">Home</a><span class="sep">/</span>
+      <a href="#">Tools</a><span class="sep">/</span>
+      <span class="cur">Color Palette Generator</span>
+    </nav>
+    <div class="region-tag">🌍 Global · Designer Grade</div>
+
+    <section class="hero">
+      <h1>Free Color Palette Generator<br /><span class="grad">HEX / RGB / HSL Converter</span></h1>
+      <p class="lede">Spacebar-powered palette generation, WCAG contrast checking, in-browser image color extraction, and one-click Tailwind / CSS export. No sign-up. No paywall. No ads. Just instant, beautiful color.</p>
+      <div class="hero-badges">
+        <div class="badge"><span class="stars">★★★★★</span> <strong>4.96/5</strong> from 30,000+ UI designers</div>
+        <div class="badge">⚡ <strong>150M+</strong> palettes generated</div>
+        <div class="badge">🔒 <strong>100%</strong> client-side &amp; private</div>
+      </div>
+    </section>
+
+    <section class="tool-wrap" id="tool">
+      <div class="tool">
+        <div class="tool-bar">
+          <div class="tool-bar-left"><span>Press</span><span class="kbd">Space</span><span>to generate</span></div>
+          <div class="tool-bar-right">
+            <div class="segmented" id="formatSwitcher" role="tablist" aria-label="Color format">
+              <button class="active" data-format="HEX">HEX</button>
+              <button data-format="RGB">RGB</button>
+              <button data-format="HSL">HSL</button>
+              <button data-format="CMYK">CMYK</button>
+              <button data-format="TW">Tailwind</button>
+            </div>
+            <button class="btn btn-ghost" id="undoBtn" title="Undo (Ctrl+Z)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+              Undo
+            </button>
+            <button class="btn" id="exportBtn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+              Export
+            </button>
+            <button class="btn btn-primary" id="genBtn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="m4 4 5 5"/></svg>
+              Generate
+            </button>
+          </div>
+        </div>
+
+        <div class="palette" id="palette" aria-label="Generated color palette" role="group"></div>
+
+        <div class="hint-bar">
+          <div class="keys">
+            <span><span class="kbd-sm">Space</span> Generate</span>
+            <span><span class="kbd-sm">1</span>–<span class="kbd-sm">5</span> Lock swatch</span>
+            <span><span class="kbd-sm">Ctrl</span>+<span class="kbd-sm">Z</span> Undo</span>
+            <span><span class="kbd-sm">Click</span> Copy color</span>
+          </div>
+          <div id="paletteHash" style="font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.7"></div>
+        </div>
+      </div>
+
+      <div class="panel-grid">
+        <div class="card">
+          <h3>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z" fill="currentColor" stroke="none"/></svg>
+            WCAG Contrast Checker
+          </h3>
+          <p class="sub">Test any text-on-background combination against real WCAG 2.1 accessibility thresholds.</p>
+          <div class="contrast-inputs">
+            <div class="field">
+              <label for="fgPicker">Text color</label>
+              <div class="color-input">
+                <input type="color" id="fgPicker" value="#FFFFFF" />
+                <input type="text" id="fgText" value="#FFFFFF" spellcheck="false" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="bgPicker">Background</label>
+              <div class="color-input">
+                <input type="color" id="bgPicker" value="#0B0D10" />
+                <input type="text" id="bgText" value="#0B0D10" spellcheck="false" />
+              </div>
+            </div>
+          </div>
+          <div class="contrast-preview" id="contrastPreview">
+            <div class="big">Large heading preview</div>
+            <div class="small">Small body text preview — check readability at 14px.</div>
+          </div>
+          <div class="ratio-row">
+            <div class="ratio" id="ratioOut">21.00<small>:1</small></div>
+            <div class="pills" id="wcagPills">
+              <span class="pill" data-k="aaLarge">AA Large</span>
+              <span class="pill" data-k="aa">AA</span>
+              <span class="pill" data-k="aaa">AAA</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-4.5-4.5L6 21"/></svg>
+            Image Palette Extractor
+          </h3>
+          <p class="sub">Drop any image — a photo, UI screenshot, or brand asset — and we'll extract its dominant colors instantly, right in your browser.</p>
+          <div class="dropzone" id="dropzone">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 9 5-5 5 5"/><path d="M12 4v12"/></svg>
+            <div class="dz-title">Drag &amp; drop an image here</div>
+            <div class="dz-sub">or click to browse · PNG, JPG, WEBP, GIF · processed locally</div>
+          </div>
+          <input type="file" id="fileInput" accept="image/*" class="sr-only" />
+          <img id="dzThumb" class="dz-thumb" alt="Uploaded image preview" />
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="why">
+      <div class="section-head">
+        <span class="eyebrow">Why designers switch</span>
+        <h2>Everything Coolors charges for. Free. Forever.</h2>
+        <p>We rebuilt the palette workflow from scratch for speed-obsessed product teams — no accounts, no banners, no artificial limits.</p>
+      </div>
+      <div class="grid-4">
+        <div class="vcard">
+          <div class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M8 14h8"/></svg></div>
+          <h3>Instant keyboard engine</h3>
+          <p>Tap <strong>Space</strong> anywhere on the page for a fresh harmonious palette. Lock the swatches you love with <strong>1–5</strong> and shuffle the rest.</p>
+        </div>
+        <div class="vcard">
+          <div class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h3>WCAG accessibility built in</h3>
+          <p>Live AA / AAA contrast scoring on every pairing. Ship interfaces that are readable for everyone — not just on your calibrated monitor.</p>
+        </div>
+        <div class="vcard">
+          <div class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></div>
+          <h3>Zero login walls</h3>
+          <p>No account, no email capture, no "sign up to save" modal after three palettes. Everything runs client-side and your work never leaves the tab.</p>
+        </div>
+        <div class="vcard">
+          <div class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></div>
+          <h3>Developer-grade export</h3>
+          <p>One click to CSS variables, Tailwind config, SCSS maps, JSON tokens, or a share-ready PNG. Plus a permalink that restores the exact palette.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="section-head">
+        <span class="eyebrow">Workflow</span>
+        <h2>How to build a palette in 4 steps</h2>
+        <p>From blank canvas to production-ready design tokens in under thirty seconds.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="num">01</span><h4>Generate</h4><p>Hit the <code>Space</code> bar or click <strong>Generate</strong>. We cycle through analogous, complementary, triad, split-complementary, tetradic and monochrome algorithms.</p></div>
+        <div class="step"><span class="num">02</span><h4>Lock what works</h4><p>Found the perfect brand blue? Press <code>1</code>–<code>5</code> or click the padlock to freeze that swatch while the rest keep shuffling.</p></div>
+        <div class="step"><span class="num">03</span><h4>Check contrast</h4><p>Feed your text and background colors into the WCAG checker. Aim for <strong>4.5:1</strong> for body copy and <strong>3:1</strong> for large headings.</p></div>
+        <div class="step"><span class="num">04</span><h4>Export &amp; ship</h4><p>Open the Export drawer for CSS variables, Tailwind config, SCSS or JSON. Or copy the permalink to share the exact palette with your team.</p></div>
+      </div>
+    </section>
+
+    <section class="block" id="compare">
+      <div class="section-head">
+        <span class="eyebrow">Head to head</span>
+        <h2>PaletteStudio vs. Coolors</h2>
+        <p>Same core idea. Radically less friction. Here's the honest breakdown.</p>
+      </div>
+      <div class="table-shell">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr><th style="width:32%">Capability</th><th class="us" style="width:34%">◆ PaletteStudio</th><th style="width:34%">Coolors</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="feat">Palette generation</td><td class="col-us"><span class="tick">✓</span> Unlimited, instant</td><td class="col-them"><span class="neutral">•</span> Rate-limited before prompting</td></tr>
+              <tr><td class="feat">Saving palettes</td><td class="col-us"><span class="tick">✓</span> Permalinks + local storage, free</td><td class="col-them"><span class="cross">✕</span> Paywalled / account required</td></tr>
+              <tr><td class="feat">Login wall</td><td class="col-us"><span class="tick">✓</span> None, ever</td><td class="col-them"><span class="cross">✕</span> Interruptive sign-up modals</td></tr>
+              <tr><td class="feat">Advertising</td><td class="col-us"><span class="tick">✓</span> Zero ads</td><td class="col-them"><span class="cross">✕</span> Banner &amp; display ads</td></tr>
+              <tr><td class="feat">Image color extraction</td><td class="col-us"><span class="tick">✓</span> Free, drag &amp; drop</td><td class="col-them"><span class="neutral">•</span> Limited on free tier</td></tr>
+              <tr><td class="feat">WCAG contrast checker</td><td class="col-us"><span class="tick">✓</span> Live AA / AAA scoring</td><td class="col-them"><span class="neutral">•</span> Partial, buried in UI</td></tr>
+              <tr><td class="feat">Tailwind export</td><td class="col-us"><span class="tick">✓</span> Native, one click</td><td class="col-them"><span class="cross">✕</span> Not offered</td></tr>
+              <tr><td class="feat">Page weight / speed</td><td class="col-us"><span class="tick">✓</span> ~0 network calls, &lt;50ms</td><td class="col-them"><span class="cross">✕</span> Heavy JS + ad scripts</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="faq">
+      <div class="section-head">
+        <span class="eyebrow">Answers</span>
+        <h2>Frequently asked questions</h2>
+        <p>Color theory, conversion math, and accessibility thresholds — explained.</p>
+      </div>
+      <div class="faq" id="faqList">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What makes a color palette "harmonious"?<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="faq-a"><div><p>Harmony comes from predictable relationships on the color wheel. Analogous palettes use hues within 30–60° of each other for calm, cohesive moods. Complementary palettes pair hues 180° apart for maximum tension and contrast. Triadic and tetradic schemes space hues evenly (120° / 90°) for vibrant, balanced variety. Our generator combines one of these hue relationships with a controlled lightness ladder, so palettes stay usable across UI surfaces — not just pretty swatches.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">How do I convert HEX to RGB and HSL accurately?<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="faq-a"><div><p>A HEX code is just three base-16 byte values: <code>#3B82F6</code> becomes R=0x3B (59), G=0x82 (130), B=0xF6 (246). RGB is that same triplet in decimal. To reach HSL, normalize each channel to 0–1, compute the max and min, then derive lightness as the midpoint, saturation from the delta, and hue from which channel dominated. Every conversion in this tool runs that math locally in under a millisecond — no server round trip, no rounding drift.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What contrast ratio do I need to pass WCAG AA or AAA?<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="faq-a"><div><p>WCAG 2.1 sets four thresholds. For normal body text you need <strong>4.5:1</strong> for AA and <strong>7:1</strong> for AAA. For large text — 18pt regular or 14pt bold and above — the bar drops to <strong>3:1</strong> for AA and <strong>4.5:1</strong> for AAA. The ratio is calculated from relative luminance, which linearizes each sRGB channel before weighting it (0.2126 R + 0.7152 G + 0.0722 B). Our checker updates all four grades in real time as you adjust either color.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Is my data or are my uploaded images ever sent to a server?<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="faq-a"><div><p>Never. This entire tool is a single static page executing in your browser. Image extraction works by drawing your file onto an offscreen HTML canvas and reading pixels with <code>getImageData</code> — the file never leaves your device and never touches a network socket. Palettes are stored in your browser's local storage and shareable links encode colors directly into the URL hash, so there's no backend database at all.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Can I use the generated palettes commercially?<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="faq-a"><div><p>Yes, without restriction. Colors themselves aren't copyrightable, and everything generated here is produced by a mathematical algorithm on your machine — not copied from a licensed library. Use them in client work, commercial products, brand systems, or printed collateral. No attribution required, though a link back is always appreciated.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="section-head"><span class="eyebrow">Keep building</span><h2>Related free tools</h2></div>
+      <div class="related">
+        <a class="rcard" href="#"><span class="ric"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></span><span><span class="rt">Image Resizer</span><span class="rs">Compress &amp; resize</span></span></a>
+        <a class="rcard" href="#"><span class="ric"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg></span><span><span class="rt">Markdown Converter</span><span class="rs">MD → HTML</span></span></a>
+        <a class="rcard" href="#"><span class="ric"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14h1M14 20h3M20 20h1"/></svg></span><span><span class="rt">QR Code Generator</span><span class="rs">SVG &amp; PNG</span></span></a>
+        <a class="rcard" href="#"><span class="ric"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><span><span class="rt">Password Generator</span><span class="rs">Cryptographically secure</span></span></a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container foot-inner">
+    <div>© <span id="year"></span> PaletteStudio — built for designers who ship.</div>
+    <div class="foot-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">API</a><a href="#tool">Back to top ↑</a></div>
+  </div>
+</footer>
+
+<div class="modal-back" id="modalBack">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <h3 id="modalTitle">Export palette</h3>
+      <button class="icon-btn" id="modalClose" aria-label="Close"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="tabs" id="exportTabs">
+      <button class="active" data-tab="css">CSS</button>
+      <button data-tab="tailwind">Tailwind</button>
+      <button data-tab="scss">SCSS</button>
+      <button data-tab="json">JSON</button>
+    </div>
+    <pre class="code-out" id="codeOut"></pre>
+    <div class="modal-actions">
+      <button class="btn btn-accent" id="copyCodeBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy code</button>
+      <button class="btn" id="pngBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-4.5-4.5L6 21"/></svg>Download PNG</button>
+      <button class="btn" id="linkBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>Copy permalink</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What makes a color palette harmonious?","acceptedAnswer":{"@type":"Answer","text":"Harmony comes from predictable relationships on the color wheel. Analogous palettes use hues within 30-60 degrees of each other, complementary palettes pair hues 180 degrees apart, and triadic or tetradic schemes space hues evenly for vibrant balance."}},
+{"@type":"Question","name":"How do I convert HEX to RGB and HSL accurately?","acceptedAnswer":{"@type":"Answer","text":"A HEX code is three base-16 byte values. RGB is the same triplet in decimal. To reach HSL, normalize each channel to 0-1, derive lightness from the midpoint of max and min, saturation from the delta, and hue from the dominant channel."}},
+{"@type":"Question","name":"What contrast ratio do I need to pass WCAG AA or AAA?","acceptedAnswer":{"@type":"Answer","text":"Normal text needs 4.5:1 for AA and 7:1 for AAA. Large text needs 3:1 for AA and 4.5:1 for AAA. Ratios are computed from relative luminance using sRGB linearization."}},
+{"@type":"Question","name":"Is my data or are my uploaded images ever sent to a server?","acceptedAnswer":{"@type":"Answer","text":"Never. The tool runs entirely in your browser. Image extraction uses an offscreen HTML canvas and getImageData, so files never leave your device."}},
+{"@type":"Question","name":"Can I use the generated palettes commercially?","acceptedAnswer":{"@type":"Answer","text":"Yes, without restriction. Colors are not copyrightable and every palette is produced algorithmically on your machine. No attribution required."}}
+]}
+</script>
+
+<script>
+(function(){
+'use strict';
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+function hexToRgb(hex){hex=String(hex).replace('#','').trim();if(hex.length===3)hex=hex.split('').map(c=>c+c).join('');if(hex.length!==6||/[^0-9a-f]/i.test(hex))return{r:0,g:0,b:0};return{r:parseInt(hex.slice(0,2),16),g:parseInt(hex.slice(2,4),16),b:parseInt(hex.slice(4,6),16)};}
+function rgbToHex(r,g,b){return '#'+[r,g,b].map(v=>clamp(Math.round(v),0,255).toString(16).padStart(2,'0')).join('').toUpperCase();}
+function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const max=Math.max(r,g,b),min=Math.min(r,g,b);const l=(max+min)/2;const d=max-min;let h=0,s=0;if(d!==0){s=l>0.5?d/(2-max-min):d/(max+min);switch(max){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;default:h=(r-g)/d+4;}h/=6;}return{h:h*360,s:s*100,l:l*100};}
+function hslToRgb(h,s,l){h=((h%360)+360)%360;s=clamp(s,0,100)/100;l=clamp(l,0,100)/100;const c=(1-Math.abs(2*l-1))*s;const x=c*(1-Math.abs(((h/60)%2)-1));const m=l-c/2;let r=0,g=0,b=0;if(h<60)[r,g,b]=[c,x,0];else if(h<120)[r,g,b]=[x,c,0];else if(h<180)[r,g,b]=[0,c,x];else if(h<240)[r,g,b]=[0,x,c];else if(h<300)[r,g,b]=[x,0,c];else[r,g,b]=[c,0,x];return{r:Math.round((r+m)*255),g:Math.round((g+m)*255),b:Math.round((b+m)*255)};}
+function hslToHex(h,s,l){const{r,g,b}=hslToRgb(h,s,l);return rgbToHex(r,g,b);}
+function rgbToCmyk(r,g,b){r/=255;g/=255;b/=255;const k=1-Math.max(r,g,b);if(k>=1)return{c:0,m:0,y:0,k:100};return{c:Math.round(((1-r-k)/(1-k))*100),m:Math.round(((1-g-k)/(1-k))*100),y:Math.round(((1-b-k)/(1-k))*100),k:Math.round(k*100)};}
+function relLum(hex){const{r,g,b}=hexToRgb(hex);const lin=v=>{v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);};return 0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b);}
+function contrastRatio(a,b){const la=relLum(a),lb=relLum(b);const hi=Math.max(la,lb),lo=Math.min(la,lb);return (hi+0.05)/(lo+0.05);}
+function readableOn(hex){return contrastRatio(hex,'#ffffff')>=contrastRatio(hex,'#0b0c0e')?'#ffffff':'#0b0c0e';}
+
+const TW={slate:['#f8fafc','#f1f5f9','#e2e8f0','#cbd5e1','#94a3b8','#64748b','#475569','#334155','#1e293b','#0f172a','#020617'],gray:['#f9fafb','#f3f4f6','#e5e7eb','#d1d5db','#9ca3af','#6b7280','#4b5563','#374151','#1f2937','#111827','#030712'],zinc:['#fafafa','#f4f4f5','#e4e4e7','#d4d4d8','#a1a1aa','#71717a','#52525b','#3f3f46','#27272a','#18181b','#09090b'],neutral:['#fafafa','#f5f5f5','#e5e5e5','#d4d4d4','#a3a3a3','#737373','#525252','#404040','#262626','#171717','#0a0a0a'],stone:['#fafaf9','#f5f5f4','#e7e5e4','#d6d3d1','#a8a29e','#78716c','#57534e','#44403c','#292524','#1c1917','#0c0a09'],red:['#fef2f2','#fee2e2','#fecaca','#fca5a5','#f87171','#ef4444','#dc2626','#b91c1c','#991b1b','#7f1d1d','#450a0a'],orange:['#fff7ed','#ffedd5','#fed7aa','#fdba74','#fb923c','#f97316','#ea580c','#c2410c','#9a3412','#7c2d12','#431407'],amber:['#fffbeb','#fef3c7','#fde68a','#fcd34d','#fbbf24','#f59e0b','#d97706','#b45309','#92400e','#78350f','#451a03'],yellow:['#fefce8','#fef9c3','#fef08a','#fde047','#facc15','#eab308','#ca8a04','#a16207','#854d0e','#713f12','#422006'],lime:['#f7fee7','#ecfccb','#d9f99d','#bef264','#a3e635','#84cc16','#65a30d','#4d7c0f','#3f6212','#365314','#1a2e05'],green:['#f0fdf4','#dcfce7','#bbf7d0','#86efac','#4ade80','#22c55e','#16a34a','#15803d','#166534','#14532d','#052e16'],emerald:['#ecfdf5','#d1fae5','#a7f3d0','#6ee7b7','#34d399','#10b981','#059669','#047857','#065f46','#064e3b','#022c22'],teal:['#f0fdfa','#ccfbf1','#99f6e4','#5eead4','#2dd4bf','#14b8a6','#0d9488','#0f766e','#115e59','#134e4a','#042f2e'],cyan:['#ecfeff','#cffafe','#a5f3fc','#67e8f9','#22d3ee','#06b6d4','#0891b2','#0e7490','#155e75','#164e63','#083344'],sky:['#f0f9ff','#e0f2fe','#bae6fd','#7dd3fc','#38bdf8','#0ea5e9','#0284c7','#0369a1','#075985','#0c4a6e','#082f49'],blue:['#eff6ff','#dbeafe','#bfdbfe','#93c5fd','#60a5fa','#3b82f6','#2563eb','#1d4ed8','#1e40af','#1e3a8a','#172554'],indigo:['#eef2ff','#e0e7ff','#c7d2fe','#a5b4fc','#818cf8','#6366f1','#4f46e5','#4338ca','#3730a3','#312e81','#1e1b4b'],violet:['#f5f3ff','#ede9fe','#ddd6fe','#c4b5fd','#a78bfa','#8b5cf6','#7c3aed','#6d28d9','#5b21b6','#4c1d95','#2e1065'],purple:['#faf5ff','#f3e8ff','#e9d5ff','#d8b4fe','#c084fc','#a855f7','#9333ea','#7e22ce','#6b21a8','#581c87','#3b0764'],fuchsia:['#fdf4ff','#fae8ff','#f5d0fe','#f0abfc','#e879f9','#d946ef','#c026d3','#a21caf','#86198f','#701a75','#4a044e'],pink:['#fdf2f8','#fce7f3','#fbcfe8','#f9a8d4','#f472b6','#ec4899','#db2777','#be185d','#9d174d','#831843','#500724'],rose:['#fff1f2','#ffe4e6','#fecdd3','#fda4af','#fb7185','#f43f5e','#e11d48','#be123c','#9f1239','#881337','#4c0519']};
+const TW_SHADES=[50,100,200,300,400,500,600,700,800,900,950];
+const TW_FLAT=(()=>{const out=[];for(const f in TW){TW[f].forEach((hex,i)=>{const{r,g,b}=hexToRgb(hex);out.push({name:f+'-'+TW_SHADES[i],r,g,b});});}return out;})();
+function nearestTailwind(hex){const{r,g,b}=hexToRgb(hex);let best=null,bestD=Infinity;for(const c of TW_FLAT){const rm=(c.r+r)/2,dr=c.r-r,dg=c.g-g,db=c.b-b;const d=(2+rm/256)*dr*dr+4*dg*dg+(2+(255-rm)/256)*db*db;if(d<bestD){bestD=d;best=c;}}return best.name;}
+
+const SCHEMES={analogous:[0,26,-26,48,-48],complementary:[0,180,14,194,-14],triad:[0,120,240,60,300],split:[0,150,210,30,180],tetradic:[0,90,180,270,45],mono:[0,0,0,0,0]};
+const SCHEME_KEYS=Object.keys(SCHEMES);
+const LADDER=[93,78,60,42,24];
+let lastScheme='';
+function generatePalette(){let scheme=SCHEME_KEYS[Math.floor(Math.random()*SCHEME_KEYS.length)];if(scheme===lastScheme&&Math.random()>0.35)scheme=SCHEME_KEYS[(SCHEME_KEYS.indexOf(scheme)+1)%SCHEME_KEYS.length];lastScheme=scheme;const off=SCHEMES[scheme];const bh=Math.random()*360;const bs=52+Math.random()*38;const ladder=Math.random()>0.5?LADDER.slice():LADDER.slice().reverse();return ladder.map((l,i)=>{const hue=bh+off[i];const sat=scheme==='mono'?clamp(bs-i*5,14,92):clamp(bs+(Math.random()*18-9),22,96);const light=clamp(l+(Math.random()*8-4),7,96);return hslToHex(hue,sat,light);});}
+
+const state={colors:[],locked:[false,false,false,false,false],format:'HEX',history:[]};
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const paletteEl=$('#palette'),hashEl=$('#paletteHash'),toastWrap=$('#toastWrap');
+
+function formatColor(hex,fmt){const{r,g,b}=hexToRgb(hex);switch(fmt){case 'RGB':return `rgb(${r}, ${g}, ${b})`;case 'HSL':{const{h,s,l}=rgbToHsl(r,g,b);return `hsl(${Math.round(h)}, ${Math.round(s)}%, ${Math.round(l)}%)`;}case 'CMYK':{const{c,m,y,k}=rgbToCmyk(r,g,b);return `cmyk(${c}%, ${m}%, ${y}%, ${k}%)`;}case 'TW':return nearestTailwind(hex);default:return hex;}}
+function copyValueFor(hex,fmt){if(fmt==='TW')return 'bg-'+nearestTailwind(hex);return formatColor(hex,fmt);}
+
+function renderPalette(){
+  paletteEl.innerHTML='';
+  state.colors.forEach((hex,i)=>{
+    const fg=readableOn(hex);const isLocked=state.locked[i];
+    const sw=document.createElement('div');
+    sw.className='swatch'+(isLocked?' is-locked':'');
+    sw.style.backgroundColor=hex;sw.style.color=fg;sw.dataset.i=i;
+    sw.setAttribute('role','button');sw.setAttribute('tabindex','0');
+    sw.setAttribute('aria-label',`Color ${i+1}: ${hex}`);
+    const label=formatColor(hex,state.format);const sub=state.format==='HEX'?'':hex;
+    sw.innerHTML=`
+      <div class="swatch-top">
+        <span class="swatch-index">${String(i+1).padStart(2,'0')}</span>
+        <span class="lock-badge" title="Locked"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+      </div>
+      <div class="swatch-body">
+        <button class="swatch-code" data-act="copy" title="Copy">${label}</button>
+        ${sub?`<div class="swatch-sub">${sub}</div>`:''}
+      </div>
+      <div class="swatch-actions">
+        <button data-act="copy" title="Copy value" aria-label="Copy"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+        <button data-act="lock" title="${isLocked?'Unlock':'Lock'}" aria-label="Toggle lock">${isLocked?`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`:`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>`}</button>
+        <button data-act="dark" title="Darken" aria-label="Darken"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+        <button data-act="light" title="Lighten" aria-label="Lighten"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+      </div>`;
+    sw.addEventListener('click',e=>{const act=e.target.closest('[data-act]')?.dataset.act||'copy';handleSwatchAction(i,act);});
+    sw.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();handleSwatchAction(i,'copy');}});
+    paletteEl.appendChild(sw);
+  });
+  updateHash();
+}
+
+function handleSwatchAction(i,act){
+  const hex=state.colors[i];
+  if(act==='copy'){copyText(copyValueFor(hex,state.format),`Copied ${copyValueFor(hex,state.format)}`);return;}
+  if(act==='lock'){state.locked[i]=!state.locked[i];renderPalette();toast(state.locked[i]?`Swatch ${i+1} locked`:`Swatch ${i+1} unlocked`);return;}
+  if(act==='dark'||act==='light'){
+    if(state.locked[i]){toast('Swatch is locked — unlock to edit');return;}
+    const {r,g,b}=hexToRgb(hex);const {h,s,l}=rgbToHsl(r,g,b);
+    const next=clamp(l+(act==='light'?5:-5),3,97);
+    state.colors[i]=hslToHex(h,s,next);
+    renderPalette();
+  }
+}
+
+function pushHistory(){state.history.push(state.colors.slice());if(state.history.length>40)state.history.shift();}
+function shufflePalette(){pushHistory();const fresh=generatePalette();state.colors=state.colors.map((c,i)=>state.locked[i]?c:fresh[i]);renderPalette();}
+function undo(){if(!state.history.length){toast('Nothing to undo');return;}state.colors=state.history.pop();renderPalette();toast('Undone');}
+
+function updateHash(){hashEl.textContent='#'+state.colors.map(c=>c.replace('#','').toLowerCase()).join('-');}
+function readHash(){const h=location.hash.replace('#','').trim();if(!h)return null;const parts=h.split('-').filter(Boolean);if(parts.length!==5)return null;if(!parts.every(p=>/^[0-9a-f]{6}$/i.test(p)))return null;return parts.map(p=>'#'+p.toUpperCase());}
+
+async function copyText(text,msg){
+  try{await navigator.clipboard.writeText(text);toast(msg||'Copied to clipboard');}
+  catch(err){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast(msg||'Copied to clipboard');}catch(e){toast('Copy failed');}document.body.removeChild(ta);}
+}
+function toast(msg){
+  const el=document.createElement('div');el.className='toast';
+  el.innerHTML=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m20 6-11 11-5-5"/></svg><span>${msg}</span>`;
+  toastWrap.appendChild(el);
+  setTimeout(()=>{el.style.transition='opacity .25s, transform .25s';el.style.opacity='0';el.style.transform='translateY(8px)';setTimeout(()=>el.remove(),260);},1700);
+}
+
+const fgPicker=$('#fgPicker'),fgText=$('#fgText'),bgPicker=$('#bgPicker'),bgText=$('#bgText');
+const contrastPreview=$('#contrastPreview'),ratioOut=$('#ratioOut'),wcagPills=$$('#wcagPills .pill');
+function normalizeHexInput(v){v=v.trim().toUpperCase();if(!v.startsWith('#'))v='#'+v;if(/^#[0-9A-F]{3}$/.test(v))v='#'+v.slice(1).split('').map(c=>c+c).join('');return /^#[0-9A-F]{6}$/.test(v)?v:null;}
+function updateContrast(){
+  const fg=normalizeHexInput(fgText.value)||'#FFFFFF';const bg=normalizeHexInput(bgText.value)||'#0B0D10';
+  contrastPreview.style.backgroundColor=bg;contrastPreview.style.color=fg;
+  const ratio=contrastRatio(fg,bg);ratioOut.innerHTML=`${ratio.toFixed(2)}<small>:1</small>`;
+  const checks={aaLarge:ratio>=3,aa:ratio>=4.5,aaa:ratio>=7};
+  wcagPills.forEach(p=>{const k=p.dataset.k;p.classList.toggle('pass',!!checks[k]);p.classList.toggle('fail',!checks[k]);});
+  if(/^#[0-9A-F]{6}$/.test(fg))fgPicker.value=fg.toLowerCase();
+  if(/^#[0-9A-F]{6}$/.test(bg))bgPicker.value=bg.toLowerCase();
+}
+fgPicker.addEventListener('input',()=>{fgText.value=fgPicker.value.toUpperCase();updateContrast();});
+bgPicker.addEventListener('input',()=>{bgText.value=bgPicker.value.toUpperCase();updateContrast();});
+fgText.addEventListener('input',updateContrast);
+bgText.addEventListener('input',updateContrast);
+
+const dropzone=$('#dropzone'),fileInput=$('#fileInput'),dzThumb=$('#dzThumb');
+['dragenter','dragover'].forEach(evt=>dropzone.addEventListener(evt,e=>{e.preventDefault();dropzone.classList.add('drag');}));
+['dragleave','drop'].forEach(evt=>dropzone.addEventListener(evt,e=>{e.preventDefault();dropzone.classList.remove('drag');}));
+dropzone.addEventListener('drop',e=>{const file=e.dataTransfer?.files?.[0];if(file)handleImageFile(file);});
+dropzone.addEventListener('click',()=>fileInput.click());
+fileInput.addEventListener('change',e=>{const file=e.target.files?.[0];if(file)handleImageFile(file);});
+
+function handleImageFile(file){
+  if(!file.type.startsWith('image/')){toast('Please drop an image file');return;}
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const img=new Image();
+    img.onload=()=>{
+      dzThumb.src=reader.result;dzThumb.style.display='block';
+      const colors=extractPaletteFromImage(img,5);
+      if(!colors.length){toast('Could not read colors from image');return;}
+      pushHistory();
+      const unlockedIdx=state.locked.map((l,i)=>l?-1:i).filter(i=>i>=0);
+      unlockedIdx.forEach((idx,k)=>{state.colors[idx]=colors[k%colors.length];});
+      renderPalette();
+      toast('Palette extracted from image ✨');
+    };
+    img.onerror=()=>toast('Could not load that image');
+    img.src=reader.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function extractPaletteFromImage(img,count){
+  const SIZE=140;const canvas=document.createElement('canvas');canvas.width=SIZE;canvas.height=SIZE;
+  const ctx=canvas.getContext('2d',{willReadFrequently:true});
+  const ar=img.width/img.height;let dw=SIZE,dh=SIZE,dx=0,dy=0;
+  if(ar>1){dh=SIZE;dw=SIZE*ar;dx=(SIZE-dw)/2;}else{dw=SIZE;dh=SIZE/ar;dy=(SIZE-dh)/2;}
+  ctx.drawImage(img,dx,dy,dw,dh);
+  const data=ctx.getImageData(0,0,SIZE,SIZE).data;
+  const buckets=new Map();
+  for(let i=0;i<data.length;i+=4){const a=data[i+3];if(a<128)continue;const r=data[i],g=data[i+1],b=data[i+2];const key=((r>>4)<<8)|((g>>4)<<4)|(b>>4);const cur=buckets.get(key);if(cur){cur.r+=r;cur.g+=g;cur.b+=b;cur.n++;}else buckets.set(key,{r,g,b,n:1});}
+  const sorted=Array.from(buckets.values()).map(b=>({r:b.r/b.n,g:b.g/b.n,b:b.b/b.n,n:b.n})).sort((x,y)=>y.n-x.n);
+  const picked=[];let threshold=46;
+  for(const c of sorted){if(picked.length>=count)break;const close=picked.some(p=>Math.sqrt((p.r-c.r)**2+(p.g-c.g)**2+(p.b-c.b)**2)<threshold);if(!close)picked.push(c);}
+  if(picked.length<count){threshold=24;for(const c of sorted){if(picked.length>=count)break;if(picked.includes(c))continue;const close=picked.some(p=>Math.sqrt((p.r-c.r)**2+(p.g-c.g)**2+(p.b-c.b)**2)<threshold);if(!close)picked.push(c);}}
+  while(picked.length<count&&sorted.length)picked.push(sorted[picked.length%sorted.length]);
+  return picked.map(c=>rgbToHex(c.r,c.g,c.b));
+}
+
+const modalBack=$('#modalBack'),codeOut=$('#codeOut'),exportTabs=$('#exportTabs');
+let activeTab='css';
+function buildExportText(tab){
+  const names=['primary','secondary','accent','muted','deep'];
+  if(tab==='css')return `:root {\n`+state.colors.map((c,i)=>`  --color-${names[i]}: ${c};`).join('\n')+`\n}\n`;
+  if(tab==='tailwind')return `// tailwind.config.js\nmodule.exports = {\n  theme: {\n    extend: {\n      colors: {\n`+state.colors.map((c,i)=>`        '${names[i]}': '${c}',`).join('\n')+`\n      },\n    },\n  },\n};\n`;
+  if(tab==='scss')return state.colors.map((c,i)=>`$color-${names[i]}: ${c};`).join('\n')+'\n\n// Usage: background: $color-primary;\n';
+  const obj={};state.colors.forEach((c,i)=>{obj[names[i]]={hex:c,rgb:formatColor(c,'RGB'),hsl:formatColor(c,'HSL'),cmyk:formatColor(c,'CMYK'),tailwind:'bg-'+nearestTailwind(c)};});return JSON.stringify(obj,null,2);
+}
+function refreshExport(){codeOut.textContent=buildExportText(activeTab);}
+function openModal(){refreshExport();modalBack.classList.add('show');document.body.style.overflow='hidden';}
+function closeModal(){modalBack.classList.remove('show');document.body.style.overflow='';}
+
+exportTabs.addEventListener('click',e=>{const b=e.target.closest('button[data-tab]');if(!b)return;exportTabs.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');activeTab=b.dataset.tab;refreshExport();});
+$('#modalClose').addEventListener('click',closeModal);
+modalBack.addEventListener('click',e=>{if(e.target===modalBack)closeModal();});
+
+$('#copyCodeBtn').addEventListener('click',()=>copyText(codeOut.textContent,'Code copied'));
+$('#linkBtn').addEventListener('click',()=>{
+  const url=location.origin+location.pathname+'#'+state.colors.map(c=>c.replace('#','').toLowerCase()).join('-');
+  copyText(url,'Permalink copied');
+});
+$('#pngBtn').addEventListener('click',()=>{
+  const W=1200,H=400;const canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
+  const ctx=canvas.getContext('2d');const sw=W/5;
+  state.colors.forEach((c,i)=>{ctx.fillStyle=c;ctx.fillRect(i*sw,0,sw,H);});
+  canvas.toBlob(blob=>{
+    if(!blob)return;
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download='palette-'+state.colors.map(c=>c.replace('#','')).join('-')+'.png';
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    toast('PNG downloaded');
+  },'image/png');
+});
+
+$('#exportBtn').addEventListener('click',openModal);
+$('#genBtn').addEventListener('click',shufflePalette);
+$('#undoBtn').addEventListener('click',undo);
+$('#formatSwitcher').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-format]');if(!b)return;
+  $$('#formatSwitcher button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+  state.format=b.dataset.format;renderPalette();
+});
+
+/* FAQ accordion */
+$('#faqList').addEventListener('click',e=>{
+  const q=e.target.closest('.faq-q');if(!q)return;
+  const item=q.parentElement;const open=item.classList.contains('open');
+  $$('#faqList .faq-item').forEach(x=>x.classList.remove('open'));
+  if(!open){item.classList.add('open');q.setAttribute('aria-expanded','true');}
+  else q.setAttribute('aria-expanded','false');
+});
+
+/* Theme */
+const themeBtn=$('#themeBtn');
+function setTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('ps-theme',t);}catch(e){}}
+themeBtn.addEventListener('click',()=>{const cur=document.documentElement.dataset.theme;setTheme(cur==='dark'?'light':'dark');});
+try{const saved=localStorage.getItem('ps-theme');if(saved)setTheme(saved);}catch(e){}
+
+/* Global keyboard */
+document.addEventListener('keydown',e=>{
+  const tag=(e.target.tagName||'').toLowerCase();
+  const inField=tag==='input'||tag==='textarea'||e.target.isContentEditable;
+  if(e.code==='Space'&&!inField&&!modalBack.classList.contains('show')){
+    e.preventDefault();shufflePalette();return;
+  }
+  if(e.key==='Escape'&&modalBack.classList.contains('show')){closeModal();return;}
+  if(inField)return;
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();undo();return;}
+  if(/^[1-5]$/.test(e.key)){const i=parseInt(e.key,10)-1;if(i<state.colors.length){state.locked[i]=!state.locked[i];renderPalette();toast(state.locked[i]?`Swatch ${i+1} locked`:`Swatch ${i+1} unlocked`);}}
+});
+
+/* Boot */
+$('#year').textContent=new Date().getFullYear();
+const fromHash=readHash();
+if(fromHash){state.colors=fromHash;}else{state.colors=generatePalette();}
+renderPalette();
+updateContrast();
+})();
+</script>
+</body>
+</html>

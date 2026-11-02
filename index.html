@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ToolForge — 25 Free Online Tools. Fast, Ad-Free & Private.</title>
+<meta name="description" content="25 free, private, ad-free online tools for creators, developers and businesses. Fast, 100% client-side." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"ToolForge","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"25 free, private, ad-free online tools.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: { extend: {
+    fontFamily: { sans: ['Inter','system-ui','-apple-system','sans-serif'], mono: ['JetBrains Mono','ui-monospace','monospace'] }
+  }}
+}
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-feature-settings: "ss01","cv11"; }
+  .text-balance { text-wrap: balance; }
+  .line-clamp-2 { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  ::-webkit-scrollbar { width:10px; height:10px; }
+  ::-webkit-scrollbar-thumb { background:rgba(120,120,130,.35); border-radius:8px; border:2px solid transparent; background-clip:content-box; }
+  ::-webkit-scrollbar-track { background:transparent; }
+
+  @keyframes shimmer { to { background-position: 200% center; } }
+  .gradient-text { background-size: 200% auto; animation: shimmer 8s linear infinite; }
+
+  @keyframes palette-in { from{opacity:0;transform:translateY(-8px) scale(.98)} to{opacity:1;transform:none} }
+  .palette-anim { animation: palette-in .18s cubic-bezier(.16,1,.3,1); }
+
+  @keyframes modal-in { from{opacity:0;transform:translateY(12px) scale(.97)} to{opacity:1;transform:none} }
+  .modal-anim { animation: modal-in .22s cubic-bezier(.16,1,.3,1); }
+
+  @keyframes toast-in { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+  .toast-anim { animation: toast-in .25s cubic-bezier(.16,1,.3,1); }
+
+  .reveal { opacity:0; transform: translateY(18px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+  .reveal.in { opacity:1; transform:none; }
+
+  .glow-border { position:relative; }
+  .glow-border::before {
+    content:''; position:absolute; inset:-1px; border-radius:inherit; padding:1px;
+    background: linear-gradient(135deg, rgba(129,140,248,.55), rgba(232,121,249,.45), rgba(34,211,238,.55));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    opacity:0; transition: opacity .4s; pointer-events:none;
+  }
+  .glow-border:hover::before { opacity:1; }
+
+  #scrollProgress { transition: width .1s linear; }
+
+  .toolbar-blur { backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); }
+</style>
+</head>
+
+<body class="relative min-h-screen overflow-x-hidden bg-[#fbfbfd] text-neutral-900 antialiased transition-colors duration-300 dark:bg-[#08080a] dark:text-neutral-100">
+
+<!-- Scroll progress -->
+<div class="fixed top-0 left-0 right-0 z-[60] h-[2px] bg-transparent">
+  <div id="scrollProgress" class="h-full w-0 bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400"></div>
+</div>
+
+<!-- Ambient background -->
+<div aria-hidden class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+  <div class="absolute -top-48 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[140px] dark:bg-indigo-600/30"></div>
+  <div class="absolute top-1/4 -right-40 h-[500px] w-[500px] rounded-full bg-fuchsia-500/15 blur-[130px] dark:bg-fuchsia-600/20"></div>
+  <div class="absolute bottom-0 -left-40 h-[500px] w-[500px] rounded-full bg-cyan-400/15 blur-[130px] dark:bg-cyan-500/15"></div>
+  <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)]"></div>
+</div>
+
+<!-- ============================ HEADER ============================ -->
+<header id="siteHeader" class="toolbar-blur sticky top-0 z-40 border-b border-transparent bg-white/60 transition-all duration-300 dark:bg-[#08080a]/60">
+  <div class="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
+
+    <a href="#" class="group flex shrink-0 items-center gap-2.5">
+      <span class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 via-fuchsia-500 to-cyan-400 shadow-lg shadow-indigo-500/30 transition-transform duration-300 group-hover:scale-105">
+        <svg class="h-[18px] w-[18px] text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+      </span>
+      <span class="text-[15px] font-semibold tracking-tight">Tool<span class="bg-gradient-to-r from-indigo-500 to-cyan-400 bg-clip-text text-transparent dark:from-indigo-400 dark:to-cyan-300">Forge</span></span>
+    </a>
+
+    <nav id="desktopNav" class="ml-6 hidden items-center gap-1 lg:flex"></nav>
+
+    <div class="ml-auto flex items-center gap-2">
+      <button onclick="openPalette()" class="hidden h-9 w-60 items-center gap-2 rounded-xl border border-black/10 bg-white/70 px-3 text-[13px] text-neutral-500 transition-all hover:border-black/20 hover:bg-white sm:flex dark:border-white/10 dark:bg-white/5 dark:text-neutral-400 dark:hover:border-white/20 dark:hover:bg-white/10">
+        <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <span class="truncate">Search 25 tools…</span>
+        <kbd class="ml-auto flex items-center gap-0.5 rounded-md border border-black/10 bg-black/5 px-1.5 py-0.5 font-mono text-[10px] font-medium dark:border-white/10 dark:bg-white/10">
+          <svg class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>K
+        </kbd>
+      </button>
+
+      <button onclick="openPalette()" class="grid h-9 w-9 place-items-center rounded-xl border border-black/10 bg-white/70 text-neutral-600 sm:hidden dark:border-white/10 dark:bg-white/5 dark:text-neutral-300" aria-label="Search">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </button>
+
+      <button onclick="toggleTheme()" id="themeBtn" class="grid h-9 w-9 place-items-center rounded-xl border border-black/10 bg-white/70 text-neutral-600 transition-all hover:scale-105 hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-neutral-300 dark:hover:bg-white/10" aria-label="Toggle theme"></button>
+
+      <a href="https://github.com" target="_blank" rel="noopener" class="hidden h-9 w-9 place-items-center rounded-xl border border-black/10 bg-white/70 text-neutral-600 transition-all hover:scale-105 hover:bg-white sm:grid dark:border-white/10 dark:bg-white/5 dark:text-neutral-300 dark:hover:bg-white/10" aria-label="GitHub">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+      </a>
+
+      <button onclick="toggleMobile()" class="grid h-9 w-9 place-items-center rounded-xl border border-black/10 bg-white/70 text-neutral-600 lg:hidden dark:border-white/10 dark:bg-white/5 dark:text-neutral-300" aria-label="Menu">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobileMenu" class="hidden border-t border-black/5 bg-white/95 px-4 py-3 toolbar-blur lg:hidden dark:border-white/10 dark:bg-[#0b0b0e]/95">
+    <div id="mobileNav" class="grid gap-1"></div>
+  </div>
+</header>
+
+<main class="relative z-10">
+  <!-- ============================ HERO ============================ -->
+  <section class="relative px-4 pt-16 pb-14 sm:px-6 sm:pt-24 lg:px-8 lg:pt-28">
+    <div class="mx-auto max-w-4xl text-center">
+
+      <div class="reveal mb-6 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-1 text-[12px] font-medium text-neutral-600 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-neutral-300">
+        <span class="relative flex h-1.5 w-1.5">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+        </span>
+        25 tools live · no signup · no ads
+      </div>
+
+      <h1 class="reveal text-balance text-[2.2rem] font-extrabold leading-[1.05] tracking-[-0.04em] sm:text-5xl lg:text-[4rem]">
+        The Ultimate Free Online Web Tools Suite —<br class="hidden sm:block" />
+        <span class="gradient-text bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 bg-clip-text text-transparent dark:from-indigo-400 dark:via-fuchsia-400 dark:to-cyan-300">Fast, Ad-Free &amp; Private</span>
+      </h1>
+
+      <p class="reveal mx-auto mt-6 max-w-2xl text-pretty text-[15px] leading-relaxed text-neutral-600 sm:text-[17px] dark:text-neutral-400">
+        25 precision-crafted utilities for creators, developers and businesses. Everything runs client-side in your browser — nothing is ever uploaded.
+      </p>
+
+      <div class="reveal mx-auto mt-10 max-w-2xl">
+        <div class="group relative">
+          <div class="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-indigo-500/40 via-fuchsia-500/40 to-cyan-400/40 opacity-0 blur transition-opacity duration-500 group-focus-within:opacity-100"></div>
+          <div class="relative flex items-center gap-3 rounded-2xl border border-black/10 bg-white/90 px-5 py-4 shadow-xl shadow-black/5 dark:border-white/10 dark:bg-white/[0.06] dark:shadow-black/40">
+            <svg class="h-5 w-5 shrink-0 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input id="heroSearch" oninput="setQuery(this.value)" placeholder="Search tools — try “transcript”, “json”, “invoice”…" class="w-full bg-transparent text-[15px] text-neutral-900 placeholder:text-neutral-400 focus:outline-none dark:text-white dark:placeholder:text-neutral-500" />
+            <button id="heroClear" onclick="setQuery('')" class="hidden shrink-0 rounded-md p-1 text-neutral-400 hover:text-neutral-700 dark:hover:text-white" aria-label="Clear">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+            <kbd id="heroKbd" class="hidden shrink-0 items-center gap-0.5 rounded-md border border-black/10 bg-black/5 px-2 py-1 font-mono text-[10px] font-medium text-neutral-500 sm:flex dark:border-white/10 dark:bg-white/10 dark:text-neutral-400">
+              <svg class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>K
+            </kbd>
+          </div>
+        </div>
+
+        <div id="fastTags" class="mt-5 flex flex-wrap items-center justify-center gap-2"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ STATS ============================ -->
+  <section class="px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl reveal">
+      <div id="stats" class="grid grid-cols-2 divide-black/5 overflow-hidden rounded-2xl border border-black/10 bg-white/60 sm:grid-cols-4 sm:divide-x dark:divide-white/10 dark:border-white/10 dark:bg-white/[0.03]"></div>
+    </div>
+  </section>
+
+  <!-- ============================ TRENDING ============================ -->
+  <section class="px-4 pt-20 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="reveal mb-6 flex items-end justify-between gap-4">
+        <div>
+          <div class="mb-1 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-indigo-500 dark:text-indigo-400">
+            <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+            Trending
+          </div>
+          <h2 class="text-xl font-semibold tracking-tight sm:text-2xl">Most popular this week</h2>
+          <p class="mt-1 text-[13.5px] text-neutral-500 dark:text-neutral-500">The four most-used tools across the platform.</p>
+        </div>
+        <a href="#directory" class="hidden shrink-0 items-center gap-1.5 rounded-xl border border-black/10 bg-white/70 px-3.5 py-2 text-[13px] font-medium text-neutral-700 transition-all hover:-translate-y-0.5 hover:bg-white sm:inline-flex dark:border-white/10 dark:bg-white/5 dark:text-neutral-300 dark:hover:bg-white/10">
+          View all
+          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div id="trendingGrid" class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4"></div>
+    </div>
+  </section>
+
+  <!-- ============================ DIRECTORY ============================ -->
+  <section class="px-4 pt-24 sm:px-6 lg:px-8" id="directory">
+    <div class="mx-auto max-w-7xl">
+      <p id="resultCount" class="mb-6 hidden text-[13.5px] text-neutral-500 dark:text-neutral-400"></p>
+      <div id="directoryRoot" class="space-y-20"></div>
+    </div>
+  </section>
+
+  <!-- ============================ WHY US ============================ -->
+  <section class="px-4 pt-28 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="reveal mx-auto max-w-2xl text-center">
+        <div class="mb-3 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-indigo-500 dark:text-indigo-400">
+          <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+          Why ToolForge
+        </div>
+        <h2 class="text-balance text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">Built for people who value their time</h2>
+        <p class="mt-4 text-[15px] text-neutral-600 sm:text-[16px] dark:text-neutral-400">No accounts. No upsells. No data collection. Just fast, focused software.</p>
+      </div>
+      <div id="whyGrid" class="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"></div>
+    </div>
+  </section>
+
+  <!-- ============================ CTA ============================ -->
+  <section class="px-4 pt-28 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl reveal">
+      <div class="relative overflow-hidden rounded-3xl border border-black/10 bg-gradient-to-br from-indigo-500/[0.08] via-fuchsia-500/[0.05] to-cyan-400/[0.08] px-6 py-16 text-center dark:border-white/10 dark:from-indigo-500/[0.12] dark:via-fuchsia-500/[0.06] dark:to-cyan-400/[0.1]">
+        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_circle_at_50%_0%,rgba(129,140,248,0.22),transparent_70%)]"></div>
+        <div class="pointer-events-none absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-fuchsia-500/20 blur-3xl"></div>
+
+        <h2 class="relative text-balance text-2xl font-semibold tracking-tight sm:text-3xl lg:text-4xl">
+          Start with 25 tools. Pay nothing. Ever.
+        </h2>
+        <p class="relative mx-auto mt-4 max-w-lg text-[15px] text-neutral-600 dark:text-neutral-400">
+          Hit <kbd class="rounded border border-black/10 bg-white/70 px-1.5 py-0.5 font-mono text-[11px] dark:border-white/15 dark:bg-white/10">⌘K</kbd> from anywhere and jump straight to the tool you need.
+        </p>
+        <button onclick="openPalette()" class="group relative mt-8 inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-6 py-3.5 text-[14px] font-medium text-white shadow-xl shadow-black/25 transition-all hover:-translate-y-0.5 hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200">
+          Open tool search
+          <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="relative z-10 mt-28 border-t border-black/5 bg-white/50 px-4 py-16 sm:px-6 lg:px-8 dark:border-white/10 dark:bg-white/[0.02]">
+  <div class="mx-auto max-w-7xl">
+    <div class="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-6">
+      <div class="col-span-2">
+        <a href="#" class="flex items-center gap-2.5">
+          <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-indigo-500 via-fuchsia-500 to-cyan-400">
+            <svg class="h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+          </span>
+          <span class="text-sm font-semibold tracking-tight">ToolForge</span>
+        </a>
+        <p class="mt-4 max-w-xs text-[13px] leading-relaxed text-neutral-500 dark:text-neutral-500">
+          25 free, private, ad-free online tools for creators, developers and businesses. Built for speed, shipped for everyone.
+        </p>
+        <div class="mt-5 flex items-center gap-2">
+          <a href="https://github.com" target="_blank" rel="noopener" class="grid h-8 w-8 place-items-center rounded-lg border border-black/10 text-neutral-500 transition-colors hover:text-neutral-900 dark:border-white/10 dark:hover:text-white" aria-label="GitHub">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          </a>
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
+            <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+            100% client-side
+          </span>
+        </div>
+      </div>
+      <div id="footerNav" class="contents"></div>
+    </div>
+
+    <div class="mt-14 flex flex-col items-center justify-between gap-3 border-t border-black/5 pt-6 text-[12px] text-neutral-500 sm:flex-row dark:border-white/10 dark:text-neutral-500">
+      <p>© <span id="year"></span> ToolForge. All rights reserved.</p>
+      <p class="flex items-center gap-3">
+        <span>25 tools</span><span class="h-1 w-1 rounded-full bg-neutral-300 dark:bg-neutral-700"></span>
+        <span>0 ads</span><span class="h-1 w-1 rounded-full bg-neutral-300 dark:bg-neutral-700"></span>
+        <span>&lt;50ms</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================ COMMAND PALETTE ============================ -->
+<div id="palette" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-black/40 dark:bg-black/70" onclick="closePalette()"></div>
+  <div class="pointer-events-none relative flex h-full items-start justify-center p-4 pt-[12vh] sm:pt-[16vh]">
+    <div class="palette-anim pointer-events-auto w-full max-w-xl overflow-hidden rounded-2xl border border-black/10 bg-white shadow-2xl dark:border-white/10 dark:bg-[#101014]">
+      <div class="flex items-center gap-3 border-b border-black/5 px-4 dark:border-white/10">
+        <svg class="h-4 w-4 shrink-0 text-neutral-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="paletteSearch" oninput="setQuery(this.value)" placeholder="Search 25 tools by name, keyword or tag…" class="h-14 w-full bg-transparent text-[14px] text-neutral-900 placeholder:text-neutral-400 focus:outline-none dark:text-white dark:placeholder:text-neutral-500" />
+        <button onclick="closePalette()" class="shrink-0 rounded-md border border-black/10 px-1.5 py-0.5 font-mono text-[10px] text-neutral-500 dark:border-white/10 dark:text-neutral-400">ESC</button>
+      </div>
+      <div id="paletteResults" class="max-h-[52vh] overflow-y-auto overscroll-contain p-2"></div>
+      <div class="flex items-center gap-4 border-t border-black/5 px-4 py-2.5 text-[11px] text-neutral-500 dark:border-white/10 dark:text-neutral-500">
+        <span class="flex items-center gap-1"><kbd class="rounded border border-black/10 px-1 dark:border-white/15">↑</kbd><kbd class="rounded border border-black/10 px-1 dark:border-white/15">↓</kbd> navigate</span>
+        <span class="flex items-center gap-1"><kbd class="rounded border border-black/10 px-1 dark:border-white/15">↵</kbd> open</span>
+        <span class="ml-auto flex items-center gap-1"><svg class="h-3 w-3 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Runs 100% locally</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ TOOL MODAL ============================ -->
+<div id="toolModal" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-black/50 dark:bg-black/75" onclick="closeToolModal()"></div>
+  <div class="pointer-events-none relative flex h-full items-center justify-center p-4">
+    <div id="toolModalContent" class="modal-anim pointer-events-auto w-full max-w-lg overflow-hidden rounded-2xl border border-black/10 bg-white shadow-2xl dark:border-white/10 dark:bg-[#101014]"></div>
+  </div>
+</div>
+
+<!-- ============================ TOAST ============================ -->
+<div id="toast" class="pointer-events-none fixed bottom-6 left-1/2 z-[70] -translate-x-1/2"></div>
+
+<script>
+/* =============================== ICONS (inline paths) =============================== */
+const PATHS = {
+  zap: '<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>',
+  search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
+  moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
+  menu: '<line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/>',
+  x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+  arrow_right: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  arrow_up_right: '<path d="M7 7h10v10"/><path d="M7 17 17 7"/>',
+  sparkles: '<path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/>',
+  shield_check: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+  ban: '<circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/>',
+  gauge: '<path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/>',
+  youtube: '<path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/>',
+  captions: '<rect width="18" height="14" x="3" y="5" rx="2"/><path d="M7 15h4M15 15h2M7 11h2M13 11h4"/>',
+  pen_line: '<path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/>',
+  image_down: '<path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10l-3.1-3.1a2 2 0 0 0-2.814.014L6 21"/><path d="m14 19 3 3v-5.5"/><path d="m17 22 3-3"/><circle cx="9" cy="9" r="2"/>',
+  link: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',
+  calculator: '<rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/>',
+  wand_2: '<path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/>',
+  case_sensitive: '<path d="m3 15 4-8 4 8"/><path d="M4 13h6"/><circle cx="18" cy="12" r="3"/><path d="M21 9v6"/>',
+  pilcrow: '<path d="M13 4v16"/><path d="M17 4v16"/><path d="M19 4H9.5a4.5 4.5 0 0 0 0 9H13"/>',
+  fingerprint: '<path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/><path d="M2 12a10 10 0 0 1 18-6"/><path d="M2 16h.01"/><path d="M21.8 16c.2-2 .131-5.354 0-6"/><path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/><path d="M8.65 22c.21-.66.45-1.32.57-2"/><path d="M9 6.8a6 6 0 0 1 9 5.2v2"/>',
+  type: '<polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/>',
+  file_text: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>',
+  code_2: '<path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/>',
+  git_compare: '<circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M11 18H8a2 2 0 0 1-2-2V9"/>',
+  wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  qr_code: '<rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/>',
+  key_round: '<path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/>',
+  braces: '<path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/>',
+  rectangle_horizontal: '<rect width="20" height="12" x="2" y="6" rx="2"/>',
+  binary: '<rect x="14" y="14" width="4" height="6" rx="2"/><rect x="6" y="4" width="4" height="6" rx="2"/><path d="M6 20h4"/><path d="M14 10h4"/><path d="M6 14h2v6"/><path d="M14 4h2v6"/>',
+  tag: '<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>',
+  image: '<rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>',
+  scaling: '<path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M14 15H9v-5"/><path d="M16 3h5v5"/><path d="M21 3 9 15"/>',
+  file_image: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><circle cx="10" cy="12" r="2"/><path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22"/>',
+  receipt: '<path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/>',
+  palette: '<circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>',
+};
+
+function icon(name, cls = "h-4 w-4") {
+  return `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${PATHS[name] || ''}</svg>`;
+}
+
+/* =============================== DATA (25 TOOLS) =============================== */
+const CATEGORIES = [
+  {
+    id: "creators", title: "YouTube & Creator Suite", emoji: "📽️", icon: "youtube",
+    blurb: "Extract, repurpose and grow — everything a creator ships weekly.",
+    accent: "from-rose-500 to-orange-400",
+    tools: [
+      { name: "YouTube Transcript", slug: "youtube-transcript", desc: "Pull accurate, timestamped transcripts from any video in seconds.", tags: ["youtube","transcript","captions","subtitles"], icon: "captions", hot: true },
+      { name: "Shorts Hook Generator", slug: "shorts-hooks", desc: "Generate scroll-stopping first-3-second hooks for Shorts & Reels.", tags: ["shorts","hooks","reels","tiktok","viral"], icon: "sparkles" },
+      { name: "Video to Blog", slug: "video-to-blog", desc: "Turn any video link into a structured, SEO-ready blog article.", tags: ["video","blog","seo","repurpose","article"], icon: "pen_line" },
+      { name: "Thumbnail Downloader", slug: "thumbnail-downloader", desc: "Download any YouTube thumbnail in max resolution — HD & 4K.", tags: ["thumbnail","youtube","download","image"], icon: "image_down" },
+      { name: "Timestamp Link Generator", slug: "timestamp-link-generator", desc: "Create shareable YouTube links that jump to an exact second.", tags: ["timestamp","youtube","link","share"], icon: "link" },
+      { name: "Creator Calculator", slug: "creator-calculator", desc: "Estimate RPM, sponsorship rates and monthly ad revenue.", tags: ["rpm","earnings","money","creator","calculator"], icon: "calculator" }
+    ]
+  },
+  {
+    id: "text", title: "AI & Text Tools", emoji: "✍️", icon: "type",
+    blurb: "Rewrite, reformat and refine copy — 100% in your browser.",
+    accent: "from-indigo-500 to-fuchsia-500",
+    tools: [
+      { name: "AI Humanizer", slug: "ai-humanizer", desc: "Rewrite AI text so it reads naturally and bypasses detectors.", tags: ["ai","humanize","rewrite","detector","paraphrase"], icon: "wand_2", hot: true },
+      { name: "Case Converter", slug: "case-converter", desc: "Switch between sentence, title, camel, snake and kebab case.", tags: ["case","uppercase","lowercase","camel","snake","text"], icon: "case_sensitive" },
+      { name: "Word Counter", slug: "word-counter", desc: "Live word, character, sentence and reading-time statistics.", tags: ["word","count","character","reading","text"], icon: "pilcrow" },
+      { name: "Hash Generator", slug: "hash-generator", desc: "Generate MD5, SHA-1, SHA-256 and SHA-512 hashes instantly.", tags: ["hash","md5","sha256","sha512","crypto","security"], icon: "fingerprint" },
+      { name: "Font Changer & Bio Generator", slug: "font-changer", desc: "Fancy Unicode fonts and aesthetic bios for every social profile.", tags: ["font","bio","instagram","unicode","aesthetic","stylish"], icon: "type" },
+      { name: "Lorem Ipsum", slug: "lorem-ipsum", desc: "Generate placeholder paragraphs, words or lists on demand.", tags: ["lorem","placeholder","dummy","text","design"], icon: "file_text" },
+      { name: "Markdown to HTML", slug: "markdown-to-html", desc: "Convert Markdown into clean, copy-ready semantic HTML.", tags: ["markdown","html","convert","md","developer"], icon: "code_2" },
+      { name: "Text & Code Diff Checker", slug: "diff-checker", desc: "Compare two blocks of text or code and highlight every change.", tags: ["diff","compare","code","changes","merge"], icon: "git_compare" }
+    ]
+  },
+  {
+    id: "dev", title: "Developer & Utilities", emoji: "🛠️", icon: "wrench",
+    blurb: "The daily-driver toolkit — no signup, no server round-trips.",
+    accent: "from-cyan-400 to-emerald-400",
+    tools: [
+      { name: "QR Generator", slug: "qr-generator", desc: "Create high-resolution QR codes for URLs, WiFi and vCards.", tags: ["qr","barcode","generator","url","wifi"], icon: "qr_code" },
+      { name: "Password Checker", slug: "password-checker", desc: "Measure entropy and breach risk without sending a byte anywhere.", tags: ["password","security","strength","entropy","breach"], icon: "key_round" },
+      { name: "JSON Formatter", slug: "json-formatter", desc: "Beautify, minify and validate JSON with instant error pointing.", tags: ["json","formatter","beautify","minify","validate"], icon: "braces", hot: true },
+      { name: "Aspect Ratio Calculator", slug: "aspect-ratio-calculator", desc: "Resolve 16:9, 4:5, 21:9 dimensions and scale perfectly.", tags: ["aspect","ratio","dimensions","video","resize"], icon: "rectangle_horizontal" },
+      { name: "Base64 Encoder", slug: "base64-encoder", desc: "Encode and decode Base64 strings, files and data URIs.", tags: ["base64","encode","decode","datauri","convert"], icon: "binary" },
+      { name: "Meta Tag Preview", slug: "meta-tag-preview", desc: "Preview Google, X and Facebook cards before you publish.", tags: ["meta","og","seo","preview","twitter","serp"], icon: "tag" },
+      { name: "URL Slug Generator", slug: "url-slug-generator", desc: "Convert any title into a clean, SEO-friendly URL slug.", tags: ["slug","url","seo","permalink"], icon: "link" }
+    ]
+  },
+  {
+    id: "media", title: "Media & Business", emoji: "🖼️", icon: "image",
+    blurb: "Ship assets and invoices without opening a heavyweight editor.",
+    accent: "from-amber-400 to-pink-500",
+    tools: [
+      { name: "Image Resizer", slug: "image-resizer", desc: "Resize, crop and compress images locally at full quality.", tags: ["image","resize","compress","crop","optimize"], icon: "scaling" },
+      { name: "HEIC to JPG Converter", slug: "heic-to-jpg", desc: "Convert iPhone HEIC photos to universal JPG in one click.", tags: ["heic","jpg","convert","iphone","photo"], icon: "file_image" },
+      { name: "Invoice Generator", slug: "invoice-generator", desc: "Build branded, downloadable PDF invoices in under a minute.", tags: ["invoice","pdf","billing","freelance","business"], icon: "receipt", hot: true },
+      { name: "Color Palette Generator", slug: "color-palette-generator", desc: "Extract cohesive palettes and generate accessible HEX combos.", tags: ["color","palette","hex","design","accessibility"], icon: "palette" }
+    ]
+  }
+];
+
+const ALL_TOOLS = CATEGORIES.flatMap(c => c.tools.map(t => ({ ...t, category: c })));
+
+const STATS = [
+  { value: "25", label: "Free Tools", icon: "sparkles" },
+  { value: "100%", label: "Client-Side Privacy", icon: "shield_check" },
+  { value: "0", label: "Ads", icon: "ban" },
+  { value: "<50ms", label: "Execution", icon: "gauge" }
+];
+
+const WHY = [
+  { title: "Privacy by Architecture", body: "Every tool runs in your browser. Files never leave your device — no uploads, no logs, no exceptions.", icon: "shield_check" },
+  { title: "Blazing Performance", body: "Zero blocking scripts and sub-50ms execution keep every interaction at a buttery 60fps.", icon: "gauge" },
+  { title: "Interfaces That Disappear", body: "Keyboard-first, distraction-free UI. You think it, the tool does it — then gets out of the way.", icon: "sparkles" },
+  { title: "Genuinely Zero Ads", body: "No interstitials, no popups, no tracking pixels. Just 25 tools that work the moment you land.", icon: "ban" }
+];
+
+const FAST_TAGS = ["YouTube Transcript", "Font Changer", "Invoice Generator", "JSON Formatter", "Color Palette"];
+
+/* =============================== STATE =============================== */
+let query = "";
+let activeIndex = 0;
+let results = [...ALL_TOOLS];
+let toastTimer = null;
+
+/* =============================== HELPERS =============================== */
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m]));
+}
+function computeResults() {
+  const q = query.trim().toLowerCase();
+  if (!q) return ALL_TOOLS;
+  return ALL_TOOLS.filter(t =>
+    t.name.toLowerCase().includes(q) ||
+    t.desc.toLowerCase().includes(q) ||
+    t.slug.includes(q) ||
+    t.category.title.toLowerCase().includes(q) ||
+    t.tags.some(tag => tag.toLowerCase().includes(q))
+  );
+}
+
+/* =============================== RENDER: NAV =============================== */
+function renderNav() {
+  document.getElementById("desktopNav").innerHTML = CATEGORIES.map(c =>
+    `<a href="#${c.id}" class="rounded-lg px-3 py-2 text-[13px] font-medium text-neutral-600 transition-colors hover:bg-black/5 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-white/5 dark:hover:text-white">${c.title.split(" ")[0]}</a>`
+  ).join("");
+
+  document.getElementById("mobileNav").innerHTML = CATEGORIES.map(c =>
+    `<a href="#${c.id}" onclick="toggleMobile()" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-700 hover:bg-black/5 dark:text-neutral-300 dark:hover:bg-white/5">
+      ${icon(c.icon,"h-4 w-4 text-neutral-400")} ${c.title}
+      <span class="ml-auto text-xs text-neutral-400">${c.tools.length}</span>
+    </a>`
+  ).join("");
+}
+
+/* =============================== RENDER: STATS =============================== */
+function renderStats() {
+  document.getElementById("stats").innerHTML = STATS.map(s => `
+    <div class="flex flex-col items-center gap-1.5 px-4 py-6 text-center">
+      ${icon(s.icon,"mb-1 h-5 w-5 text-indigo-500 dark:text-indigo-400")}
+      <span class="text-2xl font-bold tracking-tight">${s.value}</span>
+      <span class="text-[10.5px] font-semibold uppercase tracking-[0.1em] text-neutral-500 dark:text-neutral-500">${s.label}</span>
+    </div>`).join("");
+}
+
+/* =============================== RENDER: TRENDING =============================== */
+function renderTrending() {
+  const hot = ALL_TOOLS.filter(t => t.hot);
+  document.getElementById("trendingGrid").innerHTML = hot.map(t => `
+    <a href="#" onclick="openToolModal(event,'${t.slug}')" class="glow-border group relative overflow-hidden rounded-2xl border border-black/10 bg-white/70 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-transparent hover:shadow-[0_0_0_1px_rgba(129,140,248,0.4),0_20px_45px_-24px_rgba(129,140,248,0.7)] dark:border-white/10 dark:bg-white/[0.04] dark:hover:bg-white/[0.07]">
+      <div class="absolute right-3 top-3">
+        <span class="rounded-full bg-gradient-to-r from-orange-500 to-rose-500 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white shadow-md shadow-rose-500/30">Hot</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${t.category.accent} shadow-lg shadow-black/10 transition-transform duration-300 group-hover:scale-105">
+          ${icon(t.icon,"h-5 w-5 text-white")}
+        </span>
+        <div class="min-w-0 pr-10">
+          <p class="truncate text-[14px] font-semibold tracking-tight">${t.name}</p>
+          <p class="truncate text-[11.5px] text-neutral-500 dark:text-neutral-500">${t.category.title}</p>
+        </div>
+      </div>
+      <p class="mt-3 line-clamp-2 text-[12px] leading-relaxed text-neutral-600 dark:text-neutral-400">${t.desc}</p>
+      <div class="mt-3 flex items-center justify-between">
+        <span class="inline-flex items-center gap-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium text-emerald-600 dark:text-emerald-400">
+          ${icon("zap","h-2.5 w-2.5")} Free
+        </span>
+        <span class="text-neutral-400 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-indigo-500">${icon("arrow_up_right","h-4 w-4")}</span>
+      </div>
+    </a>`).join("");
+}
+
+/* =============================== RENDER: FAST TAGS =============================== */
+function renderFastTags() {
+  document.getElementById("fastTags").innerHTML = FAST_TAGS.map(t => `
+    <button onclick="setQuery('${t.split(" ")[0]}')" class="rounded-full border border-black/10 bg-white/70 px-3.5 py-1.5 text-[12px] font-medium text-neutral-600 transition-all hover:-translate-y-0.5 hover:border-indigo-400/60 hover:bg-indigo-50 hover:text-indigo-600 dark:border-white/10 dark:bg-white/5 dark:text-neutral-400 dark:hover:border-indigo-400/60 dark:hover:bg-indigo-500/10 dark:hover:text-indigo-300">
+      #${t.replace(/\s/g,"")}
+    </button>`).join("");
+}
+
+/* =============================== RENDER: TOOL CARD =============================== */
+function toolCard(t) {
+  return `
+  <a href="#" onclick="openToolModal(event,'${t.slug}')" class="glow-border group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-black/10 bg-white/60 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-transparent hover:shadow-[0_0_0_1px_rgba(129,140,248,0.4),0_20px_45px_-24px_rgba(129,140,248,0.8)] dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.06]">
+    <div class="flex items-start gap-3">
+      <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${t.category.accent} shadow-lg shadow-black/10 transition-transform duration-300 group-hover:scale-105">
+        ${icon(t.icon,"h-[20px] w-[20px] text-white")}
+      </span>
+      <div class="min-w-0 flex-1">
+        <h3 class="truncate text-[14.5px] font-semibold tracking-tight text-neutral-900 dark:text-white">${t.name}</h3>
+        <p class="mt-1 line-clamp-2 text-[12.5px] leading-relaxed text-neutral-600 dark:text-neutral-400">${t.desc}</p>
+      </div>
+      <span class="mt-1 shrink-0 text-neutral-300 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-indigo-500 dark:text-neutral-600 dark:group-hover:text-indigo-400">${icon("arrow_up_right","h-4 w-4")}</span>
+    </div>
+    <div class="mt-auto flex items-center justify-between gap-2 pt-1">
+      <span class="inline-flex items-center gap-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium text-emerald-600 dark:text-emerald-400">
+        ${icon("zap","h-2.5 w-2.5")} 100% Free &amp; Private
+      </span>
+      <span class="truncate font-mono text-[10px] text-neutral-400 dark:text-neutral-600">/${t.slug}</span>
+    </div>
+  </a>`;
+}
+
+/* =============================== RENDER: DIRECTORY =============================== */
+function renderDirectory() {
+  const root = document.getElementById("directoryRoot");
+  const countEl = document.getElementById("resultCount");
+  const q = query.trim();
+
+  const filtered = CATEGORIES.map(c => ({
+    ...c,
+    tools: c.tools.filter(t => results.some(r => r.slug === t.slug))
+  })).filter(c => c.tools.length > 0);
+
+  if (q) {
+    countEl.classList.remove("hidden");
+    countEl.innerHTML = `<span class="font-semibold text-neutral-900 dark:text-white">${results.length}</span> ${results.length === 1 ? "tool" : "tools"} matching <span class="font-mono text-indigo-500 dark:text-indigo-400">“${escapeHtml(query)}”</span>`;
+  } else {
+    countEl.classList.add("hidden");
+  }
+
+  if (filtered.length === 0) {
+    root.innerHTML = `
+      <div class="rounded-3xl border border-dashed border-black/15 py-20 text-center dark:border-white/15">
+        ${icon("search","mx-auto h-8 w-8 text-neutral-300 dark:text-neutral-700")}
+        <p class="mt-4 text-sm font-medium">No tools found for “${escapeHtml(query)}”</p>
+        <button onclick="setQuery('')" class="mt-3 rounded-lg bg-indigo-500 px-4 py-2 text-[13px] font-medium text-white transition-colors hover:bg-indigo-600">Reset search</button>
+      </div>`;
+    return;
+  }
+
+  root.innerHTML = filtered.map(cat => `
+    <div id="${cat.id}" class="scroll-mt-24">
+      <div class="mb-6 flex items-start gap-3">
+        <span class="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${cat.accent} shadow-lg shadow-black/10">
+          ${icon(cat.icon,"h-5 w-5 text-white")}
+        </span>
+        <div>
+          <h2 class="text-lg font-semibold tracking-tight sm:text-xl"><span class="mr-1.5">${cat.emoji}</span>${cat.title}</h2>
+          <p class="mt-0.5 text-[13px] text-neutral-500 dark:text-neutral-500">${cat.blurb}</p>
+        </div>
+        <span class="ml-auto hidden shrink-0 rounded-full border border-black/10 px-2.5 py-1 text-[11px] font-medium text-neutral-500 sm:block dark:border-white/10 dark:text-neutral-500">${cat.tools.length} tools</span>
+      </div>
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        ${cat.tools.map(t => toolCard({ ...t, category: cat })).join("")}
+      </div>
+    </div>`).join("");
+}
+
+/* =============================== RENDER: WHY =============================== */
+function renderWhy() {
+  document.getElementById("whyGrid").innerHTML = WHY.map(f => `
+    <div class="group relative overflow-hidden rounded-2xl border border-black/10 bg-white/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.06]">
+      <div class="mb-4 grid h-10 w-10 place-items-center rounded-xl border border-black/10 bg-gradient-to-br from-white to-neutral-100 dark:border-white/10 dark:from-white/10 dark:to-white/[0.02]">
+        ${icon(f.icon,"h-[18px] w-[18px] text-indigo-500 dark:text-indigo-400")}
+      </div>
+      <h3 class="text-[14.5px] font-semibold tracking-tight">${f.title}</h3>
+      <p class="mt-2 text-[13px] leading-relaxed text-neutral-600 dark:text-neutral-400">${f.body}</p>
+      <div class="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-indigo-500/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"></div>
+    </div>`).join("");
+}
+
+/* =============================== RENDER: FOOTER NAV =============================== */
+function renderFooter() {
+  document.getElementById("footerNav").innerHTML = CATEGORIES.map(cat => `
+    <nav aria-label="${cat.title}">
+      <h3 class="text-[12px] font-semibold uppercase tracking-wider text-neutral-900 dark:text-white">${cat.title.split(" ")[0]}</h3>
+      <ul class="mt-3 space-y-2">
+        ${cat.tools.map(t => `<li><a href="#" onclick="openToolModal(event,'${t.slug}')" class="text-[12.5px] text-neutral-500 transition-colors hover:text-indigo-600 dark:text-neutral-500 dark:hover:text-indigo-400">${t.name}</a></li>`).join("")}
+      </ul>
+    </nav>`).join("");
+}
+
+/* =============================== RENDER: PALETTE =============================== */
+function renderPalette() {
+  const box = document.getElementById("paletteResults");
+  if (results.length === 0) {
+    box.innerHTML = `<div class="px-3 py-12 text-center text-[13px] text-neutral-500 dark:text-neutral-500">No tools match “${escapeHtml(query)}”.</div>`;
+    return;
+  }
+  box.innerHTML = results.map((t, i) => `
+    <button onmouseenter="activeIndex=${i};renderPalette()" onclick="openToolModal(event,'${t.slug}');closePalette()"
+      class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-colors ${i === activeIndex ? "bg-indigo-500/10 dark:bg-white/[0.07]" : "hover:bg-black/[0.03] dark:hover:bg-white/[0.04]"}">
+      <span class="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-to-br ${t.category.accent}">
+        ${icon(t.icon,"h-4 w-4 text-white")}
+      </span>
+      <span class="min-w-0 flex-1">
+        <span class="block truncate text-[13.5px] font-medium text-neutral-900 dark:text-white">${t.name}</span>
+        <span class="block truncate text-[11.5px] text-neutral-500 dark:text-neutral-500">${t.desc}</span>
+      </span>
+      ${i === activeIndex ? `<span class="shrink-0 rounded-md border border-black/10 px-1.5 py-0.5 font-mono text-[10px] text-neutral-500 dark:border-white/15 dark:text-neutral-400">↵</span>` : ""}
+    </button>`).join("");
+}
+
+/* =============================== MASTER RENDER =============================== */
+function render() {
+  results = computeResults();
+  if (activeIndex > results.length - 1) activeIndex = Math.max(0, results.length - 1);
+  renderDirectory();
+  renderPalette();
+}
+
+function syncInputs() {
+  const hero = document.getElementById("heroSearch");
+  const pal = document.getElementById("paletteSearch");
+  if (hero.value !== query) hero.value = query;
+  if (pal.value !== query) pal.value = query;
+  document.getElementById("heroClear").classList.toggle("hidden", query.length === 0);
+  document.getElementById("heroKbd").classList.toggle("hidden", query.length > 0);
+}
+
+function setQuery(v) {
+  query = v;
+  activeIndex = 0;
+  syncInputs();
+  render();
+}
+
+/* =============================== PALETTE =============================== */
+function openPalette() {
+  const el = document.getElementById("palette");
+  el.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+  setTimeout(() => document.getElementById("paletteSearch").focus(), 40);
+  renderPalette();
+}
+function closePalette() {
+  document.getElementById("palette").classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
+/* =============================== TOOL MODAL =============================== */
+function openToolModal(e, slug) {
+  if (e) e.preventDefault();
+  const tool = ALL_TOOLS.find(t => t.slug === slug);
+  if (!tool) return;
+  const cat = tool.category;
+  document.getElementById("toolModalContent").innerHTML = `
+    <div class="relative">
+      <button onclick="closeToolModal()" class="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-lg text-neutral-400 hover:bg-black/5 hover:text-neutral-700 dark:hover:bg-white/10 dark:hover:text-white" aria-label="Close">
+        ${icon("x","h-4 w-4")}
+      </button>
+      <div class="p-6">
+        <div class="flex items-center gap-3">
+          <span class="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br ${cat.accent} shadow-lg">
+            ${icon(tool.icon,"h-6 w-6 text-white")}
+          </span>
+          <div class="min-w-0">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.12em] text-indigo-500 dark:text-indigo-400">${cat.title}</p>
+            <h3 class="truncate text-lg font-semibold tracking-tight">${tool.name}</h3>
+          </div>
+        </div>
+        <p class="mt-4 text-[13.5px] leading-relaxed text-neutral-600 dark:text-neutral-400">${tool.desc}</p>
+        <div class="mt-4 flex flex-wrap gap-1.5">
+          ${tool.tags.map(tag => `<span class="rounded-full border border-black/10 bg-black/[0.03] px-2 py-0.5 text-[11px] font-medium text-neutral-600 dark:border-white/10 dark:bg-white/5 dark:text-neutral-400">#${tag}</span>`).join("")}
+        </div>
+        <div class="mt-6 flex items-center gap-2 rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-3 py-2.5 text-[12px] font-medium text-emerald-700 dark:text-emerald-400">
+          ${icon("shield_check","h-4 w-4")} Runs 100% in your browser — nothing is uploaded.
+        </div>
+        <div class="mt-6 flex items-center gap-2">
+          <a href="/tools/${tool.slug}" onclick="demoNav(event,'${tool.slug}')" class="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-neutral-900 px-4 py-2.5 text-[13px] font-medium text-white transition-colors hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200">
+            Open tool ${icon("arrow_right","h-4 w-4")}
+          </a>
+          <button onclick="copyLink('${tool.slug}')" class="inline-flex items-center gap-1.5 rounded-xl border border-black/10 px-3.5 py-2.5 text-[13px] font-medium text-neutral-700 transition-colors hover:bg-black/5 dark:border-white/10 dark:text-neutral-300 dark:hover:bg-white/10">
+            Copy link
+          </button>
+        </div>
+        <p class="mt-3 text-center font-mono text-[10.5px] text-neutral-400 dark:text-neutral-600">/tools/${tool.slug}</p>
+      </div>
+    </div>`;
+  document.getElementById("toolModal").classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+function closeToolModal() {
+  document.getElementById("toolModal").classList.add("hidden");
+  if (document.getElementById("palette").classList.contains("hidden")) document.body.style.overflow = "";
+}
+function demoNav(e, slug) {
+  e.preventDefault();
+  showToast(`Demo: would navigate to /tools/${slug}`);
+}
+function copyLink(slug) {
+  const url = location.href.split('#')[0].split('?')[0] + `#/tools/${slug}`;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(
+      () => showToast("Link copied to clipboard"),
+      () => showToast("Copy failed — long-press the link instead")
+    );
+  } else {
+    showToast("Clipboard not available");
+  }
+}
+
+/* =============================== TOAST =============================== */
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.innerHTML = `<div class="toast-anim rounded-xl border border-black/10 bg-neutral-900 px-4 py-2.5 text-[13px] font-medium text-white shadow-2xl dark:border-white/10 dark:bg-white dark:text-neutral-900">${escapeHtml(msg)}</div>`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.innerHTML = ""; }, 2200);
+}
+
+/* =============================== THEME =============================== */
+function applyTheme(mode) {
+  document.documentElement.classList.toggle("dark", mode === "dark");
+  document.getElementById("themeBtn").innerHTML = mode === "dark" ? icon("sun","h-4 w-4") : icon("moon","h-4 w-4");
+  try { localStorage.setItem("theme", mode); } catch(e) {}
+}
+function toggleTheme() {
+  applyTheme(document.documentElement.classList.contains("dark") ? "light" : "dark");
+}
+
+/* =============================== MOBILE MENU =============================== */
+function toggleMobile() {
+  document.getElementById("mobileMenu").classList.toggle("hidden");
+}
+
+/* =============================== KEYBOARD =============================== */
+document.addEventListener("keydown", (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+    e.preventDefault();
+    const open = !document.getElementById("palette").classList.contains("hidden");
+    open ? closePalette() : openPalette();
+    return;
+  }
+  if (e.key === "Escape") {
+    closePalette();
+    closeToolModal();
+    document.getElementById("mobileMenu").classList.add("hidden");
+    return;
+  }
+  const paletteOpen = !document.getElementById("palette").classList.contains("hidden");
+  if (paletteOpen) {
+    if (e.key === "ArrowDown") { e.preventDefault(); activeIndex = Math.min(activeIndex + 1, results.length - 1); renderPalette(); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); activeIndex = Math.max(activeIndex - 1, 0); renderPalette(); }
+    else if (e.key === "Enter" && results[activeIndex]) { e.preventDefault(); openToolModal(null, results[activeIndex].slug); closePalette(); }
+  }
+});
+
+/* =============================== SCROLL =============================== */
+window.addEventListener("scroll", () => {
+  const h = document.documentElement;
+  const p = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById("scrollProgress").style.width = p + "%";
+  document.getElementById("siteHeader").classList.toggle("border-black/5", h.scrollTop > 8);
+  document.getElementById("siteHeader").classList.toggle("dark:border-white/10", h.scrollTop > 8);
+}, { passive: true });
+
+/* =============================== REVEAL =============================== */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+/* =============================== BOOT =============================== */
+(function boot() {
+  let stored = null;
+  try { stored = localStorage.getItem("theme"); } catch(e) {}
+  applyTheme(stored === "light" ? "light" : "dark");
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  renderNav();
+  renderStats();
+  renderTrending();
+  renderFastTags();
+  renderWhy();
+  renderFooter();
+  render();
+  syncInputs();
+})();
+</script>
+</body>
+</html>

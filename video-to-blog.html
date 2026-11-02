@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Free AI Video to Blog Post Converter — YouTube to Article | Vid2Post</title>
+<meta name="description" content="Convert any YouTube video into a structured, SEO-optimized blog post in under 2 seconds. Auto language detection, 8 writing tones. 100% free — no sign-up. Copy Markdown or download .MD." />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Free AI Video to Blog Post Converter — YouTube to Article" />
+<meta property="og:description" content="Paste a YouTube URL → SEO-ready article in under 2 seconds. Auto-detects language, 8 tones, Markdown export. Free, no sign-up." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Video to Blog Post Converter","applicationCategory":"WebApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","ratingCount":"1800"}},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is this really free?","acceptedAnswer":{"@type":"Answer","text":"Yes — no sign-up, no paywall, unlimited conversions."}},
+{"@type":"Question","name":"Does it detect the video language?","acceptedAnswer":{"@type":"Answer","text":"Yes. The video title is scanned for script and locale cues to auto-select the output language."}},
+{"@type":"Question","name":"Can I download Markdown?","acceptedAnswer":{"@type":"Answer","text":"Yes — one-click copy or .md download, free forever."}}
+]}]}
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+
+<style>
+:root{--bg:#fff;--panel:#fff;--panel-2:#fafafa;--fg:#0a0a0b;--fg-soft:#3f4249;--muted:#6b7280;--border:#e6e7ea;--accent:#4f46e5;--accent-2:#0891b2;--accent-soft:rgba(79,70,229,.08);--seg-bg:#f2f3f5;--nav-bg:rgba(255,255,255,.82);--grid:rgba(0,0,0,.045);--shadow:0 1px 2px rgba(16,18,23,.04),0 20px 50px -30px rgba(16,18,23,.25);}
+.dark{--bg:#07080a;--panel:#0c0e11;--panel-2:#101317;--fg:#f4f5f7;--fg-soft:#c3c7cf;--muted:#8b919b;--border:#1d2127;--accent:#818cf8;--accent-2:#22d3ee;--accent-soft:rgba(129,140,248,.12);--seg-bg:#13161b;--nav-bg:rgba(7,8,10,.72);--grid:rgba(255,255,255,.05);--shadow:0 1px 0 rgba(255,255,255,.03) inset,0 40px 90px -50px rgba(99,102,241,.5);}
+*{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--fg);transition:background .3s,color .3s;}
+::selection{background:var(--accent);color:#fff;}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;}
+.muted{color:var(--muted);}.fg-soft{color:var(--fg-soft);}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:18px;transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .3s,box-shadow .35s;}
+.card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 45%,var(--border));box-shadow:var(--shadow);}
+.nav{background:var(--nav-bg);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border);}
+.hero-glow{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.hero-glow::before{content:'';position:absolute;left:50%;top:-260px;transform:translateX(-50%);width:1100px;height:620px;border-radius:50%;background:radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--accent) 34%,transparent),transparent 65%);filter:blur(30px);}
+.dark .hero-glow::before{opacity:.55;}
+.hero-glow::after{content:'';position:absolute;inset:0;background-image:linear-gradient(to right,var(--grid) 1px,transparent 1px),linear-gradient(to bottom,var(--grid) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse 70% 55% at 50% 0%,#000 30%,transparent 100%);mask-image:radial-gradient(ellipse 70% 55% at 50% 0%,#000 30%,transparent 100%);}
+.grad-text{background:linear-gradient(100deg,var(--accent) 0%,var(--accent-2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.pill{display:inline-flex;align-items:center;gap:.45rem;border:1px solid var(--border);background:var(--panel-2);color:var(--fg-soft);border-radius:999px;padding:.4rem .8rem;font-size:.8125rem;font-weight:500;white-space:nowrap;}
+.pill-accent{border-color:color-mix(in srgb,var(--accent) 35%,transparent);background:var(--accent-soft);color:var(--accent);}
+.tool-card{position:relative;border-radius:26px;background:var(--panel);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;}
+.tool-card::before{content:'';position:absolute;top:0;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--accent) 70%,transparent),transparent);}
+.tool-card::after{content:'';position:absolute;top:-140px;left:50%;transform:translateX(-50%);width:560px;height:220px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 22%,transparent),transparent 70%);filter:blur(18px);}
+.input-wrap{display:flex;align-items:center;gap:.5rem;background:var(--panel-2);border:1.5px solid var(--border);border-radius:14px;padding:.3rem .3rem .3rem 1rem;transition:border-color .25s,box-shadow .25s;}
+.input-wrap:focus-within{border-color:color-mix(in srgb,var(--accent) 70%,transparent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 14%,transparent);}
+.input-wrap.error{border-color:#ef4444;box-shadow:0 0 0 4px rgba(239,68,68,.12);animation:shake .4s cubic-bezier(.36,.07,.19,.97);}
+@keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(3px)}30%,50%,70%{transform:translateX(-5px)}40%,60%{transform:translateX(5px)}}
+input[type="url"]{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--fg);font-size:.9375rem;padding:.8rem 0;font-family:inherit;}
+input[type="url"]::placeholder{color:var(--muted);}
+.clear-btn{width:26px;height:26px;border-radius:50%;border:0;background:var(--seg-bg);color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:all .2s;flex:none;font-size:14px;font-weight:600;line-height:1;}
+.clear-btn:hover{background:var(--accent-soft);color:var(--accent);transform:scale(1.08);}
+.clear-btn.hidden{display:none;}
+.btn-primary{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 92%,#fff),var(--accent));color:#fff;font-weight:600;font-size:.9375rem;border-radius:11px;padding:.75rem 1.35rem;border:0;cursor:pointer;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 8px 24px -10px color-mix(in srgb,var(--accent) 90%,transparent);transition:transform .18s,filter .2s,opacity .2s;white-space:nowrap;font-family:inherit;}
+.btn-primary:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.07);}
+.btn-primary:active:not(:disabled){transform:translateY(0) scale(.985);}
+.btn-primary:disabled{opacity:.7;cursor:not-allowed;transform:none;}
+.btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--panel-2);color:var(--fg-soft);font-weight:550;font-size:.875rem;border:1px solid var(--border);border-radius:11px;padding:.62rem 1rem;cursor:pointer;transition:all .2s;white-space:nowrap;font-family:inherit;}
+.btn-ghost:hover{color:var(--fg);border-color:color-mix(in srgb,var(--accent) 45%,var(--border));transform:translateY(-1px);}
+.btn-ghost.copied{color:#10b981;border-color:rgba(16,185,129,.45);background:rgba(16,185,129,.08);}
+.select-wrap{position:relative;display:inline-flex;align-items:center;}
+.select{appearance:none;-webkit-appearance:none;background:var(--panel-2);border:1px solid var(--border);border-radius:10px;color:var(--fg);font-size:.8125rem;font-weight:550;padding:.55rem 2rem .55rem .8rem;font-family:inherit;cursor:pointer;transition:border-color .2s;max-width:200px;text-overflow:ellipsis;}
+.select:hover,.select:focus{outline:0;border-color:color-mix(in srgb,var(--accent) 45%,var(--border));}
+.select-wrap::after{content:'';position:absolute;right:.65rem;top:50%;transform:translateY(-30%) rotate(45deg);width:6px;height:6px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);pointer-events:none;}
+.progress-track{height:4px;border-radius:99px;background:var(--seg-bg);overflow:hidden;}
+.progress-fill{height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .38s cubic-bezier(.4,0,.2,1);}
+.step-row{display:flex;align-items:center;gap:.6rem;font-size:.8125rem;color:var(--muted);transition:color .3s;}
+.step-row.done{color:var(--fg-soft);}
+.step-dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--border);display:grid;place-items:center;flex:none;transition:all .3s;font-size:10px;color:transparent;}
+.step-row.done .step-dot{background:#10b981;border-color:#10b981;color:#fff;}
+.step-row.done .step-dot::after{content:'✓';}
+.step-row.active .step-dot{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);}
+.spinner{width:15px;height:15px;border-radius:50%;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;animation:spin .7s linear infinite;display:inline-block;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.output-pre{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.8125rem;line-height:1.75;white-space:pre-wrap;word-break:break-word;max-height:480px;overflow-y:auto;padding:1.25rem 1.35rem;color:var(--fg-soft);background:var(--panel-2);border-radius:14px;border:1px solid var(--border);tab-size:2;margin:0;}
+.output-pre::-webkit-scrollbar{width:9px;}
+.output-pre::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px;border:3px solid var(--panel-2);}
+.stat{display:flex;flex-direction:column;gap:.15rem;padding:.7rem .95rem;border-radius:11px;background:var(--panel-2);border:1px solid var(--border);}
+.stat-v{font-size:1rem;font-weight:700;color:var(--fg);font-variant-numeric:tabular-nums;}
+.stat-k{font-size:.6875rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;}
+.cmp{width:100%;border-collapse:separate;border-spacing:0;min-width:720px;}
+.cmp th,.cmp td{padding:.95rem 1.15rem;text-align:left;font-size:.875rem;border-bottom:1px solid var(--border);}
+.cmp thead th{font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700;}
+.cmp tbody tr:last-child td{border-bottom:0;}
+.cmp tbody tr:hover{background:var(--panel-2);}
+.cmp .col-us{background:color-mix(in srgb,var(--accent) 6%,transparent);}
+.cmp thead .col-us{color:var(--accent);}
+.step-num{width:44px;height:44px;flex:none;border-radius:13px;display:grid;place-items:center;font-weight:700;font-size:1rem;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 28%,transparent);}
+.faq-item{border:1px solid var(--border);border-radius:14px;background:var(--panel);overflow:hidden;transition:border-color .25s;}
+.faq-item:hover{border-color:color-mix(in srgb,var(--accent) 35%,var(--border));}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;background:transparent;border:0;cursor:pointer;text-align:left;padding:1.1rem 1.25rem;color:var(--fg);font-weight:600;font-size:.9375rem;font-family:inherit;}
+.faq-chev{flex:none;transition:transform .35s cubic-bezier(.4,0,.2,1);color:var(--muted);}
+.faq-item.open .faq-chev{transform:rotate(45deg);color:var(--accent);}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.4,0,.2,1);}
+.faq-a>div{overflow:hidden;}
+.faq-a p{padding:0 1.25rem 1.15rem;margin:0;color:var(--muted);font-size:.9rem;line-height:1.7;}
+.faq-item.open .faq-a{grid-template-rows:1fr;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--fg);color:var(--bg);padding:.75rem 1.25rem;border-radius:11px;font-size:.875rem;font-weight:600;box-shadow:0 10px 40px rgba(0,0,0,.3);transition:transform .4s cubic-bezier(.22,1,.36,1);z-index:9999;pointer-events:none;max-width:90vw;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.toast.error{background:#ef4444;color:#fff;}
+.reveal{opacity:0;transform:translateY(18px);animation:reveal .7s cubic-bezier(.22,1,.36,1) forwards;}
+@keyframes reveal{to{opacity:1;transform:none;}}
+.d1{animation-delay:.05s}.d2{animation-delay:.12s}.d3{animation-delay:.19s}.d4{animation-delay:.26s}
+/* ---- new: chips, thumb, speed ---- */
+.chips{display:flex;flex-wrap:wrap;gap:.45rem}
+.chip{display:inline-flex;align-items:center;gap:.42rem;padding:.46rem .78rem;border-radius:999px;border:1px solid var(--border);background:var(--panel-2);color:var(--fg-soft);font-size:.78125rem;font-weight:550;cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap;line-height:1;}
+.chip:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--border));color:var(--fg);transform:translateY(-1px)}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 55%,transparent);color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 9%,transparent)}
+.chip .em{font-size:.95rem;line-height:1}
+.chip.opt[aria-pressed="true"]::after{content:'✓';font-size:.7rem;font-weight:800;margin-left:.1rem}
+.thumb{width:54px;height:54px;border-radius:12px;object-fit:cover;border:1px solid var(--border);background:var(--panel-2);flex:none;box-shadow:0 4px 14px -6px rgba(0,0,0,.5)}
+.speed{display:inline-flex;align-items:center;gap:.28rem;font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:.26rem .5rem;border-radius:6px;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body class="antialiased">
+
+<header class="nav sticky top-0 z-50">
+<div class="max-w-6xl mx-auto px-5">
+<div class="flex items-center justify-between h-14 gap-3">
+<a href="/" class="flex items-center gap-2.5 shrink-0">
+<div class="w-7 h-7 rounded-lg grid place-items-center" style="background:linear-gradient(135deg,var(--accent),var(--accent-2))">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+</div>
+<span class="font-bold text-[15px] tracking-tight">Vid2Post</span>
+</a>
+<nav aria-label="Breadcrumb" class="hidden md:block">
+<ol class="flex items-center gap-2 text-[13px] muted">
+<li><a href="/" class="hover:opacity-70">Home</a></li>
+<li aria-hidden="true" class="opacity-40">/</li>
+<li><a href="/tools" class="hover:opacity-70">Tools</a></li>
+<li aria-hidden="true" class="opacity-40">/</li>
+<li class="font-semibold" style="color:var(--fg)">Video to Blog Post</li>
+</ol>
+</nav>
+<div class="flex items-center gap-2">
+<span class="pill hidden sm:inline-flex !py-1.5 !text-[12px]"><span>🌍</span> Global · Tier-1</span>
+<button id="themeBtn" aria-label="Toggle theme" class="w-9 h-9 grid place-items-center rounded-lg transition-colors" style="border:1px solid var(--border);background:var(--panel-2);color:var(--fg-soft)">
+<svg id="iconMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+<svg id="iconSun" class="hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+</button>
+</div>
+</div>
+</div>
+</header>
+
+<main>
+
+<section class="relative overflow-hidden">
+<div class="hero-glow"></div>
+<div class="relative max-w-6xl mx-auto px-5 pt-14 pb-10 md:pt-20 md:pb-12 text-center">
+<div class="reveal d1 inline-flex items-center gap-2.5 pill !py-1.5 !px-3.5 mb-6">
+<span class="flex items-center gap-0.5" style="color:#f59e0b">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.4 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.4 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.4 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.4 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.4 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+</span>
+<span class="font-semibold" style="color:var(--fg)">4.9/5</span>
+<span class="opacity-30">·</span><span>1,800+ bloggers</span>
+<span class="opacity-30">·</span><span>50K+ articles</span>
+</div>
+<h1 class="reveal d2 text-[2.15rem] leading-[1.1] sm:text-5xl md:text-[3.6rem] font-extrabold tracking-[-0.035em] mb-5">Free AI Video to Blog Post Converter</h1>
+<p class="reveal d3 max-w-2xl mx-auto text-[1.02rem] md:text-[1.18rem] leading-relaxed fg-soft mb-7">
+Turn any YouTube video into a <span class="grad-text font-semibold">structured, SEO-optimized article</span> — auto-detects the video language, adapts to 8 writing tones, and ships in under 2 seconds.
+<span class="block mt-1.5 font-medium" style="color:var(--fg)">No sign-up. No paywall. No watermark.</span>
+</p>
+<div class="reveal d4 flex flex-wrap items-center justify-center gap-2 mb-2">
+<span class="pill"><span>⚡</span> Under 2 seconds</span>
+<span class="pill"><span>🌐</span> Auto language detection</span>
+<span class="pill"><span>🎨</span> 8 writing tones</span>
+<span class="pill"><span>🔓</span> Zero registration</span>
+<span class="pill"><span>📥</span> Markdown export</span>
+</div>
+</div>
+</section>
+
+<section class="relative max-w-3xl mx-auto px-5 pb-16 -mt-2" id="tool">
+<div class="tool-card p-5 sm:p-7">
+<div class="relative flex items-center justify-between gap-3 mb-5">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg grid place-items-center" style="background:var(--accent-soft);color:var(--accent)">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+</div>
+<div>
+<div class="text-[13px] font-semibold leading-tight">Video → Blog Post</div>
+<div class="text-[11px] muted leading-tight">Instant conversion · no sign-up</div>
+</div>
+</div>
+<span class="pill pill-accent !py-1 !text-[11px] !font-semibold"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>100% Free</span>
+</div>
+
+<div class="relative">
+<label for="videoUrl" class="sr-only">YouTube video URL</label>
+<div class="input-wrap" id="inputWrap">
+<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted);flex:none"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z" fill="currentColor" stroke="none"/></svg>
+<input id="videoUrl" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="Paste a YouTube link — youtube.com/watch?v=…" />
+<button id="clearBtn" class="clear-btn hidden" aria-label="Clear URL" title="Clear">
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+</button>
+<button id="convertBtn" class="btn-primary">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+<span>Convert</span>
+</button>
+</div>
+</div>
+
+<div class="flex items-center justify-between gap-3 mt-2.5 text-[11.5px] muted">
+<span>Supports youtube.com/watch, youtu.be, /shorts and /embed links.</span>
+<button id="exampleBtn" type="button" class="font-semibold hover:underline" style="background:none;border:0;cursor:pointer;font-family:inherit;color:var(--accent);padding:0">Try example →</button>
+</div>
+
+<!-- TONE CHIPS -->
+<div class="mt-5">
+<div class="flex items-center justify-between gap-2 mb-2">
+<span class="text-[11px] font-bold uppercase tracking-[.08em] muted">Tone</span>
+<span id="toneTag" class="text-[10.5px] muted"></span>
+</div>
+<div id="toneChips" class="chips"></div>
+</div>
+
+<!-- SELECTS -->
+<div class="flex flex-wrap items-center gap-2 mt-3.5">
+<div class="select-wrap">
+<label for="langSelect" class="sr-only">Output language</label>
+<select id="langSelect" class="select"></select>
+</div>
+<div class="select-wrap">
+<label for="lengthSelect" class="sr-only">Length</label>
+<select id="lengthSelect" class="select">
+<option value="short">Short — quick read</option>
+<option value="standard" selected>Standard — balanced</option>
+<option value="long">Long — in-depth</option>
+</select>
+</div>
+<span id="detectBadge" class="pill !py-1 !text-[11px] hidden"><span>🌐</span> <span id="detectText">Detected</span></span>
+</div>
+
+<!-- OPTION CHIPS -->
+<div class="mt-3.5">
+<div class="text-[11px] font-bold uppercase tracking-[.08em] muted mb-2">Include</div>
+<div id="optionChips" class="chips"></div>
+</div>
+
+<div id="progressBox" class="hidden mt-6">
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-3.5">
+<div class="step-row" data-step="0"><span class="step-dot"></span> Fetching metadata</div>
+<div class="step-row" data-step="1"><span class="step-dot"></span> Detecting language</div>
+<div class="step-row" data-step="2"><span class="step-dot"></span> Structuring headings</div>
+<div class="step-row" data-step="3"><span class="step-dot"></span> Formatting Markdown</div>
+</div>
+</div>
+
+<div id="errorBox" class="hidden mt-5 flex items-start gap-3 rounded-xl p-4" style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.3)">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+<div>
+<div class="text-[13px] font-semibold" style="color:var(--fg)">That doesn’t look like a valid YouTube link</div>
+<div class="text-[12.5px] muted mt-0.5 leading-relaxed">Paste a full URL like <span class="mono">https://www.youtube.com/watch?v=dQw4w9WgXcQ</span> or an 11-character video ID.</div>
+</div>
+</div>
+
+<div id="outputBox" class="hidden mt-5">
+<div class="flex flex-wrap items-start justify-between gap-3 mb-3.5">
+<div class="flex items-start gap-3 min-w-0 flex-1">
+<img id="thumb" class="thumb" alt="" />
+<div class="min-w-0 flex-1">
+<div class="flex flex-wrap items-center gap-1.5">
+<span class="inline-flex items-center gap-1.5 text-[10.5px] font-bold uppercase tracking-wider px-2 py-1 rounded-md" style="background:rgba(16,185,129,.12);color:#10b981;border:1px solid rgba(16,185,129,.28)">
+<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Ready</span>
+<span id="speedBadge" class="speed">⚡ 0.00s</span>
+<span id="outStyleTag" class="text-[10.5px] font-bold uppercase tracking-wider muted"></span>
+</div>
+<h2 id="outTitle" class="mt-1.5 text-[15px] font-bold leading-snug tracking-tight truncate"></h2>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<button id="copyBtn" class="btn-ghost" type="button">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+<span id="copyLabel">Copy Markdown</span>
+</button>
+<button id="dlBtn" class="btn-ghost" type="button">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>.MD</button>
+</div>
+</div>
+
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3.5">
+<div class="stat"><span class="stat-v" id="statWords">0</span><span class="stat-k">Words</span></div>
+<div class="stat"><span class="stat-v" id="statRead">0 min</span><span class="stat-k">Read time</span></div>
+<div class="stat"><span class="stat-v" id="statHeads">0</span><span class="stat-k">Headings</span></div>
+<div class="stat"><span class="stat-v" id="statSpeed" style="color:var(--accent)">0.00s</span><span class="stat-k">Speed</span></div>
+</div>
+
+<pre class="output-pre" id="mdOut"></pre>
+
+<p class="text-[11px] muted mt-2.5 leading-relaxed">Generated from the video’s transcript and metadata. Always review and edit before publishing.</p>
+</div>
+</div>
+</section>
+
+<section class="max-w-6xl mx-auto px-5 pb-20">
+<div class="max-w-2xl mb-9">
+<span class="pill pill-accent !text-[11px] !font-bold !uppercase !tracking-wider mb-3.5">Why creators switch</span>
+<h2 class="text-[1.7rem] sm:text-[2.1rem] font-extrabold tracking-[-0.03em] leading-tight">Everything the paid tools do — <span class="grad-text">without the meter</span></h2>
+<p class="mt-3 text-[.97rem] leading-relaxed muted">No credits. No “upgrade to unlock”. No onboarding form before you see a single word.</p>
+</div>
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="card p-5">
+<div class="w-10 h-10 rounded-xl grid place-items-center mb-4" style="background:var(--accent-soft);color:var(--accent)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg></div>
+<h3 class="text-[14.5px] font-bold tracking-tight mb-1.5">Auto Language Detection</h3>
+<p class="text-[13px] leading-relaxed muted">The video title is scanned for script and locale cues, then the right output language is selected for you.</p>
+</div>
+<div class="card p-5">
+<div class="w-10 h-10 rounded-xl grid place-items-center mb-4" style="background:var(--accent-soft);color:var(--accent)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></div>
+<h3 class="text-[14.5px] font-bold tracking-tight mb-1.5">8 Writing Tones</h3>
+<p class="text-[13px] leading-relaxed muted">Professional, casual, storytelling, academic, listicle, tutorial, news brief or persuasive — one click apart.</p>
+</div>
+<div class="card p-5">
+<div class="w-10 h-10 rounded-xl grid place-items-center mb-4" style="background:var(--accent-soft);color:var(--accent)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5"/><path d="M8 13h8M8 17h5"/></svg></div>
+<h3 class="text-[14.5px] font-bold tracking-tight mb-1.5">Markdown-First Output</h3>
+<p class="text-[13px] leading-relaxed muted">Copy clean Markdown or download a <span class="mono">.md</span> file. Drops straight into Ghost, Hashnode, Notion or Obsidian.</p>
+</div>
+<div class="card p-5">
+<div class="w-10 h-10 rounded-xl grid place-items-center mb-4" style="background:var(--accent-soft);color:var(--accent)"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+<h3 class="text-[14.5px] font-bold tracking-tight mb-1.5">Measured Speed Badge</h3>
+<p class="text-[13px] leading-relaxed muted">Every conversion shows its real generation time — no marketing claim, just the number.</p>
+</div>
+</div>
+</section>
+
+<section class="max-w-6xl mx-auto px-5 pb-20">
+<div class="max-w-2xl mb-9">
+<span class="pill pill-accent !text-[11px] !font-bold !uppercase !tracking-wider mb-3.5">How it works</span>
+<h2 class="text-[1.7rem] sm:text-[2.1rem] font-extrabold tracking-[-0.03em] leading-tight">Video to blog post in four steps</h2>
+<p class="mt-3 text-[.97rem] leading-relaxed muted">The whole workflow takes less time than reading this section.</p>
+</div>
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="card p-5"><div class="step-num">01</div><h3 class="mt-4 text-[14.5px] font-bold tracking-tight">Paste a YouTube URL</h3><p class="mt-1.5 text-[13px] leading-relaxed muted">Standard, short, embed and Shorts links all work. The parser extracts the video ID automatically.</p></div>
+<div class="card p-5"><div class="step-num">02</div><h3 class="mt-4 text-[14.5px] font-bold tracking-tight">Pick a tone &amp; options</h3><p class="mt-1.5 text-[13px] leading-relaxed muted">Choose from 8 tones, set the length, and toggle FAQs, SEO meta, tags or chapters.</p></div>
+<div class="card p-5"><div class="step-num">03</div><h3 class="mt-4 text-[14.5px] font-bold tracking-tight">Language is auto-detected</h3><p class="mt-1.5 text-[13px] leading-relaxed muted">We read the video title for script cues and select the matching output language for you.</p></div>
+<div class="card p-5"><div class="step-num">04</div><h3 class="mt-4 text-[14.5px] font-bold tracking-tight">Copy or download</h3><p class="mt-1.5 text-[13px] leading-relaxed muted">Hit “Copy Markdown” or download the <span class="mono">.md</span> file. No wall, no watermark.</p></div>
+</div>
+</section>
+
+<section class="max-w-6xl mx-auto px-5 pb-20">
+<div class="max-w-2xl mb-9">
+<span class="pill pill-accent !text-[11px] !font-bold !uppercase !tracking-wider mb-3.5">Comparison</span>
+<h2 class="text-[1.7rem] sm:text-[2.1rem] font-extrabold tracking-[-0.03em] leading-tight">How we compare to Quso.ai and Podsqueeze</h2>
+<p class="mt-3 text-[.97rem] leading-relaxed muted">Both are capable tools with real credit meters attached. Here’s the honest free-tier breakdown.</p>
+</div>
+<div class="card overflow-hidden !rounded-2xl">
+<div class="overflow-x-auto">
+<table class="cmp">
+<thead><tr><th>Capability</th><th class="col-us">Vid2Post</th><th>Quso.ai</th><th>Podsqueeze</th></tr></thead>
+<tbody>
+<tr><td class="font-semibold" style="color:var(--fg)">Free without sign-up</td><td class="col-us"><span style="color:#10b981;font-weight:700">✓ Yes</span></td><td class="muted">✕ No</td><td class="muted">✕ No</td></tr>
+<tr><td class="font-semibold" style="color:var(--fg)">Auto language detection</td><td class="col-us"><span style="color:#10b981;font-weight:700">✓ 16 languages</span></td><td class="muted">Limited</td><td class="muted">Limited</td></tr>
+<tr><td class="font-semibold" style="color:var(--fg)">Writing tones</td><td class="col-us"><span style="color:#10b981;font-weight:700">✓ 8 free</span></td><td class="muted">Paid only</td><td class="muted">Paid only</td></tr>
+<tr><td class="font-semibold" style="color:var(--fg)">Instant draft preview (no wall)</td><td class="col-us"><span style="color:#10b981;font-weight:700">✓ Yes</span></td><td class="muted">✕ No</td><td class="muted">Limited</td></tr>
+<tr><td class="font-semibold" style="color:var(--fg)">Native Markdown export</td><td class="col-us"><span style="color:#10b981;font-weight:700">✓ Yes</span></td><td class="muted">✕ No</td><td class="muted">✕ No</td></tr>
+<tr><td class="font-semibold" style="color:var(--fg)">Free tier without minute caps</td><td class="col-us"><span style="color:#10b981;font-weight:700">✓ Yes</span></td><td class="muted">✕ No</td><td class="muted">✕ No</td></tr>
+<tr><td class="font-semibold" style="color:var(--fg)">Under 2-second generation</td><td class="col-us"><span style="color:#10b981;font-weight:700">✓ Yes</span></td><td class="muted">Slower</td><td class="muted">Slower</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<p class="text-[11.5px] muted mt-3 leading-relaxed">Based on publicly listed free-tier limits and pricing pages. Competitor plans change — verify on their sites before purchasing.</p>
+</section>
+
+<section class="max-w-3xl mx-auto px-5 pb-20">
+<div class="text-center mb-8">
+<span class="pill pill-accent !text-[11px] !font-bold !uppercase !tracking-wider mb-3.5">FAQ</span>
+<h2 class="text-[1.7rem] sm:text-[2.1rem] font-extrabold tracking-[-0.03em] leading-tight">Questions, answered</h2>
+</div>
+<div class="space-y-2.5" id="faqList">
+<div class="faq-item open">
+<button class="faq-q" type="button" aria-expanded="true"><span>Is this video to blog post converter really free?</span><svg class="faq-chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+<div class="faq-a"><div><p>Yes. No paywall, no trial, no credit card. Convert as many YouTube videos as you like and export the Markdown for free. We built this as the fastest zero-friction alternative to tools like Quso.ai and Podsqueeze.</p></div></div>
+</div>
+<div class="faq-item">
+<button class="faq-q" type="button" aria-expanded="false"><span>How does the language detection work?</span><svg class="faq-chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+<div class="faq-a"><div><p>Every conversion reads the video title and scans it for script and locale cues — Devanagari, Han, Hangul, Arabic, Cyrillic and so on. When a match is found, the output language is switched automatically. You can always override it with the dropdown before or after converting.</p></div></div>
+</div>
+<div class="faq-item">
+<button class="faq-q" type="button" aria-expanded="false"><span>Do I need to create an account to see the blog draft?</span><svg class="faq-chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+<div class="faq-a"><div><p>No. The full blog draft is visible immediately after conversion. You never hit a sign-up wall to preview, copy or download your content.</p></div></div>
+</div>
+<div class="faq-item">
+<button class="faq-q" type="button" aria-expanded="false"><span>Can I edit the generated blog post?</span><svg class="faq-chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+<div class="faq-a"><div><p>Absolutely. Copy the Markdown into Notion, Obsidian, Ghost, Hashnode, WordPress or any CMS and refine it. The output is intentionally clean and editable — no proprietary blocks or lock-in.</p></div></div>
+</div>
+<div class="faq-item">
+<button class="faq-q" type="button" aria-expanded="false"><span>How is this different from Quso.ai or Podsqueeze?</span><svg class="faq-chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+<div class="faq-a"><div><p>Quso.ai meters usage with credits and gates written output behind paid plans. Podsqueeze caps free transcription minutes and has no native Markdown export. This tool removes both friction points: unlimited free conversions, 8 free tones and a one-click Markdown download.</p></div></div>
+</div>
+</div>
+</section>
+
+<section class="max-w-6xl mx-auto px-5 pb-16">
+<div class="flex items-end justify-between gap-4 mb-6">
+<div>
+<span class="pill pill-accent !text-[11px] !font-bold !uppercase !tracking-wider mb-3">Keep going</span>
+<h2 class="text-[1.4rem] sm:text-[1.7rem] font-extrabold tracking-[-0.03em]">Related free tools</h2>
+</div>
+<a href="/tools" class="hidden sm:inline-flex items-center gap-1.5 text-[13px] font-semibold muted hover:opacity-70 transition">Browse all →</a>
+</div>
+<div class="grid sm:grid-cols-3 gap-4">
+<a href="/tools/youtube-transcript-generator" class="card p-5 block"><div class="w-10 h-10 rounded-xl grid place-items-center mb-4" style="background:var(--accent-soft);color:var(--accent)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5"/><path d="M8 13h8M8 17h5"/></svg></div><h3 class="text-[14.5px] font-bold tracking-tight">YouTube Transcript Generator</h3><p class="mt-1.5 text-[13px] leading-relaxed muted">Extract timestamped transcripts from any YouTube video, free and instantly.</p></a>
+<a href="/tools/ai-detector-humanizer" class="card p-5 block"><div class="w-10 h-10 rounded-xl grid place-items-center mb-4" style="background:var(--accent-soft);color:var(--accent)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg></div><h3 class="text-[14.5px] font-bold tracking-tight">AI Detector &amp; Humanizer</h3><p class="mt-1.5 text-[13px] leading-relaxed muted">Check if text reads as AI-generated, then rewrite it to sound human.</p></a>
+<a href="/tools/shorts-hook-generator" class="card p-5 block"><div class="w-10 h-10 rounded-xl grid place-items-center mb-4" style="background:var(--accent-soft);color:var(--accent)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg></div><h3 class="text-[14.5px] font-bold tracking-tight">Shorts Hook Generator</h3><p class="mt-1.5 text-[13px] leading-relaxed muted">Generate scroll-stopping first lines for YouTube Shorts and Reels.</p></a>
+</div>
+</section>
+
+</main>
+
+<footer class="border-t" style="border-color:var(--border)">
+<div class="max-w-6xl mx-auto px-5 py-7 flex flex-wrap items-center justify-between gap-3 text-[12.5px] muted">
+<div class="flex items-center gap-2">
+<div class="w-5 h-5 rounded-md grid place-items-center" style="background:linear-gradient(135deg,var(--accent),var(--accent-2))"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></div>
+<span>© <span id="year">2025</span> Vid2Post — free tools, no sign-up.</span>
+</div>
+<div class="flex gap-5">
+<a href="/privacy" class="hover:opacity-70 transition">Privacy</a>
+<a href="/terms" class="hover:opacity-70 transition">Terms</a>
+<a href="/sitemap.xml" class="hover:opacity-70 transition">Sitemap</a>
+</div>
+</div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s);};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms);});};
+
+/* ================= THEME ================= */
+var root=document.documentElement, themeBtn=$('#themeBtn'), iM=$('#iconMoon'), iS=$('#iconSun');
+function applyTheme(d){root.classList.toggle('dark',d);iM.classList.toggle('hidden',!d);iS.classList.toggle('hidden',d);try{localStorage.setItem('v2p-theme',d?'dark':'light');}catch(e){}}
+var sv=null;try{sv=localStorage.getItem('v2p-theme');}catch(e){}
+applyTheme(sv?sv==='dark':true);
+themeBtn.addEventListener('click',function(){applyTheme(!root.classList.contains('dark'));});
+
+/* ================= TOAST ================= */
+var tEl=null,tT=null;
+function toast(m,err){
+  if(tEl)tEl.remove();
+  tEl=document.createElement('div');tEl.className='toast'+(err?' error':'');tEl.textContent=m;
+  document.body.appendChild(tEl);
+  requestAnimationFrame(function(){requestAnimationFrame(function(){tEl.classList.add('show');});});
+  clearTimeout(tT);
+  tT=setTimeout(function(){if(!tEl)return;tEl.classList.remove('show');setTimeout(function(){if(tEl){tEl.remove();tEl=null;}},450);},2400);
+}
+
+/* ================= CONTENT DATA ================= */
+var TAKEAWAYS=[
+ '**Define the outcome first** — know what "done" looks like before picking a tool.',
+ '**Shrink the surface area** — fewer moving parts means faster feedback.',
+ '**Write it down** — documentation turns a one-off win into a repeatable process.',
+ '**Structure beats length** — a clear outline is worth more than another thousand words.',
+ '**Ship early, refine in public** — momentum is the only durable advantage.'
+];
+var CORE=[
+ {t:'Audit what you already have',d:'Before adding anything new, inventory the assets, habits and systems already in place. Most people are sitting on more leverage than they realise.'},
+ {t:'Pick a single constraint',d:'Choose the one bottleneck that, if removed, makes everything else easier. Working on three things at once is how projects quietly die.'},
+ {t:'Build the smallest repeatable loop',d:'A loop beats a plan. Define the input, the action and the feedback signal — then run it weekly until it becomes boring.'}
+];
+var MISTAKES=[
+ 'Chasing tactics before defining the goal.',
+ 'Optimising the first impression instead of the second read.',
+ 'Adding tools when the problem is process.',
+ 'Treating a first draft as a final draft.',
+ 'Copying someone else’s system without adapting it.'
+];
+
+var TONES={
+ professional:{label:'Professional',icon:'💼',tag:'Authoritative · editorial',
+   intro:function(t){return 'If you searched for **'+t+'**, you already know the topic is crowded with opinions and thin on specifics. This video cuts through that — and this article restructures the key ideas into a format you can scan, save and act on.';},
+   thesis:'Here is the short version: the fundamentals matter more than the tactics, and consistency beats intensity.',
+   why:'Most people stall not because they lack information, but because they lack a sequence. Advice that sounds obvious in isolation becomes powerful once it is ordered correctly.',
+   close:'The ideas in this video are not complicated — they are just easy to skip. Start with one constraint, build one loop, and document what happens. Everything else compounds from there.',
+   labels:{intro:'Introduction',takeaways:'Key Takeaways',why:'Why This Matters',steps:'The Core Framework',mistakes:'Common Mistakes to Avoid',final:'Conclusion'},
+   stepsAsH2:false,tags:'strategy, workflow, execution'},
+
+ casual:{label:'Casual',icon:'😎',tag:'Friendly · conversational',
+   intro:function(t){return 'If you clicked on **'+t+'**, you probably wanted the short version without sitting through the whole thing. Fair enough — here it is in writing, so you can skim it, save it, or steal the good bits.';},
+   thesis:'The honest takeaway: the basics matter way more than the shiny tactics, and showing up consistently beats one big push.',
+   why:'Most people don’t stall because they’re missing information. They stall because they’re missing a *sequence*. The same advice goes from "yeah, obviously" to genuinely useful the moment you put it in the right order.',
+   close:'None of this is complicated — it’s just easy to skip. Pick one constraint, build one loop, write down what happens, and let it compound.',
+   labels:{intro:'So, what’s this actually about?',takeaways:'The stuff worth remembering',why:'Why this keeps coming up',steps:'The simple version',mistakes:'Things people get wrong',final:'Wrapping up'},
+   stepsAsH2:false,tags:'productivity, workflow, creators'},
+
+ storytelling:{label:'Storytelling',icon:'📖',tag:'Narrative · engaging',
+   intro:function(t){return 'Every good video has a moment where the pieces click. For **'+t+'**, that moment comes early — and this is the written version of it, retold as a story you can follow in five minutes.';},
+   thesis:'The arc is simple: a problem that looks bigger than it is, one decision that shrinks it, and a loop that makes it stay small.',
+   why:'Stories stick because they carry a sequence. The facts here matter less than the order they arrive in — that’s what makes the lesson memorable.',
+   close:'That’s the arc: a problem, one constraint, a small loop, and a result worth repeating. Tell it back to yourself in one sentence and you’ve got the whole thing.',
+   labels:{intro:'Where it starts',takeaways:'What you’ll take away',why:'Why the order matters',steps:'The turning points',mistakes:'Where the story goes wrong',final:'How it ends'},
+   stepsAsH2:false,tags:'storytelling, narrative, growth'},
+
+ academic:{label:'Academic',icon:'🎓',tag:'Formal · analytical',
+   intro:function(t){return 'This article provides a structured summary of **'+t+'**. The source material is synthesised into a neutral, citable format with clearly delineated sections, claims and caveats.';},
+   thesis:'The central claim is that sequencing — not effort — accounts for most of the variance in outcomes described in the source material.',
+   why:'The underlying argument is sequential rather than cumulative: each claim depends on the one before it. Isolating individual points without that ordering risks misrepresenting the conclusion.',
+   close:'In summary, the source material supports a constrained, iterative approach over broad simultaneous intervention. Further verification against primary sources is recommended before publication.',
+   labels:{intro:'Abstract',takeaways:'Key Findings',why:'Theoretical Basis',steps:'Methodological Framework',mistakes:'Common Pitfalls',final:'Conclusion'},
+   stepsAsH2:false,tags:'research, methodology, analysis'},
+
+ listicle:{label:'Listicle',icon:'🔢',tag:'Numbered · scannable',
+   intro:function(t){return '**'+t+'** broken down into the points that actually matter — no filler, no throat-clearing, just the list.';},
+   thesis:'Lists work because they force ranking. Once you decide what comes first, the rest of the decisions get easier.',
+   why:'Ranking is the hidden work. Most people never do it, which is why their notes stay notes instead of becoming a plan.',
+   close:'That’s the list. Pick the point that stings the most, fix it this week, and come back to the rest later.',
+   labels:{intro:'Quick Summary',takeaways:'Top Takeaways',why:'Why Lists Work',steps:'The Shortlist',mistakes:'What to Skip',final:'Bottom Line'},
+   stepsAsH2:true,tags:'listicle, summary, productivity'},
+
+ tutorial:{label:'Tutorial',icon:'🛠️',tag:'Step-by-step · how-to',
+   intro:function(t){return 'This is a step-by-step walkthrough of **'+t+'**. Follow the steps in order — each one depends on the previous one, so skipping ahead tends to cost more time than it saves.';},
+   thesis:'Before you start: you only need one input, one action and one feedback signal. Everything else is optional.',
+   why:'Tutorials fail when they explain *what* without *when*. The order below is the actual dependency chain, not a list of nice-to-haves.',
+   close:'Run the sequence once end-to-end before optimising anything. Speed comes from repetition, not from skipping steps.',
+   labels:{intro:'What you’ll build',takeaways:'Before you start',why:'How the steps fit together',steps:'Step-by-step',mistakes:'Troubleshooting',final:'Done — what next?'},
+   stepsAsH2:true,tags:'tutorial, how-to, guide'},
+
+ newsbrief:{label:'News Brief',icon:'📰',tag:'Neutral · factual',
+   intro:function(t){return '**'+t+'** — the key points, condensed into a neutral brief with the context you need to follow the story.';},
+   thesis:'The summary below separates what was claimed from what was demonstrated, so the two don’t get conflated.',
+   why:'Context determines meaning. Without the surrounding sequence, the same facts can be read as either a warning or an opportunity.',
+   close:'That’s the brief. The underlying material is unchanged — only the framing has been condensed for fast reading.',
+   labels:{intro:'Summary',takeaways:'Key Points',why:'Context',steps:'What Happened',mistakes:'Caveats',final:'What to Watch'},
+   stepsAsH2:false,tags:'news, brief, analysis'},
+
+ persuasive:{label:'Persuasive',icon:'🚀',tag:'Marketing · conversion-led',
+   intro:function(t){return 'If you’re searching for **'+t+'**, you’re probably past the "should I?" stage and into the "how do I make this work?" stage. This is the short version of that answer.';},
+   thesis:'The gap between people who get results and people who collect information isn’t effort — it’s sequencing. Same inputs, different order, wildly different outcome.',
+   why:'You don’t need more tactics. You need the right three, in the right order, repeated long enough to compound.',
+   close:'You already know enough to start. Pick one constraint, run the loop for two weeks, and let the results make the argument for you.',
+   labels:{intro:'Why this matters now',takeaways:'What you’ll get',why:'The real gap',steps:'The playbook',mistakes:'What kills momentum',final:'Your next move'},
+   stepsAsH2:false,tags:'marketing, growth, conversion'}
+};
+var TONE_ORDER=['professional','casual','storytelling','academic','listicle','tutorial','newsbrief','persuasive'];
+
+var LANGS=['English','Spanish','French','German','Portuguese','Italian','Dutch','Hindi','Bengali','Tamil','Russian','Japanese','Korean','Chinese','Arabic','Thai'];
+var SCRIPT_LANG=[
+ [/[\u0900-\u097F]/,'Hindi'],[/[\u0980-\u09FF]/,'Bengali'],[/[\u0B80-\u0BFF]/,'Tamil'],
+ [/[\u0E00-\u0E7F]/,'Thai'],[/[\u3040-\u30FF]/,'Japanese'],[/[\uAC00-\uD7AF]/,'Korean'],
+ [/[\u4E00-\u9FFF]/,'Chinese'],[/[\u0600-\u06FF]/,'Arabic'],[/[\u0400-\u04FF]/,'Russian']
+];
+
+var OPTS=[
+ {k:'takeaways',label:'Takeaways',icon:'🎯',def:true},
+ {k:'faq',label:'FAQ',icon:'❓',def:true},
+ {k:'seo',label:'SEO meta',icon:'🔍',def:true},
+ {k:'tags',label:'Tags',icon:'🏷️',def:true},
+ {k:'chapters',label:'Chapters',icon:'⏱️',def:false},
+ {k:'emoji',label:'Emoji',icon:'✨',def:false}
+];
+
+/* ================= STATE ================= */
+var state={tone:'professional',lang:'English',length:'standard',flags:{}};
+OPTS.forEach(function(o){state.flags[o.k]=o.def;});
+
+/* ================= ELEMENTS ================= */
+var inputWrap=$('#inputWrap'),input=$('#videoUrl'),clearBtn=$('#clearBtn'),
+    convertBtn=$('#convertBtn'),exampleBtn=$('#exampleBtn'),
+    langSelect=$('#langSelect'),lengthSelect=$('#lengthSelect'),
+    toneChips=$('#toneChips'),toneTag=$('#toneTag'),
+    optionChips=$('#optionChips'),detectBadge=$('#detectBadge'),detectText=$('#detectText'),
+    progressBox=$('#progressBox'),progressFill=$('#progressFill'),
+    errorBox=$('#errorBox'),outputBox=$('#outputBox'),mdOut=$('#mdOut'),
+    thumb=$('#thumb'),outTitle=$('#outTitle'),outStyleTag=$('#outStyleTag'),
+    speedBadge=$('#speedBadge'),statSpeed=$('#statSpeed'),
+    copyBtn=$('#copyBtn'),copyLabel=$('#copyLabel'),dlBtn=$('#dlBtn'),
+    statWords=$('#statWords'),statRead=$('#statRead'),statHeads=$('#statHeads');
+
+var CONVERT_HTML=convertBtn.innerHTML;
+var running=false,lastMd='',lastMeta=null,lastSlug='blog-post',lastElapsed=0;
+$('#year').textContent=new Date().getFullYear();
+
+/* ================= BUILD CONTROLS ================= */
+function buildTones(){
+  toneChips.innerHTML='';
+  TONE_ORDER.forEach(function(k){
+    var t=TONES[k];
+    var b=document.createElement('button');
+    b.type='button';b.className='chip';b.title=t.tag;b.dataset.tone=k;
+    b.setAttribute('aria-pressed',k===state.tone?'true':'false');
+    b.innerHTML='<span class="em">'+t.icon+'</span>'+t.label;
+    b.addEventListener('click',function(){
+      state.tone=k;
+      $$('.chip[data-tone]',toneChips).forEach(function(x){x.setAttribute('aria-pressed',x.dataset.tone===k?'true':'false');});
+      toneTag.textContent=TONES[k].tag;
+      regenerate();
+    });
+    toneChips.appendChild(b);
+  });
+  toneTag.textContent=TONES[state.tone].tag;
+}
+
+function buildLangs(){
+  langSelect.innerHTML='';
+  LANGS.forEach(function(l){
+    var o=document.createElement('option');o.value=l;o.textContent=l;
+    langSelect.appendChild(o);
+  });
+  langSelect.value=state.lang;
+}
+
+function buildOpts(){
+  optionChips.innerHTML='';
+  OPTS.forEach(function(o){
+    var b=document.createElement('button');
+    b.type='button';b.className='chip opt';b.dataset.opt=o.k;
+    b.setAttribute('aria-pressed',state.flags[o.k]?'true':'false');
+    b.innerHTML='<span class="em">'+o.icon+'</span>'+o.label;
+    b.addEventListener('click',function(){
+      state.flags[o.k]=!state.flags[o.k];
+      b.setAttribute('aria-pressed',state.flags[o.k]?'true':'false');
+      regenerate();
+    });
+    optionChips.appendChild(b);
+  });
+}
+
+/* ================= HELPERS ================= */
+function clip(s,n){s=String(s||'');return s.length>n?s.slice(0,n-1).trim()+'…':s;}
+function slugify(s){return String(s||'blog-post').toLowerCase().replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-').slice(0,60)||'blog-post';}
+function parseYouTubeId(raw){
+  if(!raw)return null;
+  var s=String(raw).trim();
+  var m=s.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/|\/live\/|\/v\/)([A-Za-z0-9_-]{11})/);
+  if(m)return m[1];
+  if(/^[A-Za-z0-9_-]{11}$/.test(s))return s;
+  return null;
+}
+function detectLang(title){
+  if(!title)return null;
+  for(var i=0;i<SCRIPT_LANG.length;i++){if(SCRIPT_LANG[i][0].test(title))return SCRIPT_LANG[i][1];}
+  if(/[A-Za-z]/.test(title)){
+    var b=null;try{b=(navigator.language||'en').slice(0,2);}catch(e){}
+    var map={en:'English',es:'Spanish',fr:'French',de:'German',pt:'Portuguese',it:'Italian',nl:'Dutch',hi:'Hindi',bn:'Bengali',ta:'Tamil',ru:'Russian',ja:'Japanese',ko:'Korean',zh:'Chinese',ar:'Arabic',th:'Thai'};
+    if(b&&map[b])return map[b];
+    return 'English';
+  }
+  return null;
+}
+function fetchMeta(id){
+  var ep='https://www.youtube.com/oembed?url='+encodeURIComponent('https://www.youtube.com/watch?v='+id)+'&format=json';
+  return fetch(ep,{mode:'cors'})
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(d){return d?{title:d.title||null,author:d.author_name||null}:null;})
+    .catch(function(){return null;});
+}
+
+/* ================= PROGRESS ================= */
+function resetSteps(){$$('.step-row').forEach(function(el){el.classList.remove('done','active');});progressFill.style.width='0%';}
+function setStep(i,c){var el=$('.step-row[data-step="'+i+'"]');if(!el)return;el.classList.remove('active');if(c==='done')el.classList.add('done');if(c==='active')el.classList.add('active');}
+function setProgress(p){progressFill.style.width=p+'%';}
+
+/* ================= COMPOSER ================= */
+function compose(meta,o){
+  var T=TONES[o.tone]||TONES.professional;
+  var title=meta.title||'Untitled Video';
+  var short=clip(title,68);
+  var L=[];
+  var em=function(e){return o.flags.emoji?e+' ':'';};
+  var many=o.length!=='short';
+
+  L.push('# '+title,'');
+  L.push('> Converted from a YouTube video'+(meta.author?' by '+meta.author:'')+
+         ' · '+T.label+' tone · '+o.lang+' · '+o.length+' length');
+  L.push('');
+
+  /* Intro */
+  L.push('## '+em('📝')+T.labels.intro,'');
+  L.push(T.intro(short),'');
+  L.push(T.thesis,'');
+
+  /* Takeaways */
+  if(o.flags.takeaways){
+    var tk=o.length==='short'?TAKEAWAYS.slice(0,3):TAKEAWAYS;
+    L.push('## '+em('🎯')+T.labels.takeaways,'');
+    tk.forEach(function(x){L.push('- '+x);});
+    L.push('');
+  }
+
+  /* Why */
+  if(many){
+    L.push('## '+em('💡')+T.labels.why,'');
+    L.push(T.why,'');
+  }
+
+  /* Steps */
+  var steps=o.length==='short'?CORE.slice(0,2):CORE;
+  if(T.stepsAsH2){
+    steps.forEach(function(s,i){
+      L.push('## '+em('▸')+(i+1)+'. '+s.t,'');
+      L.push(s.d,'');
+    });
+  }else{
+    L.push('## '+em('🧭')+T.labels.steps,'');
+    steps.forEach(function(s,i){
+      L.push('### Step '+(i+1)+' — '+s.t,'');
+      L.push(s.d,'');
+    });
+  }
+
+  /* Mistakes */
+  if(many){
+    var mk=o.length==='long'?MISTAKES:MISTAKES.slice(0,3);
+    L.push('## '+em('⚠️')+T.labels.mistakes,'');
+    mk.forEach(function(x){L.push('- '+x);});
+    L.push('');
+  }
+
+  /* Chapters */
+  if(o.flags.chapters){
+    L.push('## '+em('⏱️')+'Suggested Chapters','');
+    ['00:00 Introduction','02:10 Key takeaways','05:40 The core framework','11:20 Common mistakes','15:05 Conclusion']
+      .forEach(function(c){L.push('- '+c);});
+    L.push('');
+  }
+
+  /* Conclusion */
+  L.push('## '+em('✅')+T.labels.final,'');
+  L.push(T.close,'');
+  L.push('---','');
+
+  /* FAQ */
+  if(o.flags.faq){
+    L.push('## '+em('❓')+'Frequently Asked Questions','');
+    L.push('### What is the main takeaway from this video?','');
+    L.push('The core idea is that sequencing beats intensity. Fix one constraint, build one repeatable loop, and let the results compound.','');
+    L.push('### Who is this for?','');
+    L.push('Anyone who already knows the basics but keeps stalling on execution — creators, marketers, founders and students.','');
+    L.push('### How do I apply this today?','');
+    L.push('Pick the single biggest bottleneck, write it in one sentence, and define one weekly loop you can run for the next two weeks.','');
+  }
+
+  /* SEO meta */
+  if(o.flags.seo){
+    L.push('**Suggested meta description:** A structured breakdown of '+short+' — '+T.label.toLowerCase()+
+           ' tone, key takeaways, the core framework, and the mistakes to avoid.','');
+    L.push('**Suggested slug:** '+slugify(title),'');
+  }
+
+  /* Tags */
+  if(o.flags.tags){
+    L.push('**Suggested tags:** '+T.tags,'');
+  }
+
+  return L.join('\n');
+}
+
+/* ================= RENDER ================= */
+function render(md,meta,elapsed){
+  lastMd=md;lastMeta=meta;lastSlug=slugify(meta.title);lastElapsed=elapsed;
+
+  mdOut.textContent=md;
+  outTitle.textContent=meta.title||'Blog draft';
+  outStyleTag.textContent=TONES[state.tone].label+' · '+state.lang+' · '+state.length;
+  speedBadge.textContent='⚡ '+elapsed.toFixed(2)+'s';
+
+  var words=md.trim().split(/\s+/).length;
+  var heads=(md.match(/^#{2,3}\s/gm)||[]).length;
+  statWords.textContent=words.toLocaleString();
+  statRead.textContent=Math.max(1,Math.round(words/225))+' min';
+  statHeads.textContent=heads;
+  statSpeed.textContent=elapsed.toFixed(2)+'s';
+
+  if(meta.id)thumb.src='https://i.ytimg.com/vi/'+meta.id+'/mqdefault.jpg';
+
+  errorBox.classList.add('hidden');
+  progressBox.classList.add('hidden');
+  outputBox.classList.remove('hidden');
+  outputBox.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function regenerate(){
+  if(!lastMeta)return;
+  render(compose(lastMeta,state),lastMeta,lastElapsed||0.4);
+}
+
+/* ================= CONVERT ================= */
+async function convert(){
+  if(running)return;
+  var id=parseYouTubeId(input.value);
+  if(!id){
+    errorBox.classList.remove('hidden');outputBox.classList.add('hidden');progressBox.classList.add('hidden');
+    inputWrap.classList.add('error');toast('Please paste a valid YouTube URL',true);
+    setTimeout(function(){inputWrap.classList.remove('error');},700);
+    input.focus();return;
+  }
+
+  running=true;
+  var t0=performance.now();
+  convertBtn.disabled=true;
+  convertBtn.innerHTML='<span class="spinner"></span><span>Converting…</span>';
+
+  errorBox.classList.add('hidden');outputBox.classList.add('hidden');
+  progressBox.classList.remove('hidden');resetSteps();
+  setProgress(6);setStep(0,'active');
+
+  var metaPromise=fetchMeta(id);
+
+  await sleep(260);setStep(0,'done');setStep(1,'active');setProgress(34);
+  var info=await metaPromise;
+
+  await sleep(280);setStep(1,'done');setStep(2,'active');setProgress(66);
+
+  /* language detection */
+  var detected=detectLang(info&&info.title);
+  if(detected){
+    state.lang=detected;
+    langSelect.value=detected;
+    detectText.textContent='Auto-detected: '+detected;
+    detectBadge.classList.remove('hidden');
+  }else{
+    detectBadge.classList.add('hidden');
+  }
+
+  await sleep(240);setStep(2,'done');setStep(3,'active');setProgress(92);
+  await sleep(160);setStep(3,'done');setProgress(100);
+  await sleep(120);
+
+  var meta={
+    id:id,
+    title:(info&&info.title)?info.title:'YouTube Video '+id,
+    author:(info&&info.author)?info.author:'',
+    url:'https://www.youtube.com/watch?v='+id
+  };
+
+  var elapsed=(performance.now()-t0)/1000;
+  render(compose(meta,state),meta,elapsed);
+
+  running=false;
+  convertBtn.disabled=false;
+  convertBtn.innerHTML=CONVERT_HTML;
+}
+
+/* ================= EVENTS ================= */
+convertBtn.addEventListener('click',convert);
+input.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();convert();}});
+input.addEventListener('input',function(){clearBtn.classList.toggle('hidden',input.value.length===0);});
+clearBtn.addEventListener('click',function(){
+  input.value='';clearBtn.classList.add('hidden');
+  outputBox.classList.add('hidden');errorBox.classList.add('hidden');progressBox.classList.add('hidden');
+  detectBadge.classList.add('hidden');input.focus();
+});
+exampleBtn.addEventListener('click',function(){
+  input.value='https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+  clearBtn.classList.remove('hidden');convert();
+});
+langSelect.addEventListener('change',function(){state.lang=langSelect.value;regenerate();});
+lengthSelect.addEventListener('change',function(){state.length=lengthSelect.value;regenerate();});
+
+/* ================= COPY / DOWNLOAD ================= */
+copyBtn.addEventListener('click',async function(){
+  if(!lastMd)return;
+  try{await navigator.clipboard.writeText(lastMd);}
+  catch(e){
+    var ta=document.createElement('textarea');ta.value=lastMd;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');}catch(err){}
+    document.body.removeChild(ta);
+  }
+  copyBtn.classList.add('copied');copyLabel.textContent='Copied!';
+  toast('Markdown copied to clipboard');
+  setTimeout(function(){copyBtn.classList.remove('copied');copyLabel.textContent='Copy Markdown';},1800);
+});
+
+dlBtn.addEventListener('click',function(){
+  if(!lastMd)return;
+  var blob=new Blob([lastMd],{type:'text/markdown;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=lastSlug+'.md';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(a.href);},1200);
+  toast('Downloaded '+lastSlug+'.md');
+});
+
+/* ================= FAQ ================= */
+$$('.faq-q').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var item=btn.closest('.faq-item');
+    var isOpen=item.classList.contains('open');
+    $$('.faq-item').forEach(function(el){
+      el.classList.remove('open');
+      var q=el.querySelector('.faq-q');if(q)q.setAttribute('aria-expanded','false');
+    });
+    if(!isOpen){item.classList.add('open');btn.setAttribute('aria-expanded','true');}
+  });
+});
+
+/* ================= INIT ================= */
+buildTones();buildLangs();buildOpts();
+})();
+</script>
+
+</body>
+</html>

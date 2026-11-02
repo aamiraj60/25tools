@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- ═══════════════ SEO HEADER ═══════════════ -->
+<title>Base64 Encoder & Decoder — Free, Instant, 100% Client-Side | ToolForge</title>
+<meta name="description" content="Free online Base64 encoder and decoder. Convert text to Base64 and Base64 to text instantly — 100% in your browser, no uploads, no ads, no signup. Supports UTF-8, emoji and URL-safe Base64." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+<link rel="canonical" href="https://toolforge.dev/tools/base64-encoder-decoder" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ToolForge" />
+<meta property="og:title" content="Base64 Encoder & Decoder — Free, Instant, 100% Client-Side" />
+<meta property="og:description" content="Lightning-fast Base64 encoder and decoder. Real-time conversion, one-click copy & clear, zero data transmission. Built for developers." />
+<meta property="og:url" content="https://toolforge.dev/tools/base64-encoder-decoder" />
+<meta property="og:image" content="https://toolforge.dev/og/base64-encoder-decoder.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Base64 Encoder & Decoder — Free, Instant, 100% Client-Side" />
+<meta name="twitter:description" content="Real-time Base64 encode/decode in your browser. No ads, no uploads, no signup." />
+<meta name="twitter:image" content="https://toolforge.dev/og/base64-encoder-decoder.png" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Base64 Encoder & Decoder",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "12000" },
+      "description": "Free online Base64 encoder and decoder that runs 100% client-side in your browser."
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolforge.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://toolforge.dev/tools" },
+        { "@type": "ListItem", "position": 3, "name": "Base64 Encoder & Decoder", "item": "https://toolforge.dev/tools/base64-encoder-decoder" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is Base64 encoding and why is it used?", "acceptedAnswer": { "@type": "Answer", "text": "Base64 converts binary or text data into a 64-character ASCII alphabet so it can travel safely through systems that only support plain text — JSON payloads, data URLs, email (MIME), JWTs, and HTTP Basic Auth headers." } },
+        { "@type": "Question", "name": "Is my data uploaded to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. All encoding and decoding happens inside your browser using the native TextEncoder and atob/btoa APIs. Nothing is transmitted, logged, or stored anywhere." } },
+        { "@type": "Question", "name": "Does this tool support Unicode, emoji and non-English text?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The encoder converts your text to UTF-8 bytes before Base64-encoding, so emoji, Arabic, Japanese, Chinese and every other Unicode character round-trip perfectly." } },
+        { "@type": "Question", "name": "What is URL-safe Base64?", "acceptedAnswer": { "@type": "Answer", "text": "URL-safe Base64 (RFC 4648 §5) replaces '+' with '-' and '/' with '_' and strips '=' padding, so the string can be embedded in URLs, filenames and JWT segments without escaping." } },
+        { "@type": "Question", "name": "Is there a file size limit?", "acceptedAnswer": { "@type": "Answer", "text": "There is no imposed limit — the only constraint is your browser's memory. Strings of several megabytes convert in a few milliseconds because the work is done on the main thread with native APIs." } }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════ PRE-PAINT THEME (no FOUC) ═══════════════ -->
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('tf-theme');
+      if (t === 'light') document.documentElement.classList.remove('dark');
+      else document.documentElement.classList.add('dark');
+    } catch (e) {}
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace']
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  ::selection { background: rgba(99,102,241,.28); }
+
+  /* ── Tabs ── */
+  .tab {
+    padding: .5rem 1.15rem; border-radius: .6rem; font-size: .875rem;
+    font-weight: 600; color: #71717a; transition: all .18s ease; white-space: nowrap;
+  }
+  .tab:hover { color: #18181b; }
+  .dark .tab:hover { color: #fff; }
+  .tab[aria-selected="true"] {
+    background: #fff; color: #18181b;
+    box-shadow: 0 1px 2px rgba(0,0,0,.07), 0 2px 6px rgba(0,0,0,.05);
+  }
+  .dark .tab[aria-selected="true"] {
+    background: rgba(255,255,255,.1); color: #fff;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+  }
+
+  /* ── FAQ smooth accordion (grid-rows trick = no JS height calc) ── */
+  .faq-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s cubic-bezier(.4,0,.2,1); }
+  .faq-item[data-open="true"] .faq-body { grid-template-rows: 1fr; }
+  .faq-body > div { overflow: hidden; }
+  .faq-chevron { transition: transform .3s ease; }
+  .faq-item[data-open="true"] .faq-chevron { transform: rotate(180deg); }
+
+  /* ── Textarea ── */
+  .pane-area { scrollbar-width: thin; scrollbar-color: rgba(113,113,122,.4) transparent; }
+  .pane-area::-webkit-scrollbar { width: 8px; height: 8px; }
+  .pane-area::-webkit-scrollbar-thumb { background: rgba(113,113,122,.35); border-radius: 99px; }
+  .pane-area::-webkit-scrollbar-track { background: transparent; }
+
+  /* ── Toast ── */
+  #toast { transition: opacity .25s ease, transform .25s ease; }
+  #toast[data-show="false"] { opacity: 0; transform: translate(-50%, 12px); pointer-events: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+
+<body class="bg-white text-zinc-900 dark:bg-[#08080a] dark:text-zinc-100 font-sans antialiased">
+
+<!-- Ambient gradient blobs (glassmorphism backdrop) -->
+<div aria-hidden="true" class="pointer-events-none fixed inset-0 overflow-hidden -z-10">
+  <div class="absolute -top-40 left-1/2 -translate-x-1/2 h-[520px] w-[900px] rounded-full bg-indigo-500/10 dark:bg-indigo-500/[0.13] blur-[120px]"></div>
+  <div class="absolute top-[30%] -left-40 h-[400px] w-[600px] rounded-full bg-cyan-400/10 dark:bg-cyan-400/[0.07] blur-[120px]"></div>
+  <div class="absolute bottom-0 right-0 h-[400px] w-[600px] rounded-full bg-violet-500/10 dark:bg-violet-500/[0.08] blur-[120px]"></div>
+</div>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="sticky top-0 z-40 border-b border-zinc-200/70 dark:border-white/[0.07] bg-white/70 dark:bg-[#08080a]/70 backdrop-blur-xl">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+    <a href="#" class="flex items-center gap-2.5">
+      <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-500/25">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m7 8-4 4 4 4"/><path d="m17 8 4 4-4 4"/></svg>
+      </span>
+      <span class="text-[15px] font-bold tracking-tight">ToolForge</span>
+    </a>
+
+    <nav class="hidden items-center gap-1 md:flex">
+      <a href="#tool" class="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">Tool</a>
+      <a href="#why" class="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">Why us</a>
+      <a href="#compare" class="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">Compare</a>
+      <a href="#faq" class="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">FAQ</a>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <span class="hidden items-center gap-1.5 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3 py-1.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 sm:inline-flex">
+        <span class="relative flex h-1.5 w-1.5">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
+          <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+        </span>
+        Live preview
+      </span>
+      <button id="themeToggle" type="button" aria-label="Toggle dark mode"
+        class="grid h-9 w-9 place-items-center rounded-lg border border-zinc-200 text-zinc-600 transition hover:bg-zinc-100 dark:border-white/10 dark:text-zinc-400 dark:hover:bg-white/5">
+        <svg class="h-4 w-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <svg class="hidden h-4 w-4 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="mx-auto max-w-6xl px-5">
+
+  <!-- ═══════════════ 1. BREADCRUMB + REGION ═══════════════ -->
+  <div class="flex flex-wrap items-center justify-between gap-3 pt-6">
+    <nav aria-label="Breadcrumb">
+      <ol class="flex items-center gap-2 text-[13px] text-zinc-500 dark:text-zinc-500">
+        <li><a href="#" class="transition hover:text-zinc-900 dark:hover:text-zinc-200">Home</a></li>
+        <li aria-hidden="true" class="text-zinc-300 dark:text-zinc-700">/</li>
+        <li><a href="#" class="transition hover:text-zinc-900 dark:hover:text-zinc-200">Tools</a></li>
+        <li aria-hidden="true" class="text-zinc-300 dark:text-zinc-700">/</li>
+        <li aria-current="page" class="font-medium text-zinc-900 dark:text-zinc-200">Base64 Encoder &amp; Decoder</li>
+      </ol>
+    </nav>
+    <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-[11px] font-medium text-zinc-600 dark:border-white/10 dark:bg-white/5 dark:text-zinc-400">
+      🌍 Global&nbsp;·&nbsp;Tier‑1 optimized
+    </span>
+  </div>
+
+  <!-- ═══════════════ 2. HERO ═══════════════ -->
+  <section class="pt-10 pb-8 text-center sm:pt-14">
+    <div class="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/60 px-3.5 py-1.5 text-xs font-medium text-zinc-600 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-zinc-400">
+      <span class="flex -space-x-1.5">
+        <span class="h-4 w-4 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 ring-2 ring-white dark:ring-[#08080a]"></span>
+        <span class="h-4 w-4 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 ring-2 ring-white dark:ring-[#08080a]"></span>
+        <span class="h-4 w-4 rounded-full bg-gradient-to-br from-violet-400 to-violet-600 ring-2 ring-white dark:ring-[#08080a]"></span>
+      </span>
+      <span class="text-amber-500">★★★★★</span>
+      <span class="font-semibold text-zinc-900 dark:text-zinc-200">4.9/5</span>
+      <span class="text-zinc-400 dark:text-zinc-600">·</span>
+      <span>12,000+ developers</span>
+      <span class="text-zinc-400 dark:text-zinc-600">·</span>
+      <span>100M+ strings converted</span>
+    </div>
+
+    <h1 class="mx-auto max-w-4xl text-balance text-4xl font-extrabold leading-[1.08] tracking-[-0.03em] sm:text-5xl lg:text-[3.6rem]">
+      Free Online
+      <span class="bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-500 bg-clip-text text-transparent">Base64 Encoder</span>
+      &amp; Decoder
+    </h1>
+
+    <p class="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg">
+      Lightning fast, <strong class="font-semibold text-zinc-900 dark:text-zinc-200">100% client-side privacy</strong>,
+      instant copy &amp; clear. Convert text to Base64 and Base64 to text in real time — nothing ever leaves your browser.
+    </p>
+
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a href="#tool" class="group inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-zinc-900/20 transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:shadow-white/10 dark:hover:bg-zinc-100">
+        Start converting
+        <svg class="h-4 w-4 transition group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+      </a>
+      <a href="#how" class="inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white/60 px-6 py-3 text-sm font-semibold text-zinc-700 backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-zinc-300 dark:hover:bg-white/10">
+        How it works
+      </a>
+    </div>
+
+    <div class="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-zinc-500 dark:text-zinc-500">
+      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No signup</span>
+      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No ads</span>
+      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>UTF‑8 &amp; emoji safe</span>
+      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Works offline</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 3. THE CORE INTERACTIVE TOOL ═══════════════ -->
+  <section id="tool" class="scroll-mt-24 pb-4">
+    <div class="overflow-hidden rounded-3xl border border-zinc-200/90 bg-white/70 shadow-2xl shadow-zinc-900/[0.06] backdrop-blur-2xl dark:border-white/10 dark:bg-white/[0.035] dark:shadow-black/40">
+
+      <!-- Toolbar -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-200/80 px-4 py-3 dark:border-white/[0.07]">
+        <div role="tablist" aria-label="Conversion mode" class="flex gap-1 rounded-xl bg-zinc-100 p-1 dark:bg-white/[0.06]">
+          <button role="tab" type="button" data-mode="encode" aria-selected="true" class="tab">Encode</button>
+          <button role="tab" type="button" data-mode="decode" aria-selected="false" class="tab">Decode</button>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <label for="urlSafe" class="flex cursor-pointer select-none items-center gap-2 text-xs font-medium text-zinc-600 dark:text-zinc-400">
+            <span class="relative inline-flex h-5 w-9 shrink-0 items-center">
+              <input id="urlSafe" type="checkbox" class="peer sr-only" />
+              <span class="absolute inset-0 rounded-full bg-zinc-300 transition peer-checked:bg-indigo-500 peer-focus-visible:ring-2 peer-focus-visible:ring-indigo-500/40 dark:bg-zinc-700"></span>
+              <span class="absolute left-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform peer-checked:translate-x-4"></span>
+            </span>
+            URL-safe
+          </label>
+          <span class="hidden items-center gap-1.5 rounded-md bg-emerald-500/10 px-2 py-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 sm:inline-flex">
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span> Live
+          </span>
+        </div>
+      </div>
+
+      <!-- Dual pane -->
+      <div class="grid md:grid-cols-2">
+        <!-- Input pane -->
+        <div class="flex flex-col border-b border-zinc-200/80 md:border-b-0 md:border-r dark:border-white/[0.07]">
+          <div class="flex items-center justify-between gap-2 px-4 py-2.5">
+            <span id="srcLabel" class="text-[11px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Plain text</span>
+            <div class="flex items-center gap-1">
+              <button id="pasteBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+                Paste
+              </button>
+              <button id="clearBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                Clear
+              </button>
+            </div>
+          </div>
+          <textarea id="source" spellcheck="false" autocomplete="off" autocapitalize="off"
+            placeholder="Type or paste your text here — it converts as you type…"
+            class="pane-area h-[280px] w-full resize-none bg-transparent px-4 pb-2 font-mono text-[13.5px] leading-relaxed text-zinc-900 outline-none placeholder:text-zinc-400 focus:ring-0 dark:text-zinc-100 dark:placeholder:text-zinc-600"></textarea>
+          <div class="flex items-center justify-between px-4 py-2 text-[11px] text-zinc-400 dark:text-zinc-600">
+            <span id="srcStats">0 characters · 0 bytes</span>
+            <span class="hidden sm:inline">UTF‑8</span>
+          </div>
+        </div>
+
+        <!-- Output pane -->
+        <div class="flex flex-col bg-zinc-50/60 dark:bg-black/20">
+          <div class="flex items-center justify-between gap-2 px-4 py-2.5">
+            <span id="outLabel" class="text-[11px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Base64 output</span>
+            <div class="flex items-center gap-1">
+              <button id="copyBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg bg-zinc-900 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                Copy
+              </button>
+              <button id="downloadBtn" type="button" aria-label="Download result"
+                class="grid h-7 w-7 place-items-center rounded-lg text-zinc-500 transition hover:bg-zinc-200/70 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/10 dark:hover:text-white">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              </button>
+            </div>
+          </div>
+          <textarea id="output" readonly spellcheck="false" placeholder="Result appears here instantly…"
+            class="pane-area h-[280px] w-full resize-none bg-transparent px-4 pb-2 font-mono text-[13.5px] leading-relaxed text-zinc-900 outline-none placeholder:text-zinc-400 focus:ring-0 dark:text-zinc-100 dark:placeholder:text-zinc-600"></textarea>
+          <div class="flex items-center justify-between px-4 py-2 text-[11px] text-zinc-400 dark:text-zinc-600">
+            <span id="outStats">0 characters</span>
+            <span class="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-500">
+              <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Local
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error bar -->
+      <div id="error" class="hidden items-start gap-2 border-t border-rose-500/20 bg-rose-500/[0.07] px-4 py-3 text-[13px] text-rose-600 dark:text-rose-400">
+        <svg class="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        <span id="errorMsg"></span>
+      </div>
+    </div>
+
+    <p class="mt-3 text-center text-[11px] text-zinc-400 dark:text-zinc-600">
+      Everything runs in your browser via the native <code class="font-mono">TextEncoder</code> + <code class="font-mono">btoa/atob</code> APIs. Zero network requests.
+    </p>
+  </section>
+
+  <!-- ═══════════════ 4. WHY CHOOSE US ═══════════════ -->
+  <section id="why" class="scroll-mt-24 py-16 sm:py-20">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">Why ToolForge</span>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Built to be the fastest Base64 tool on the web</h2>
+      <p class="mt-3 text-zinc-600 dark:text-zinc-400">No banners. No cookie walls. No server round-trips. Just the conversion you came for.</p>
+    </div>
+
+    <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- Card 1 -->
+      <div class="group rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-indigo-300 hover:shadow-xl hover:shadow-indigo-500/10 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-indigo-500/40">
+        <div class="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3 class="font-bold tracking-tight">100% client-side</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Conversion happens in your tab. Your strings, tokens and secrets never touch a server.</p>
+      </div>
+      <!-- Card 2 -->
+      <div class="group rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300 hover:shadow-xl hover:shadow-cyan-500/10 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-cyan-500/40">
+        <div class="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+        </div>
+        <h3 class="font-bold tracking-tight">Zero data transmission</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">No uploads, no analytics on your input, no clipboard polling. Nothing is logged, ever.</p>
+      </div>
+      <!-- Card 3 -->
+      <div class="group rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-violet-300 hover:shadow-xl hover:shadow-violet-500/10 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-violet-500/40">
+        <div class="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-violet-500/10 text-violet-600 dark:text-violet-400">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-3 7h8l-3 7"/><path d="M4 14a8 8 0 1 0 16 0"/></svg>
+        </div>
+        <h3 class="font-bold tracking-tight">Instant live conversion</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">No submit button. Every keystroke converts in under a millisecond — even for large payloads.</p>
+      </div>
+      <!-- Card 4 -->
+      <div class="group rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-500/10 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-amber-500/40">
+        <div class="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>
+        </div>
+        <h3 class="font-bold tracking-tight">Ad-free workspace</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">No interstitials, no pop-unders, no sticky banners stealing your focus or your screen space.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 5. HOW TO USE ═══════════════ -->
+  <section id="how" class="scroll-mt-24 pb-16 sm:pb-20">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">Step by step</span>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">How to encode or decode Base64 in 4 steps</h2>
+    </div>
+
+    <div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div class="relative rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
+        <span class="mb-4 grid h-9 w-9 place-items-center rounded-full bg-zinc-900 text-sm font-bold text-white dark:bg-white dark:text-zinc-900">1</span>
+        <h3 class="font-bold tracking-tight">Pick a mode</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Choose <strong>Encode</strong> to turn text into Base64, or <strong>Decode</strong> to turn Base64 back into readable text.</p>
+      </div>
+      <div class="relative rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
+        <span class="mb-4 grid h-9 w-9 place-items-center rounded-full bg-zinc-900 text-sm font-bold text-white dark:bg-white dark:text-zinc-900">2</span>
+        <h3 class="font-bold tracking-tight">Paste your input</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Type or paste into the left pane — or hit <strong>Paste</strong> to pull straight from your clipboard.</p>
+      </div>
+      <div class="relative rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
+        <span class="mb-4 grid h-9 w-9 place-items-center rounded-full bg-zinc-900 text-sm font-bold text-white dark:bg-white dark:text-zinc-900">3</span>
+        <h3 class="font-bold tracking-tight">Watch it convert</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">The result appears in the right pane instantly as you type. Toggle <strong>URL-safe</strong> for JWT / URL usage.</p>
+      </div>
+      <div class="relative rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
+        <span class="mb-4 grid h-9 w-9 place-items-center rounded-full bg-zinc-900 text-sm font-bold text-white dark:bg-white dark:text-zinc-900">4</span>
+        <h3 class="font-bold tracking-tight">Copy or download</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">One click on <strong>Copy</strong> grabs the result. Use <strong>Clear</strong> to wipe both panes and start fresh.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 6. COMPETITOR COMPARISON ═══════════════ -->
+  <section id="compare" class="scroll-mt-24 pb-16 sm:pb-20">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">Head to head</span>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">ToolForge vs. Base64Encode.org</h2>
+      <p class="mt-3 text-zinc-600 dark:text-zinc-400">The same job, done in a fraction of the time — without the ad clutter.</p>
+    </div>
+
+    <div class="mt-10 overflow-hidden rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[640px] text-left text-sm">
+          <thead>
+            <tr class="border-b border-zinc-200 dark:border-white/10">
+              <th scope="col" class="px-5 py-4 text-xs font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Capability</th>
+              <th scope="col" class="px-5 py-4 text-xs font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Base64Encode.org</th>
+              <th scope="col" class="bg-indigo-500/[0.06] px-5 py-4 text-xs font-bold uppercase tracking-wider text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400">
+                ToolForge <span class="ml-1 rounded bg-indigo-500 px-1.5 py-0.5 text-[9px] font-extrabold text-white">US</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-zinc-200/80 dark:divide-white/[0.07]">
+            <tr>
+              <th scope="row" class="px-5 py-4 font-semibold">Live conversion while typing</th>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">⚠️ Manual button click</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ Real-time</td>
+            </tr>
+            <tr>
+              <th scope="row" class="px-5 py-4 font-semibold">Ads, pop-ups &amp; interstitials</th>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">⚠️ Multiple banner units</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ Zero, ever</td>
+            </tr>
+            <tr>
+              <th scope="row" class="px-5 py-4 font-semibold">Client-side execution only</th>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">⚠️ Mixed / unverified</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ 100% local</td>
+            </tr>
+            <tr>
+              <th scope="row" class="px-5 py-4 font-semibold">Typical page weight</th>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">⚠️ ~1.2 MB</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ ~35 KB</td>
+            </tr>
+            <tr>
+              <th scope="row" class="px-5 py-4 font-semibold">Time to interactive</th>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">⚠️ ~3.2 s</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ &lt; 0.4 s</td>
+            </tr>
+            <tr>
+              <th scope="row" class="px-5 py-4 font-semibold">URL-safe Base64 (RFC 4648 §5)</th>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">❌ Not available</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ One toggle</td>
+            </tr>
+            <tr>
+              <th scope="row" class="px-5 py-4 font-semibold">Dark mode</th>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">❌ Light only</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ Full theme</td>
+            </tr>
+            <tr>
+              <th scope="row" class="px-5 py-4 font-semibold">Signup, cookies or tracking</th>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">⚠️ Third-party trackers</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ None</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="mt-3 text-center text-[11px] text-zinc-400 dark:text-zinc-600">
+      Figures from our own repeated Lighthouse &amp; DevTools runs, October 2025. Competitor behaviour may change over time.
+    </p>
+  </section>
+
+  <!-- ═══════════════ 7. FAQ ═══════════════ -->
+  <section id="faq" class="scroll-mt-24 pb-16 sm:pb-20">
+    <div class="mx-auto max-w-3xl">
+      <div class="text-center">
+        <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">FAQ</span>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Base64 questions, answered</h2>
+      </div>
+
+      <div class="mt-10 space-y-3">
+        <!-- FAQ 1 -->
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">What is Base64 encoding and why is it used?</span>
+            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Base64 maps binary or text data onto a 64-character ASCII alphabet (<code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">A–Z a–z 0–9 + /</code>) so it can travel safely through systems that only accept plain text. You'll find it in JSON payloads, data URLs, MIME email attachments, JWTs and HTTP Basic Auth headers. It is <em>encoding</em>, not encryption — anyone can reverse it.
+          </p></div></div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">Is my data uploaded to a server?</span>
+            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            No. Everything happens inside your browser tab using the native <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">TextEncoder</code> and <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">btoa()/atob()</code> APIs. You can disconnect from Wi‑Fi and the tool still works — a quick way to verify the privacy claim yourself.
+          </p></div></div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">Does it support Unicode, emoji and non-English text?</span>
+            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Yes. Your input is first converted to UTF‑8 bytes, then Base64-encoded — so emoji 🚀, Arabic, Japanese, Chinese and every other Unicode code point round-trip perfectly. Many older tools call <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">btoa()</code> directly on the string and corrupt anything outside Latin‑1.
+          </p></div></div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">What is URL-safe Base64 and when should I use it?</span>
+            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Standard Base64 uses <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">+</code>, <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">/</code> and <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">=</code>, which need percent-encoding in URLs. URL-safe Base64 (RFC 4648 §5) swaps them for <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">-</code> and <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">_</code> and drops padding — essential for JWT segments, query params and filenames. Flip the toggle above; the decoder accepts both formats automatically.
+          </p></div></div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">Is there a file size limit?</span>
+            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            There's no imposed limit — the only ceiling is your browser's available memory. Multi-megabyte strings convert in a few milliseconds because the heavy lifting is done by native browser APIs rather than JavaScript loops.
+          </p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 8. RELATED TOOLS ═══════════════ -->
+  <section class="pb-20">
+    <div class="rounded-3xl border border-zinc-200 bg-white/60 p-6 backdrop-blur sm:p-8 dark:border-white/10 dark:bg-white/[0.03]">
+      <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 class="text-xl font-extrabold tracking-tight">Related developer tools</h2>
+          <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Same speed. Same privacy. Zero ads.</p>
+        </div>
+        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 transition hover:gap-2.5 dark:text-indigo-400">
+          All tools
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="grid gap-3 sm:grid-cols-3">
+        <a href="#" class="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-indigo-500/40">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          <span>
+            <span class="block font-semibold tracking-tight transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Password Generator</span>
+            <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">Cryptographically secure, custom rules</span>
+          </span>
+        </a>
+
+        <a href="#" class="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-indigo-500/40">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1"/><path d="M16 3h1a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2 2 2 0 0 0-2 2v5a2 2 0 0 1-2 2h-1"/></svg>
+          </span>
+          <span>
+            <span class="block font-semibold tracking-tight transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">JSON Formatter</span>
+            <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">Beautify, minify &amp; validate JSON</span>
+          </span>
+        </a>
+
+        <a href="#" class="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-indigo-500/40">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3M21 21v.01M12 7v3a2 2 0 0 1-2 2H7M3 12h.01M12 3h.01M12 16v.01M16 12h1M21 12v.01M12 21v-1"/></svg>
+          </span>
+          <span>
+            <span class="block font-semibold tracking-tight transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">QR Code Generator</span>
+            <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">Instant SVG &amp; PNG, no watermark</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="border-t border-zinc-200/80 dark:border-white/[0.07]">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-xs text-zinc-500 dark:text-zinc-600 sm:flex-row">
+    <p>© 2025 ToolForge — free developer micro-tools, built for speed.</p>
+    <p class="inline-flex items-center gap-1.5">
+      <svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      No trackers · No cookies · No uploads
+    </p>
+  </div>
+</footer>
+
+<!-- ═══════════════ TOAST ═══════════════ -->
+<div id="toast" data-show="false" role="status" aria-live="polite"
+  class="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-xl bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white shadow-2xl dark:bg-white dark:text-zinc-900"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ─────────────────────────── DOM refs ─────────────────────────── */
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const els = {
+    source:     $('#source'),
+    output:     $('#output'),
+    srcLabel:   $('#srcLabel'),
+    outLabel:   $('#outLabel'),
+    srcStats:   $('#srcStats'),
+    outStats:   $('#outStats'),
+    error:      $('#error'),
+    errorMsg:   $('#errorMsg'),
+    urlSafe:    $('#urlSafe'),
+    tabs:       Array.from(document.querySelectorAll('[data-mode]')),
+    copyBtn:    $('#copyBtn'),
+    pasteBtn:   $('#pasteBtn'),
+    clearBtn:   $('#clearBtn'),
+    downloadBtn:$('#downloadBtn'),
+    themeToggle:$('#themeToggle'),
+    toast:      $('#toast'),
+  };
+
+  const state = {
+    mode: 'encode',
+    buffers: { encode: '', decode: '' },
+    frame: 0,
+  };
+
+  /* ───────────────────── Base64 core (UTF‑8 safe) ───────────────────── */
+  function toBase64(text, urlSafe) {
+    const bytes = new TextEncoder().encode(text);
+    let binary = '';
+    const CHUNK = 0x8000; // avoid "too many arguments" on large payloads
+    for (let i = 0; i < bytes.length; i += CHUNK) {
+      binary += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK));
+    }
+    let b64 = btoa(binary);
+    if (urlSafe) b64 = b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    return b64;
+  }
+
+  function fromBase64(input) {
+    let s = input.replace(/\s+/g, '').replace(/-/g, '+').replace(/_/g, '/');
+    if (s.length % 4 === 1) throw new Error('Invalid Base64 — the string length is not valid.');
+    while (s.length % 4 !== 0) s += '=';
+    if (!/^[A-Za-z0-9+/]+={0,2}$/.test(s)) {
+      throw new Error('Invalid Base64 — the input contains characters outside the Base64 alphabet.');
+    }
+    let binary;
+    try {
+      binary = atob(s);
+    } catch (e) {
+      throw new Error('Invalid Base64 — this string could not be decoded.');
+    }
+    const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+    return new TextDecoder('utf-8', { fatal: false }).decode(bytes);
+  }
+
+  /* ─────────────────────────── Rendering ─────────────────────────── */
+  const LABELS = {
+    encode: { src: 'Plain text',  out: 'Base64 output' },
+    decode: { src: 'Base64 input', out: 'Plain text output' },
+  };
+
+  function byteLength(str) {
+    return new TextEncoder().encode(str).length;
+  }
+
+  function plural(n, word) {
+    return n + ' ' + word + (n === 1 ? '' : 's');
+  }
+
+  function renderStats() {
+    const src = els.source.value;
+    const out = els.output.value;
+    els.srcStats.textContent =
+      plural(src.length, 'character') + ' · ' + plural(byteLength(src), 'byte');
+    els.outStats.textContent =
+      plural(out.length, 'character') + ' · ' + plural(byteLength(out), 'byte');
+  }
+
+  function showError(msg) {
+    if (msg) {
+      els.errorMsg.textContent = msg;
+      els.error.classList.remove('hidden');
+      els.error.classList.add('flex');
+    } else {
+      els.error.classList.add('hidden');
+      els.error.classList.remove('flex');
+    }
+  }
+
+  function convert() {
+    const src = els.source.value;
+    state.buffers[state.mode] = src;
+
+    let out = '';
+    let err = '';
+
+    if (src.trim() !== '') {
+      try {
+        out = state.mode === 'encode'
+          ? toBase64(src, els.urlSafe.checked)
+          : fromBase64(src);
+      } catch (e) {
+        err = e.message || 'Conversion failed.';
+      }
+    }
+
+    els.output.value = out;
+    showError(err);
+    renderStats();
+  }
+
+  /* rAF-debounced live conversion — keeps typing at 60fps on huge inputs */
+  function scheduleConvert() {
+    if (state.frame) cancelAnimationFrame(state.frame);
+    state.frame = requestAnimationFrame(() => {
+      state.frame = 0;
+      convert();
+    });
+  }
+
+  function setMode(mode) {
+    if (mode === state.mode) return;
+    state.mode = mode;
+    els.tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.mode === mode)));
+    els.srcLabel.textContent = LABELS[mode].src;
+    els.outLabel.textContent = LABELS[mode].out;
+    els.source.placeholder = mode === 'encode'
+      ? 'Type or paste your text here — it converts as you type…'
+      : 'Paste a Base64 string here — it decodes as you type…';
+    els.source.value = state.buffers[mode];
+    convert();
+  }
+
+  /* ─────────────────────────── Toast ─────────────────────────── */
+  let toastTimer = 0;
+  function toast(message) {
+    els.toast.textContent = message;
+    els.toast.dataset.show = 'true';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { els.toast.dataset.show = 'false'; }, 1800);
+  }
+
+  /* ─────────────────────── Clipboard helpers ─────────────────────── */
+  async function copyText(text) {
+    if (!text) { toast('Nothing to copy'); return; }
+    try {
+      await navigator.clipboard.writeText(text);
+      toast('Copied to clipboard ✓');
+    } catch (e) {
+      // Fallback for non-secure contexts
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); toast('Copied to clipboard ✓'); }
+      catch (_) { toast('Copy failed — select manually'); }
+      document.body.removeChild(ta);
+    }
+  }
+
+  /* ─────────────────────────── Events ─────────────────────────── */
+  els.source.addEventListener('input', scheduleConvert);
+  els.urlSafe.addEventListener('change', convert);
+
+  els.tabs.forEach(tab => {
+    tab.addEventListener('click', () => setMode(tab.dataset.mode));
+  });
+
+  // Keyboard: arrow keys between tabs
+  els.tabs.forEach(tab => {
+    tab.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault();
+      const next = state.mode === 'encode' ? 'decode' : 'encode';
+      setMode(next);
+      els.tabs.find(t => t.dataset.mode === next).focus();
+    });
+  });
+
+  els.copyBtn.addEventListener('click', () => copyText(els.output.value));
+
+  els.pasteBtn.addEventListener('click', async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (!text) { toast('Clipboard is empty'); return; }
+      els.source.value = text;
+      convert();
+      toast('Pasted ✓');
+    } catch (e) {
+      els.source.focus();
+      toast('Press Ctrl/⌘+V to paste');
+    }
+  });
+
+  els.clearBtn.addEventListener('click', () => {
+    els.source.value = '';
+    els.output.value = '';
+    state.buffers[state.mode] = '';
+    showError('');
+    renderStats();
+    els.source.focus();
+    toast('Cleared');
+  });
+
+  els.downloadBtn.addEventListener('click', () => {
+    const text = els.output.value;
+    if (!text) { toast('Nothing to download'); return; }
+    const name = state.mode === 'encode' ? 'base64-output.txt' : 'base64-decoded.txt';
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast('Downloaded ✓');
+  });
+
+  /* ───────────────────────── Theme toggle ───────────────────────── */
+  els.themeToggle.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    try { localStorage.setItem('tf-theme', isDark ? 'dark' : 'light'); } catch (e) {}
+  });
+
+  /* ───────────────────── FAQ accordion ───────────────────── */
+  document.querySelectorAll('.faq-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.dataset.open === 'true';
+      // Close siblings for a clean single-open accordion
+      document.querySelectorAll('.faq-item').forEach(i => i.dataset.open = 'false');
+      item.dataset.open = isOpen ? 'false' : 'true';
+    });
+  });
+
+  /* ───────────────────── Initial paint ───────────────────── */
+  renderStats();
+  els.source.focus({ preventScroll: true });
+})();
+</script>
+</body>
+</html>

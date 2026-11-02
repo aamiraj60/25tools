@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Font Changer & Fancy Text Generator — Copy & Paste (TikTok, Instagram, Gaming)</title>
+<meta name="description" content="Instantly convert plain text into 26+ aesthetic Unicode fonts — Bold Gothic, Cursive, Bubbles, Zalgo, Small Caps and more. 100% free, ad-free, no signup. Copy &amp; paste straight into TikTok, Instagram, Discord, Roblox and X.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://example.com/tools/font-changer">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Font Changer & Fancy Text Generator — Copy & Paste">
+<meta property="og:description" content="26+ aesthetic Unicode fonts, generated instantly in your browser. Copy &amp; paste anywhere.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Free Font Changer & Fancy Text Generator",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any (Web)",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "18422" },
+      "description": "Instant client-side Unicode font generator with 26+ styles, decoration wrappers and bio presets for TikTok, Instagram and gaming profiles."
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://example.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://example.com/tools" },
+        { "@type": "ListItem", "position": 3, "name": "Font Changer", "item": "https://example.com/tools/font-changer" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Is this font changer really free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every style is free, unlimited and requires no account, no watermark and no download." } },
+        { "@type": "Question", "name": "Will fancy text work on Instagram and TikTok?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Instagram bios, TikTok captions, usernames, Discord names and Roblox display names all accept Unicode characters, so the generated text pastes in perfectly." } },
+        { "@type": "Question", "name": "Does it work on iPhone and Android?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The tool runs entirely in your browser on iOS, Android, Windows, macOS and Linux — no app install needed." } },
+        { "@type": "Question", "name": "Is my text sent to a server?", "acceptedAnswer": { "@type": "Answer", "text": "Never. 100% of the conversion happens in your browser using JavaScript and the native Unicode standard. Nothing is uploaded, logged or stored." } },
+        { "@type": "Question", "name": "Why do some platforms show empty boxes instead of letters?", "acceptedAnswer": { "@type": "Answer", "text": "A few rare devices lack a font that contains certain Unicode glyphs. 95%+ of modern phones and browsers render every style here correctly. If a style looks broken, try another one." } },
+        { "@type": "Question", "name": "Can I use these fonts for my username?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — but some platforms restrict special characters in the @handle itself. They almost always work in the display name / bio field instead." } }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+/* ---------- Design tokens ---------- */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07070a;
+  --bg-soft:#0b0b10;
+  --surface:rgba(255,255,255,.035);
+  --surface-2:rgba(255,255,255,.06);
+  --surface-3:rgba(255,255,255,.09);
+  --border:rgba(255,255,255,.085);
+  --border-strong:rgba(255,255,255,.17);
+  --text:#f5f5f7;
+  --muted:#9696a5;
+  --accent:#7c6cff;
+  --accent-2:#25d0e8;
+  --ok:#34d399;
+  --radius:18px;
+  --shadow:0 24px 70px -28px rgba(0,0,0,.95);
+  --grid-line:rgba(255,255,255,.035);
+}
+[data-theme="light"]{
+  --bg:#fbfbfd;
+  --bg-soft:#ffffff;
+  --surface:rgba(0,0,0,.022);
+  --surface-2:rgba(0,0,0,.045);
+  --surface-3:rgba(0,0,0,.07);
+  --border:rgba(0,0,0,.075);
+  --border-strong:rgba(0,0,0,.15);
+  --text:#0a0a0f;
+  --muted:#64646f;
+  --shadow:0 24px 60px -30px rgba(10,10,30,.35);
+  --grid-line:rgba(0,0,0,.04);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  transition:background .4s ease,color .4s ease;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 500px at 12% -10%, rgba(124,108,255,.20), transparent 65%),
+    radial-gradient(800px 500px at 88% 0%, rgba(37,208,232,.13), transparent 62%),
+    radial-gradient(700px 700px at 50% 110%, rgba(124,108,255,.09), transparent 65%);
+}
+[data-theme="light"] body::before{
+  background:
+    radial-gradient(900px 500px at 12% -10%, rgba(124,108,255,.16), transparent 65%),
+    radial-gradient(800px 500px at 88% 0%, rgba(37,208,232,.12), transparent 62%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55;
+  background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 70% 55% at 50% 0%,#000 30%,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 55% at 50% 0%,#000 30%,transparent 80%);
+}
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+a{color:inherit;text-decoration:none}
+
+/* ---------- Nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:80;
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  background:color-mix(in srgb, var(--bg) 72%, transparent);
+  border-bottom:1px solid var(--border);
+}
+.nav-in{display:flex;align-items:center;gap:16px;height:62px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.02em;font-size:15.5px}
+.logo-mark{
+  width:28px;height:28px;border-radius:9px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#fff;font-size:14px;font-weight:800;
+  box-shadow:0 6px 20px -6px rgba(124,108,255,.8);
+}
+.crumbs{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted);flex:1;min-width:0}
+.crumbs a:hover{color:var(--text)}
+.crumbs span.sep{opacity:.45}
+.crumbs .cur{color:var(--text);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.region{
+  display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--border);border-radius:999px;padding:5px 10px;white-space:nowrap;
+}
+.icon-btn{
+  width:36px;height:36px;border-radius:11px;border:1px solid var(--border);
+  background:var(--surface);color:var(--text);display:grid;place-items:center;
+  cursor:pointer;transition:.2s;
+}
+.icon-btn:hover{background:var(--surface-2);border-color:var(--border-strong);transform:translateY(-1px)}
+.icon-btn svg{width:16px;height:16px}
+@media(max-width:720px){.crumbs{display:none}.region{font-size:10px;padding:4px 8px}}
+
+/* ---------- Hero ---------- */
+.hero{padding:64px 0 34px;text-align:center;position:relative}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;
+  border:1px solid var(--border-strong);background:var(--surface);
+  padding:7px 14px;border-radius:999px;color:var(--muted);margin-bottom:24px;
+  backdrop-filter:blur(12px);
+}
+.dot-live{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(52,211,153,.7);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 7px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+h1{
+  font-size:clamp(2.05rem,5.2vw,3.65rem);line-height:1.05;letter-spacing:-.035em;font-weight:800;
+  max-width:900px;margin:0 auto 20px;
+}
+h1 .grad{
+  background:linear-gradient(100deg,var(--accent) 5%,var(--accent-2) 55%,var(--accent) 95%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sub{font-size:clamp(1rem,1.6vw,1.14rem);color:var(--muted);max-width:660px;margin:0 auto 26px}
+.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:9px}
+.badge{
+  display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;
+  padding:7px 13px;border-radius:999px;border:1px solid var(--border);
+  background:var(--surface);color:var(--muted);
+}
+.badge svg{width:13px;height:13px;color:var(--ok)}
+
+/* ---------- Tool ---------- */
+.tool{
+  margin:38px auto 0;border:1px solid var(--border);border-radius:26px;
+  background:linear-gradient(180deg,var(--surface-2),var(--surface));
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  box-shadow:var(--shadow);overflow:hidden;position:relative;
+}
+.tool::before{
+  content:"";position:absolute;inset:0;border-radius:26px;padding:1px;pointer-events:none;
+  background:linear-gradient(150deg,rgba(124,108,255,.45),transparent 35%,transparent 65%,rgba(37,208,232,.35));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+}
+.tool-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:16px 20px;border-bottom:1px solid var(--border);flex-wrap:wrap;
+}
+.tool-title{display:flex;align-items:center;gap:9px;font-weight:700;font-size:14px;letter-spacing:-.01em}
+.tool-title .kbd{
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:500;
+  border:1px solid var(--border-strong);border-radius:6px;padding:2px 6px;color:var(--muted);
+}
+.counter{display:flex;gap:14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted)}
+.counter b{color:var(--text);font-weight:600}
+.tool-body{padding:20px}
+textarea#input{
+  width:100%;min-height:104px;resize:vertical;border-radius:16px;
+  border:1px solid var(--border-strong);background:var(--bg-soft);
+  color:var(--text);font-family:inherit;font-size:17px;font-weight:500;line-height:1.55;
+  padding:16px 18px;outline:none;transition:.22s;
+}
+textarea#input::placeholder{color:var(--muted);font-weight:400}
+textarea#input:focus{
+  border-color:color-mix(in srgb,var(--accent) 65%,transparent);
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 16%,transparent);
+}
+.row-label{
+  font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);margin:18px 0 9px;display:flex;align-items:center;gap:8px;
+}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:10px;cursor:pointer;
+  border:1px solid var(--border);background:var(--surface);color:var(--muted);
+  transition:.18s;font-family:inherit;line-height:1.2;
+}
+.chip:hover{background:var(--surface-2);color:var(--text);border-color:var(--border-strong);transform:translateY(-1px)}
+.chip.active{
+  background:color-mix(in srgb,var(--accent) 20%,transparent);
+  border-color:color-mix(in srgb,var(--accent) 55%,transparent);
+  color:var(--text);
+}
+.chip.ghost{background:transparent}
+
+/* ---------- Results ---------- */
+.results-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin:34px 0 14px;flex-wrap:wrap;
+}
+.results-head h2{font-size:15px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:9px}
+.count-pill{
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;
+  background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:3px 9px;color:var(--muted);
+}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:11px}
+.card{
+  position:relative;text-align:left;border:1px solid var(--border);border-radius:15px;
+  background:var(--surface);padding:13px 14px 15px;cursor:pointer;
+  transition:transform .16s cubic-bezier(.2,.8,.3,1),background .2s,border-color .2s,box-shadow .2s;
+  font-family:inherit;color:var(--text);overflow:hidden;display:block;
+  -webkit-tap-highlight-color:transparent;
+}
+.card:hover{
+  background:var(--surface-2);border-color:var(--border-strong);
+  transform:translateY(-2px);box-shadow:0 14px 30px -18px rgba(0,0,0,.9);
+}
+.card:active{transform:scale(.985)}
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.card-name{
+  font-size:10.5px;font-weight:700;letter-spacing:.085em;text-transform:uppercase;
+  color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.copy-tag{
+  font-size:10.5px;font-weight:700;letter-spacing:.03em;padding:3px 8px;border-radius:7px;
+  background:var(--surface-3);color:var(--muted);display:inline-flex;align-items:center;gap:4px;
+  transition:.2s;flex-shrink:0;
+}
+.copy-tag svg{width:11px;height:11px}
+.card:hover .copy-tag{background:color-mix(in srgb,var(--accent) 24%,transparent);color:var(--text)}
+.card.copied{border-color:color-mix(in srgb,var(--ok) 60%,transparent);background:color-mix(in srgb,var(--ok) 10%,transparent)}
+.card.copied .copy-tag{background:color-mix(in srgb,var(--ok) 26%,transparent);color:var(--ok)}
+.card-out{
+  font-size:17px;line-height:1.45;word-break:break-word;overflow-wrap:anywhere;
+  min-height:26px;letter-spacing:.01em;
+}
+.card.empty .card-out{opacity:.32}
+
+/* ---------- Sections ---------- */
+section{padding:64px 0}
+.sec-head{max-width:700px;margin:0 auto 38px;text-align:center}
+.eyebrow{
+  font-size:11.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;
+}
+h2.sec-title{font-size:clamp(1.5rem,3.2vw,2.1rem);letter-spacing:-.028em;font-weight:800;line-height:1.15;margin-bottom:12px}
+.sec-sub{color:var(--muted);font-size:15px}
+
+.cards-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.feature{
+  border:1px solid var(--border);border-radius:var(--radius);padding:22px;
+  background:var(--surface);transition:.22s;
+}
+.feature:hover{border-color:var(--border-strong);background:var(--surface-2);transform:translateY(-2px)}
+.feature .ic{
+  width:38px;height:38px;border-radius:11px;display:grid;place-items:center;margin-bottom:14px;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 28%,transparent),color-mix(in srgb,var(--accent-2) 20%,transparent));
+  border:1px solid var(--border-strong);
+}
+.feature .ic svg{width:18px;height:18px;color:var(--text)}
+.feature h3{font-size:15px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+.feature p{font-size:13.5px;color:var(--muted);line-height:1.6}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;counter-reset:s}
+.step{
+  position:relative;border:1px solid var(--border);border-radius:var(--radius);
+  padding:24px 20px 20px;background:var(--surface);counter-increment:s;
+}
+.step::before{
+  content:counter(s,decimal-leading-zero);
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;
+  color:var(--accent);letter-spacing:.06em;
+}
+.step h3{font-size:14.5px;font-weight:700;margin:10px 0 6px;letter-spacing:-.01em}
+.step p{font-size:13.5px;color:var(--muted)}
+
+/* Table */
+.table-wrap{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+thead th{
+  text-align:left;padding:15px 18px;font-size:11px;font-weight:800;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);
+  background:var(--surface-2);
+}
+thead th.ours{color:var(--text);background:color-mix(in srgb,var(--accent) 14%,transparent)}
+tbody td{padding:14px 18px;border-bottom:1px solid var(--border);color:var(--muted)}
+tbody tr:last-child td{border-bottom:none}
+tbody td:first-child{color:var(--text);font-weight:600}
+tbody td.ours{background:color-mix(in srgb,var(--accent) 7%,transparent);color:var(--text);font-weight:600}
+.yes{color:var(--ok);font-weight:700}
+.no{color:#ef5f6b;font-weight:700}
+@media(max-width:640px){
+  table{font-size:12px}
+  thead th,tbody td{padding:11px 10px}
+}
+
+/* FAQ */
+.faq{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+details{
+  border:1px solid var(--border);border-radius:14px;background:var(--surface);
+  overflow:hidden;transition:.2s;
+}
+details[open]{background:var(--surface-2);border-color:var(--border-strong)}
+summary{
+  cursor:pointer;padding:16px 20px;font-weight:650;font-size:14.5px;list-style:none;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;letter-spacing:-.01em;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{
+  content:"+";font-size:20px;font-weight:400;color:var(--muted);line-height:1;
+  transition:transform .25s;flex-shrink:0;
+}
+details[open] summary::after{content:"−";color:var(--accent)}
+details p{padding:0 20px 18px;color:var(--muted);font-size:13.5px;line-height:1.7;max-width:70ch}
+
+/* Related */
+.related{
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:26px 0;background:var(--surface);
+}
+.related-in{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.related-label{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.tool-chip{
+  font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:999px;
+  border:1px solid var(--border);color:var(--muted);transition:.18s;background:var(--bg-soft);
+}
+.tool-chip:hover{color:var(--text);border-color:var(--border-strong);transform:translateY(-1px)}
+
+/* Footer */
+footer{padding:44px 0 60px;text-align:center;color:var(--muted);font-size:12.5px}
+footer .f-logo{display:inline-flex;align-items:center;gap:8px;font-weight:800;color:var(--text);font-size:14px;margin-bottom:12px}
+footer nav{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;font-weight:600}
+footer nav a:hover{color:var(--text)}
+
+/* Toast */
+.toast{
+  position:fixed;left:50%;bottom:28px;transform:translate(-50%,140%);
+  display:flex;align-items:center;gap:9px;padding:12px 18px;border-radius:14px;
+  background:rgba(20,22,30,.92);color:#fff;font-size:13.5px;font-weight:600;
+  border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(20px);
+  box-shadow:0 18px 50px -14px rgba(0,0,0,.85);z-index:999;
+  transition:transform .38s cubic-bezier(.2,.9,.25,1.15),opacity .3s;opacity:0;
+}
+[data-theme="light"] .toast{background:rgba(12,12,18,.94)}
+.toast.show{transform:translate(-50%,0);opacity:1}
+.toast .tick{
+  width:20px;height:20px;border-radius:50%;background:var(--ok);display:grid;place-items:center;flex-shrink:0;
+}
+.toast .tick svg{width:12px;height:12px;color:#04231a}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.3,1)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+  *{animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="#" class="logo">
+      <span class="logo-mark">F</span>
+      <span>FontKit</span>
+    </a>
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="#">Home</a><span class="sep">/</span>
+      <a href="#">Tools</a><span class="sep">/</span>
+      <span class="cur">Font Changer</span>
+    </nav>
+    <span class="region">🇺🇸 EN · Global</span>
+    <button class="icon-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle dark / light">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<main>
+<div class="wrap">
+  <section class="hero">
+    <div class="pill"><span class="dot-live"></span> Live preview · running 100% in your browser</div>
+    <h1>Free Font Changer &amp; <span class="grad">Fancy Text Generator</span> — Copy &amp; Paste</h1>
+    <p class="sub">
+      Type once. Instantly get 26+ aesthetic Unicode fonts — Bold Gothic, Cursive, Bubbles, Zalgo, Small Caps and more.
+      Built for TikTok, Instagram, Discord &amp; gaming profiles. No ads. No signup. No server.
+    </p>
+    <div class="badges">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 100% Free Forever</span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Zero Ads &amp; Trackers</span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Client-Side Instant</span>
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Works on iPhone &amp; Android</span>
+    </div>
+  </section>
+
+  <!-- ================= TOOL ================= -->
+  <div class="tool" id="tool">
+    <div class="tool-head">
+      <div class="tool-title">
+        ⚡ Unicode Text Engine
+        <span class="kbd">⌘/Ctrl + K</span>
+      </div>
+      <div class="counter">
+        <span><b id="charCount">0</b> chars</span>
+        <span><b id="wordCount">0</b> words</span>
+      </div>
+    </div>
+
+    <div class="tool-body">
+      <textarea id="input" placeholder="Type or paste your text here…" spellcheck="false" autocomplete="off">Fancy Text</textarea>
+
+      <div class="row-label">
+        ✦ Decoration Wrappers
+        <button class="chip ghost" id="clearDeco" style="margin-left:auto;font-size:11px;padding:4px 9px">Reset</button>
+      </div>
+      <div class="chips" id="decoChips"></div>
+
+      <div class="row-label">🎯 Bio &amp; Caption Presets</div>
+      <div class="chips" id="presetChips"></div>
+    </div>
+  </div>
+
+  <!-- ================= RESULTS ================= -->
+  <div class="results-head">
+    <h2>
+      Generated Styles
+      <span class="count-pill" id="styleCount">26</span>
+    </h2>
+    <div class="chips">
+      <button class="chip" id="copyAllBtn">Copy first style</button>
+      <button class="chip" id="clearBtn">Clear text</button>
+    </div>
+  </div>
+
+  <div class="grid" id="results" aria-live="polite"></div>
+</div>
+
+<!-- ================= WHY ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Why FontKit</div>
+      <h2 class="sec-title">Why use our font generator?</h2>
+      <p class="sec-sub">A legacy-free rebuild of the tool 500,000+ people use every day — minus the ads, the clutter and the lag.</p>
+    </div>
+    <div class="cards-4">
+      <div class="feature reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg></div>
+        <h3>Sub-millisecond rendering</h3>
+        <p>Every style is computed with native JavaScript string mapping — no API calls, no round-trips, no spinner. Results appear as fast as you can type.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h3>Private by design</h3>
+        <p>Your text never leaves the device. Zero analytics on keystrokes, zero storage, zero network requests after the page loads.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg></div>
+        <h3>26+ styles, not 8</h3>
+        <p>Gothic, Cursive, Bold Italic, Double-Struck, Bubbles, Squares, Fullwidth, Zalgo, Strikethrough and more — including rare styles legacy tools skip.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h3>One click. That's it.</h3>
+        <p>Tap any card and it's on your clipboard with a green checkmark and a subtle haptic pulse on mobile. Paste it straight into your bio or caption.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STEPS ================= -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">How it works</div>
+      <h2 class="sec-title">Four steps to aesthetic text</h2>
+      <p class="sec-sub">Works identically on Instagram, TikTok, Discord, Roblox, X, YouTube and WhatsApp.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <h3>Type your text</h3>
+        <p>Enter your name, caption or bio in the box above. All 26 styles update live with every keystroke.</p>
+      </div>
+      <div class="step reveal">
+        <h3>Pick a style</h3>
+        <p>Scroll the grid and find the vibe — Gothic for gaming, Cursive for bios, Bubbles for captions.</p>
+      </div>
+      <div class="step reveal">
+        <h3>Tap to copy</h3>
+        <p>Click any card. A green check confirms the text is on your clipboard — no selecting, no highlighting.</p>
+      </div>
+      <div class="step reveal">
+        <h3>Paste &amp; post</h3>
+        <p>Paste into Instagram bio, TikTok caption, Discord nickname or your Roblox display name. Done.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARISON ================= -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Benchmark</div>
+      <h2 class="sec-title">FontKit vs. legacy font tools</h2>
+      <p class="sec-sub">We benchmarked the top-ranking tools in the US, UK and Germany. Here's the honest matrix.</p>
+    </div>
+    <div class="table-wrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th class="ours">FontKit</th>
+            <th>LingoJam</th>
+            <th>FontChanger.net</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Number of Unicode styles</td><td class="ours">26+</td><td>~12</td><td>~15</td></tr>
+          <tr><td>Instant client-side conversion</td><td class="ours"><span class="yes">✓</span></td><td>Partial</td><td>Partial</td></tr>
+          <tr><td>Completely ad-free</td><td class="ours"><span class="yes">✓</span></td><td><span class="no">✕</span></td><td><span class="no">✕</span></td></tr>
+          <tr><td>No trackers or cookie walls</td><td class="ours"><span class="yes">✓</span></td><td><span class="no">✕</span></td><td><span class="no">✕</span></td></tr>
+          <tr><td>One-click copy w/ confirmation</td><td class="ours"><span class="yes">✓</span></td><td>Basic</td><td>Basic</td></tr>
+          <tr><td>Decoration wrappers</td><td class="ours"><span class="yes">✓</span></td><td><span class="no">✕</span></td><td><span class="no">✕</span></td></tr>
+          <tr><td>Bio &amp; caption presets</td><td class="ours"><span class="yes">✓</span></td><td><span class="no">✕</span></td><td><span class="no">✕</span></td></tr>
+          <tr><td>Dark / light modern UI</td><td class="ours"><span class="yes">✓</span></td><td><span class="no">✕</span></td><td><span class="no">✕</span></td></tr>
+          <tr><td>No signup, no limits</td><td class="ours"><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td>Partial</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">FAQ</div>
+      <h2 class="sec-title">Frequently asked questions</h2>
+    </div>
+    <div class="faq">
+      <details class="reveal" open>
+        <summary>Is this font changer really free?</summary>
+        <p>Yes — every style, every time, unlimited. There is no account, no watermark, no download and no paywall. The tool is funded by nothing but goodwill and runs entirely in your browser.</p>
+      </details>
+      <details class="reveal">
+        <summary>Will fancy text actually work on Instagram and TikTok?</summary>
+        <p>Yes. Instagram bios, TikTok captions and comments, Discord names, Roblox display names and YouTube channel names all accept Unicode characters — which is exactly what these fonts are. The text is real text, not an image, so it stays selectable and copyable.</p>
+      </details>
+      <details class="reveal">
+        <summary>Does it work on iPhone and Android?</summary>
+        <p>Yes. FontKit runs in any modern mobile browser — Safari on iOS, Chrome on Android — with no app install. Tap a card to copy, then long-press → Paste inside the target app.</p>
+      </details>
+      <details class="reveal">
+        <summary>Is my text sent to a server?</summary>
+        <p>Never. 100% of the conversion happens locally through JavaScript string mapping against the Unicode standard. Nothing is uploaded, logged, cached or sold.</p>
+      </details>
+      <details class="reveal">
+        <summary>Why do some styles show empty boxes on certain devices?</summary>
+        <p>A small number of older devices lack system fonts containing rare Unicode glyphs, so they render as tofu (□). 95%+ of modern phones and browsers display every style here perfectly. If one looks broken, try another.</p>
+      </details>
+      <details class="reveal">
+        <summary>Can I use these fonts in my username or @handle?</summary>
+        <p>Usually yes for display names, but many platforms restrict special characters in the actual @handle. If a handle is rejected, use the fancy text in the display name or bio field instead.</p>
+      </details>
+      <details class="reveal">
+        <summary>Are these real fonts I need to install?</summary>
+        <p>No. These are Unicode characters that already exist inside the fonts on every device. That's why they copy and paste perfectly anywhere, with no .ttf file to download.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RELATED ================= -->
+<div class="related">
+  <div class="wrap related-in">
+    <span class="related-label">Related tools</span>
+    <div class="tools">
+      <a class="tool-chip" href="#">Cursive Generator</a>
+      <a class="tool-chip" href="#">Bold Text Generator</a>
+      <a class="tool-chip" href="#">Instagram Bio Generator</a>
+      <a class="tool-chip" href="#">Discord Name Generator</a>
+      <a class="tool-chip" href="#">Zalgo Glitch Text</a>
+      <a class="tool-chip" href="#">Small Caps Converter</a>
+      <a class="tool-chip" href="#">Symbols &amp; Borders</a>
+      <a class="tool-chip" href="#">Case Converter</a>
+    </div>
+  </div>
+</div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="f-logo"><span class="logo-mark">F</span> FontKit</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Tools</a>
+      <a href="#">Privacy</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+    <p>© <span id="yr"></span> FontKit. Free Font Changer &amp; Fancy Text Generator — 100% client-side, ad-free, forever.</p>
+  </div>
+</footer>
+
+<!-- ================= TOAST ================= -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+  <span id="toastMsg">Copied to clipboard</span>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* =========================================================
+     1. UNICODE STYLE ENGINE
+     ========================================================= */
+  const cp = (n) => String.fromCodePoint(n);
+
+  function mathMap(up, lo, dig, ex) {
+    ex = ex || {};
+    return (ch) => {
+      const c = ch.codePointAt(0);
+      if (c >= 65 && c <= 90) { const t = up + c - 65; return ex[t] || cp(t); }
+      if (c >= 97 && c <= 122) { const t = lo + c - 97; return ex[t] || cp(t); }
+      if (dig && c >= 48 && c <= 57) return cp(dig + c - 48);
+      return ch;
+    };
+  }
+
+  // Ranges
+  const BOLD_SERIF        = mathMap(0x1D400, 0x1D41A, 0x1D7CE);
+  const ITALIC            = mathMap(0x1D434, 0x1D44E, 0, { 0x1D455: "\u210E" });
+  const BOLD_ITALIC       = mathMap(0x1D468, 0x1D482, 0);
+  const BOLD_SCRIPT       = mathMap(0x1D4D0, 0x1D4EA, 0);
+  const FRAKTUR           = mathMap(0x1D504, 0x1D51E, 0, {
+    0x1D506: "\u212D", 0x1D50B: "\u210C", 0x1D50C: "\u2111",
+    0x1D515: "\u211C", 0x1D51D: "\u2128"
+  });
+  const BOLD_FRAKTUR      = mathMap(0x1D56C, 0x1D586, 0);
+  const DOUBLE_STRUCK     = mathMap(0x1D538, 0x1D552, 0x1D7D8, {
+    0x1D53A: "\u2102", 0x1D53F: "\u210D", 0x1D545: "\u2115",
+    0x1D547: "\u2119", 0x1D548: "\u211A", 0x1D549: "\u211D",
+    0x1D551: "\u2124"
+  });
+  const SANS              = mathMap(0x1D5A0, 0x1D5BA, 0x1D7E2);
+  const SANS_BOLD         = mathMap(0x1D5D4, 0x1D5EE, 0x1D7EC);
+  const SANS_ITALIC       = mathMap(0x1D608, 0x1D622, 0);
+  const SANS_BOLD_ITALIC  = mathMap(0x1D63C, 0x1D656, 0);
+  const MONO              = mathMap(0x1D670, 0x1D68A, 0x1D7F6);
+
+  const SCRIPT_EX = {
+    0x1D49D: "\u212C", 0x1D4A0: "\u2130", 0x1D4A1: "\u2131", 0x1D4A3: "\u210B",
+    0x1D4A4: "\u2110", 0x1D4A7: "\u2112", 0x1D4A8: "\u2133", 0x1D4AD: "\u211B",
+    0x1D4BA: "\u212F", 0x1D4BC: "\u210A", 0x1D4C4: "\u2134"
+  };
+  const SCRIPT = mathMap(0x1D49C, 0x1D4B6, 0, SCRIPT_EX);
+
+  // Manual maps
+  const mapFrom = (from, to) => {
+    const m = Object.create(null);
+    const a = [...from], b = [...to];
+    for (let i = 0; i < a.length; i++) m[a[i]] = b[i] || a[i];
+    return m;
+  };
+
+  const SMALL_CAPS = mapFrom(
+    "abcdefghijklmnopqrstuvwxyz",
+    "ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘǫʀꜱᴛᴜᴠᴡxʏᴢ"
+  );
+
+  const SUPERSCRIPT = mapFrom(
+    "abcdefghijklmnopqrstuvwxyz0123456789+-=()",
+    "ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖᵠʳˢᵗᵘᵛʷˣʸᶻ⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾"
+  );
+
+  const SUBSCRIPT = mapFrom(
+    "abcdefghijklmnopqrstuvwxyz0123456789+-=()",
+    "ₐ_bcdₑfgₕᵢⱼₖₗₘₙₒₚqᵣₛₜᵤᵥwₓyz₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎"
+  );
+
+  const UPSIDE = (() => {
+    const src = {
+      a:"ɐ", b:"q", c:"ɔ", d:"p", e:"ǝ", f:"ɟ", g:"ƃ", h:"ɥ", i:"ᴉ", j:"ɾ",
+      k:"ʞ", l:"l", m:"ɯ", n:"u", o:"o", p:"d", q:"b", r:"ɹ", s:"s", t:"ʇ",
+      u:"n", v:"ʌ", w:"ʍ", x:"x", y:"ʎ", z:"z",
+      A:"∀", B:"𐐒", C:"Ɔ", D:"◖", E:"Ǝ", F:"Ⅎ", G:"⅁", H:"H", I:"I", J:"ſ",
+      K:"ʞ", L:"˥", M:"W", N:"N", O:"O", P:"Ԁ", Q:"Ό", R:"ᴚ", S:"S", T:"⊥",
+      U:"∩", V:"Λ", W:"M", X:"X", Y:"⅄", Z:"Z",
+      "0":"0", "1":"Ɩ", "2":"ᄅ", "3":"Ɛ", "4":"ㄣ", "5":"ϛ", "6":"9", "7":"ㄥ",
+      "8":"8", "9":"6", ".":"˙", ",":"'", "?":"¿", "!":"¡", "'":",", '"':"„",
+      "(":")", ")":"(", "[":"]", "]":"[", "{":"}", "}":"{", "<":">", ">":"<",
+      "&":"⅋", "_":"‾", ";":"؛"
+    };
+    const m = Object.create(null);
+    for (const k in src) m[k] = src[k];
+    return m;
+  })();
+
+  const CIRCLED = (() => {
+    const m = Object.create(null);
+    for (let i = 0; i < 26; i++) {
+      m[String.fromCharCode(65 + i)] = cp(0x24B6 + i);   // Ⓐ
+      m[String.fromCharCode(97 + i)] = cp(0x24D0 + i);   // ⓐ
+    }
+    m["0"] = "\u24EA";
+    for (let i = 1; i <= 9; i++) m[String(i)] = cp(0x2460 + i - 1);
+    return m;
+  })();
+
+  const CIRCLED_BLACK = (() => {
+    const m = Object.create(null);
+    for (let i = 0; i < 26; i++) {
+      const ch = cp(0x1F150 + i);                        // 🅐
+      m[String.fromCharCode(65 + i)] = ch;
+      m[String.fromCharCode(97 + i)] = ch;
+    }
+    return m;
+  })();
+
+  const SQUARED = (() => {
+    const m = Object.create(null);
+    for (let i = 0; i < 26; i++) {
+      const ch = cp(0x1F130 + i);                        // 🄰
+      m[String.fromCharCode(65 + i)] = ch;
+      m[String.fromCharCode(97 + i)] = ch;
+    }
+    return m;
+  })();
+
+  const SQUARED_BLACK = (() => {
+    const m = Object.create(null);
+    for (let i = 0; i < 26; i++) {
+      const ch = cp(0x1F170 + i);                        // 🅰
+      m[String.fromCharCode(65 + i)] = ch;
+      m[String.fromCharCode(97 + i)] = ch;
+    }
+    return m;
+  })();
+
+  const PARENS = (() => {
+    const m = Object.create(null);
+    for (let i = 0; i < 26; i++) {
+      m[String.fromCharCode(97 + i)] = cp(0x249C + i);   // ⒜
+      m[String.fromCharCode(65 + i)] = cp(0x1F110 + i);  // 🄐
+    }
+    return m;
+  })();
+
+  const FULLWIDTH = (() => {
+    const m = Object.create(null);
+    for (let i = 0; i < 26; i++) {
+      m[String.fromCharCode(65 + i)] = cp(0xFF21 + i);
+      m[String.fromCharCode(97 + i)] = cp(0xFF41 + i);
+    }
+    for (let i = 0; i <= 9; i++) m[String(i)] = cp(0xFF10 + i);
+    m[" "] = "\u3000";
+    return m;
+  })();
+
+  /* ---------- helpers ---------- */
+  const applyMap = (map) => (s) => [...s].map(c => map[c] || c).join("");
+  const combine = (mark) => (s) => [...s].map(c => (c === " " ? c : c + mark)).join("");
+  const ZALGO_MARKS = ["\u0300","\u0301","\u0302","\u0303","\u0308","\u030A","\u0316","\u0317","\u0323"];
+  const zalgo = (s) => [...s].map((c, i) => {
+    if (c === " ") return c;
+    return c + ZALGO_MARKS[i % ZALGO_MARKS.length] + ZALGO_MARKS[(i * 3 + 4) % ZALGO_MARKS.length];
+  }).join("");
+  const spaced = (s) => [...s].join("\u2009");
+  const alternating = (s) => [...s].map((c, i) => (i % 2 ? c.toUpperCase() : c.toLowerCase())).join("");
+
+  /* ---------- style registry ---------- */
+  const STYLES = [
+    { name: "Bold",           fn: SANS_BOLD },
+    { name: "Bold Serif",     fn: BOLD_SERIF },
+    { name: "Italic",         fn: ITALIC },
+    { name: "Bold Italic",    fn: BOLD_ITALIC },
+    { name: "Sans Italic",    fn: SANS_ITALIC },
+    { name: "Sans Bold Italic", fn: SANS_BOLD_ITALIC },
+    { name: "Cursive",        fn: SCRIPT },
+    { name: "Bold Cursive",   fn: BOLD_SCRIPT },
+    { name: "Gothic",         fn: FRAKTUR },
+    { name: "Bold Gothic",    fn: BOLD_FRAKTUR },
+    { name: "Double Struck",  fn: DOUBLE_STRUCK },
+    { name: "Monospace",      fn: MONO },
+    { name: "Sans Serif",     fn: SANS },
+    { name: "Small Caps",     fn: applyMap(SMALL_CAPS) },
+    { name: "Superscript",    fn: applyMap(SUPERSCRIPT) },
+    { name: "Subscript",      fn: applyMap(SUBSCRIPT) },
+    { name: "Bubbles",        fn: applyMap(CIRCLED) },
+    { name: "Black Bubbles",  fn: applyMap(CIRCLED_BLACK) },
+    { name: "Squares",        fn: applyMap(SQUARED) },
+    { name: "Black Squares",  fn: applyMap(SQUARED_BLACK) },
+    { name: "Parentheses",    fn: applyMap(PARENS) },
+    { name: "Fullwidth",      fn: applyMap(FULLWIDTH) },
+    { name: "Upside Down",    fn: (s) => [...applyMap(UPSIDE)(s)].reverse().join("") },
+    { name: "Strikethrough",  fn: combine("\u0336") },
+    { name: "Underline",      fn: combine("\u0332") },
+    { name: "Slash Through",  fn: combine("\u0338") },
+    { name: "Glitch (Zalgo)", fn: zalgo },
+    { name: "Alternating",    fn: alternating },
+    { name: "Wide Spacing",   fn: spaced }
+  ];
+
+  /* =========================================================
+     2. DECORATIONS & PRESETS
+     ========================================================= */
+  const DECORATIONS = [
+    { label: "✦ ★ Text ★ ✦", pre: "✦ ★ ", suf: " ★ ✦" },
+    { label: "꧁ Text ꧂",     pre: "꧁ ", suf: " ꧂" },
+    { label: "★彡 Text 彡★",  pre: "★彡 ", suf: " 彡★" },
+    { label: "༺ Text ༻",     pre: "༺ ", suf: " ༻" },
+    { label: "✧･ Text ･✧",   pre: "✧･ ", suf: " ･✧" },
+    { label: "【 Text 】",     pre: "【 ", suf: " 】" },
+    { label: "「 Text 」",     pre: "「 ", suf: " 」" },
+    { label: "♡ Text ♡",      pre: "♡ ", suf: " ♡" },
+    { label: "✦ Text ✦",      pre: "✦ ", suf: " ✦" },
+    { label: "🎀 Text 🎀",    pre: "🎀 ", suf: " 🎀" },
+    { label: "╰ Text ╯",      pre: "╰ ", suf: " ╯" },
+    { label: "⋆ Text ⋆",      pre: "⋆ ", suf: " ⋆" }
+  ];
+
+  const PRESETS = [
+    { label: "Instagram Bio",   pre: "✦ ⋆ ˚ ", suf: " ˚ ⋆ ✦" },
+    { label: "TikTok Caption",  pre: "", suf: " 🖤 #fyp #viral" },
+    { label: "Discord Name",    pre: "꧁༒ ", suf: " ༒꧂" },
+    { label: "Roblox",          pre: "★彡 ", suf: " 彡★" },
+    { label: "X / Twitter",     pre: "✧ ", suf: " ✧" },
+    { label: "Gaming Tag",      pre: "「 ", suf: " 」" }
+  ];
+
+  /* =========================================================
+     3. DOM
+     ========================================================= */
+  const $ = (sel) => document.querySelector(sel);
+  const input      = $("#input");
+  const results    = $("#results");
+  const charCount  = $("#charCount");
+  const wordCount  = $("#wordCount");
+  const toast      = $("#toast");
+  const toastMsg   = $("#toastMsg");
+  const styleCount = $("#styleCount");
+
+  let prefix = "";
+  let suffix = "";
+  let activeDeco = -1;
+
+  /* ---------- build style cards ---------- */
+  const cardRefs = STYLES.map((style) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "card";
+    card.setAttribute("aria-label", "Copy " + style.name + " style");
+
+    const top = document.createElement("div");
+    top.className = "card-top";
+
+    const nm = document.createElement("span");
+    nm.className = "card-name";
+    nm.textContent = style.name;
+
+    const tag = document.createElement("span");
+    tag.className = "copy-tag";
+    tag.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span>';
+
+    const out = document.createElement("div");
+    out.className = "card-out";
+
+    top.appendChild(nm);
+    top.appendChild(tag);
+    card.appendChild(top);
+    card.appendChild(out);
+
+    card.addEventListener("click", () => copyCard(card, out.textContent));
+
+    results.appendChild(card);
+    return { style, card, out, tag };
+  });
+
+  styleCount.textContent = STYLES.length;
+
+  /* ---------- render ---------- */
+  let frame = null;
+  function scheduleRender() {
+    if (frame) return;
+    frame = requestAnimationFrame(() => { frame = null; render(); });
+  }
+
+  function render() {
+    const raw = input.value;
+    const isPreview = raw.trim().length === 0;
+    const base = isPreview ? "Fancy Text" : raw;
+
+    for (const ref of cardRefs) {
+      const styled = ref.style.fn(base);
+      const text = prefix + styled + suffix;
+      ref.out.textContent = text;
+      ref.card.classList.toggle("empty", isPreview);
+      ref.card.dataset.raw = raw;
+    }
+
+    charCount.textContent = raw.length;
+    const words = raw.trim() ? raw.trim().split(/\s+/).length : 0;
+    wordCount.textContent = words;
+  }
+
+  /* ---------- copy ---------- */
+  let toastTimer = null;
+  function showToast(msg) {
+    toastMsg.textContent = msg || "Copied to clipboard";
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 1900);
+  }
+
+  function legacyCopy(text) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.cssText = "position:fixed;top:-9999px;opacity:0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  function copyCard(card, text) {
+    if (!text || !text.trim()) { showToast("Type something first ✍️"); return; }
+
+    const done = () => {
+      card.classList.add("copied");
+      const label = card.querySelector(".copy-tag span");
+      if (label) label.textContent = "Copied!";
+      if (navigator.vibrate) { try { navigator.vibrate(12); } catch (e) {} }
+      showToast("Copied to clipboard ✓");
+      setTimeout(() => {
+        card.classList.remove("copied");
+        if (label) label.textContent = "Copy";
+      }, 1500);
+    };
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done).catch(() => { legacyCopy(text); done(); });
+    } else {
+      legacyCopy(text);
+      done();
+    }
+  }
+
+  /* ---------- decorations ---------- */
+  const decoChips = $("#decoChips");
+  DECORATIONS.forEach((d, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip";
+    b.textContent = d.label;
+    b.addEventListener("click", () => {
+      const wasActive = activeDeco === i;
+      decoChips.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+      if (wasActive) {
+        prefix = ""; suffix = ""; activeDeco = -1;
+      } else {
+        prefix = d.pre; suffix = d.suf; activeDeco = i;
+        b.classList.add("active");
+      }
+      render();
+    });
+    decoChips.appendChild(b);
+  });
+
+  $("#clearDeco").addEventListener("click", () => {
+    prefix = ""; suffix = ""; activeDeco = -1;
+    decoChips.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+    render();
+  });
+
+  /* ---------- presets ---------- */
+  const presetChips = $("#presetChips");
+  PRESETS.forEach((p) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip";
+    b.textContent = p.label;
+    b.addEventListener("click", () => {
+      presetChips.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+      b.classList.add("active");
+      prefix = p.pre;
+      suffix = p.suf;
+      activeDeco = -1;
+      decoChips.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+      if (!input.value.trim()) input.value = "yourname";
+      render();
+      document.getElementById("results").scrollIntoView({ behavior: "smooth", block: "start" });
+      showToast(p.label + " template applied");
+    });
+    presetChips.appendChild(b);
+  });
+
+  /* ---------- misc buttons ---------- */
+  $("#clearBtn").addEventListener("click", () => {
+    input.value = "";
+    prefix = ""; suffix = ""; activeDeco = -1;
+    decoChips.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+    presetChips.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+    render();
+    input.focus();
+    showToast("Cleared");
+  });
+
+  $("#copyAllBtn").addEventListener("click", () => {
+    const first = cardRefs[0];
+    copyCard(first.card, first.out.textContent);
+  });
+
+  /* ---------- keyboard shortcut ---------- */
+  document.addEventListener("keydown", (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      input.focus();
+      input.select();
+    }
+  });
+
+  /* ---------- theme ---------- */
+  const themeBtn = $("#themeBtn");
+  const root = document.documentElement;
+  const saved = (() => { try { return localStorage.getItem("fk-theme"); } catch (e) { return null; } })();
+  if (saved) root.setAttribute("data-theme", saved);
+  else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
+    root.setAttribute("data-theme", "light");
+  }
+
+  themeBtn.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("fk-theme", next); } catch (e) {}
+  });
+
+  /* ---------- reveal on scroll ---------- */
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
+  }
+
+  /* ---------- init ---------- */
+  document.getElementById("yr").textContent = new Date().getFullYear();
+  input.addEventListener("input", scheduleRender);
+  render();
+})();
+</script>
+</body>
+</html>

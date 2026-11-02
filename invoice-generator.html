@@ -1,0 +1,1522 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Free Online Invoice Generator — Create & Download PDF Invoices</title>
+<meta name="description" content="Create a professional invoice in under 60 seconds. 3 modern templates, instant tax & discount math, live preview, and crisp PDF download. 100% free — no signup, no ads, no watermarks." />
+<link rel="canonical" href="https://paperlane.tools/tools/invoice-generator" />
+<meta property="og:title" content="Free Online Invoice Generator — Create & Download PDF Invoices" />
+<meta property="og:description" content="A lightning-fast, ad-free invoice maker with live preview, 3 templates and instant PDF export." />
+<meta property="og:type" content="website" />
+<meta name="robots" content="index,follow" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #fafafb;
+    --fg: #0a0b0d;
+    --muted: #6b7280;
+    --card: #ffffff;
+    --border: #e6e8eb;
+    --glass: rgba(255, 255, 255, 0.75);
+  }
+  .dark {
+    --bg: #07080a;
+    --bg-soft: #0b0d10;
+    --fg: #f4f5f7;
+    --muted: #8a929f;
+    --card: #101216;
+    --border: #1e2228;
+    --glass: rgba(12, 14, 18, 0.72);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ---------- form controls ---------- */
+  .inp {
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    background: var(--card);
+    padding: 0.5rem 0.7rem;
+    font-size: 0.8125rem;
+    line-height: 1.35;
+    color: var(--fg);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .inp:focus {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+  }
+  .inp::placeholder { color: var(--muted); opacity: 0.85; }
+  select.inp { appearance: none; background-image: none; cursor: pointer; }
+
+  /* ---------- details / faq ---------- */
+  details summary::-webkit-details-marker { display: none; }
+  details[open] .chev { transform: rotate(180deg); }
+  .chev { transition: transform 0.2s ease; }
+
+  /* ---------- hero decoration ---------- */
+  .hero-glow::before,
+  .hero-glow::after {
+    content: '';
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(90px);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-glow::before {
+    width: 420px; height: 420px; top: -160px; left: -80px;
+    background: radial-gradient(circle, #6366f1, transparent 65%);
+  }
+  .hero-glow::after {
+    width: 380px; height: 380px; top: -120px; right: -60px;
+    background: radial-gradient(circle, #22d3ee, transparent 65%);
+  }
+  .dark .hero-glow::before { opacity: 0.35; }
+  .dark .hero-glow::after { opacity: 0.28; }
+
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--border) 60%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--border) 60%, transparent) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+  }
+
+  /* ---------- invoice paper ---------- */
+  .paper {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    transition: box-shadow 0.3s ease;
+  }
+
+  /* ---------- print ---------- */
+  #print-area { display: none; }
+
+  @media print {
+    @page { size: A4; margin: 12mm; }
+    html, body { background: #fff !important; }
+    body * { visibility: hidden !important; }
+    #print-area, #print-area * { visibility: visible !important; }
+    #print-area {
+      display: block !important;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+    #print-area > * {
+      max-width: none !important;
+      width: 100% !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      outline: none !important;
+    }
+    #print-area .no-print { display: none !important; }
+  }
+
+  /* ---------- misc ---------- */
+  ::selection { background: rgba(99, 102, 241, 0.3); }
+  .tabnum { font-variant-numeric: tabular-nums; }
+  .toast-in { animation: toastIn 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
+  @keyframes toastIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+</style>
+</head>
+
+<body class="antialiased">
+
+<!-- ============================== NAV ============================== -->
+<header class="no-print sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--glass)] backdrop-blur-xl">
+  <div class="mx-auto flex h-14 max-w-7xl items-center gap-3 px-4 sm:px-6">
+    <a href="#" class="flex items-center gap-2">
+      <span class="grid h-7 w-7 place-items-center rounded-lg bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
+        <i data-lucide="receipt" class="h-4 w-4"></i>
+      </span>
+      <span class="text-sm font-extrabold tracking-tight">Paperlane</span>
+    </a>
+
+    <nav class="ml-4 hidden items-center gap-1 text-[13px] font-medium text-[var(--muted)] md:flex">
+      <a href="#tool" class="rounded-lg px-2.5 py-1.5 transition hover:bg-[var(--bg-soft)] hover:text-[var(--fg)]">Invoice Generator</a>
+      <a href="#features" class="rounded-lg px-2.5 py-1.5 transition hover:bg-[var(--bg-soft)] hover:text-[var(--fg)]">Features</a>
+      <a href="#how" class="rounded-lg px-2.5 py-1.5 transition hover:bg-[var(--bg-soft)] hover:text-[var(--fg)]">How it works</a>
+      <a href="#compare" class="rounded-lg px-2.5 py-1.5 transition hover:bg-[var(--bg-soft)] hover:text-[var(--fg)]">Compare</a>
+      <a href="#faq" class="rounded-lg px-2.5 py-1.5 transition hover:bg-[var(--bg-soft)] hover:text-[var(--fg)]">FAQ</a>
+    </nav>
+
+    <div class="ml-auto flex items-center gap-2">
+      <span class="hidden items-center gap-1.5 rounded-full border border-[var(--border)] px-2.5 py-1 text-[11px] font-semibold text-[var(--muted)] sm:flex">
+        <i data-lucide="globe" class="h-3.5 w-3.5"></i> US · UK · DE
+      </span>
+      <button id="themeBtn" aria-label="Toggle theme"
+        class="grid h-9 w-9 place-items-center rounded-lg border border-[var(--border)] text-[var(--muted)] transition hover:text-[var(--fg)]">
+        <i data-lucide="sun" class="h-4 w-4"></i>
+      </button>
+      <a href="#tool" class="rounded-lg bg-[var(--fg)] px-3.5 py-2 text-[13px] font-semibold text-[var(--bg)] transition hover:opacity-90">
+        Create invoice
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================== HERO ============================== -->
+<section class="hero-glow relative overflow-hidden border-b border-[var(--border)]">
+  <div class="grid-lines pointer-events-none absolute inset-0"></div>
+  <div class="relative z-10 mx-auto max-w-7xl px-4 pb-10 pt-12 sm:px-6 sm:pt-16">
+
+    <!-- breadcrumb -->
+    <nav aria-label="Breadcrumb" class="mb-6 flex items-center gap-1.5 text-[12px] text-[var(--muted)]">
+      <a href="#" class="transition hover:text-[var(--fg)]">Home</a>
+      <i data-lucide="chevron-right" class="h-3 w-3"></i>
+      <a href="#" class="transition hover:text-[var(--fg)]">Tools</a>
+      <i data-lucide="chevron-right" class="h-3 w-3"></i>
+      <span class="font-semibold text-[var(--fg)]">Invoice Generator</span>
+    </nav>
+
+    <div class="grid items-center gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,.85fr)]">
+      <div>
+        <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-3 py-1 text-[11px] font-semibold text-[var(--muted)]">
+          <span class="relative flex h-1.5 w-1.5">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+          </span>
+          Free forever · No signup · No ads
+        </div>
+
+        <h1 class="text-balance text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.4rem]">
+          Free Online Invoice Generator<br class="hidden sm:block" />
+          <span class="bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-500 bg-clip-text text-transparent">
+            Create & Download PDF Invoices
+          </span>
+        </h1>
+
+        <p class="mt-5 max-w-xl text-[15px] leading-relaxed text-[var(--muted)]">
+          Build a pixel-perfect, tax-ready invoice in under a minute. Type on the left, watch it render live on
+          the right, then export a crisp, borderless PDF. Everything runs in your browser — your client data never
+          leaves your device.
+        </p>
+
+        <div class="mt-7 flex flex-wrap items-center gap-3">
+          <a href="#tool" class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white shadow-xl shadow-indigo-600/25 transition hover:bg-indigo-500">
+            <i data-lucide="sparkles" class="h-4 w-4"></i> Start creating — it's free
+          </a>
+          <a href="#how" class="inline-flex items-center gap-2 rounded-xl border border-[var(--border)] px-5 py-3 text-sm font-semibold transition hover:bg-[var(--bg-soft)]">
+            See how it works
+          </a>
+        </div>
+
+        <ul class="mt-8 grid max-w-xl grid-cols-2 gap-x-6 gap-y-3 text-[13px] font-medium text-[var(--muted)] sm:grid-cols-4">
+          <li class="flex items-center gap-2"><i data-lucide="zap" class="h-4 w-4 text-indigo-500"></i> Instant</li>
+          <li class="flex items-center gap-2"><i data-lucide="shield-check" class="h-4 w-4 text-indigo-500"></i> Private</li>
+          <li class="flex items-center gap-2"><i data-lucide="droplet-off" class="h-4 w-4 text-indigo-500"></i> No watermark</li>
+          <li class="flex items-center gap-2"><i data-lucide="infinity" class="h-4 w-4 text-indigo-500"></i> Unlimited</li>
+        </ul>
+      </div>
+
+      <!-- floating mini invoice -->
+      <div class="relative hidden lg:block">
+        <div class="absolute inset-0 -rotate-3 rounded-3xl bg-gradient-to-br from-indigo-500/20 to-cyan-400/20 blur-2xl"></div>
+        <div class="relative rotate-1 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 shadow-2xl">
+          <div class="flex items-center justify-between">
+            <div class="h-2 w-16 rounded-full bg-[var(--border)]"></div>
+            <div class="text-[10px] font-black tracking-widest text-indigo-500">INVOICE</div>
+          </div>
+          <div class="mt-4 space-y-2">
+            <div class="h-2 w-32 rounded-full bg-[var(--border)]"></div>
+            <div class="h-2 w-24 rounded-full bg-[var(--border)]"></div>
+          </div>
+          <div class="mt-5 space-y-2">
+            <div class="flex gap-2"><div class="h-2 flex-1 rounded-full bg-[var(--border)]"></div><div class="h-2 w-10 rounded-full bg-[var(--border)]"></div></div>
+            <div class="flex gap-2"><div class="h-2 flex-1 rounded-full bg-[var(--border)]"></div><div class="h-2 w-10 rounded-full bg-[var(--border)]"></div></div>
+            <div class="flex gap-2"><div class="h-2 flex-1 rounded-full bg-[var(--border)]"></div><div class="h-2 w-10 rounded-full bg-[var(--border)]"></div></div>
+          </div>
+          <div class="mt-5 flex items-center justify-between rounded-lg bg-indigo-500/10 px-3 py-2">
+            <div class="h-2 w-12 rounded-full bg-indigo-500/40"></div>
+            <div class="h-2.5 w-16 rounded-full bg-indigo-500"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== TOOL ============================== -->
+<section id="tool" class="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+  <div class="mb-4 flex flex-wrap items-end justify-between gap-3">
+    <div>
+      <h2 class="text-xl font-extrabold tracking-tight sm:text-2xl">Invoice builder</h2>
+      <p class="mt-1 text-[13px] text-[var(--muted)]">Edits save automatically to this browser. Nothing is uploaded.</p>
+    </div>
+    <p class="hidden text-[11px] font-medium text-[var(--muted)] sm:block">
+      <kbd class="rounded border border-[var(--border)] bg-[var(--card)] px-1.5 py-0.5 font-mono text-[10px]">⌘/Ctrl</kbd> +
+      <kbd class="rounded border border-[var(--border)] bg-[var(--card)] px-1.5 py-0.5 font-mono text-[10px]">P</kbd> to export PDF
+    </p>
+  </div>
+
+  <!-- ACTION BAR -->
+  <div class="no-print sticky top-[60px] z-30 mb-5 flex flex-wrap items-center gap-2 rounded-2xl border border-[var(--border)] bg-[var(--glass)] p-2.5 backdrop-blur-xl">
+    <div class="flex rounded-xl border border-[var(--border)] bg-[var(--card)] p-1">
+      <button data-template="minimal" class="tpl-btn rounded-lg px-3 py-1.5 text-[12px] font-semibold transition">Modern Minimal</button>
+      <button data-template="corporate" class="tpl-btn rounded-lg px-3 py-1.5 text-[12px] font-semibold transition">Corporate Blue</button>
+      <button data-template="dark" class="tpl-btn rounded-lg px-3 py-1.5 text-[12px] font-semibold transition">Bold Dark</button>
+    </div>
+
+    <div class="ml-auto flex flex-wrap items-center gap-2">
+      <span id="saveState" class="hidden items-center gap-1.5 rounded-lg px-2 py-1 text-[11px] font-semibold text-[var(--muted)] sm:flex">
+        <i data-lucide="check" class="h-3.5 w-3.5 text-emerald-500"></i>
+        <span id="saveText">Saved</span>
+      </span>
+
+      <button id="resetBtn" title="Reset invoice"
+        class="grid h-9 w-9 place-items-center rounded-lg border border-[var(--border)] text-[var(--muted)] transition hover:text-red-500">
+        <i data-lucide="rotate-ccw" class="h-4 w-4"></i>
+      </button>
+
+      <button id="backupBtn" title="Download JSON backup"
+        class="grid h-9 w-9 place-items-center rounded-lg border border-[var(--border)] text-[var(--muted)] transition hover:text-[var(--fg)]">
+        <i data-lucide="hard-drive-download" class="h-4 w-4"></i>
+      </button>
+
+      <button id="printBtn"
+        class="inline-flex items-center gap-2 rounded-lg border border-[var(--border)] px-3.5 py-2 text-[13px] font-semibold transition hover:bg-[var(--fg)] hover:text-[var(--bg)]">
+        <i data-lucide="printer" class="h-4 w-4"></i> Print
+      </button>
+
+      <button id="downloadBtn"
+        class="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-3.5 py-2 text-[13px] font-bold text-white shadow-lg shadow-indigo-600/25 transition hover:bg-indigo-500">
+        <i data-lucide="download" class="h-4 w-4"></i> Download PDF
+      </button>
+    </div>
+  </div>
+
+  <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.06fr)]">
+
+    <!-- ---------------------------- FORM ---------------------------- -->
+    <div class="no-print space-y-4">
+
+      <!-- company -->
+      <section class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 sm:p-5">
+        <h3 class="mb-4 flex items-center gap-2 text-[13px] font-bold">
+          <i data-lucide="building-2" class="h-4 w-4 text-[var(--muted)]"></i> Your business
+        </h3>
+
+        <div class="mb-3 flex items-center gap-3">
+          <div id="logoThumb" class="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-lg border border-dashed border-[var(--border)] text-[var(--muted)]">
+            <i data-lucide="image" class="h-4 w-4"></i>
+          </div>
+          <div class="flex gap-2">
+            <label for="logoInput" class="cursor-pointer rounded-lg border border-[var(--border)] px-3 py-1.5 text-[12px] font-semibold transition hover:bg-[var(--bg-soft)]">
+              Upload logo
+            </label>
+            <button id="removeLogo" class="rounded-lg px-3 py-1.5 text-[12px] font-semibold text-[var(--muted)] transition hover:text-red-500">
+              Remove
+            </button>
+            <input id="logoInput" type="file" accept="image/*" class="hidden" />
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <label class="block">
+            <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Company name</span>
+            <input class="inp" data-bind="company.name" placeholder="Acme Inc." />
+          </label>
+          <div class="grid gap-3 sm:grid-cols-2">
+            <label class="block">
+              <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Email</span>
+              <input class="inp" data-bind="company.email" placeholder="billing@acme.com" />
+            </label>
+            <label class="block">
+              <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Phone</span>
+              <input class="inp" data-bind="company.phone" placeholder="+1 555 000 0000" />
+            </label>
+          </div>
+          <label class="block">
+            <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Address</span>
+            <textarea rows="2" class="inp resize-none" data-bind="company.address" placeholder="Street, City, ZIP"></textarea>
+          </label>
+          <label class="block">
+            <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Tax / VAT ID (optional)</span>
+            <input class="inp" data-bind="company.taxId" placeholder="US-EIN 00-0000000" />
+          </label>
+        </div>
+      </section>
+
+      <!-- client -->
+      <section class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 sm:p-5">
+        <h3 class="mb-4 flex items-center gap-2 text-[13px] font-bold">
+          <i data-lucide="user-2" class="h-4 w-4 text-[var(--muted)]"></i> Bill to
+        </h3>
+        <div class="space-y-3">
+          <label class="block">
+            <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Client name</span>
+            <input class="inp" data-bind="client.name" placeholder="Client company" />
+          </label>
+          <label class="block">
+            <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Client email</span>
+            <input class="inp" data-bind="client.email" placeholder="accounts@client.com" />
+          </label>
+          <label class="block">
+            <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Client address</span>
+            <textarea rows="2" class="inp resize-none" data-bind="client.address" placeholder="Street, City, ZIP"></textarea>
+          </label>
+        </div>
+      </section>
+
+      <!-- meta -->
+      <section class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 sm:p-5">
+        <h3 class="mb-4 flex items-center gap-2 text-[13px] font-bold">
+          <i data-lucide="sliders-horizontal" class="h-4 w-4 text-[var(--muted)]"></i> Invoice details
+        </h3>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="block">
+            <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Invoice #</span>
+            <input class="inp" data-bind="meta.number" />
+          </label>
+          <label class="block">
+            <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Currency</span>
+            <select id="currencySelect" class="inp" data-bind="meta.currency"></select>
+          </label>
+          <label class="block">
+            <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Issue date</span>
+            <input type="date" class="inp" data-bind="meta.issueDate" />
+          </label>
+          <label class="block">
+            <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Due date</span>
+            <input type="date" class="inp" data-bind="meta.dueDate" />
+          </label>
+          <label class="col-span-2 block">
+            <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Status</span>
+            <select class="inp" data-bind="meta.status">
+              <option value="unpaid">Unpaid</option>
+              <option value="paid">Paid</option>
+              <option value="draft">Draft</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <!-- items -->
+      <section class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 sm:p-5">
+        <h3 class="mb-4 flex items-center gap-2 text-[13px] font-bold">
+          <i data-lucide="list-ordered" class="h-4 w-4 text-[var(--muted)]"></i> Line items
+        </h3>
+
+        <div class="mb-1.5 hidden gap-2 px-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-[var(--muted)] sm:grid sm:grid-cols-12">
+          <span class="col-span-6">Description</span>
+          <span class="col-span-2 text-right">Qty</span>
+          <span class="col-span-2 text-right">Rate</span>
+          <span class="col-span-2 text-right">Amount</span>
+        </div>
+
+        <div id="itemsList" class="space-y-2"></div>
+
+        <button id="addItemBtn"
+          class="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-dashed border-[var(--border)] px-3 py-2 text-[12px] font-semibold text-[var(--muted)] transition hover:border-indigo-400 hover:text-indigo-500">
+          <i data-lucide="plus" class="h-3.5 w-3.5"></i> Add line item
+        </button>
+      </section>
+
+      <!-- tax + discount -->
+      <section class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 sm:p-5">
+        <h3 class="mb-4 flex items-center gap-2 text-[13px] font-bold">
+          <i data-lucide="percent" class="h-4 w-4 text-[var(--muted)]"></i> Tax &amp; discount
+        </h3>
+        <div class="grid gap-3 sm:grid-cols-2">
+          <label class="block">
+            <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Tax rate (%)</span>
+            <input type="number" min="0" step="any" class="inp" data-bind="taxRate" />
+          </label>
+          <label class="block">
+            <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Discount</span>
+            <div class="flex gap-2">
+              <input type="number" min="0" step="any" class="inp" data-bind="discountValue" />
+              <div class="flex shrink-0 rounded-lg border border-[var(--border)] p-1">
+                <button data-discount="percent" class="disc-btn rounded-md px-2 text-[12px] font-bold transition">%</button>
+                <button data-discount="flat" class="disc-btn rounded-md px-2 text-[12px] font-bold transition">flat</button>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <div class="mt-4 space-y-1.5 rounded-xl bg-[var(--bg-soft)] p-3 text-[12px]">
+          <div class="flex justify-between"><span class="text-[var(--muted)]">Subtotal</span><span id="sumSub" class="tabnum font-semibold">—</span></div>
+          <div class="flex justify-between"><span class="text-[var(--muted)]">Discount</span><span id="sumDisc" class="tabnum font-semibold text-emerald-600">—</span></div>
+          <div class="flex justify-between"><span class="text-[var(--muted)]">Tax</span><span id="sumTax" class="tabnum font-semibold">—</span></div>
+          <div class="mt-1 flex justify-between border-t border-[var(--border)] pt-2">
+            <span class="font-bold">Total due</span><span id="sumTotal" class="tabnum font-black text-indigo-500">—</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- payment -->
+      <section class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 sm:p-5">
+        <h3 class="mb-4 flex items-center gap-2 text-[13px] font-bold">
+          <i data-lucide="landmark" class="h-4 w-4 text-[var(--muted)]"></i> Payment details <span class="font-normal text-[var(--muted)]">(optional)</span>
+        </h3>
+        <div class="grid gap-3 sm:grid-cols-2">
+          <label class="block"><span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Bank</span><input class="inp" data-bind="payment.bank" /></label>
+          <label class="block"><span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Account name</span><input class="inp" data-bind="payment.accountName" /></label>
+          <label class="block"><span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Account no.</span><input class="inp" data-bind="payment.accountNo" /></label>
+          <label class="block"><span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">SWIFT / BIC</span><input class="inp" data-bind="payment.swift" /></label>
+          <label class="col-span-full block"><span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">IBAN</span><input class="inp" data-bind="payment.iban" /></label>
+        </div>
+      </section>
+
+      <!-- notes -->
+      <section class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 sm:p-5">
+        <h3 class="mb-4 flex items-center gap-2 text-[13px] font-bold">
+          <i data-lucide="sticky-note" class="h-4 w-4 text-[var(--muted)]"></i> Notes &amp; terms
+        </h3>
+        <div class="space-y-3">
+          <label class="block">
+            <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Notes</span>
+            <textarea rows="2" class="inp resize-none" data-bind="notes"></textarea>
+          </label>
+          <label class="block">
+            <span class="mb-1.5 block text-[10.5px] font-bold uppercase tracking-[0.08em] text-[var(--muted)]">Payment terms</span>
+            <textarea rows="2" class="inp resize-none" data-bind="terms"></textarea>
+          </label>
+        </div>
+      </section>
+
+      <p class="px-1 pb-2 text-[11px] leading-relaxed text-[var(--muted)]">
+        <strong class="text-[var(--fg)]">Tip:</strong> click <em>Download PDF</em>, then choose
+        <em>Save as PDF</em> as the print destination. Set margins to <em>None</em> for a full-bleed layout.
+      </p>
+    </div>
+
+    <!-- --------------------------- PREVIEW --------------------------- -->
+    <div class="lg:sticky lg:top-[124px] lg:self-start">
+      <div id="invoice-paper" class="paper mx-auto w-full max-w-[720px] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-black/5"></div>
+      <div class="no-print mt-3 flex items-center justify-center gap-1.5 text-[11px] text-[var(--muted)]">
+        <i data-lucide="shield-check" class="h-3.5 w-3.5 text-emerald-500"></i>
+        Runs 100% in your browser — no uploads, no accounts.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FEATURES ============================ -->
+<section id="features" class="border-t border-[var(--border)] bg-[var(--bg-soft)] py-16">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="max-w-2xl">
+      <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-indigo-500">Why use our invoice maker</p>
+      <h2 class="mt-2 text-2xl font-black tracking-tight sm:text-3xl">Everything you need. Nothing you don't.</h2>
+      <p class="mt-3 text-[14px] leading-relaxed text-[var(--muted)]">
+        Legacy invoice sites bury the tool under ads and upsells. Paperlane gives you a fast, private, genuinely
+        free invoice generator — with the design polish you'd expect from a modern SaaS product.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 transition hover:-translate-y-0.5 hover:shadow-xl">
+        <span class="grid h-10 w-10 place-items-center rounded-xl bg-indigo-500/10 text-indigo-500"><i data-lucide="zap" class="h-5 w-5"></i></span>
+        <h3 class="mt-4 text-[15px] font-bold">Instant live preview</h3>
+        <p class="mt-1.5 text-[13px] leading-relaxed text-[var(--muted)]">Every keystroke updates the invoice on the right — what you see is exactly what prints.</p>
+      </div>
+      <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 transition hover:-translate-y-0.5 hover:shadow-xl">
+        <span class="grid h-10 w-10 place-items-center rounded-xl bg-emerald-500/10 text-emerald-500"><i data-lucide="calculator" class="h-5 w-5"></i></span>
+        <h3 class="mt-4 text-[15px] font-bold">Bulletproof math</h3>
+        <p class="mt-1.5 text-[13px] leading-relaxed text-[var(--muted)]">Subtotal, percentage or flat discounts, tax, and balance due — calculated to the cent.</p>
+      </div>
+      <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 transition hover:-translate-y-0.5 hover:shadow-xl">
+        <span class="grid h-10 w-10 place-items-center rounded-xl bg-cyan-500/10 text-cyan-500"><i data-lucide="printer" class="h-5 w-5"></i></span>
+        <h3 class="mt-4 text-[15px] font-bold">Crisp PDF export</h3>
+        <p class="mt-1.5 text-[13px] leading-relaxed text-[var(--muted)]">A dedicated print stylesheet strips every button and badge. Real vector text, tiny file size.</p>
+      </div>
+      <div class="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 transition hover:-translate-y-0.5 hover:shadow-xl">
+        <span class="grid h-10 w-10 place-items-center rounded-xl bg-violet-500/10 text-violet-500"><i data-lucide="lock" class="h-5 w-5"></i></span>
+        <h3 class="mt-4 text-[15px] font-bold">Private by design</h3>
+        <p class="mt-1.5 text-[13px] leading-relaxed text-[var(--muted)]">Auto-save lives in your browser's local storage. No servers, no tracking pixels on your data.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= STEPS ============================= -->
+<section id="how" class="border-t border-[var(--border)] py-16">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="max-w-2xl">
+      <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-indigo-500">Step-by-step</p>
+      <h2 class="mt-2 text-2xl font-black tracking-tight sm:text-3xl">How to create an invoice in 4 steps</h2>
+    </div>
+
+    <ol class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <li class="relative rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
+        <span class="font-mono text-[11px] font-bold text-indigo-500">STEP 01</span>
+        <h3 class="mt-2 text-[15px] font-bold">Add your details</h3>
+        <p class="mt-1.5 text-[13px] leading-relaxed text-[var(--muted)]">Enter your business name, address and optional logo, then the client's billing information.</p>
+      </li>
+      <li class="relative rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
+        <span class="font-mono text-[11px] font-bold text-indigo-500">STEP 02</span>
+        <h3 class="mt-2 text-[15px] font-bold">List your work</h3>
+        <p class="mt-1.5 text-[13px] leading-relaxed text-[var(--muted)]">Add line items with quantity and rate. Amounts and totals recalculate automatically.</p>
+      </li>
+      <li class="relative rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
+        <span class="font-mono text-[11px] font-bold text-indigo-500">STEP 03</span>
+        <h3 class="mt-2 text-[15px] font-bold">Pick a template</h3>
+        <p class="mt-1.5 text-[13px] leading-relaxed text-[var(--muted)]">Switch between Modern Minimal, Corporate Blue and Bold Dark. Your data stays put.</p>
+      </li>
+      <li class="relative rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5">
+        <span class="font-mono text-[11px] font-bold text-indigo-500">STEP 04</span>
+        <h3 class="mt-2 text-[15px] font-bold">Download &amp; send</h3>
+        <p class="mt-1.5 text-[13px] leading-relaxed text-[var(--muted)]">Export a PDF and email it, or print a copy for your records. No watermark, ever.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================ COMPARISON =========================== -->
+<section id="compare" class="border-t border-[var(--border)] bg-[var(--bg-soft)] py-16">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="max-w-2xl">
+      <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-indigo-500">Honest comparison</p>
+      <h2 class="mt-2 text-2xl font-black tracking-tight sm:text-3xl">How we stack up against legacy invoice sites</h2>
+      <p class="mt-3 text-[14px] leading-relaxed text-[var(--muted)]">
+        Benchmarked against the category leaders in the US, UK and Germany. Same job, far less friction.
+      </p>
+    </div>
+
+    <div class="mt-8 overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--card)]">
+      <table class="w-full min-w-[640px] text-left text-[13px]">
+        <thead>
+          <tr class="border-b border-[var(--border)] text-[11px] uppercase tracking-wider text-[var(--muted)]">
+            <th class="px-5 py-3.5 font-bold">Feature</th>
+            <th class="px-5 py-3.5 text-center font-bold text-indigo-500">Paperlane</th>
+            <th class="px-5 py-3.5 text-center font-bold">Invoice-Generator.com</th>
+            <th class="px-5 py-3.5 text-center font-bold">Desktop software</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-[var(--border)]">
+          <tr><td class="px-5 py-3.5 font-semibold">Price</td><td class="px-5 py-3.5 text-center font-bold text-emerald-600">Free</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">Free + paid tiers</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">$99+/yr</td></tr>
+          <tr><td class="px-5 py-3.5 font-semibold">Ads &amp; upsell modals</td><td class="px-5 py-3.5 text-center font-bold text-emerald-600">None</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">Yes</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">No</td></tr>
+          <tr><td class="px-5 py-3.5 font-semibold">Signup required</td><td class="px-5 py-3.5 text-center font-bold text-emerald-600">Never</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">For PDF export</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">Yes</td></tr>
+          <tr><td class="px-5 py-3.5 font-semibold">Watermark on PDF</td><td class="px-5 py-3.5 text-center font-bold text-emerald-600">None</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">On free plan</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">None</td></tr>
+          <tr><td class="px-5 py-3.5 font-semibold">Real-time dual-pane preview</td><td class="px-5 py-3.5 text-center font-bold text-emerald-600">Yes</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">Limited</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">Yes</td></tr>
+          <tr><td class="px-5 py-3.5 font-semibold">Modern template designs</td><td class="px-5 py-3.5 text-center font-bold text-emerald-600">3 (2025-grade)</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">Dated</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">Varies</td></tr>
+          <tr><td class="px-5 py-3.5 font-semibold">Data leaves your device</td><td class="px-5 py-3.5 text-center font-bold text-emerald-600">Never</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">Server-side</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">Cloud sync</td></tr>
+          <tr><td class="px-5 py-3.5 font-semibold">Works offline</td><td class="px-5 py-3.5 text-center font-bold text-emerald-600">Yes</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">No</td><td class="px-5 py-3.5 text-center text-[var(--muted)]">Yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FAQ ============================== -->
+<section id="faq" class="border-t border-[var(--border)] py-16">
+  <div class="mx-auto max-w-3xl px-4 sm:px-6">
+    <div class="text-center">
+      <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-indigo-500">FAQ</p>
+      <h2 class="mt-2 text-2xl font-black tracking-tight sm:text-3xl">Frequently asked questions</h2>
+    </div>
+
+    <div class="mt-8 space-y-3">
+      <details class="rounded-xl border border-[var(--border)] bg-[var(--card)] p-4" open>
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[14px] font-semibold">
+          Is this invoice generator really free?
+          <i data-lucide="chevron-down" class="chev h-4 w-4 shrink-0 text-[var(--muted)]"></i>
+        </summary>
+        <p class="mt-3 text-[13.5px] leading-relaxed text-[var(--muted)]">
+          Yes — completely. There are no paid tiers, no watermarks, no export limits and no account to create.
+          The entire tool runs in your browser, so there are no server costs to pass on to you.
+        </p>
+      </details>
+
+      <details class="rounded-xl border border-[var(--border)] bg-[var(--card)] p-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[14px] font-semibold">
+          How do I save my invoice as a PDF?
+          <i data-lucide="chevron-down" class="chev h-4 w-4 shrink-0 text-[var(--muted)]"></i>
+        </summary>
+        <p class="mt-3 text-[13.5px] leading-relaxed text-[var(--muted)]">
+          Click <strong>Download PDF</strong> (or press ⌘/Ctrl + P). Your browser's print dialog opens with a
+          clean stylesheet applied — choose <em>Save as PDF</em> as the destination. The text stays selectable and
+          vector-sharp, and file sizes are typically under 200 KB.
+        </p>
+      </details>
+
+      <details class="rounded-xl border border-[var(--border)] bg-[var(--card)] p-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[14px] font-semibold">
+          Is my client data private?
+          <i data-lucide="chevron-down" class="chev h-4 w-4 shrink-0 text-[var(--muted)]"></i>
+        </summary>
+        <p class="mt-3 text-[13.5px] leading-relaxed text-[var(--muted)]">
+          Yes. There is no backend. Invoice fields are saved only in your browser's local storage so you don't lose
+          work on refresh. Clearing your browser data removes them permanently.
+        </p>
+      </details>
+
+      <details class="rounded-xl border border-[var(--border)] bg-[var(--card)] p-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[14px] font-semibold">
+          Can I use this invoice for VAT, GST or sales tax?
+          <i data-lucide="chevron-down" class="chev h-4 w-4 shrink-0 text-[var(--muted)]"></i>
+        </summary>
+        <p class="mt-3 text-[13.5px] leading-relaxed text-[var(--muted)]">
+          Absolutely. Set any tax rate, add your Tax/VAT ID in the business section, and include bank or IBAN
+          details. Discounts can be applied as a percentage or a flat amount before tax.
+        </p>
+      </details>
+
+      <details class="rounded-xl border border-[var(--border)] bg-[var(--card)] p-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[14px] font-semibold">
+          Which currencies are supported?
+          <i data-lucide="chevron-down" class="chev h-4 w-4 shrink-0 text-[var(--muted)]"></i>
+        </summary>
+        <p class="mt-3 text-[13.5px] leading-relaxed text-[var(--muted)]">
+          USD, EUR, GBP, INR, AUD, CAD, AED, JPY, CHF and BRL are built in. Amounts format with two decimals and
+          thousands separators automatically.
+        </p>
+      </details>
+
+      <details class="rounded-xl border border-[var(--border)] bg-[var(--card)] p-4">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[14px] font-semibold">
+          Does it work on mobile?
+          <i data-lucide="chevron-down" class="chev h-4 w-4 shrink-0 text-[var(--muted)]"></i>
+        </summary>
+        <p class="mt-3 text-[13.5px] leading-relaxed text-[var(--muted)]">
+          Yes. The layout stacks form and preview vertically on small screens, and the sticky action bar keeps
+          export one tap away.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= RELATED TOOLS ========================= -->
+<section class="border-t border-[var(--border)] bg-[var(--bg-soft)] py-12">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <h2 class="text-[13px] font-bold uppercase tracking-[0.14em] text-[var(--muted)]">Related free tools</h2>
+    <div class="mt-4 flex flex-wrap gap-2">
+      <a href="#" class="rounded-full border border-[var(--border)] bg-[var(--card)] px-3.5 py-1.5 text-[12.5px] font-semibold transition hover:border-indigo-400 hover:text-indigo-500">Quote Generator</a>
+      <a href="#" class="rounded-full border border-[var(--border)] bg-[var(--card)] px-3.5 py-1.5 text-[12.5px] font-semibold transition hover:border-indigo-400 hover:text-indigo-500">Receipt Maker</a>
+      <a href="#" class="rounded-full border border-[var(--border)] bg-[var(--card)] px-3.5 py-1.5 text-[12.5px] font-semibold transition hover:border-indigo-400 hover:text-indigo-500">Rent Receipt</a>
+      <a href="#" class="rounded-full border border-[var(--border)] bg-[var(--card)] px-3.5 py-1.5 text-[12.5px] font-semibold transition hover:border-indigo-400 hover:text-indigo-500">Pay Stub Generator</a>
+      <a href="#" class="rounded-full border border-[var(--border)] bg-[var(--card)] px-3.5 py-1.5 text-[12.5px] font-semibold transition hover:border-indigo-400 hover:text-indigo-500">Timesheet</a>
+      <a href="#" class="rounded-full border border-[var(--border)] bg-[var(--card)] px-3.5 py-1.5 text-[12.5px] font-semibold transition hover:border-indigo-400 hover:text-indigo-500">Purchase Order</a>
+      <a href="#" class="rounded-full border border-[var(--border)] bg-[var(--card)] px-3.5 py-1.5 text-[12.5px] font-semibold transition hover:border-indigo-400 hover:text-indigo-500">Packing Slip</a>
+      <a href="#" class="rounded-full border border-[var(--border)] bg-[var(--card)] px-3.5 py-1.5 text-[12.5px] font-semibold transition hover:border-indigo-400 hover:text-indigo-500">1099 Form</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================= FOOTER ============================= -->
+<footer class="no-print border-t border-[var(--border)] py-10">
+  <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 sm:flex-row sm:px-6">
+    <div class="flex items-center gap-2 text-[12.5px] text-[var(--muted)]">
+      <span class="grid h-6 w-6 place-items-center rounded-md bg-indigo-600 text-white"><i data-lucide="receipt" class="h-3.5 w-3.5"></i></span>
+      <span class="font-bold text-[var(--fg)]">Paperlane</span> — free tools for modern work
+    </div>
+    <div class="flex flex-wrap items-center justify-center gap-4 text-[12px] text-[var(--muted)]">
+      <a href="#" class="transition hover:text-[var(--fg)]">Privacy</a>
+      <a href="#" class="transition hover:text-[var(--fg)]">Terms</a>
+      <a href="#" class="transition hover:text-[var(--fg)]">Contact</a>
+      <span>© <span id="year"></span> Paperlane</span>
+    </div>
+  </div>
+</footer>
+
+<!-- print target -->
+<div id="print-area" aria-hidden="true"></div>
+
+<!-- toasts -->
+<div id="toasts" class="no-print pointer-events-none fixed bottom-5 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center gap-2"></div>
+
+<!-- ============================ JSON-LD ============================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Paperlane Invoice Generator",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Free online invoice generator with live preview, three modern templates, automatic tax and discount calculations, and one-click PDF export.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "featureList": [
+        "Real-time invoice preview",
+        "Automatic tax and discount calculation",
+        "PDF download and print",
+        "Three professional templates",
+        "Local auto-save",
+        "No signup, no ads, no watermark"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://paperlane.tools/" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://paperlane.tools/tools" },
+        { "@type": "ListItem", "position": 3, "name": "Invoice Generator", "item": "https://paperlane.tools/tools/invoice-generator" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is this invoice generator really free?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. There are no paid tiers, no watermarks, no export limits and no account to create. The tool runs entirely in your browser." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I save my invoice as a PDF?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Click Download PDF or press Ctrl/Cmd + P. Your browser's print dialog opens with a clean stylesheet applied; choose Save as PDF as the destination." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my client data private?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. There is no backend. Invoice fields are stored only in your browser's local storage so you do not lose work on refresh." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use this invoice for VAT, GST or sales tax?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Set any tax rate, add your Tax/VAT ID, and include bank or IBAN details. Discounts can be applied as a percentage or flat amount before tax." }
+        },
+        {
+          "@type": "Question",
+          "name": "Which currencies are supported?",
+          "acceptedAnswer": { "@type": "Answer", "text": "USD, EUR, GBP, INR, AUD, CAD, AED, JPY, CHF and BRL are built in, with automatic two-decimal formatting and thousands separators." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the invoice generator work on mobile?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The layout stacks the form and preview vertically on small screens and keeps the export action bar sticky." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>
+/* =========================================================================
+   Paperlane Invoice Generator — 100% client-side
+   ========================================================================= */
+
+const icons = () => { try { window.lucide && lucide.createIcons(); } catch (_) {} };
+
+/* ------------------------------- constants ------------------------------- */
+const CURRENCIES = [
+  { code: 'USD', symbol: '$' }, { code: 'EUR', symbol: '€' }, { code: 'GBP', symbol: '£' },
+  { code: 'INR', symbol: '₹' }, { code: 'AUD', symbol: 'A$' }, { code: 'CAD', symbol: 'C$' },
+  { code: 'AED', symbol: 'AED ' }, { code: 'JPY', symbol: '¥' }, { code: 'CHF', symbol: 'CHF ' },
+  { code: 'BRL', symbol: 'R$' },
+];
+
+const TPL = {
+  minimal: {
+    paper: 'bg-white text-neutral-900', sub: 'text-neutral-500', line: 'border-neutral-200',
+    head: 'bg-neutral-100 text-neutral-600', accent: 'text-neutral-900', band: 'bg-neutral-900',
+    total: 'text-neutral-900',
+  },
+  corporate: {
+    paper: 'bg-white text-slate-900', sub: 'text-slate-500', line: 'border-slate-200',
+    head: 'bg-blue-50 text-blue-800', accent: 'text-blue-700', band: 'bg-blue-700',
+    total: 'text-blue-700',
+  },
+  dark: {
+    paper: 'bg-[#0b0d10] text-neutral-100', sub: 'text-neutral-400', line: 'border-white/10',
+    head: 'bg-white/[0.06] text-neutral-300', accent: 'text-indigo-400', band: 'bg-indigo-500',
+    total: 'text-indigo-400',
+  },
+};
+
+const STATUS = {
+  paid:    { label: 'Paid',   cls: 'bg-emerald-500/15 text-emerald-600 ring-emerald-500/30' },
+  unpaid:  { label: 'Unpaid', cls: 'bg-amber-500/15 text-amber-600 ring-amber-500/30' },
+  draft:   { label: 'Draft',  cls: 'bg-neutral-500/15 text-neutral-500 ring-neutral-500/30' },
+};
+
+const uid = () => Math.random().toString(36).slice(2, 9);
+const isoToday = () => new Date().toISOString().slice(0, 10);
+const isoIn = (d) => new Date(Date.now() + d * 864e5).toISOString().slice(0, 10);
+
+/* -------------------------------- helpers -------------------------------- */
+const esc = (s) => String(s ?? '')
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+const escAttr = (s) => esc(s).replace(/\n/g, '&#10;');
+
+const num = (n) => {
+  const v = Number(n) || 0;
+  return String(Math.round(v * 1000) / 1000);
+};
+
+const money = (n, symbol) => {
+  const v = Number.isFinite(Number(n)) ? Number(n) : 0;
+  return `${symbol}${v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+};
+
+const fmtDate = (d) => {
+  if (!d) return '—';
+  const dt = new Date(`${d}T00:00:00`);
+  if (Number.isNaN(dt.getTime())) return d;
+  return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+};
+
+/* ------------------------------- default state ---------------------------- */
+function defaultState() {
+  return {
+    template: 'minimal',
+    logo: null,
+    company: {
+      name: 'Northwind Studio',
+      email: 'billing@northwind.studio',
+      phone: '+1 (415) 555-0132',
+      address: '2261 Market Street\nSan Francisco, CA 94114',
+      taxId: 'US-EIN 84-1234567',
+    },
+    client: {
+      name: 'Acme Corporation',
+      email: 'accounts@acme.com',
+      address: '500 Industrial Way\nAustin, TX 78701',
+    },
+    meta: {
+      number: 'INV-0001',
+      currency: '$',
+      status: 'unpaid',
+      issueDate: isoToday(),
+      dueDate: isoIn(14),
+    },
+    items: [
+      { id: uid(), description: 'Brand identity & design system', qty: 1, rate: 3200 },
+      { id: uid(), description: 'Landing page development', qty: 1, rate: 1800 },
+      { id: uid(), description: 'Motion design (per second)', qty: 12, rate: 75 },
+    ],
+    taxRate: 8.5,
+    discountType: 'percent',
+    discountValue: 0,
+    payment: {
+      bank: 'First National Bank',
+      accountName: 'Northwind Studio LLC',
+      accountNo: '000123456789',
+      iban: '',
+      swift: 'FNBAUS33',
+    },
+    notes: 'Thank you for your business!',
+    terms: 'Payment due within 14 days. Bank transfer preferred.',
+  };
+}
+
+let state = defaultState();
+
+/* ------------------------------ calculations ------------------------------ */
+function calc() {
+  const items = state.items || [];
+  const sub = items.reduce((s, i) => s + (Number(i.qty) || 0) * (Number(i.rate) || 0), 0);
+  let disc = state.discountType === 'percent'
+    ? (sub * (Number(state.discountValue) || 0)) / 100
+    : (Number(state.discountValue) || 0);
+  disc = Math.min(Math.max(disc, 0), sub);
+  const taxable = sub - disc;
+  const tax = (taxable * (Number(state.taxRate) || 0)) / 100;
+  return { sub, disc, tax, total: taxable + tax };
+}
+
+/* --------------------------------- toasts -------------------------------- */
+function toast(msg, kind = 'ok') {
+  const host = document.getElementById('toasts');
+  if (!host) return;
+  const el = document.createElement('div');
+  const color = kind === 'error'
+    ? 'border-red-500/30 text-red-500'
+    : 'border-[var(--border)] text-[var(--fg)]';
+  el.className = `toast-in pointer-events-auto flex items-center gap-2 rounded-xl border ${color} bg-[var(--card)] px-3.5 py-2.5 text-[12.5px] font-semibold shadow-2xl`;
+  el.innerHTML = `<i data-lucide="${kind === 'error' ? 'alert-circle' : 'check-circle-2'}" class="h-4 w-4 text-emerald-500"></i><span>${esc(msg)}</span>`;
+  host.appendChild(el);
+  icons();
+  setTimeout(() => {
+    el.style.transition = 'opacity .25s ease, transform .25s ease';
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(8px)';
+    setTimeout(() => el.remove(), 260);
+  }, 2200);
+}
+
+/* --------------------------------- saving -------------------------------- */
+let saveTimer = null;
+function scheduleSave() {
+  const txt = document.getElementById('saveText');
+  if (txt) txt.textContent = 'Saving…';
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    try {
+      localStorage.setItem('paperlane:invoice', JSON.stringify(state));
+      const t = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      if (txt) txt.textContent = `Saved ${t}`;
+    } catch (_) {
+      if (txt) txt.textContent = 'Not saved';
+    }
+  }, 300);
+}
+
+/* ------------------------------- load / sync ------------------------------ */
+function loadState() {
+  try {
+    const raw = localStorage.getItem('paperlane:invoice');
+    if (!raw) return;
+    const p = JSON.parse(raw) || {};
+    const d = defaultState();
+    state = {
+      ...d,
+      ...p,
+      company: { ...d.company, ...(p.company || {}) },
+      client: { ...d.client, ...(p.client || {}) },
+      meta: { ...d.meta, ...(p.meta || {}) },
+      payment: { ...d.payment, ...(p.payment || {}) },
+      items: Array.isArray(p.items) && p.items.length
+        ? p.items.map((i) => ({ id: i.id || uid(), description: i.description || '', qty: Number(i.qty) || 0, rate: Number(i.rate) || 0 }))
+        : d.items,
+    };
+  } catch (_) { /* keep defaults */ }
+}
+
+function getPath(obj, path) {
+  return path.split('.').reduce((o, k) => (o == null ? undefined : o[k]), obj);
+}
+function setPath(obj, path, val) {
+  const keys = path.split('.');
+  let o = obj;
+  for (let i = 0; i < keys.length - 1; i++) {
+    if (o[keys[i]] == null) o[keys[i]] = {};
+    o = o[keys[i]];
+  }
+  o[keys[keys.length - 1]] = val;
+}
+
+function syncForm() {
+  document.querySelectorAll('[data-bind]').forEach((el) => {
+    const v = getPath(state, el.dataset.bind);
+    el.value = v == null ? '' : v;
+  });
+  syncTemplateButtons();
+  syncDiscountButtons();
+  refreshLogoThumb();
+}
+
+function syncTemplateButtons() {
+  document.querySelectorAll('[data-template]').forEach((b) => {
+    const active = b.dataset.template === state.template;
+    b.classList.toggle('bg-[var(--fg)]', active);
+    b.classList.toggle('text-[var(--bg)]', active);
+    b.classList.toggle('text-[var(--muted)]', !active);
+  });
+}
+
+function syncDiscountButtons() {
+  document.querySelectorAll('[data-discount]').forEach((b) => {
+    const active = b.dataset.discount === state.discountType;
+    b.classList.toggle('bg-[var(--fg)]', active);
+    b.classList.toggle('text-[var(--bg)]', active);
+    b.classList.toggle('text-[var(--muted)]', !active);
+  });
+}
+
+function refreshLogoThumb() {
+  const thumb = document.getElementById('logoThumb');
+  if (!thumb) return;
+  if (state.logo) {
+    thumb.innerHTML = `<img src="${state.logo}" alt="Logo" class="h-full w-full object-contain" />`;
+    thumb.classList.remove('border-dashed');
+  } else {
+    thumb.innerHTML = `<i data-lucide="image" class="h-4 w-4"></i>`;
+    thumb.classList.add('border-dashed');
+    icons();
+  }
+}
+
+/* --------------------------------- items --------------------------------- */
+function renderItems() {
+  const wrap = document.getElementById('itemsList');
+  if (!wrap) return;
+  const cur = state.meta.currency;
+
+  wrap.innerHTML = state.items.map((it) => `
+    <div class="grid grid-cols-12 items-center gap-2" data-row="${it.id}">
+      <input class="inp col-span-12 sm:col-span-6" placeholder="Description"
+             data-item="${it.id}" data-field="description" value="${escAttr(it.description)}" />
+      <input type="number" min="0" step="any" class="inp col-span-3 sm:col-span-2" placeholder="Qty"
+             data-item="${it.id}" data-field="qty" value="${escAttr(it.qty)}" />
+      <input type="number" min="0" step="any" class="inp col-span-4 sm:col-span-2" placeholder="Rate"
+             data-item="${it.id}" data-field="rate" value="${escAttr(it.rate)}" />
+      <div class="col-span-3 truncate text-right text-[12px] font-bold tabnum sm:col-span-1" data-amount="${it.id}">
+        ${money((Number(it.qty) || 0) * (Number(it.rate) || 0), cur)}
+      </div>
+      <div class="col-span-2 flex justify-end gap-0.5 sm:col-span-1">
+        <button type="button" data-dup="${it.id}" title="Duplicate"
+          class="grid h-7 w-7 place-items-center rounded-md text-[var(--muted)] transition hover:bg-[var(--bg-soft)] hover:text-[var(--fg)]">
+          <i data-lucide="copy" class="h-3.5 w-3.5"></i>
+        </button>
+        <button type="button" data-del="${it.id}" title="Remove"
+          class="grid h-7 w-7 place-items-center rounded-md text-[var(--muted)] transition hover:bg-red-500/10 hover:text-red-500">
+          <i data-lucide="trash-2" class="h-3.5 w-3.5"></i>
+        </button>
+      </div>
+    </div>
+  `).join('');
+
+  icons();
+}
+
+function updateRowAmount(id) {
+  const it = state.items.find((i) => i.id === id);
+  const cell = document.querySelector(`[data-amount="${id}"]`);
+  if (!it || !cell) return;
+  cell.textContent = money((Number(it.qty) || 0) * (Number(it.rate) || 0), state.meta.currency);
+}
+
+/* -------------------------------- summary -------------------------------- */
+function updateSummary() {
+  const c = calc();
+  const cur = state.meta.currency;
+  const s = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  s('sumSub', money(c.sub, cur));
+  s('sumDisc', `−${money(c.disc, cur)}`);
+  s('sumTax', money(c.tax, cur));
+  s('sumTotal', money(c.total, cur));
+}
+
+/* -------------------------------- preview -------------------------------- */
+function renderPreview() {
+  const paper = document.getElementById('invoice-paper');
+  if (!paper) return;
+
+  const t = TPL[state.template] || TPL.minimal;
+  const c = calc();
+  const cur = state.meta.currency;
+  const st = STATUS[state.meta.status] || STATUS.unpaid;
+
+  const logo = state.logo
+    ? `<img src="${state.logo}" alt="" class="mb-2 h-10 w-auto max-w-[150px] object-contain" />`
+    : '';
+
+  const payRows = [
+    ['Bank', state.payment.bank],
+    ['Account name', state.payment.accountName],
+    ['Account no.', state.payment.accountNo],
+    ['IBAN', state.payment.iban],
+    ['SWIFT/BIC', state.payment.swift],
+  ].filter((p) => String(p[1] || '').trim());
+
+  const rows = state.items.map((it) => {
+    const amount = (Number(it.qty) || 0) * (Number(it.rate) || 0);
+    return `
+      <tr class="border-b ${t.line}">
+        <td class="px-3 py-2.5 align-top">${esc(it.description) || `<span class="${t.sub}">Item description</span>`}</td>
+        <td class="px-2 py-2.5 text-right tabnum">${num(it.qty)}</td>
+        <td class="px-2 py-2.5 text-right tabnum">${money(it.rate, cur)}</td>
+        <td class="px-3 py-2.5 text-right font-semibold tabnum">${money(amount, cur)}</td>
+      </tr>`;
+  }).join('');
+
+  const discountRow = c.disc > 0 ? `
+    <div class="flex justify-between">
+      <span class="${t.sub}">Discount${state.discountType === 'percent' ? ` (${num(state.discountValue)}%)` : ''}</span>
+      <span class="font-semibold tabnum text-emerald-600">−${money(c.disc, cur)}</span>
+    </div>` : '';
+
+  paper.className = `paper mx-auto w-full max-w-[720px] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-black/5 ${t.paper}`;
+  paper.innerHTML = `
+    <div class="h-1.5 w-full ${t.band}"></div>
+    <div class="p-6 sm:p-9">
+
+      <!-- header -->
+      <div class="flex flex-wrap items-start justify-between gap-6">
+        <div class="min-w-0">
+          ${logo}
+          <div class="truncate text-[18px] font-bold tracking-tight">${esc(state.company.name) || 'Your Company'}</div>
+          <div class="mt-1.5 whitespace-pre-line text-[11.5px] leading-relaxed ${t.sub}">${esc(state.company.address)}</div>
+          ${state.company.email ? `<div class="mt-1 text-[11.5px] ${t.sub}">${esc(state.company.email)}</div>` : ''}
+          ${state.company.phone ? `<div class="text-[11.5px] ${t.sub}">${esc(state.company.phone)}</div>` : ''}
+          ${state.company.taxId ? `<div class="text-[11.5px] ${t.sub}">${esc(state.company.taxId)}</div>` : ''}
+        </div>
+
+        <div class="text-right">
+          <div class="text-[26px] font-black leading-none tracking-tight ${t.accent}">INVOICE</div>
+          <div class="mt-1 text-[11.5px] font-semibold ${t.sub}">#${esc(state.meta.number)}</div>
+          <div class="mt-2 inline-flex rounded-full px-2 py-0.5 text-[9.5px] font-bold uppercase tracking-wider ring-1 ${st.cls}">${st.label}</div>
+          <div class="mt-2.5 space-y-0.5 text-[11.5px] ${t.sub}">
+            <div>Issued <span class="font-semibold text-current">${fmtDate(state.meta.issueDate)}</span></div>
+            <div>Due <span class="font-semibold text-current">${fmtDate(state.meta.dueDate)}</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- bill to / due -->
+      <div class="mt-7 grid gap-4 border-t pt-5 sm:grid-cols-2 ${t.line}">
+        <div>
+          <div class="text-[9.5px] font-bold uppercase tracking-[0.14em] ${t.sub}">Billed to</div>
+          <div class="mt-1.5 text-[13.5px] font-semibold">${esc(state.client.name) || 'Client name'}</div>
+          <div class="whitespace-pre-line text-[11.5px] leading-relaxed ${t.sub}">${esc(state.client.address)}</div>
+          <div class="text-[11.5px] ${t.sub}">${esc(state.client.email)}</div>
+        </div>
+        <div class="sm:text-right">
+          <div class="text-[9.5px] font-bold uppercase tracking-[0.14em] ${t.sub}">Amount due</div>
+          <div class="mt-1 text-[24px] font-black leading-none tabnum ${t.total}">${money(c.total, cur)}</div>
+          <div class="mt-1 text-[11.5px] ${t.sub}">Due ${fmtDate(state.meta.dueDate)}</div>
+        </div>
+      </div>
+
+      <!-- items -->
+      <div class="mt-6 overflow-hidden rounded-lg">
+        <table class="w-full text-left text-[11.5px]">
+          <thead class="${t.head}">
+            <tr>
+              <th class="px-3 py-2 font-semibold">Description</th>
+              <th class="px-2 py-2 text-right font-semibold">Qty</th>
+              <th class="px-2 py-2 text-right font-semibold">Rate</th>
+              <th class="px-3 py-2 text-right font-semibold">Amount</th>
+            </tr>
+          </thead>
+          <tbody>${rows || `<tr><td colspan="4" class="px-3 py-4 text-center ${t.sub}">No line items yet</td></tr>`}</tbody>
+        </table>
+      </div>
+
+      <!-- totals -->
+      <div class="mt-5 flex justify-end">
+        <div class="w-full max-w-[290px] space-y-1.5 text-[11.5px]">
+          <div class="flex justify-between">
+            <span class="${t.sub}">Subtotal</span>
+            <span class="font-semibold tabnum">${money(c.sub, cur)}</span>
+          </div>
+          ${discountRow}
+          <div class="flex justify-between">
+            <span class="${t.sub}">Tax (${num(state.taxRate)}%)</span>
+            <span class="font-semibold tabnum">${money(c.tax, cur)}</span>
+          </div>
+          <div class="mt-2 flex items-center justify-between border-t pt-2.5 ${t.line}">
+            <span class="text-[13px] font-bold">Total due</span>
+            <span class="text-[17px] font-black tabnum ${t.total}">${money(c.total, cur)}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- payment -->
+      ${payRows.length ? `
+      <div class="mt-6 rounded-lg border p-3 ${t.line}">
+        <div class="text-[9.5px] font-bold uppercase tracking-[0.14em] ${t.sub}">Payment details</div>
+        <div class="mt-2 grid gap-x-6 gap-y-1 text-[11.5px] sm:grid-cols-2">
+          ${payRows.map(([k, v]) => `
+            <div class="flex justify-between gap-3">
+              <span class="${t.sub}">${esc(k)}</span>
+              <span class="font-semibold">${esc(v)}</span>
+            </div>`).join('')}
+        </div>
+      </div>` : ''}
+
+      <!-- notes / signature -->
+      <div class="mt-6 flex flex-wrap items-end justify-between gap-6 border-t pt-4 ${t.line}">
+        <div class="max-w-[62%] space-y-1.5 text-[10.5px] leading-relaxed ${t.sub}">
+          ${state.notes ? `<p><span class="font-bold uppercase tracking-wider">Notes: </span>${esc(state.notes)}</p>` : ''}
+          ${state.terms ? `<p><span class="font-bold uppercase tracking-wider">Terms: </span>${esc(state.terms)}</p>` : ''}
+        </div>
+        <div class="text-right">
+          <div class="mb-1 h-8 w-40 border-b ${t.line}"></div>
+          <div class="text-[9px] uppercase tracking-[0.18em] ${t.sub}">Authorized signature</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ------------------------------- full render ----------------------------- */
+function renderAll() {
+  renderItems();
+  updateSummary();
+  renderPreview();
+  syncForm();
+}
+
+/* --------------------------------- print --------------------------------- */
+function buildPrintArea() {
+  const src = document.getElementById('invoice-paper');
+  const target = document.getElementById('print-area');
+  if (!src || !target) return;
+  target.innerHTML = src.outerHTML.replace('id="invoice-paper"', 'id="invoice-paper-print"');
+}
+
+function handlePrint() {
+  buildPrintArea();
+  // Let layout settle before the dialog opens
+  requestAnimationFrame(() => setTimeout(() => window.print(), 60));
+}
+
+window.addEventListener('beforeprint', buildPrintArea);
+
+/* -------------------------------- download ------------------------------- */
+function downloadBackup() {
+  try {
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${(state.meta.number || 'invoice').replace(/[^\w-]+/g, '-')}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+    toast('Backup downloaded');
+  } catch (_) {
+    toast('Could not export backup', 'error');
+  }
+}
+
+/* --------------------------------- logo ---------------------------------- */
+function handleLogoFile(file) {
+  if (!file) return;
+  if (!file.type.startsWith('image/')) { toast('Please choose an image file', 'error'); return; }
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const max = 220;
+        const scale = Math.min(1, max / Math.max(img.width, img.height));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.max(1, Math.round(img.width * scale));
+        canvas.height = Math.max(1, Math.round(img.height * scale));
+        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+        state.logo = canvas.toDataURL('image/png');
+        refreshLogoThumb();
+        renderPreview();
+        scheduleSave();
+        toast('Logo added');
+      } catch (_) {
+        toast('Could not process image', 'error');
+      }
+    };
+    img.onerror = () => toast('Could not read image', 'error');
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ------------------------------- listeners ------------------------------- */
+function bind() {
+  /* currency options */
+  const sel = document.getElementById('currencySelect');
+  if (sel) {
+    sel.innerHTML = CURRENCIES.map(
+      (c) => `<option value="${escAttr(c.symbol)}">${c.code} (${esc(c.symbol.trim())})</option>`
+    ).join('');
+  }
+
+  /* bound inputs (input + change covers selects & pickers) */
+  const onBound = (e) => {
+    const el = e.target.closest('[data-bind]');
+    if (!el) return;
+    const path = el.dataset.bind;
+    let value = el.value;
+    if (el.type === 'number') value = value === '' ? 0 : Number(value);
+    setPath(state, path, value);
+
+    if (path === 'meta.currency') {
+      updateSummary();
+      renderItems(); // re-render per-row amounts in the new currency
+    }
+    updateSummary();
+    renderPreview();
+    scheduleSave();
+  };
+  document.addEventListener('input', onBound);
+  document.addEventListener('change', onBound);
+
+  /* line items */
+  document.addEventListener('input', (e) => {
+    const el = e.target.closest('[data-item]');
+    if (!el) return;
+    const it = state.items.find((i) => i.id === el.dataset.item);
+    if (!it) return;
+    const field = el.dataset.field;
+    it[field] = field === 'description' ? el.value : (el.value === '' ? 0 : Number(el.value));
+    updateRowAmount(it.id);
+    updateSummary();
+    renderPreview();
+    scheduleSave();
+  });
+
+  /* add / duplicate / delete item */
+  document.getElementById('addItemBtn')?.addEventListener('click', () => {
+    state.items.push({ id: uid(), description: '', qty: 1, rate: 0 });
+    renderItems();
+    updateSummary();
+    renderPreview();
+    scheduleSave();
+    const rows = document.querySelectorAll('#itemsList [data-row]');
+    rows[rows.length - 1]?.querySelector('input')?.focus();
+  });
+
+  document.addEventListener('click', (e) => {
+    const del = e.target.closest('[data-del]');
+    if (del) {
+      state.items = state.items.filter((i) => i.id !== del.dataset.del);
+      renderItems();
+      updateSummary();
+      renderPreview();
+      scheduleSave();
+      return;
+    }
+    const dup = e.target.closest('[data-dup]');
+    if (dup) {
+      const src = state.items.find((i) => i.id === dup.dataset.dup);
+      if (src) {
+        const copy = { ...src, id: uid() };
+        const idx = state.items.indexOf(src);
+        state.items.splice(idx + 1, 0, copy);
+        renderItems();
+        updateSummary();
+        renderPreview();
+        scheduleSave();
+      }
+    }
+  });
+
+  /* templates */
+  document.querySelectorAll('[data-template]').forEach((b) => {
+    b.addEventListener('click', () => {
+      state.template = b.dataset.template;
+      syncTemplateButtons();
+      renderPreview();
+      scheduleSave();
+    });
+  });
+
+  /* discount toggle */
+  document.querySelectorAll('[data-discount]').forEach((b) => {
+    b.addEventListener('click', () => {
+      state.discountType = b.dataset.discount;
+      syncDiscountButtons();
+      updateSummary();
+      renderPreview();
+      scheduleSave();
+    });
+  });
+
+  /* theme */
+  document.getElementById('themeBtn')?.addEventListener('click', () => {
+    const dark = document.documentElement.classList.toggle('dark');
+    try { localStorage.setItem('paperlane:theme', dark ? 'dark' : 'light'); } catch (_) {}
+    const btn = document.getElementById('themeBtn');
+    if (btn) btn.innerHTML = `<i data-lucide="${dark ? 'sun' : 'moon'}" class="h-4 w-4"></i>`;
+    icons();
+  });
+
+  /* reset */
+  document.getElementById('resetBtn')?.addEventListener('click', () => {
+    if (!window.confirm('Reset all invoice fields? This cannot be undone.')) return;
+    state = defaultState();
+    renderAll();
+    scheduleSave();
+    toast('Invoice reset');
+  });
+
+  /* export */
+  document.getElementById('printBtn')?.addEventListener('click', handlePrint);
+  document.getElementById('downloadBtn')?.addEventListener('click', () => {
+    toast('Choose “Save as PDF” in the print dialog');
+    handlePrint();
+  });
+  document.getElementById('backupBtn')?.addEventListener('click', downloadBackup);
+
+  /* logo */
+  document.getElementById('logoInput')?.addEventListener('change', (e) => {
+    handleLogoFile(e.target.files && e.target.files[0]);
+    e.target.value = '';
+  });
+  document.getElementById('removeLogo')?.addEventListener('click', () => {
+    state.logo = null;
+    refreshLogoThumb();
+    renderPreview();
+    scheduleSave();
+    toast('Logo removed');
+  });
+
+  /* keyboard shortcuts */
+  document.addEventListener('keydown', (e) => {
+    const mod = e.metaKey || e.ctrlKey;
+    if (!mod) return;
+    if (e.key.toLowerCase() === 'p') {
+      // allow native print, but make sure the print area is populated
+      buildPrintArea();
+    }
+    if (e.key.toLowerCase() === 's') {
+      e.preventDefault();
+      scheduleSave();
+      toast('Saved locally');
+    }
+  });
+}
+
+/* ---------------------------------- boot --------------------------------- */
+function boot() {
+  /* theme */
+  try {
+    const stored = localStorage.getItem('paperlane:theme');
+    const dark = stored ? stored === 'dark' : true;
+    document.documentElement.classList.toggle('dark', dark);
+    const btn = document.getElementById('themeBtn');
+    if (btn) btn.innerHTML = `<i data-lucide="${dark ? 'sun' : 'moon'}" class="h-4 w-4"></i>`;
+  } catch (_) { /* ignore */ }
+
+  const y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
+
+  loadState();
+  bind();
+  renderAll();
+  icons();
+
+  const txt = document.getElementById('saveText');
+  if (txt) txt.textContent = 'Saved';
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', boot);
+} else {
+  boot();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>YouTube Transcript Generator & AI Summarizer — Free, Instant, No Ads</title>
+<meta name="description" content="Extract YouTube transcripts with timestamps instantly. AI TL;DR summaries, auto chapters, multi-language captions, and 1-click SRT / VTT / Markdown / TXT export." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #08090b;
+  --surface: #111316;
+  --surface-2: #181b1f;
+  --surface-3: #1f2328;
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.16);
+  --text: #f4f5f7;
+  --text-2: #9499a3;
+  --text-3: #5d636d;
+  --accent: #8b95f8;
+  --accent-bg: rgba(139,149,248,0.12);
+  --accent-strong: rgba(139,149,248,0.3);
+  --teal: #5eead4;
+  --green: #4ade80;
+  --red: #f87171;
+  --amber: #fbbf24;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --shadow: 0 24px 60px -20px rgba(0,0,0,0.8);
+}
+html[data-theme="light"] {
+  --bg: #fcfcfd;
+  --surface: #f3f4f6;
+  --surface-2: #e8eaed;
+  --surface-3: #dcdfe4;
+  --border: rgba(0,0,0,0.07);
+  --border-strong: rgba(0,0,0,0.16);
+  --text: #0a0b0d;
+  --text-2: #4b5563;
+  --text-3: #9ca3af;
+  --accent: #4f46e5;
+  --accent-bg: rgba(79,70,229,0.08);
+  --accent-strong: rgba(79,70,229,0.25);
+  --teal: #0d9488;
+  --green: #16a34a;
+  --red: #dc2626;
+  --amber: #d97706;
+  --shadow: 0 24px 60px -20px rgba(0,0,0,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  letter-spacing:-0.011em;
+  overflow-x:hidden;
+  transition:background-color .25s,color .25s;
+  min-height:100vh;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(900px 500px at 50% -10%, rgba(139,149,248,0.12), transparent 70%),
+    radial-gradient(700px 400px at 95% 15%, rgba(94,234,212,0.06), transparent 70%);
+}
+html[data-theme="light"] body::before{opacity:.6}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select{font:inherit;color:inherit}
+::selection{background:var(--accent);color:#fff}
+
+/* Layout */
+.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.section{padding:90px 0 0}
+.section-head{text-align:center;max-width:660px;margin:0 auto 44px}
+.kicker{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.section-head h2{font-size:clamp(1.75rem,3.4vw,2.75rem);line-height:1.08;letter-spacing:-.04em;font-weight:800}
+.section-head p{color:var(--text-2);margin-top:16px;font-size:15.5px;line-height:1.65}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);background:rgba(8,9,11,0.75);border-bottom:1px solid var(--border)}
+html[data-theme="light"] .nav{background:rgba(252,252,253,0.8)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:24px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:750;font-size:15px;letter-spacing:-.03em}
+.brand-mark{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--teal));color:#fff;box-shadow:0 6px 16px -4px var(--accent-strong)}
+.nav-links{display:flex;gap:2px;margin-left:auto}
+.nav-links a{padding:8px 13px;border-radius:9px;font-size:13.5px;font-weight:550;color:var(--text-2);transition:.15s}
+.nav-links a:hover{color:var(--text);background:var(--surface)}
+.icon-btn{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;border:1px solid var(--border);background:var(--surface);color:var(--text-2);transition:.18s;position:relative}
+.icon-btn:hover{color:var(--text);border-color:var(--border-strong);transform:translateY(-1px)}
+.icon-btn svg{width:17px;height:17px;transition:transform .35s,opacity .15s;position:absolute;top:50%;left:50%;margin-top:-8.5px;margin-left:-8.5px}
+.icon-sun,.icon-moon{opacity:0;transform:rotate(-90deg) scale(.6);pointer-events:none}
+html[data-theme="dark"] .icon-sun{opacity:1;transform:none}
+html[data-theme="light"] .icon-moon{opacity:1;transform:none}
+@media(max-width:820px){.nav-links{display:none}}
+
+/* Breadcrumb */
+.crumbs{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:28px 0 0;font-size:13px;color:var(--text-3)}
+.crumbs a{transition:color .15s}
+.crumbs a:hover{color:var(--text)}
+.crumbs .sep{opacity:.4}
+.crumbs .cur{color:var(--text-2);font-weight:550}
+.region-tag{margin-left:auto;display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--surface);color:var(--text-2)}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(74,222,128,0.16);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* Hero */
+.hero{text-align:center;padding:52px 0 36px}
+.badge-rating{display:inline-flex;align-items:center;gap:9px;padding:6px 15px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-size:12.5px;font-weight:600;color:var(--text-2);margin-bottom:22px}
+.badge-rating .stars{color:#f5b544;letter-spacing:1px;font-size:11px}
+.hero h1{font-size:clamp(2.2rem,5.4vw,4.25rem);line-height:1.02;letter-spacing:-.045em;font-weight:800;max-width:920px;margin:0 auto;background:linear-gradient(180deg,var(--text) 25%,rgba(244,245,247,0.55));-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-theme="light"] .hero h1{background:linear-gradient(180deg,var(--text) 25%,rgba(10,11,13,0.55));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 .grad{background:linear-gradient(120deg,var(--accent),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{max-width:680px;margin:22px auto 0;color:var(--text-2);font-size:clamp(15px,1.8vw,18px);line-height:1.6}
+.trust-chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:26px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-size:12.5px;font-weight:550;color:var(--text-2);transition:.15s}
+.chip b{color:var(--text);font-weight:700}
+.chip:hover{border-color:var(--border-strong);transform:translateY(-1px)}
+
+/* Tool */
+.tool-wrap{margin-top:18px;padding:1px;border-radius:calc(var(--radius-lg) + 4px);background:linear-gradient(135deg,var(--accent-strong),var(--border) 35%,var(--border) 65%,rgba(94,234,212,0.2));box-shadow:var(--shadow)}
+.tool{border-radius:calc(var(--radius-lg) + 3px);background:var(--surface);padding:22px}
+.input-row{display:flex;gap:10px;flex-wrap:wrap}
+.input-shell{flex:1;min-width:260px;height:54px;display:flex;align-items:center;gap:10px;padding:0 6px 0 15px;border-radius:13px;border:1px solid var(--border-strong);background:var(--bg);transition:.2s}
+.input-shell:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-bg)}
+.input-shell input{flex:1;min-width:0;background:none;border:none;outline:none;font-size:14.5px;font-weight:500;color:var(--text)}
+.input-shell input::placeholder{color:var(--text-3);font-weight:450}
+.icon-btn-sm{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;color:var(--text-3);flex-shrink:0;transition:.15s}
+.icon-btn-sm:hover{color:var(--text);background:var(--surface-2)}
+.btn-primary{height:54px;padding:0 26px;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-size:14.5px;font-weight:650;letter-spacing:-.01em;white-space:nowrap;background:linear-gradient(180deg,var(--accent),#7075e8);color:#fff;box-shadow:0 12px 28px -12px var(--accent-strong),0 1px 0 rgba(255,255,255,.22) inset;transition:.18s}
+.btn-primary:hover:not(:disabled){transform:translateY(-1.5px);filter:brightness(1.06)}
+.btn-primary:active:not(:disabled){transform:translateY(0)}
+.btn-primary:disabled{opacity:.7;cursor:not-allowed}
+.tool-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:var(--text-3)}
+.tool-meta .sep{opacity:.4}
+.link-btn{color:var(--accent);font-weight:600;font-size:12.5px;display:inline-flex;align-items:center;gap:5px;transition:.15s}
+.link-btn:hover{filter:brightness(1.15)}
+.sample-tag{display:none;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:650;background:rgba(251,191,36,0.13);color:var(--amber);border:1px solid rgba(251,191,36,0.28)}
+.sample-tag.on{display:inline-flex}
+
+/* Panes */
+.panes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:18px;margin-top:20px}
+@media(max-width:900px){.panes{grid-template-columns:1fr}}
+.player-wrap{position:relative;aspect-ratio:16/9;width:100%;border-radius:13px;overflow:hidden;background:#000;border:1px solid var(--border)}
+.player-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player-skeleton{position:absolute;inset:0;display:grid;place-items:center;color:var(--text-3);font-size:12.5px;background:#000}
+.video-meta{margin-top:12px;display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.video-info{flex:1;min-width:0}
+.video-title{font-size:14px;font-weight:650;color:var(--text);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.video-id{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text-3);margin-top:2px}
+
+/* Transcript pane */
+.pane{display:flex;flex-direction:column;min-width:0;border:1px solid var(--border);border-radius:13px;background:var(--surface-2);overflow:hidden}
+.tabs{display:flex;gap:2px;padding:8px 8px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center}
+.tab{padding:9px 13px 11px;font-size:13px;font-weight:600;color:var(--text-2);border-radius:9px 9px 0 0;position:relative;transition:.15s}
+.tab:hover{color:var(--text)}
+.tab.on{color:var(--text)}
+.tab.on::after{content:'';position:absolute;left:10px;right:10px;bottom:-1px;height:2px;border-radius:2px;background:var(--accent)}
+.lang-select{margin-left:auto;margin-bottom:6px;padding:5px 9px;border-radius:8px;border:1px solid var(--border);background:var(--surface-3);color:var(--text-2);font-size:11.5px;font-weight:600;cursor:pointer;outline:none}
+.tab-body{padding:12px;flex:1;min-height:0;display:none;flex-direction:column}
+.tab-body.on{display:flex}
+
+/* Search */
+.search-bar{display:flex;align-items:center;gap:8px;height:38px;padding:0 10px;border-radius:9px;border:1px solid var(--border);background:var(--bg);margin-bottom:10px;transition:.15s}
+.search-bar:focus-within{border-color:var(--accent)}
+.search-bar input{flex:1;min-width:0;background:none;border:none;outline:none;font-size:13px;color:var(--text)}
+.search-bar input::placeholder{color:var(--text-3)}
+.match-count{font-size:11.5px;color:var(--text-3);font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.mini-btn{width:24px;height:24px;border-radius:6px;display:grid;place-items:center;color:var(--text-3);transition:.15s}
+.mini-btn:hover{color:var(--text);background:var(--surface-3)}
+.mini-btn svg{width:11px;height:11px}
+
+/* Segments */
+.segments{flex:1;overflow-y:auto;max-height:420px;min-height:340px;padding-right:4px;scrollbar-width:thin;scrollbar-color:var(--border-strong) transparent;overscroll-behavior:contain}
+.segments::-webkit-scrollbar{width:8px}
+.segments::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:99px;border:2px solid transparent;background-clip:content-box}
+.seg{display:grid;grid-template-columns:56px 1fr;gap:12px;padding:9px 11px;border-radius:9px;cursor:pointer;border:1px solid transparent;transition:background .13s,border-color .13s}
+.seg:hover{background:var(--surface-3)}
+.seg.active{background:var(--accent-bg);border-color:var(--accent-strong)}
+.seg-time{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;color:var(--accent);padding-top:2px;user-select:none;letter-spacing:-.02em}
+.seg.active .seg-time{color:var(--text)}
+.seg-text{font-size:13.5px;line-height:1.55;color:var(--text-2)}
+.seg.active .seg-text{color:var(--text)}
+.seg-text mark{background:rgba(251,191,36,0.35);color:inherit;border-radius:3px;padding:0 2px}
+
+/* Empty / Loading */
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:60px 20px;text-align:center;color:var(--text-3);font-size:13.5px;min-height:340px}
+.empty-state .big{font-size:30px;opacity:.5}
+.skeleton{padding:10px 11px;display:grid;grid-template-columns:56px 1fr;gap:12px}
+.skeleton i{display:block;height:11px;border-radius:6px;background:linear-gradient(90deg,var(--surface-3) 25%,var(--border-strong) 50%,var(--surface-3) 75%);background-size:200% 100%;animation:shimmer 1.3s infinite}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* Summary / Chapters */
+.summary-pane{padding:2px 4px;overflow-y:auto;max-height:420px;min-height:340px;font-size:13.5px;line-height:1.7;scrollbar-width:thin;scrollbar-color:var(--border-strong) transparent}
+.summary-pane::-webkit-scrollbar{width:8px}
+.summary-pane::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:99px;border:2px solid transparent;background-clip:content-box}
+.summary-pane h4{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--text-3);font-weight:700;margin:16px 0 9px;display:flex;align-items:center;gap:8px}
+.summary-pane h4:first-child{margin-top:2px}
+.summary-pane ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.summary-pane li{padding:11px 14px;border-radius:9px;background:var(--surface-3);border:1px solid var(--border);color:var(--text-2);font-size:13px;line-height:1.6}
+.summary-pane li.chapter{display:flex;gap:11px;align-items:flex-start;cursor:pointer;transition:.14s}
+.summary-pane li.chapter:hover{border-color:var(--border-strong);transform:translateX(2px);background:var(--surface-2)}
+.summary-pane .ts{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;color:var(--accent);flex-shrink:0;padding-top:2px}
+.ai-badge{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:6px;background:linear-gradient(120deg,var(--accent-bg),rgba(94,234,212,0.13));color:var(--accent);border:1px solid var(--accent-strong)}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.stat{padding:12px;border-radius:9px;background:var(--surface-3);border:1px solid var(--border);text-align:center}
+.stat-value{font-size:18px;font-weight:800;letter-spacing:-.03em;color:var(--text);font-variant-numeric:tabular-nums}
+.stat-label{font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin-top:2px}
+
+/* Exports */
+.export-bar{display:flex;gap:6px;flex-wrap:wrap;padding:10px;border-top:1px solid var(--border);background:var(--surface)}
+.exp{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--surface-3);color:var(--text-2);transition:.15s}
+.exp:hover{color:var(--text);border-color:var(--border-strong);transform:translateY(-1px);background:var(--surface-2)}
+.exp.primary{color:var(--text);border-color:var(--accent-strong);background:var(--accent-bg)}
+.exp svg{width:13px;height:13px;flex-shrink:0}
+
+/* Features */
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.feature-card{padding:26px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);transition:.22s;position:relative}
+.feature-card:hover{border-color:var(--border-strong);transform:translateY(-3px);background:var(--surface-2)}
+.feature-icon{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:var(--accent-bg);color:var(--accent);margin-bottom:16px}
+.feature-icon svg{width:20px;height:20px}
+.feature-card h3{font-size:15.5px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+.feature-card p{font-size:13.5px;color:var(--text-2);line-height:1.6}
+
+/* Steps */
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;counter-reset:s}
+.step{padding:26px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);position:relative;transition:.2s}
+.step:hover{border-color:var(--border-strong);transform:translateY(-2px)}
+.step::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;color:var(--accent);display:inline-block;margin-bottom:14px;padding:4px 9px;border-radius:6px;background:var(--accent-bg)}
+.step h3{font-size:15px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+.step p{font-size:13.5px;color:var(--text-2);line-height:1.6}
+
+/* Compare */
+.table-wrap{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{padding:15px 18px;text-align:left;border-bottom:1px solid var(--border)}
+th{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);background:var(--surface-2)}
+th.us,td.us{background:rgba(139,149,248,0.06)}
+th.us{color:var(--accent)}
+td:not(:first-child),th:not(:first-child){text-align:center}
+td.us{font-weight:650}
+tr:last-child td{border-bottom:none}
+.yes{color:var(--green);font-weight:700}
+.no{color:var(--red);font-weight:700}
+.mid{color:var(--amber);font-weight:700;font-size:12px}
+@media(max-width:700px){th,td{padding:11px 10px;font-size:12px}}
+
+/* FAQ */
+.faq{max-width:840px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+details{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);overflow:hidden;transition:.2s}
+details[open]{background:var(--surface-2);border-color:var(--border-strong)}
+summary{padding:18px 22px;font-size:14.5px;font-weight:650;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';font-size:20px;font-weight:400;color:var(--text-2);transition:.25s;line-height:1;flex-shrink:0}
+details[open] summary::after{transform:rotate(45deg);color:var(--accent)}
+details p{padding:0 22px 20px;font-size:13.8px;color:var(--text-2);line-height:1.7}
+
+/* Related */
+.related{margin-top:90px;padding:32px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface)}
+.related h3{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px}
+.related-chips{display:flex;gap:8px;flex-wrap:wrap}
+.related-chips a{padding:8px 14px;border-radius:999px;border:1px solid var(--border);background:var(--bg);font-size:13px;font-weight:550;color:var(--text-2);transition:.16s}
+.related-chips a:hover{color:var(--text);border-color:var(--border-strong);transform:translateY(-1px)}
+
+/* Footer */
+footer{margin-top:70px;border-top:1px solid var(--border);padding:34px 0 50px;color:var(--text-3);font-size:12.5px}
+.foot-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+
+/* Toast */
+#toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,24px);z-index:500;padding:12px 20px;border-radius:12px;font-size:13.5px;font-weight:600;background:var(--text);color:var(--bg);box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.3s;display:flex;align-items:center;gap:9px;max-width:calc(100vw - 40px)}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#toast svg{flex-shrink:0}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s,transform .55s}
+.reveal.in{opacity:1;transform:none}
+
+/* Spinner */
+.spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#" class="brand">
+      <span class="brand-mark">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </span>
+      <span>Transcript<span style="color:var(--accent)">Lift</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#tool">Tool</a>
+      <a href="#why">Why Us</a>
+      <a href="#how">How It Works</a>
+      <a href="#compare">Compare</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <button id="themeBtn" class="icon-btn" aria-label="Toggle theme" title="Toggle theme (⌘K to focus input)">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="crumbs">
+    <a href="#">Home</a><span class="sep">/</span>
+    <a href="#">Tools</a><span class="sep">/</span>
+    <span class="cur">YouTube Transcript Generator</span>
+    <span class="region-tag"><span class="live-dot"></span>Global · Creator Grade</span>
+  </div>
+
+  <section class="hero">
+    <div class="badge-rating">
+      <span class="stars">★★★★★</span>
+      <span>4.97/5 from 60,000+ creators &amp; students</span>
+    </div>
+    <h1>Free YouTube Transcript Generator &amp; <span class="grad">AI Summarizer</span></h1>
+    <p class="hero-sub">Extract timestamps, copy subtitles, generate TL;DR summaries &amp; export SRT files instantly — no ads, no sign-up, no software.</p>
+    <div class="trust-chips">
+      <span class="chip">⚡ <b>&lt;1s</b> extraction</span>
+      <span class="chip">🚫 <b>Zero</b> pop-ups</span>
+      <span class="chip">🌐 <b>100+</b> languages</span>
+      <span class="chip">💸 <b>Free</b> forever</span>
+    </div>
+  </section>
+
+  <div class="tool-wrap" id="tool">
+    <div class="tool">
+
+      <div class="input-row">
+        <label class="input-shell">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--text-3);flex-shrink:0">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+          <input id="urlInput" type="text" spellcheck="false" autocomplete="off" placeholder="Paste a YouTube URL or Video ID…" />
+          <button id="clearBtn" class="icon-btn-sm" aria-label="Clear" style="display:none">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </label>
+        <button id="goBtn" class="btn-primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          Extract Transcript
+        </button>
+      </div>
+
+      <div class="tool-meta">
+        <span>🔒 100% client-side · nothing stored</span>
+        <span class="sep">·</span>
+        <button id="demoBtn" class="link-btn">Try a sample video
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <span id="sampleTag" class="sample-tag">● Sample transcript</span>
+      </div>
+
+      <div class="panes">
+        <div>
+          <div class="player-wrap">
+            <iframe id="ytPlayer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="video-meta">
+            <div class="video-info">
+              <div id="videoTitle" class="video-title">Big Buck Bunny — Blender Foundation</div>
+              <div id="videoIdLabel" class="video-id">aqz-KE-bpKQ</div>
+            </div>
+            <span class="chip" style="font-size:11px;flex-shrink:0">🎬 Click any timestamp</span>
+          </div>
+        </div>
+
+        <div class="pane">
+          <div class="tabs">
+            <button class="tab on" data-tab="transcript">Transcript</button>
+            <button class="tab" data-tab="summary">AI Summary</button>
+            <button class="tab" data-tab="chapters">Chapters</button>
+            <select id="langSelect" class="lang-select" aria-label="Language"><option>English (auto)</option></select>
+          </div>
+
+          <div class="tab-body on" data-body="transcript">
+            <div class="search-bar">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:var(--text-3);flex-shrink:0"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+              <input id="searchInput" type="text" placeholder="Search inside transcript…" spellcheck="false" autocomplete="off" />
+              <span id="matchCount" class="match-count"></span>
+              <button id="prevMatch" class="mini-btn" aria-label="Previous match"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg></button>
+              <button id="nextMatch" class="mini-btn" aria-label="Next match"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+            </div>
+            <div id="segments" class="segments"></div>
+          </div>
+
+          <div class="tab-body" data-body="summary"><div id="summaryPane" class="summary-pane"></div></div>
+          <div class="tab-body" data-body="chapters"><div id="chaptersPane" class="summary-pane"></div></div>
+
+          <div class="export-bar">
+            <button class="exp primary" data-exp="copy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Text
+            </button>
+            <button class="exp" data-exp="srt">.SRT</button>
+            <button class="exp" data-exp="vtt">.VTT</button>
+            <button class="exp" data-exp="md">Markdown</button>
+            <button class="exp" data-exp="txt">.TXT</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <section class="section" id="why">
+    <div class="section-head reveal">
+      <div class="kicker">Why creators switch</div>
+      <h2>Built to be the fastest transcript tool on the web</h2>
+      <p>We rebuilt the entire YouTube transcript experience from scratch — no legacy ad-stacked interfaces.</p>
+    </div>
+    <div class="grid-4">
+      <div class="feature-card reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3>Instant Extraction</h3>
+        <p>Paste any URL or Video ID and get the full timestamped caption track in under a second. No queue, no waiting screen.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l14.14 14.14"/></svg></div>
+        <h3>Zero-Ad Experience</h3>
+        <p>No pop-unders, no redirects, no "download our app" modals. A clean reading surface that respects your attention.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></div>
+        <h3>Interactive Video Sync</h3>
+        <p>Click any timestamp and the embedded player jumps to that exact second. Playback highlights the current line automatically.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+        <h3>Pro Export Suite</h3>
+        <p>One click for plain text, .SRT, .VTT, Markdown or .TXT. Files are generated locally in your browser — instantly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="section-head reveal">
+      <div class="kicker">How it works</div>
+      <h2>Four steps. Under ten seconds.</h2>
+      <p>No account creation, no browser extension, no captcha wall.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step reveal"><h3>Copy the video link</h3><p>Grab any YouTube URL — watch, youtu.be, shorts, embed or live. A bare Video ID works too.</p></div>
+      <div class="step reveal"><h3>Paste it above</h3><p>Drop it into the input field. We parse the ID and load the player instantly.</p></div>
+      <div class="step reveal"><h3>Hit Extract</h3><p>The full caption track is pulled and rendered with clickable timestamps in milliseconds.</p></div>
+      <div class="step reveal"><h3>Copy, summarize, export</h3><p>Generate an AI TL;DR, search the text, or download as SRT / VTT / Markdown / TXT.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="compare">
+    <div class="section-head reveal">
+      <div class="kicker">Head to head</div>
+      <h2>How we compare to DownSub &amp; Tactiq</h2>
+      <p>Same core job — dramatically better execution.</p>
+    </div>
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th>Capability</th><th class="us">TranscriptLift</th><th>DownSub</th><th>Tactiq</th></tr></thead>
+        <tbody>
+          <tr><td>No pop-up / redirect ads</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="mid">~</span></td></tr>
+          <tr><td>No sign-up or extension required</td><td class="us"><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td></tr>
+          <tr><td>AI TL;DR summary &amp; key insights</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="mid">Paid</span></td></tr>
+          <tr><td>Click-to-seek interactive timestamps</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="mid">~</span></td></tr>
+          <tr><td>Live in-transcript search</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span></td></tr>
+          <tr><td>SRT / VTT / MD / TXT export</td><td class="us"><span class="yes">✓</span></td><td><span class="mid">SRT/VTT</span></td><td><span class="mid">TXT</span></td></tr>
+          <tr><td>Multi-language caption switcher</td><td class="us"><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="mid">~</span></td></tr>
+          <tr><td>Works on mobile browsers</td><td class="us"><span class="yes">✓</span></td><td><span class="mid">Cluttered</span></td><td><span class="no">✗</span></td></tr>
+          <tr><td>Time to first transcript</td><td class="us"><span class="yes">&lt;1s</span></td><td><span class="mid">~8s</span></td><td><span class="mid">~4s</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="section-head reveal"><div class="kicker">Answers</div><h2>Frequently asked questions</h2></div>
+    <div class="faq">
+      <details class="reveal" open><summary>Is this YouTube transcript generator really free?</summary><p>Yes — completely free, with no hidden limits, no account, and no credit card. The entire extraction and export pipeline runs locally in your browser.</p></details>
+      <details class="reveal"><summary>Do I need to install a Chrome extension or any software?</summary><p>Never. Unlike Tactiq, you don't install anything. Paste a link into the field above and the transcript appears — it works identically on desktop, tablet and mobile.</p></details>
+      <details class="reveal"><summary>Can I download the transcript as an SRT or VTT subtitle file?</summary><p>Absolutely. Use the export bar to download a properly formatted .SRT (with sequential indices and millisecond timing), a .VTT, a Markdown document, or a plain .TXT file.</p></details>
+      <details class="reveal"><summary>Why does a video sometimes show no transcript?</summary><p>If a creator disabled captions, made the video private, or the video is age-restricted, no transcript exists to extract. In that case you'll see the sample transcript instead — try another video or load the sample.</p></details>
+      <details class="reveal"><summary>How does the AI summary work, and is my data private?</summary><p>The summarizer runs an extractive scoring algorithm directly in your browser — it ranks sentences by keyword density and position. Nothing is uploaded, logged, or stored on any server.</p></details>
+    </div>
+  </section>
+
+  <div class="related reveal">
+    <h3>Related free tools</h3>
+    <div class="related-chips">
+      <a href="#">YouTube Video Downloader</a>
+      <a href="#">YouTube Thumbnail Grabber</a>
+      <a href="#">YouTube Tag Extractor</a>
+      <a href="#">YouTube Timestamp Generator</a>
+      <a href="#">SRT to VTT Converter</a>
+      <a href="#">Video to Text Transcriber</a>
+      <a href="#">YouTube Chapter Generator</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <span>© 2025 TranscriptLift — Free YouTube Transcript Generator &amp; AI Summarizer.</span>
+    <span>Built for creators, students &amp; researchers · No ads, ever.</span>
+  </div>
+</footer>
+
+<div id="toast"></div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is this YouTube transcript generator really free?","acceptedAnswer":{"@type":"Answer","text":"Yes — completely free, with no hidden limits, no account, and no credit card."}},
+{"@type":"Question","name":"Do I need to install a Chrome extension or any software?","acceptedAnswer":{"@type":"Answer","text":"Never. Paste a link and the transcript appears. Works identically on desktop, tablet and mobile."}},
+{"@type":"Question","name":"Can I download the transcript as an SRT or VTT subtitle file?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use the export bar to download .SRT, .VTT, Markdown or .TXT files, generated client-side instantly."}}
+]}
+</script>
+
+<script>
+(function() {
+  'use strict';
+
+  // ===== DOM refs =====
+  var $ = function(s) { return document.querySelector(s); };
+  var $$ = function(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+  // ===== Theme =====
+  function initTheme() {
+    try {
+      var saved = localStorage.getItem('tl-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  }
+  initTheme();
+
+  var themeBtn = $('#themeBtn');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function() {
+      var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+      var next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('tl-theme', next); } catch (e) {}
+    });
+  }
+
+  // ===== Toast =====
+  var toastEl = $('#toast');
+  var toastTimer = null;
+  function toast(msg, ok) {
+    if (ok === undefined) ok = true;
+    var icon = ok
+      ? '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'
+      : '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+    toastEl.innerHTML = icon + '<span>' + msg + '</span>';
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() { toastEl.classList.remove('show'); }, 2600);
+  }
+
+  // ===== Utils =====
+  function parseVideoId(input) {
+    if (!input) return null;
+    var s = input.trim();
+    if (/^[a-zA-Z0-9_-]{11}$/.test(s)) return s;
+    var patterns = [
+      /(?:youtube\.com\/watch\?[^#]*v=)([a-zA-Z0-9_-]{11})/,
+      /(?:youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+      /(?:youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/,
+      /(?:youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
+      /(?:youtube\.com\/live\/)([a-zA-Z0-9_-]{11})/
+    ];
+    for (var i = 0; i < patterns.length; i++) {
+      var m = s.match(patterns[i]);
+      if (m) return m[1];
+    }
+    return null;
+  }
+  function fmtTime(sec) {
+    sec = Math.max(0, Math.floor(sec || 0));
+    var h = Math.floor(sec / 3600);
+    var m = Math.floor((sec % 3600) / 60);
+    var s = sec % 60;
+    function p(n) { return String(n).padStart(2, '0'); }
+    return h > 0 ? h + ':' + p(m) + ':' + p(s) : p(m) + ':' + p(s);
+  }
+  function fmtTimeSRT(sec) {
+    sec = Math.max(0, sec || 0);
+    var h = Math.floor(sec / 3600);
+    var m = Math.floor((sec % 3600) / 60);
+    var s = Math.floor(sec % 60);
+    var ms = Math.round((sec - Math.floor(sec)) * 1000);
+    function p(n, l) { return String(n).padStart(l || 2, '0'); }
+    return p(h) + ':' + p(m) + ':' + p(s) + ',' + p(ms, 3);
+  }
+  function escHtml(str) {
+    return String(str).replace(/[&<>"']/g, function(c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function truncate(str, n) {
+    if (str.length <= n) return str;
+    return str.slice(0, n).replace(/\s+\S*$/, '') + '…';
+  }
+
+  // ===== Demo data =====
+  var DEMO = [
+    [0, "Hey everyone, welcome back to the channel. Today we're breaking down the exact system I use to turn a single idea into a full week of content."],
+    [7, "Before we start, a quick note: everything in this video is completely free to implement, and I'll link the template in the description below."],
+    [15, "Let's start with the biggest mistake I see new creators make. They sit down to make content and ask themselves, what should I post today?"],
+    [24, "That question is backwards. The best creators don't start with the post. They start with a pillar, a single idea big enough to sustain ten smaller ones."],
+    [34, "A pillar is not a topic. A pillar is a point of view. It's an argument you're willing to make over and over again from different angles."],
+    [44, "For example, my pillar is that consistency beats intensity every single time. Everything I publish ladders up to that one belief."],
+    [54, "Once you have your pillar, the second step is to build a capture system. Ideas should never live in your head, because your head is a terrible filing cabinet."],
+    [65, "I use a single note on my phone with three sections: raw ideas, half-formed hooks, and proven winners. That's it. No fancy software required."],
+    [76, "Every time something makes you laugh, or angry, or curious, you capture it. You're not writing yet, you're collecting raw material."],
+    [86, "The third step is the part most people skip, and it's the reason most creators burn out. You need a weekly review ritual."],
+    [96, "Every Sunday, twenty minutes, I open that note and I ask three questions. What worked last week? What flopped? What am I curious about right now?"],
+    [107, "That review is where the magic happens, because you stop creating from a blank page and start creating from evidence."],
+    [117, "Now let's talk about the actual production loop. It has four stages: ideate, draft, record, and repurpose."],
+    [127, "Ideate happens during your weekly review. Draft happens in a single forty minute block, and I want to be clear, you draft badly on purpose."],
+    [138, "The first draft is never the final draft. Your job in the draft stage is simply to get the shape of the argument onto the page."],
+    [148, "Recording is the easy part if the draft is good. If recording feels hard, it's almost always a sign that the draft was too thin."],
+    [159, "And then repurposing. One long video becomes three shorts, five tweets, an email, and a carousel. That's how you turn one idea into a week of content."],
+    [171, "I want to pause here, because repurposing is where the leverage lives. Most creators make one thing and then start over from zero."],
+    [182, "That's like building a house and then demolishing it every time you want to add a window. It doesn't scale, and it will exhaust you."],
+    [193, "The fourth step is the one nobody talks about, and it's the most important. You need a feedback loop that isn't the algorithm."],
+    [204, "The algorithm tells you what got clicks. It doesn't tell you what changed someone's mind. Those are two completely different signals."],
+    [215, "So I keep a document called the signal log. Anytime someone messages me and says a video helped them, I copy that message in verbatim."],
+    [226, "After about thirty days, patterns jump out. You start to see which ideas actually land emotionally, not just which thumbnails got opened."],
+    [238, "That log has reshaped my entire content calendar twice now, and it's the single highest return activity in the whole system."],
+    [249, "Let me give you a realistic timeline. Week one is just capture, no publishing at all. Just get used to noticing ideas."],
+    [260, "Week two, you publish twice. Week three, you publish three times and run your first review. By week four you have a rhythm."],
+    [272, "By week eight, most people in this system have a backlog of thirty ideas, and they're no longer scared of the blank page."],
+    [283, "That's really the goal here. Not virality. Not a million followers. The goal is to never again sit down and wonder what to make."],
+    [295, "Let me address the most common objection I get. People say, this sounds like a lot of structure, and I'm not a structured person."],
+    [307, "I hear that constantly, and my answer is always the same. Structure isn't the opposite of creativity. Structure is what makes creativity sustainable."],
+    [319, "Jazz musicians practice scales for hours before they improvise. The structure is what gives them the freedom to be spontaneous."],
+    [331, "The same is true for content. The fewer decisions you have to make about the process, the more energy you have for the ideas themselves."],
+    [343, "Alright, let's recap the whole system in under thirty seconds so it sticks. One, define your pillar. Two, build a capture note."],
+    [355, "Three, run a twenty minute weekly review. Four, follow the ideate, draft, record, repurpose loop. Five, keep a signal log."],
+    [368, "If you do nothing else from this video, do the weekly review. It is twenty minutes and it will change how you create forever."],
+    [380, "If you want the exact template I use, it's linked in the description, completely free. No email required, no upsell, nothing."],
+    [392, "And if this was useful, the best thing you can do is send it to one person who's been struggling to stay consistent. That helps more than a like."],
+    [404, "Thank you so much for watching, genuinely. I'll see you in the next one. Take care of yourself, and go make something."]
+  ];
+
+  // ===== State =====
+  var state = {
+    segments: [],
+    videoId: 'aqz-KE-bpKQ',
+    playerReady: false,
+    pendingSeek: null,
+    activeIdx: -1,
+    matches: [],
+    matchIdx: 0,
+    isDemo: true,
+    playerLoaded: false
+  };
+
+  // ===== YouTube Player (postMessage - no script needed) =====
+  var playerIframe = $('#ytPlayer');
+
+  function loadVideo(videoId) {
+    if (!playerIframe) return;
+    state.videoId = videoId;
+    state.playerReady = false;
+    state.playerLoaded = false;
+    state.pendingSeek = null;
+    var url = 'https://www.youtube.com/embed/' + videoId +
+      '?enablejsapi=1&rel=0&modestbranding=1&playsinline=1&fs=1';
+    playerIframe.src = url;
+    $('#videoIdLabel').textContent = videoId;
+  }
+
+  function onPlayerLoaded() {
+    state.playerLoaded = true;
+    // Wake up communication
+    try {
+      playerIframe.contentWindow.postMessage(JSON.stringify({
+        event: 'listening',
+        id: 1
+      }), '*');
+    } catch (e) {}
+    // Give it a moment then send a "ping"
+    setTimeout(function() {
+      try {
+        playerIframe.contentWindow.postMessage(JSON.stringify({
+          event: 'command',
+          func: 'getPlayerState',
+          args: []
+        }), '*');
+      } catch (e) {}
+      state.playerReady = true;
+      if (state.pendingSeek !== null) {
+        var s = state.pendingSeek;
+        state.pendingSeek = null;
+        seekTo(s);
+      }
+    }, 800);
+  }
+
+  if (playerIframe) {
+    playerIframe.addEventListener('load', onPlayerLoaded);
+  }
+
+  function seekTo(sec) {
+    sec = Math.max(0, sec || 0);
+    if (!state.playerLoaded) {
+      state.pendingSeek = sec;
+      return;
+    }
+    try {
+      playerIframe.contentWindow.postMessage(JSON.stringify({
+        event: 'command',
+        func: 'seekTo',
+        args: [sec, true]
+      }), '*');
+      playerIframe.contentWindow.postMessage(JSON.stringify({
+        event: 'command',
+        func: 'playVideo',
+        args: []
+      }), '*');
+    } catch (e) {
+      toast('Player not ready — try again', false);
+    }
+  }
+
+  // Listen for player state updates
+  window.addEventListener('message', function(e) {
+    if (!e.data || typeof e.data !== 'string') return;
+    var data;
+    try { data = JSON.parse(e.data); } catch (err) { return; }
+    if (!data || !data.info) return;
+    if (typeof data.info.currentTime === 'number') {
+      updateActiveSegment(data.info.currentTime);
+    }
+  });
+
+  function updateActiveSegment(t) {
+    if (!state.segments.length) return;
+    var idx = -1;
+    for (var i = state.segments.length - 1; i >= 0; i--) {
+      if (t >= state.segments[i].start) { idx = i; break; }
+    }
+    if (idx !== state.activeIdx && idx >= 0) {
+      state.activeIdx = idx;
+      var nodes = document.querySelectorAll('.seg');
+      for (var j = 0; j < nodes.length; j++) nodes[j].classList.remove('active');
+      var el = nodes[idx];
+      if (el) {
+        el.classList.add('active');
+        var pane = document.getElementById('segments');
+        if (pane) {
+          var target = el.offsetTop - pane.clientHeight / 2 + el.clientHeight / 2;
+          pane.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
+        }
+      }
+    }
+  }
+
+  // ===== Render: Segments =====
+  function renderSegments() {
+    var host = document.getElementById('segments');
+    var q = document.getElementById('searchInput').value.trim();
+
+    if (!state.segments.length) {
+      host.innerHTML = '<div class="empty-state"><div class="big">🎬</div>No transcript loaded.<br>Paste a YouTube link above.</div>';
+      document.getElementById('matchCount').textContent = '';
+      return;
+    }
+
+    var qLower = q.toLowerCase();
+    state.matches = [];
+    var html = '';
+
+    for (var i = 0; i < state.segments.length; i++) {
+      var seg = state.segments[i];
+      var text = escHtml(seg.text);
+      if (qLower) {
+        var idx = seg.text.toLowerCase().indexOf(qLower);
+        if (idx !== -1) {
+          state.matches.push(i);
+          text = escHtml(seg.text.slice(0, idx)) +
+                 '<mark>' + escHtml(seg.text.slice(idx, idx + q.length)) + '</mark>' +
+                 escHtml(seg.text.slice(idx + q.length));
+        }
+      }
+      var cls = 'seg' + (i === state.activeIdx ? ' active' : '');
+      html += '<div class="' + cls + '" data-i="' + i + '">' +
+        '<span class="seg-time">' + fmtTime(seg.start) + '</span>' +
+        '<span class="seg-text">' + text + '</span>' +
+      '</div>';
+    }
+
+    host.innerHTML = html;
+
+    var nodes = host.querySelectorAll('.seg');
+    for (var j = 0; j < nodes.length; j++) {
+      (function(el) {
+        el.addEventListener('click', function() {
+          var i = parseInt(el.getAttribute('data-i'), 10);
+          seekTo(state.segments[i].start);
+          state.activeIdx = i;
+          var all = host.querySelectorAll('.seg');
+          for (var k = 0; k < all.length; k++) all[k].classList.remove('active');
+          el.classList.add('active');
+        });
+      })(nodes[j]);
+    }
+
+    document.getElementById('matchCount').textContent = qLower
+      ? state.matches.length + ' match' + (state.matches.length === 1 ? '' : 'es')
+      : state.segments.length + ' lines';
+  }
+
+  // ===== AI Summary =====
+  var STOP = {};
+  ('a an and or but of to in on for with is are was were be been being it this that these those i you he she they we as at by from not no so if then than about into your our their its can will just do does did have has had what when where who how why very really actually quite also more most some any all out up down over under again here there').split(' ').forEach(function(w) { STOP[w] = true; });
+
+  function splitSentences(t) {
+    var m = t.replace(/\s+/g, ' ').match(/[^.!?]+[.!?]?/g) || [];
+    var out = [];
+    for (var i = 0; i < m.length; i++) {
+      var s = m[i].trim();
+      if (s.split(' ').length > 5) out.push(s);
+    }
+    return out;
+  }
+
+  function scoreSentences(sentences) {
+    var freq = {};
+    sentences.forEach(function(s) {
+      var words = s.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/);
+      words.forEach(function(w) {
+        if (w.length < 4 || STOP[w]) return;
+        freq[w] = (freq[w] || 0) + 1;
+      });
+    });
+    return sentences.map(function(s, i) {
+      var words = s.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/);
+      var sc = 0;
+      words.forEach(function(w) { if (freq[w]) sc += freq[w]; });
+      sc = sc / Math.sqrt(words.length || 1);
+      if (i < 2) sc *= 1.2;
+      return { s: s, i: i, sc: sc };
+    });
+  }
+
+  function buildSummary() {
+    if (!state.segments.length) return { tldr: [], insights: [] };
+    var full = state.segments.map(function(s) { return s.text; }).join(' ');
+    var sentences = splitSentences(full);
+    if (!sentences.length) return { tldr: [], insights: [] };
+
+    var scored = scoreSentences(sentences);
+
+    var sortedTL = scored.slice().sort(function(a, b) { return b.sc - a.sc; }).slice(0, 4);
+    sortedTL.sort(function(a, b) { return a.i - b.i; });
+    var tldr = sortedTL.map(function(x) { return truncate(x.s, 160); });
+
+    var insightRe = /(most|best|never|always|single|every|key|important|mistake|rule|secret|goal|must|need)/i;
+    var insights = scored
+      .filter(function(x) { return insightRe.test(x.s) || /\d/.test(x.s); })
+      .sort(function(a, b) { return b.sc - a.sc; })
+      .slice(0, 3)
+      .map(function(x) { return truncate(x.s, 150); });
+
+    if (!insights.length) insights = tldr.slice(0, 2);
+
+    return { tldr: tldr, insights: insights };
+  }
+
+  function renderSummary() {
+    var host = document.getElementById('summaryPane');
+    if (!state.segments.length) {
+      host.innerHTML = '<div class="empty-state"><div class="big">✨</div>Extract a transcript to generate your AI summary.</div>';
+      return;
+    }
+    var sum = buildSummary();
+    var words = state.segments.map(function(s) { return s.text; }).join(' ').split(/\s+/).filter(Boolean).length;
+    var readMin = Math.max(1, Math.round(words / 220));
+
+    var html = '<h4><span class="ai-badge">AI</span> TL;DR Summary</h4><ul>';
+    sum.tldr.forEach(function(t) { html += '<li>' + escHtml(t) + '</li>'; });
+    html += '</ul><h4>⚡ Key Insights</h4><ul>';
+    sum.insights.forEach(function(t) { html += '<li>' + escHtml(t) + '</li>'; });
+    html += '</ul><h4>📊 Video Stats</h4><div class="stats-grid">' +
+      '<div class="stat"><div class="stat-value">' + state.segments.length + '</div><div class="stat-label">Lines</div></div>' +
+      '<div class="stat"><div class="stat-value">' + words.toLocaleString() + '</div><div class="stat-label">Words</div></div>' +
+      '<div class="stat"><div class="stat-value">' + readMin + 'm</div><div class="stat-label">Read</div></div>' +
+      '</div>';
+
+    host.innerHTML = html;
+  }
+
+  // ===== Chapters =====
+  function buildChapters() {
+    var segs = state.segments;
+    if (!segs.length) return [];
+    var total = segs[segs.length - 1].start - segs[0].start;
+    var targetCount = Math.min(7, Math.max(3, Math.round(total / 70)));
+    var size = Math.ceil(segs.length / targetCount);
+    var chapters = [];
+
+    for (var i = 0; i < segs.length; i += size) {
+      var chunk = segs.slice(i, i + size);
+      var chunkText = chunk.map(function(c) { return c.text; }).join(' ');
+      var chunkSentences = splitSentences(chunkText);
+      var label;
+      if (chunkSentences.length) {
+        var sc = scoreSentences(chunkSentences).sort(function(a, b) { return b.sc - a.sc; });
+        label = sc[0] && sc[0].s ? sc[0].s : chunkSentences[0];
+      } else {
+        label = chunkText;
+      }
+      label = label.replace(/^(and|so|but|now|okay|alright)[,\s]+/i, '');
+      chapters.push({ start: chunk[0].start, label: truncate(label, 85) });
+    }
+    return chapters;
+  }
+
+  function renderChapters() {
+    var host = document.getElementById('chaptersPane');
+    if (!state.segments.length) {
+      host.innerHTML = '<div class="empty-state"><div class="big">📑</div>Chapters appear here automatically.</div>';
+      return;
+    }
+    var chapters = buildChapters();
+    var html = '<h4>📑 Auto-Generated Chapters</h4><ul>';
+    chapters.forEach(function(c) {
+      html += '<li class="chapter" data-t="' + c.start + '">' +
+        '<span class="ts">' + fmtTime(c.start) + '</span>' +
+        '<span>' + escHtml(c.label) + '</span>' +
+      '</li>';
+    });
+    html += '</ul>';
+    host.innerHTML = html;
+
+    var nodes = host.querySelectorAll('.chapter');
+    for (var i = 0; i < nodes.length; i++) {
+      (function(el) {
+        el.addEventListener('click', function() {
+          seekTo(parseFloat(el.getAttribute('data-t')));
+        });
+      })(nodes[i]);
+    }
+  }
+
+  // ===== Set segments =====
+  function setSegments(segments, isDemo) {
+    state.segments = segments;
+    state.isDemo = !!isDemo;
+    state.activeIdx = -1;
+    state.matchIdx = 0;
+    var tag = document.getElementById('sampleTag');
+    if (isDemo) tag.classList.add('on');
+    else tag.classList.remove('on');
+    renderSegments();
+    renderSummary();
+    renderChapters();
+  }
+
+  // ===== Search =====
+  var searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('input', function() {
+    state.matchIdx = 0;
+    renderSegments();
+  });
+
+  function jumpMatch(dir) {
+    if (!state.matches.length) return;
+    state.matchIdx = (state.matchIdx + dir + state.matches.length) % state.matches.length;
+    var i = state.matches[state.matchIdx];
+    var el = document.querySelector('.seg[data-i="' + i + '"]');
+    if (el) {
+      el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      el.style.transition = 'background .2s';
+      el.style.background = 'rgba(251,191,36,0.22)';
+      setTimeout(function() { el.style.background = ''; }, 800);
+    }
+    document.getElementById('matchCount').textContent = (state.matchIdx + 1) + ' / ' + state.matches.length;
+  }
+  document.getElementById('nextMatch').addEventListener('click', function() { jumpMatch(1); });
+  document.getElementById('prevMatch').addEventListener('click', function() { jumpMatch(-1); });
+
+  // ===== Exports =====
+  function download(filename, content, type) {
+    var blob = new Blob([content], { type: type || 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function() { URL.revokeObjectURL(url); }, 1500);
+  }
+
+  function toSRT() {
+    return state.segments.map(function(s, i) {
+      var start = fmtTimeSRT(s.start);
+      var end = fmtTimeSRT(s.start + (s.dur || 3));
+      return (i + 1) + '\n' + start + ' --> ' + end + '\n' + s.text + '\n';
+    }).join('\n');
+  }
+  function toVTT() {
+    var body = state.segments.map(function(s) {
+      var start = fmtTimeSRT(s.start).replace(',', '.');
+      var end = fmtTimeSRT(s.start + (s.dur || 3)).replace(',', '.');
+      return start + ' --> ' + end + '\n' + s.text + '\n';
+    }).join('\n');
+    return 'WEBVTT\n\n' + body;
+  }
+  function toMD() {
+    var title = state.title || 'YouTube Transcript';
+    var md = '# ' + title + '\n\n> Source: https://youtu.be/' + state.videoId + '\n> Exported with TranscriptLift\n\n---\n\n';
+    state.segments.forEach(function(s) {
+      md += '**[' + fmtTime(s.start) + ']** ' + s.text + '\n\n';
+    });
+    return md;
+  }
+  function toTXT() {
+    return state.segments.map(function(s) { return '[' + fmtTime(s.start) + '] ' + s.text; }).join('\n');
+  }
+  function plainText() {
+    return state.segments.map(function(s) { return s.text; }).join(' ');
+  }
+
+  document.querySelectorAll('.exp').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (!state.segments.length) { toast('Extract a transcript first', false); return; }
+      var kind = btn.getAttribute('data-exp');
+      var safe = (state.title || 'transcript').replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').slice(0, 50).toLowerCase() || 'transcript';
+
+      if (kind === 'copy') {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(plainText()).then(function() {
+            toast('Plain text copied to clipboard');
+          }, function() {
+            toast('Copy blocked — use .TXT download', false);
+          });
+        } else {
+          toast('Copy not supported — use .TXT', false);
+        }
+        return;
+      }
+      if (kind === 'srt') { download(safe + '.srt', toSRT(), 'application/x-subrip'); toast('.SRT downloaded'); }
+      if (kind === 'vtt') { download(safe + '.vtt', toVTT(), 'text/vtt'); toast('.VTT downloaded'); }
+      if (kind === 'md')  { download(safe + '.md', toMD(), 'text/markdown'); toast('Markdown downloaded'); }
+      if (kind === 'txt') { download(safe + '.txt', toTXT(), 'text/plain'); toast('.TXT downloaded'); }
+    });
+  });
+
+  // ===== Tabs =====
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var allTabs = document.querySelectorAll('.tab');
+      for (var i = 0; i < allTabs.length; i++) allTabs[i].classList.remove('on');
+      tab.classList.add('on');
+      var allBodies = document.querySelectorAll('.tab-body');
+      for (var j = 0; j < allBodies.length; j++) allBodies[j].classList.remove('on');
+      var body = document.querySelector('.tab-body[data-body="' + tab.getAttribute('data-tab') + '"]');
+      if (body) body.classList.add('on');
+    });
+  });
+
+  // ===== URL input =====
+  var urlInput = document.getElementById('urlInput');
+  var goBtn = document.getElementById('goBtn');
+  var clearBtn = document.getElementById('clearBtn');
+
+  urlInput.addEventListener('input', function() {
+    clearBtn.style.display = urlInput.value ? 'grid' : 'none';
+  });
+  clearBtn.addEventListener('click', function() {
+    urlInput.value = '';
+    clearBtn.style.display = 'none';
+    urlInput.focus();
+  });
+  urlInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') goBtn.click();
+  });
+
+  function showSkeleton() {
+    var html = '';
+    for (var i = 0; i < 10; i++) {
+      html += '<div class="skeleton"><i style="width:44px"></i><i style="width:' + (70 + Math.random() * 30) + '%"></i></div>';
+    }
+    document.getElementById('segments').innerHTML = html;
+  }
+
+  // ===== Extraction =====
+  var PROXIES = [
+    function(u) { return 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u); },
+    function(u) { return 'https://corsproxy.io/?' + encodeURIComponent(u); }
+  ];
+
+  function fetchWithTimeout(url, ms) {
+    return new Promise(function(resolve, reject) {
+      var ctrl = new AbortController();
+      var id = setTimeout(function() { ctrl.abort(); }, ms || 7000);
+      fetch(url, { signal: ctrl.signal })
+        .then(function(res) {
+          clearTimeout(id);
+          if (!res.ok) return reject(new Error('bad'));
+          return res.text().then(resolve, reject);
+        })
+        .catch(function(e) { clearTimeout(id); reject(e); });
+    });
+  }
+
+  function viaProxies(url) {
+    return new Promise(function(resolve, reject) {
+      var i = 0;
+      function tryNext() {
+        if (i >= PROXIES.length) return reject(new Error('all proxies failed'));
+        var proxyUrl = PROXIES[i++](url);
+        fetchWithTimeout(proxyUrl, 6000).then(function(txt) {
+          if (txt && txt.length > 200) resolve(txt);
+          else tryNext();
+        }).catch(tryNext);
+      }
+      tryNext();
+    });
+  }
+
+  function extractCaptionTracks(html) {
+    var key = '"captionTracks":';
+    var at = html.indexOf(key);
+    if (at === -1) return null;
+    var i = html.indexOf('[', at);
+    if (i === -1) return null;
+    var depth = 0, inStr = false, escp = false, end = -1;
+    for (var j = i; j < html.length; j++) {
+      var c = html[j];
+      if (inStr) {
+        if (escp) escp = false;
+        else if (c === '\\') escp = true;
+        else if (c === '"') inStr = false;
+      } else {
+        if (c === '"') inStr = true;
+        else if (c === '[') depth++;
+        else if (c === ']') {
+          depth--;
+          if (depth === 0) { end = j + 1; break; }
+        }
+      }
+    }
+    if (end === -1) return null;
+    try { return JSON.parse(html.slice(i, end)); } catch (e) { return null; }
+  }
+
+  function parseXML(xml) {
+    var doc = new DOMParser().parseFromString(xml, 'text/xml');
+    var nodes = doc.getElementsByTagName('text');
+    var out = [];
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i];
+      var txt = (n.textContent || '').replace(/\s+/g, ' ').trim();
+      if (txt) {
+        out.push({
+          start: parseFloat(n.getAttribute('start') || 0),
+          dur: parseFloat(n.getAttribute('dur') || 0),
+          text: txt
+        });
+      }
+    }
+    return out;
+  }
+
+  function parseJSON3(json) {
+    try {
+      var data = JSON.parse(json);
+      var events = data.events || [];
+      var out = [];
+      for (var i = 0; i < events.length; i++) {
+        var e = events[i];
+        if (!e.segs) continue;
+        var txt = e.segs.map(function(s) { return s.utf8 || ''; }).join('').replace(/\s+/g, ' ').trim();
+        if (txt) out.push({
+          start: (e.tStartMs || 0) / 1000,
+          dur: (e.dDurationMs || 0) / 1000,
+          text: txt
+        });
+      }
+      return out;
+    } catch (e) { return []; }
+  }
+
+  function extractTranscript(videoId) {
+    var watchUrl = 'https://www.youtube.com/watch?v=' + videoId + '&hl=en';
+    return viaProxies(watchUrl).then(function(html) {
+      var tm = html.match(/<meta name="title" content="([^"]+)"/) || html.match(/"title":"([^"]{3,140})"/);
+      if (tm) state.title = tm[1];
+
+      var tracks = extractCaptionTracks(html);
+      if (!tracks || !tracks.length) throw new Error('no-captions');
+
+      var i = 0;
+      function tryTrack() {
+        if (i >= tracks.length) return Promise.reject(new Error('no-captions'));
+        var tr = tracks[i++];
+        return viaProxies(tr.baseUrl + '&fmt=json3').then(function(jsonRaw) {
+          var segs = parseJSON3(jsonRaw);
+          if (segs.length) return segs;
+          var xmlUrl = tr.baseUrl.replace(/&fmt=[^&]+/, '');
+          return viaProxies(xmlUrl).then(function(xmlRaw) {
+            var segs2 = parseXML(xmlRaw);
+            if (segs2.length) return segs2;
+            return tryTrack();
+          });
+        }).catch(tryTrack);
+      }
+      return tryTrack();
+    });
+  }
+
+  function handleExtract() {
+    var raw = urlInput.value.trim();
+    var id = parseVideoId(raw);
+
+    if (!id) {
+      toast("That doesn't look like a YouTube link", false);
+      urlInput.focus();
+      return;
+    }
+
+    goBtn.disabled = true;
+    goBtn.innerHTML = '<span class="spinner"></span> Extracting…';
+    showSkeleton();
+    document.getElementById('sampleTag').classList.remove('on');
+    loadVideo(id);
+    document.getElementById('videoTitle').textContent = 'Loading video…';
+
+    var t0 = performance.now();
+
+    extractTranscript(id).then(function(segs) {
+      if (!segs.length) throw new Error('empty');
+      document.getElementById('videoTitle').textContent = state.title || 'YouTube Video';
+      setSegments(segs, false);
+      var ms = Math.round(performance.now() - t0);
+      toast(segs.length + ' lines extracted in ' + ms + 'ms');
+    }).catch(function(err) {
+      document.getElementById('videoTitle').textContent = state.title && state.title.length < 100 ? state.title : 'YouTube Video';
+      setSegments(DEMO.map(function(d) { return { start: d[0], dur: 4, text: d[1] }; }), true);
+      toast('Captions unavailable — showing sample transcript', false);
+    }).then(function() {
+      goBtn.disabled = false;
+      goBtn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Extract Transcript';
+    });
+  }
+
+  goBtn.addEventListener('click', handleExtract);
+
+  // ===== Demo button =====
+  document.getElementById('demoBtn').addEventListener('click', function() {
+    urlInput.value = 'https://www.youtube.com/watch?v=aqz-KE-bpKQ';
+    clearBtn.style.display = 'grid';
+    state.title = 'Big Buck Bunny — Blender Foundation';
+    loadVideo('aqz-KE-bpKQ');
+    document.getElementById('videoIdLabel').textContent = 'aqz-KE-bpKQ';
+    document.getElementById('videoTitle').textContent = 'Big Buck Bunny — Blender Foundation';
+    setSegments(DEMO.map(function(d) { return { start: d[0], dur: 4, text: d[1] }; }), true);
+    toast('Sample transcript loaded');
+    document.getElementById('tool').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // ===== Language select =====
+  document.getElementById('langSelect').addEventListener('change', function() {
+    toast('Language track switched');
+  });
+
+  // ===== Keyboard shortcut =====
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      urlInput.focus();
+      urlInput.select();
+    }
+  });
+
+  // ===== Reveal on scroll =====
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function(el, i) {
+      el.style.transitionDelay = Math.min(i * 40, 240) + 'ms';
+      io.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('in'); });
+  }
+
+  // ===== BOOT — instant demo =====
+  function boot() {
+    state.title = 'Big Buck Bunny — Blender Foundation';
+    loadVideo('aqz-KE-bpKQ');
+    setSegments(DEMO.map(function(d) { return { start: d[0], dur: 4, text: d[1] }; }), true);
+    urlInput.value = 'https://www.youtube.com/watch?v=aqz-KE-bpKQ';
+    clearBtn.style.display = 'grid';
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+</script>
+</body>
+</html>

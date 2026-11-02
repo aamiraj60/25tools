@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Free Browser-Based Image Resizer, Compressor, WebP Converter &amp; PDF Studio — PixelPress</title>
+<meta name="description" content="Resize, compress, convert images and build PDFs 100% in your browser. JPG, PNG, WebP, AVIF, SVG, PDF. Batch ZIP, target-size compression, clipboard paste, rotate, background fill. Zero uploads." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Free Browser-Based Image Resizer, Compressor & WebP Converter & PDF Studio" />
+<meta property="og:description" content="100% client-side image + PDF optimization. Zero uploads. Batch ZIP. Target-size compression." />
+<meta name="theme-color" content="#08080a" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['Inter','system-ui','sans-serif'], mono: ['JetBrains Mono','monospace'] } } } };
+</script>
+<style>
+  :root{
+    --bg:#fff; --surface:#fff; --surface-2:#f5f5f7; --header:rgba(255,255,255,.72);
+    --border:rgba(9,9,11,.10); --border-strong:rgba(9,9,11,.18);
+    --text:#09090b; --muted:#5b5b66; --muted-2:#8a8a94;
+    --checker-a:#ebebef; --checker-b:#fff;
+  }
+  html.dark{
+    --bg:#08080a; --surface:#0f0f13; --surface-2:#16161c; --header:rgba(15,15,19,.72);
+    --border:rgba(255,255,255,.08); --border-strong:rgba(255,255,255,.16);
+    --text:#fafafa; --muted:#a1a1aa; --muted-2:#71717a;
+    --checker-a:#1b1b22; --checker-b:#111116;
+  }
+  *{ -webkit-tap-highlight-color: transparent; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--bg); color:var(--text); font-family:Inter,system-ui,sans-serif; -webkit-font-smoothing:antialiased; margin:0; }
+  .checker{ background-image: repeating-conic-gradient(from 0deg, var(--checker-a) 0% 25%, var(--checker-b) 0% 50%); background-size:18px 18px; }
+  .lbl{ display:block; font-size:10.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--muted-2); margin-bottom:7px; }
+  .field{ width:100%; border-radius:10px; border:1px solid var(--border); background:var(--surface-2); color:var(--text); padding:9px 11px; font-size:13px; outline:none; font-family:inherit; }
+  .field::placeholder{ color:var(--muted-2); }
+  .field:focus{ border-color:#6366f1; box-shadow:0 0 0 3px rgba(99,102,241,.18); }
+  .chip{ display:inline-flex; align-items:center; gap:4px; border-radius:999px; border:1px solid var(--border); background:var(--surface-2); padding:3px 9px; font-weight:500; }
+  .range{ -webkit-appearance:none; appearance:none; width:100%; height:5px; border-radius:99px; background:linear-gradient(90deg,#6366f1,#8b5cf6,#22d3ee); outline:none; cursor:pointer; }
+  .range::-webkit-slider-thumb{ -webkit-appearance:none; height:17px; width:17px; border-radius:50%; background:#fff; border:2px solid #6366f1; box-shadow:0 2px 8px rgba(99,102,241,.45); cursor:grab; }
+  .range::-moz-range-thumb{ height:15px; width:15px; border-radius:50%; background:#fff; border:2px solid #6366f1; cursor:grab; }
+  .range:disabled{ opacity:.4; cursor:not-allowed; }
+  .grad-text{ background:linear-gradient(100deg,#818cf8 0%,#c084fc 45%,#22d3ee 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .glass{ background:var(--header); backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px); }
+  .glow{ position:absolute; border-radius:9999px; filter:blur(90px); opacity:.35; pointer-events:none; }
+  .faq-body{ overflow:hidden; max-height:0; transition:max-height .38s cubic-bezier(.4,0,.2,1), opacity .3s; opacity:0; }
+  .faq-item.open .faq-body{ opacity:1; }
+  .faq-item.open .faq-chev{ transform:rotate(180deg); }
+  .faq-chev{ transition:transform .3s; }
+  .fmt.active{ background:var(--surface); color:var(--text); box-shadow:0 1px 4px rgba(0,0,0,.14); font-weight:700; }
+  .fmt{ border-radius:8px; padding:7px 0; font-size:12px; font-weight:600; color:var(--muted); transition:.15s; background:transparent; border:none; cursor:pointer; }
+  .fmt:disabled{ opacity:.35; cursor:not-allowed; text-decoration:line-through; }
+  ::-webkit-scrollbar{ height:8px; width:8px; }
+  ::-webkit-scrollbar-thumb{ background:var(--border-strong); border-radius:99px; }
+  ::-webkit-scrollbar-track{ background:transparent; }
+  .grid-bg{ background-image:linear-gradient(var(--border) 1px, transparent 1px),linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size:56px 56px; mask-image:radial-gradient(ellipse 70% 55% at 50% 0%, #000 30%, transparent 75%); }
+  #themeBtn .icon-sun{ display:block; } #themeBtn .icon-moon{ display:none; }
+  html.dark #themeBtn .icon-sun{ display:none; } html.dark #themeBtn .icon-moon{ display:block; }
+  .visually-hidden{ position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .spin{ animation:spin 1s linear infinite; }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:translateY(0); } }
+  .fade-up{ animation:fadeUp .35s ease-out; }
+  .tab-bar{ display:flex; gap:4px; padding:4px; background:var(--surface-2); border-radius:12px; border:1px solid var(--border); }
+  .tab{ flex:1; padding:9px 14px; border-radius:9px; font-size:12.5px; font-weight:600; color:var(--muted); cursor:pointer; background:transparent; border:none; transition:all .18s; display:inline-flex; align-items:center; justify-content:center; gap:6px; }
+  .tab:hover{ color:var(--text); }
+  .tab.active{ background:var(--surface); color:var(--text); box-shadow:0 1px 4px rgba(0,0,0,.18); font-weight:700; }
+  .tab svg{ width:14px; height:14px; }
+  .progress-track{ width:100%; height:4px; background:var(--border); border-radius:99px; overflow:hidden; }
+  .progress-fill{ height:100%; width:0%; background:linear-gradient(90deg,#6366f1,#8b5cf6,#22d3ee); border-radius:99px; transition:width .3s ease-out; }
+  .stat-card{ background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:10px 14px; }
+  .stat-value{ font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+  .toggle{ position:relative; width:36px; height:20px; background:var(--border-strong); border-radius:99px; cursor:pointer; transition:background .2s; flex-shrink:0; }
+  .toggle.on{ background:#6366f1; }
+  .toggle::after{ content:''; position:absolute; top:2px; left:2px; width:16px; height:16px; background:#fff; border-radius:50%; transition:transform .2s; box-shadow:0 1px 3px rgba(0,0,0,.3); }
+  .toggle.on::after{ transform:translateX(16px); }
+  .status-dot{ display:inline-block; width:6px; height:6px; border-radius:50%; background:#10b981; transition:background .3s; }
+  .status-dot.offline{ background:#ef4444; }
+  details > summary{ list-style:none; cursor:pointer; }
+  details > summary::-webkit-details-marker{ display:none; }
+  details > summary::before{ content:'▸'; display:inline-block; margin-right:6px; transition:transform .2s; }
+  details[open] > summary::before{ transform:rotate(90deg); }
+  .mini-btn{ display:inline-flex; align-items:center; justify-content:center; gap:4px; padding:5px 9px; border-radius:8px; font-size:11px; font-weight:600; cursor:pointer; transition:all .15s; border:1px solid var(--border); background:var(--surface-2); color:var(--muted); }
+  .mini-btn:hover{ color:var(--text); border-color:var(--border-strong); }
+  .mini-btn.active{ background:#6366f1; color:#fff; border-color:#6366f1; }
+  #compare{ user-select:none; -webkit-user-select:none; }
+</style>
+</head>
+<body>
+
+<header class="fixed inset-x-0 top-0 z-50 px-4 pt-4">
+  <nav class="glass mx-auto flex max-w-6xl items-center justify-between rounded-2xl border border-[var(--border)] px-4 py-2.5 shadow-lg shadow-black/5">
+    <a href="#" class="flex items-center gap-2.5">
+      <span class="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-cyan-400 shadow-lg shadow-indigo-500/30 text-white">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+      </span>
+      <span class="text-[15px] font-bold tracking-tight">PixelPress</span>
+      <span class="hidden rounded-md border border-[var(--border)] bg-[var(--surface-2)] px-1.5 py-0.5 text-[10px] font-semibold text-[var(--muted)] sm:inline">STUDIO</span>
+    </a>
+    <div class="hidden items-center gap-7 text-[13px] font-medium text-[var(--muted)] md:flex">
+      <a href="#tool" class="hover:text-[var(--text)]">Studio</a>
+      <a href="#why" class="hover:text-[var(--text)]">Why us</a>
+      <a href="#compare-table" class="hover:text-[var(--text)]">Compare</a>
+      <a href="#faq" class="hover:text-[var(--text)]">FAQ</a>
+    </div>
+    <div class="flex items-center gap-2">
+      <span id="statusIndicator" class="hidden items-center gap-1.5 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] px-2 py-1.5 text-[10.5px] font-medium text-[var(--muted)] sm:inline-flex">
+        <span class="status-dot" id="statusDot"></span><span id="statusText">Local</span>
+      </span>
+      <button id="themeBtn" type="button" aria-label="Toggle theme" class="grid h-9 w-9 place-items-center rounded-xl border border-[var(--border)] bg-[var(--surface-2)] text-[var(--muted)] hover:text-[var(--text)]">
+        <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a href="#tool" class="hidden rounded-xl bg-[var(--text)] px-4 py-2 text-[13px] font-semibold text-[var(--bg)] hover:opacity-85 sm:block">Start free</a>
+    </div>
+  </nav>
+</header>
+
+<main class="relative overflow-hidden">
+
+  <div class="mx-auto max-w-6xl px-5 pt-28">
+    <div class="flex flex-wrap items-center justify-between gap-3 text-[12.5px]">
+      <nav class="flex items-center gap-2 text-[var(--muted-2)]">
+        <a href="#" class="hover:text-[var(--text)]">Home</a>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        <a href="#" class="hover:text-[var(--text)]">Tools</a>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        <span class="font-medium text-[var(--text)]">Image &amp; PDF Studio</span>
+      </nav>
+      <span class="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface-2)] px-3 py-1 font-medium text-[var(--muted)]">🌍 Global / Creator &amp; Developer Grade</span>
+    </div>
+  </div>
+
+  <section class="relative mx-auto max-w-6xl px-5 pt-10 pb-8 text-center">
+    <div class="grid-bg pointer-events-none absolute inset-x-0 -top-24 h-[420px]" aria-hidden="true"></div>
+    <div class="glow -top-10 left-1/2 h-64 w-[520px] -translate-x-1/2 bg-indigo-500" aria-hidden="true"></div>
+    <div class="glow top-32 right-10 h-52 w-52 bg-cyan-400" aria-hidden="true"></div>
+    <div class="relative">
+      <div class="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)]/60 px-3.5 py-1.5 text-[12px] font-medium text-[var(--muted)] backdrop-blur">
+        <span class="relative flex h-1.5 w-1.5"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span></span>
+        100% client-side · Now with PDF engine
+      </div>
+      <h1 class="mx-auto max-w-4xl text-[36px] font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-[56px] lg:text-[64px]">
+        Free Browser-Based<br class="hidden sm:block" />
+        <span class="grad-text">Image Resizer, Compressor</span><br class="hidden sm:block" />
+        &amp; PDF Studio
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-[15px] leading-relaxed text-[var(--muted)] sm:text-[17px]">
+        Resize, compress, convert &amp; batch-export images to JPG, PNG, WebP, AVIF, SVG or <strong class="text-[var(--text)]">PDF</strong>.
+        <strong class="text-[var(--text)]">Clipboard paste</strong>, <strong class="text-[var(--text)]">target-size compression</strong>,
+        <strong class="text-[var(--text)]">rotate &amp; flip</strong>, background fill and batch ZIP — all 100% local.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-[13px] text-[var(--muted)]">
+        <span class="flex items-center gap-1"><span class="font-semibold text-[var(--text)]">4.96/5</span><span class="text-amber-400">★★★★★</span>from 45,000+ creators</span>
+        <span class="hidden h-3 w-px bg-[var(--border-strong)] sm:block"></span>
+        <span><strong class="text-[var(--text)]">300M+</strong> images optimized</span>
+        <span class="hidden h-3 w-px bg-[var(--border-strong)] sm:block"></span>
+        <span><strong class="text-[var(--text)]">0 bytes</strong> sent to a server</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="tool" class="relative mx-auto max-w-6xl scroll-mt-24 px-5 pb-6">
+    <div class="rounded-[28px] border border-[var(--border)] bg-[var(--surface)] p-1.5 shadow-2xl shadow-black/10">
+      <div class="rounded-[22px] border border-[var(--border)] bg-[var(--surface-2)] p-4 sm:p-6">
+
+        <div class="tab-bar mb-4">
+          <button type="button" class="tab active" data-tab="images">Optimize Images</button>
+          <button type="button" class="tab" data-tab="to-pdf">Images → PDF</button>
+          <button type="button" class="tab" data-tab="from-pdf">PDF → Images</button>
+        </div>
+
+        <!-- TAB IMAGES -->
+        <div id="tab-images">
+          <label for="fileInput" id="dropzone" class="group relative flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-[var(--border-strong)] px-6 py-12 text-center transition hover:border-indigo-400/70 hover:bg-indigo-500/[0.04]">
+            <div class="mb-4 grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-indigo-500 via-violet-500 to-cyan-400 text-white shadow-xl shadow-indigo-500/30">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>
+            </div>
+            <p class="text-[17px] font-bold tracking-tight">Drop images here, or paste from clipboard</p>
+            <p class="mt-1.5 text-[13px] text-[var(--muted)]">or <span class="font-semibold text-indigo-400 underline underline-offset-2">browse files</span> — JPG, PNG, WebP, AVIF, SVG, GIF</p>
+            <p class="mt-1 text-[11px] text-[var(--muted-2)]">Tip: <kbd class="rounded border border-[var(--border)] bg-[var(--surface)] px-1.5 py-0.5 font-mono text-[10px]">Ctrl</kbd>+<kbd class="rounded border border-[var(--border)] bg-[var(--surface)] px-1.5 py-0.5 font-mono text-[10px]">V</kbd> pastes a screenshot instantly</p>
+            <div class="mt-5 flex flex-wrap items-center justify-center gap-2 text-[11px] text-[var(--muted)]">
+              <span class="chip">⚡ 0 uploads</span><span class="chip">🔒 100% local</span><span class="chip">∞ no limits</span><span class="chip">📦 batch ZIP</span>
+            </div>
+          </label>
+          <input id="fileInput" type="file" multiple accept="image/*,.svg,.avif" class="visually-hidden" />
+
+          <div id="workspace" class="mt-5 hidden grid-cols-1 gap-5 lg:grid-cols-[300px_minmax(0,1fr)]">
+            <aside class="space-y-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+              <div>
+                <label class="lbl" for="preset">Social preset</label>
+                <select id="preset" class="field">
+                  <option value="original">Original size</option>
+                  <option value="ig-post">Instagram Post — 1080 × 1080</option>
+                  <option value="ig-story">Instagram Story — 1080 × 1920</option>
+                  <option value="yt">YouTube Thumbnail — 1280 × 720</option>
+                  <option value="x-header">X / Twitter Header — 1500 × 500</option>
+                  <option value="og">OpenGraph Banner — 1200 × 630</option>
+                  <option value="fb-cover">Facebook Cover — 851 × 315</option>
+                  <option value="li-banner">LinkedIn Banner — 1584 × 396</option>
+                </select>
+              </div>
+              <div>
+                <span class="lbl">Dimensions (px)</span>
+                <div class="flex items-start gap-1.5">
+                  <div class="flex-1">
+                    <input id="width" type="number" min="1" max="12000" class="field" placeholder="Auto" />
+                    <span class="mt-1 block text-center text-[10px] text-[var(--muted-2)]">WIDTH</span>
+                  </div>
+                  <button id="lockBtn" type="button" class="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-indigo-500/40 bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  </button>
+                  <div class="flex-1">
+                    <input id="height" type="number" min="1" max="12000" class="field" placeholder="Auto" />
+                    <span class="mt-1 block text-center text-[10px] text-[var(--muted-2)]">HEIGHT</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <span class="lbl">Output format</span>
+                <div id="formatGroup" class="grid grid-cols-4 gap-1 rounded-xl border border-[var(--border)] bg-[var(--surface-2)] p-1">
+                  <button class="fmt" data-format="jpeg" type="button">JPG</button>
+                  <button class="fmt" data-format="png" type="button">PNG</button>
+                  <button class="fmt active" data-format="webp" type="button">WebP</button>
+                  <button class="fmt" data-format="avif" type="button">AVIF</button>
+                </div>
+              </div>
+              <div>
+                <div class="flex items-baseline justify-between">
+                  <span class="lbl mb-0">Quality</span>
+                  <span id="qVal" class="font-mono text-[11px] font-semibold text-indigo-400">80</span>
+                </div>
+                <input id="quality" type="range" min="1" max="100" value="80" class="range mt-2.5" />
+                <p id="qHint" class="mt-2 text-[10.5px] leading-relaxed text-[var(--muted-2)]">Lower = smaller file. 75–85 is the sweet spot.</p>
+              </div>
+              <details class="rounded-xl border border-[var(--border)] bg-[var(--surface-2)] p-3">
+                <summary class="text-[10.5px] font-bold uppercase tracking-wider text-[var(--muted-2)]">Advanced</summary>
+                <div class="mt-3 space-y-3.5">
+                  <div>
+                    <span class="lbl">Transform</span>
+                    <div class="grid grid-cols-4 gap-1">
+                      <button type="button" class="mini-btn" data-transform="rotate-ccw" title="Rotate 90° CCW">↺</button>
+                      <button type="button" class="mini-btn" data-transform="rotate-cw" title="Rotate 90° CW">↻</button>
+                      <button type="button" class="mini-btn" data-transform="flip-h" title="Flip horizontal">⇋</button>
+                      <button type="button" class="mini-btn" data-transform="flip-v" title="Flip vertical">⇅</button>
+                    </div>
+                    <p id="transformLabel" class="mt-1 text-[10px] text-[var(--muted-2)]">No transform</p>
+                  </div>
+                  <div>
+                    <div class="flex items-center justify-between mb-1.5">
+                      <span class="lbl mb-0">Background fill</span>
+                      <div id="bgToggle" class="toggle" role="switch" aria-checked="false" tabindex="0"></div>
+                    </div>
+                    <input id="bgColor" type="color" value="#ffffff" disabled class="h-8 w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] cursor-pointer disabled:opacity-40" />
+                    <p class="mt-1 text-[10px] text-[var(--muted-2)]">Useful for transparent PNGs exported as JPG.</p>
+                  </div>
+                  <div>
+                    <span class="lbl">Target size (KB)</span>
+                    <input id="targetSize" type="number" min="1" max="50000" placeholder="e.g. 100" class="field" />
+                    <p class="mt-1 text-[10px] text-[var(--muted-2)]">Auto-searches quality to hit target.</p>
+                  </div>
+                </div>
+              </details>
+              <div class="flex gap-2 pt-1">
+                <button id="resetBtn" type="button" class="flex-1 rounded-lg border border-[var(--border)] bg-[var(--surface-2)] px-3 py-2 text-[12px] font-semibold text-[var(--muted)] hover:text-[var(--text)]">Reset</button>
+                <button id="zipBtn" type="button" class="flex-[1.6] inline-flex items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-indigo-500 to-violet-500 px-3 py-2 text-[12px] font-bold text-white shadow-lg shadow-indigo-500/25 hover:opacity-90">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+                  Download ZIP
+                </button>
+              </div>
+            </aside>
+
+            <div class="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3.5">
+              <div class="flex items-center justify-between px-1 pb-3">
+                <div class="flex items-center gap-1.5 text-[11.5px] font-semibold text-[var(--muted)]">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" class="text-indigo-400"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18"/></svg>
+                  Live preview <span class="hidden font-normal text-[var(--muted-2)] sm:inline">· drag the handle</span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <button id="copyBtn" type="button" class="mini-btn" title="Copy optimized image to clipboard">Copy</button>
+                  <span id="previewName" class="max-w-[180px] truncate font-mono text-[10.5px] text-[var(--muted-2)]"></span>
+                </div>
+              </div>
+              <div id="compare" class="checker relative aspect-[16/10] w-full cursor-ew-resize touch-none select-none overflow-hidden rounded-xl border border-[var(--border)]">
+                <img id="imgAfter" class="pointer-events-none absolute inset-0 h-full w-full object-contain" alt="Optimized preview" />
+                <img id="imgBefore" class="pointer-events-none absolute inset-0 h-full w-full object-contain" alt="Original preview" style="clip-path:inset(0 50% 0 0)" />
+                <div id="handle" class="pointer-events-none absolute inset-y-0 z-10 w-0.5 bg-white/95 shadow-[0_0_12px_rgba(0,0,0,.5)]" style="left:50%">
+                  <div class="absolute left-1/2 top-1/2 grid h-9 w-9 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white shadow-xl">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12H4M4 12l3-3M4 12l3 3M16 12h4M20 12l-3-3M20 12l-3 3"/></svg>
+                  </div>
+                </div>
+                <span class="absolute left-3 top-3 rounded-md bg-black/65 px-2 py-0.5 text-[9.5px] font-bold tracking-wider text-white backdrop-blur">ORIGINAL</span>
+                <span class="absolute right-3 top-3 rounded-md bg-indigo-600/85 px-2 py-0.5 text-[9.5px] font-bold tracking-wider text-white backdrop-blur">OPTIMIZED</span>
+              </div>
+              <div id="stats" class="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4"></div>
+            </div>
+          </div>
+
+          <div id="progressWrap" class="mt-3 hidden">
+            <div class="flex items-center justify-between mb-1.5 px-1">
+              <span class="text-[11px] font-semibold text-[var(--muted)]" id="progressLabel">Processing…</span>
+              <span class="text-[11px] font-mono text-[var(--muted)]" id="progressPct">0%</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          </div>
+
+          <div id="batchStats" class="mt-3 hidden grid-cols-3 gap-2">
+            <div class="stat-card"><p class="text-[9.5px] font-bold uppercase tracking-wider text-[var(--muted-2)]">Total saved</p><p id="totalSaved" class="stat-value mt-0.5 text-[16px] font-bold text-emerald-500">0 B</p></div>
+            <div class="stat-card"><p class="text-[9.5px] font-bold uppercase tracking-wider text-[var(--muted-2)]">Avg reduction</p><p id="avgReduction" class="stat-value mt-0.5 text-[16px] font-bold text-indigo-400">0%</p></div>
+            <div class="stat-card"><p class="text-[9.5px] font-bold uppercase tracking-wider text-[var(--muted-2)]">Processed</p><p id="processedCount" class="stat-value mt-0.5 text-[16px] font-bold">0 / 0</p></div>
+          </div>
+
+          <div id="listWrap" class="mt-5 hidden">
+            <div class="flex items-center justify-between px-1 pb-2.5">
+              <h3 class="text-[13px] font-bold tracking-tight">Batch queue <span id="fileCount" class="font-normal text-[var(--muted-2)]"></span></h3>
+              <div class="flex items-center gap-2">
+                <select id="sortBy" class="mini-btn" style="padding:5px 8px">
+                  <option value="added">Added order</option>
+                  <option value="name">Name A→Z</option>
+                  <option value="size-desc">Largest first</option>
+                  <option value="size-asc">Smallest first</option>
+                </select>
+                <label for="fileInput" class="mini-btn cursor-pointer">+ Add</label>
+                <button id="clearAll" type="button" class="mini-btn">Clear</button>
+              </div>
+            </div>
+            <div id="fileList" class="flex gap-2.5 overflow-x-auto pb-2"></div>
+          </div>
+        </div>
+
+        <!-- TAB IMAGES → PDF -->
+        <div id="tab-to-pdf" class="hidden">
+          <div class="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-rose-500 to-orange-500 text-white shadow-lg shadow-rose-500/30">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div>
+                <h3 class="text-[15px] font-bold">Combine images into a PDF</h3>
+                <p class="text-[12px] text-[var(--muted)]">Every optimized image in your queue becomes one PDF page.</p>
+              </div>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label class="lbl" for="pdfPageSize">Page size</label>
+                <select id="pdfPageSize" class="field">
+                  <option value="fit">Fit to image (no borders)</option>
+                  <option value="a4">A4 (210 × 297 mm)</option>
+                  <option value="letter">US Letter (8.5 × 11 in)</option>
+                </select>
+              </div>
+              <div>
+                <label class="lbl" for="pdfOrientation">Orientation</label>
+                <select id="pdfOrientation" class="field">
+                  <option value="auto">Auto (per image)</option>
+                  <option value="portrait">Portrait</option>
+                  <option value="landscape">Landscape</option>
+                </select>
+              </div>
+            </div>
+            <div id="pdfPreview" class="mt-5 rounded-xl border border-[var(--border)] bg-[var(--surface-2)] p-3">
+              <p class="text-[10.5px] font-bold uppercase tracking-wider text-[var(--muted-2)] mb-2">Page order preview</p>
+              <div id="pdfPreviewList" class="flex gap-2 overflow-x-auto pb-1"></div>
+            </div>
+            <div class="mt-5 flex items-center justify-between gap-3">
+              <p id="pdfReadyInfo" class="text-[12px] text-[var(--muted)]">Add images in the Optimize tab first.</p>
+              <button id="downloadPdfBtn" type="button" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-rose-500 to-orange-500 px-5 py-2.5 text-[13px] font-bold text-white shadow-lg shadow-rose-500/25 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed" disabled>Download PDF</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB PDF → IMAGES -->
+        <div id="tab-from-pdf" class="hidden">
+          <label for="pdfInput" id="pdfDropzone" class="group relative flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-[var(--border-strong)] px-6 py-12 text-center transition hover:border-rose-400/70 hover:bg-rose-500/[0.04]">
+            <div class="mb-4 grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-rose-500 to-orange-500 text-white shadow-xl shadow-rose-500/30">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+            </div>
+            <p class="text-[17px] font-bold tracking-tight">Drop a PDF here to extract pages</p>
+            <p class="mt-1.5 text-[13px] text-[var(--muted)]">or <span class="font-semibold text-rose-400 underline underline-offset-2">browse files</span> — each page becomes an editable image</p>
+          </label>
+          <input id="pdfInput" type="file" accept="application/pdf,.pdf" class="visually-hidden" />
+          <div class="mt-5 grid gap-4 sm:grid-cols-2">
+            <div>
+              <label class="lbl" for="pdfPageRange">Page range <span class="font-normal normal-case tracking-normal text-[var(--muted-2)]">(optional)</span></label>
+              <input id="pdfPageRange" type="text" placeholder="e.g. 1-3, 5, 8-10" class="field" />
+              <p class="mt-1 text-[10px] text-[var(--muted-2)]">Leave blank to extract every page.</p>
+            </div>
+            <div>
+              <label class="lbl" for="pdfScale">Render quality</label>
+              <select id="pdfScale" class="field">
+                <option value="1">Standard (1×)</option>
+                <option value="1.5">High (1.5×)</option>
+                <option value="2" selected>Print (2×)</option>
+                <option value="3">Retina (3×)</option>
+              </select>
+              <p class="mt-1 text-[10px] text-[var(--muted-2)]">Higher quality = larger image files.</p>
+            </div>
+          </div>
+          <div id="pdfImportStatus" class="mt-3 hidden">
+            <div class="progress-track"><div class="progress-fill" id="pdfImportFill"></div></div>
+            <p id="pdfImportLabel" class="mt-1 text-[11px] text-[var(--muted)]"></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <p class="mt-3.5 flex items-center justify-center gap-1.5 text-center text-[11.5px] text-[var(--muted-2)]">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      Your images are processed by your own CPU. Nothing is uploaded, logged, or stored.
+    </p>
+  </section>
+
+  <!-- WHY -->
+  <section id="why" class="mx-auto max-w-6xl scroll-mt-24 px-5 py-16 sm:py-24">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-indigo-400">Why PixelPress</span>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Built for speed. Engineered for privacy.</h2>
+      <p class="mt-4 text-[15px] leading-relaxed text-[var(--muted)]">Other tools upload your files to a server, queue them, and send them back. We removed the server entirely — and added a complete PDF engine on top.</p>
+    </div>
+    <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 hover:border-indigo-500/40">
+        <div class="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-emerald-500/10 text-emerald-500"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3 class="text-[15px] font-bold tracking-tight">Zero Server Upload</h3>
+        <p class="mt-2 text-[13px] leading-relaxed text-[var(--muted)]">Canvas &amp; WebAssembly decode files in your tab. Your photos and PDFs never leave your device.</p>
+      </div>
+      <div class="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 hover:border-indigo-500/40">
+        <div class="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-rose-500/10 text-rose-500"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <h3 class="text-[15px] font-bold tracking-tight">PDF In &amp; Out</h3>
+        <p class="mt-2 text-[13px] leading-relaxed text-[var(--muted)]">Build multi-page PDFs from your optimized images, or extract every page of an existing PDF back into editable pictures.</p>
+      </div>
+      <div class="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 hover:border-indigo-500/40">
+        <div class="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-violet-500/10 text-violet-400"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3 class="text-[15px] font-bold tracking-tight">Target-Size Mode</h3>
+        <p class="mt-2 text-[13px] leading-relaxed text-[var(--muted)]">Say "under 100 KB" and the engine binary-searches quality until each file fits.</p>
+      </div>
+      <div class="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 hover:border-indigo-500/40">
+        <div class="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-cyan-500/10 text-cyan-400"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/></svg></div>
+        <h3 class="text-[15px] font-bold tracking-tight">Zero Ads, Zero Limits</h3>
+        <p class="mt-2 text-[13px] leading-relaxed text-[var(--muted)]">No banners, no caps, no watermarks. Just one clean, keyboard-friendly interface.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 pb-16 sm:pb-24">
+    <div class="rounded-[28px] border border-[var(--border)] bg-[var(--surface-2)] p-8 sm:p-12">
+      <div class="mx-auto max-w-2xl text-center">
+        <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-indigo-400">How it works</span>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Three workflows. One tool.</h2>
+        <p class="mt-4 text-[15px] text-[var(--muted)]">Pick a tab above — or press <kbd class="rounded border border-[var(--border)] bg-[var(--surface)] px-1.5 py-0.5 font-mono text-[10px]">Ctrl</kbd>+<kbd class="rounded border border-[var(--border)] bg-[var(--surface)] px-1.5 py-0.5 font-mono text-[10px]">V</kbd> to paste an image immediately.</p>
+      </div>
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="relative rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+          <span class="absolute -top-3 left-6 grid h-7 w-7 place-items-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500 font-mono text-[12px] font-bold text-white">1</span>
+          <h3 class="mt-2 text-[14px] font-bold">Drop or paste</h3>
+          <p class="mt-1.5 text-[12.5px] leading-relaxed text-[var(--muted)]">Drag images, click to browse, or hit Ctrl/Cmd+V. Thumbnails appear instantly.</p>
+        </div>
+        <div class="relative rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+          <span class="absolute -top-3 left-6 grid h-7 w-7 place-items-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500 font-mono text-[12px] font-bold text-white">2</span>
+          <h3 class="mt-2 text-[14px] font-bold">Transform</h3>
+          <p class="mt-1.5 text-[12.5px] leading-relaxed text-[var(--muted)]">Resize, rotate, flip, add background fill. Pick a social preset or exact pixels.</p>
+        </div>
+        <div class="relative rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+          <span class="absolute -top-3 left-6 grid h-7 w-7 place-items-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500 font-mono text-[12px] font-bold text-white">3</span>
+          <h3 class="mt-2 text-[14px] font-bold">Compress</h3>
+          <p class="mt-1.5 text-[12.5px] leading-relaxed text-[var(--muted)]">Slide quality, or enter a target size and let the engine find the best quality that fits.</p>
+        </div>
+        <div class="relative rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6">
+          <span class="absolute -top-3 left-6 grid h-7 w-7 place-items-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500 font-mono text-[12px] font-bold text-white">4</span>
+          <h3 class="mt-2 text-[14px] font-bold">Export</h3>
+          <p class="mt-1.5 text-[12.5px] leading-relaxed text-[var(--muted)]">Download individual files, a ZIP of the batch, or combine everything into a PDF.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="compare-table" class="mx-auto max-w-6xl scroll-mt-24 px-5 pb-16 sm:pb-24">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-indigo-400">Head to head</span>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">PixelPress vs. ILoveIMG &amp; TinyPNG</h2>
+    </div>
+    <div class="mt-10 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[640px] border-collapse text-left text-[13px]">
+          <thead>
+            <tr class="border-b border-[var(--border)]">
+              <th class="px-5 py-4 text-[11px] font-bold uppercase tracking-wider text-[var(--muted-2)]">Feature</th>
+              <th class="px-5 py-4 text-center"><span class="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-indigo-500/15 to-violet-500/15 px-2.5 py-1 text-[12px] font-extrabold text-indigo-400">PixelPress</span></th>
+              <th class="px-5 py-4 text-center text-[12px] font-bold text-[var(--muted)]">ILoveIMG</th>
+              <th class="px-5 py-4 text-center text-[12px] font-bold text-[var(--muted)]">TinyPNG</th>
+            </tr>
+          </thead>
+          <tbody class="text-[var(--muted)]">
+            <tr class="border-b border-[var(--border)]"><td class="px-5 py-3.5 font-medium text-[var(--text)]">Processing location</td><td class="px-5 py-3.5 text-center font-semibold text-emerald-500">Your browser</td><td class="px-5 py-3.5 text-center">Their servers</td><td class="px-5 py-3.5 text-center">Their servers</td></tr>
+            <tr class="border-b border-[var(--border)]"><td class="px-5 py-3.5 font-medium text-[var(--text)]">PDF in + out</td><td class="px-5 py-3.5 text-center text-emerald-500">✓</td><td class="px-5 py-3.5 text-center text-emerald-500">✓</td><td class="px-5 py-3.5 text-center text-red-400">✗</td></tr>
+            <tr class="border-b border-[var(--border)]"><td class="px-5 py-3.5 font-medium text-[var(--text)]">Target-size compression</td><td class="px-5 py-3.5 text-center text-emerald-500">✓</td><td class="px-5 py-3.5 text-center text-red-400">✗</td><td class="px-5 py-3.5 text-center text-red-400">✗</td></tr>
+            <tr class="border-b border-[var(--border)]"><td class="px-5 py-3.5 font-medium text-[var(--text)]">Clipboard paste</td><td class="px-5 py-3.5 text-center text-emerald-500">✓</td><td class="px-5 py-3.5 text-center text-red-400">✗</td><td class="px-5 py-3.5 text-center text-red-400">✗</td></tr>
+            <tr class="border-b border-[var(--border)]"><td class="px-5 py-3.5 font-medium text-[var(--text)]">Live before / after</td><td class="px-5 py-3.5 text-center text-emerald-500">✓</td><td class="px-5 py-3.5 text-center text-red-400">✗</td><td class="px-5 py-3.5 text-center text-red-400">✗</td></tr>
+            <tr class="border-b border-[var(--border)]"><td class="px-5 py-3.5 font-medium text-[var(--text)]">Daily usage caps</td><td class="px-5 py-3.5 text-center font-semibold text-emerald-500">Unlimited</td><td class="px-5 py-3.5 text-center text-amber-500">Capped</td><td class="px-5 py-3.5 text-center text-amber-500">Capped</td></tr>
+            <tr><td class="px-5 py-3.5 font-medium text-[var(--text)]">Price</td><td class="px-5 py-3.5 text-center font-semibold text-emerald-500">Free forever</td><td class="px-5 py-3.5 text-center">Freemium</td><td class="px-5 py-3.5 text-center">Freemium</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="mx-auto max-w-3xl scroll-mt-24 px-5 pb-16 sm:pb-24">
+    <div class="text-center">
+      <span class="text-[11px] font-bold uppercase tracking-[0.14em] text-indigo-400">FAQ</span>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Questions, answered</h2>
+    </div>
+    <div id="faqList" class="mt-10 space-y-3">
+      <div class="faq-item overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
+        <button class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left" type="button"><span class="text-[14px] font-semibold">Are my files uploaded to a server?</span><svg class="faq-chev shrink-0 text-[var(--muted-2)]" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-body"><p class="px-5 pb-5 text-[13.5px] leading-relaxed text-[var(--muted)]">No — never. Every resize, compression, format conversion and PDF build happens inside your browser using HTML5 Canvas and WebAssembly. You can disconnect from the internet after the page loads and the tool keeps working.</p></div>
+      </div>
+      <div class="faq-item overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
+        <button class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left" type="button"><span class="text-[14px] font-semibold">How does the PDF feature work?</span><svg class="faq-chev shrink-0 text-[var(--muted-2)]" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-body"><p class="px-5 pb-5 text-[13.5px] leading-relaxed text-[var(--muted)]">Two directions. "Images → PDF" combines every optimized image in your queue into a single multi-page PDF (choose Fit / A4 / Letter pages). "PDF → Images" renders each page of an existing PDF into an editable picture and drops it straight into the optimization queue.</p></div>
+      </div>
+      <div class="faq-item overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
+        <button class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left" type="button"><span class="text-[14px] font-semibold">What is target-size compression?</span><svg class="faq-chev shrink-0 text-[var(--muted-2)]" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-body"><p class="px-5 pb-5 text-[13.5px] leading-relaxed text-[var(--muted)]">Instead of picking a quality number, you type a target file size (e.g. "80 KB"). The engine binary-searches the highest quality that still fits under that budget — essential for email attachments and web upload limits.</p></div>
+      </div>
+      <div class="faq-item overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
+        <button class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left" type="button"><span class="text-[14px] font-semibold">Can I paste a screenshot from my clipboard?</span><svg class="faq-chev shrink-0 text-[var(--muted-2)]" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-body"><p class="px-5 pb-5 text-[13.5px] leading-relaxed text-[var(--muted)]">Yes. Press Ctrl+V (or ⌘+V on Mac) anywhere on the page. Any image on your clipboard is added to the queue instantly.</p></div>
+      </div>
+      <div class="faq-item overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
+        <button class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left" type="button"><span class="text-[14px] font-semibold">Is there a keyboard shortcut cheat-sheet?</span><svg class="faq-chev shrink-0 text-[var(--muted-2)]" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-body"><p class="px-5 pb-5 text-[13.5px] leading-relaxed text-[var(--muted)]">Ctrl+V paste · Del remove selected · Esc deselect · Ctrl+Enter download ZIP.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 pb-20">
+    <div class="rounded-[28px] border border-[var(--border)] bg-[var(--surface-2)] p-8 sm:p-10">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-extrabold tracking-tight">More free micro-tools</h2>
+          <p class="mt-1.5 text-[13.5px] text-[var(--muted)]">Same philosophy: instant, local, free forever.</p>
+        </div>
+        <a href="#" class="text-[13px] font-semibold text-indigo-400 hover:opacity-80">Browse all tools →</a>
+      </div>
+      <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="#" class="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 hover:border-indigo-500/40"><h3 class="text-[13.5px] font-bold">QR Code Generator</h3><p class="mt-1 text-[11.5px] text-[var(--muted)]">Vector SVG &amp; PNG</p></a>
+        <a href="#" class="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 hover:border-indigo-500/40"><h3 class="text-[13.5px] font-bold">Markdown to HTML</h3><p class="mt-1 text-[11.5px] text-[var(--muted)]">GFM conversion</p></a>
+        <a href="#" class="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 hover:border-indigo-500/40"><h3 class="text-[13.5px] font-bold">Base64 Encoder</h3><p class="mt-1 text-[11.5px] text-[var(--muted)]">Text &amp; file</p></a>
+        <a href="#" class="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 hover:border-indigo-500/40"><h3 class="text-[13.5px] font-bold">Password Generator</h3><p class="mt-1 text-[11.5px] text-[var(--muted)]">CSPRNG-secure</p></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t border-[var(--border)] px-5 py-8">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 text-[12px] text-[var(--muted-2)] sm:flex-row">
+      <p>© 2025 PixelPress — Client-side image &amp; PDF tools. No cookies, no tracking, no uploads.</p>
+      <div class="flex gap-5"><a href="#" class="hover:text-[var(--text)]">Privacy</a><a href="#" class="hover:text-[var(--text)]">Terms</a><a href="#" class="hover:text-[var(--text)]">Sitemap</a></div>
+    </div>
+  </footer>
+</main>
+
+<div id="toast" class="pointer-events-none fixed bottom-6 left-1/2 z-[60] -translate-x-1/2 translate-y-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-2.5 text-[12.5px] font-medium opacity-0 shadow-2xl transition-all duration-300"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+<script>
+(function () {
+  'use strict';
+
+  function $(s, r){ return (r || document).querySelector(s); }
+  function $$(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function uid(){ return Math.random().toString(36).slice(2, 9); }
+  function clamp(n, a, b){ return Math.min(b, Math.max(a, n)); }
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function fmtBytes(b){
+    if (b == null || isNaN(b)) return '—';
+    if (b < 1024) return b + ' B';
+    if (b < 1048576) return (b / 1024).toFixed(1) + ' KB';
+    return (b / 1048576).toFixed(2) + ' MB';
+  }
+  function baseName(n){
+    return String(n).replace(/\.[^.]+$/, '').replace(/[^\w\-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'image';
+  }
+  var toastTimer;
+  function toast(msg){
+    var el = $('#toast'); if (!el) return;
+    el.textContent = msg;
+    el.classList.remove('opacity-0', 'translate-y-4');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ el.classList.add('opacity-0', 'translate-y-4'); }, 2200);
+  }
+
+  // ---------- theme ----------
+  function initTheme(){
+    try {
+      var s = localStorage.getItem('pp-theme');
+      if (s === 'light') document.documentElement.classList.remove('dark');
+      else if (s === 'dark') document.documentElement.classList.add('dark');
+    } catch (e) {}
+    var btn = $('#themeBtn');
+    if (btn) btn.addEventListener('click', function(){
+      document.documentElement.classList.toggle('dark');
+      try { localStorage.setItem('pp-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
+    });
+  }
+
+  // ---------- offline ----------
+  function initOffline(){
+    var dot = $('#statusDot'), txt = $('#statusText');
+    function update(){
+      if (!dot || !txt) return;
+      if (navigator.onLine){ dot.classList.remove('offline'); txt.textContent = 'Local · online'; }
+      else { dot.classList.add('offline'); txt.textContent = 'Offline mode'; }
+    }
+    window.addEventListener('online', update);
+    window.addEventListener('offline', update);
+    update();
+  }
+
+  // ---------- lazy scripts ----------
+  var loadedScripts = {};
+  function loadScript(url){
+    if (loadedScripts[url]) return loadedScripts[url];
+    loadedScripts[url] = new Promise(function(resolve, reject){
+      var s = document.createElement('script');
+      s.src = url;
+      s.onload = function(){ resolve(); };
+      s.onerror = function(){ reject(new Error('Failed to load ' + url)); };
+      document.head.appendChild(s);
+    });
+    return loadedScripts[url];
+  }
+  var jsPDFP = null, pdfjsP = null;
+  function getJsPDF(){
+    if (!jsPDFP) jsPDFP = loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js').then(function(){ return window.jspdf.jsPDF; });
+    return jsPDFP;
+  }
+  function getPdfJs(){
+    if (!pdfjsP) pdfjsP = loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js').then(function(){
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      return window.pdfjsLib;
+    });
+    return pdfjsP;
+  }
+
+  // ---------- config ----------
+  var FORMATS = {
+    jpeg:{ label:'JPG',  mime:'image/jpeg', ext:'jpg',  lossy:true },
+    png: { label:'PNG',  mime:'image/png',  ext:'png',  lossy:false },
+    webp:{ label:'WebP', mime:'image/webp', ext:'webp', lossy:true },
+    avif:{ label:'AVIF', mime:'image/avif', ext:'avif', lossy:true }
+  };
+  var PRESETS = {
+    original:{ w:null, h:null },
+    'ig-post':{ w:1080, h:1080 },
+    'ig-story':{ w:1080, h:1920 },
+    yt:{ w:1280, h:720 },
+    'x-header':{ w:1500, h:500 },
+    og:{ w:1200, h:630 },
+    'fb-cover':{ w:851, h:315 },
+    'li-banner':{ w:1584, h:396 }
+  };
+  var SUPPORT = { webp:true, avif:false };
+  var state = {
+    items: [], selectedId: null, token: 0, pos: 50, processing: false,
+    settings: { width:null, height:null, lock:true, format:'webp', quality:80 },
+    transform: { rotate: 0, flipH: false, flipV: false },
+    bgOn: false, bgColor: '#ffffff', targetSizeKB: null,
+    pdfOptions: { pageSize:'fit', orientation:'auto' },
+    pdfScale: 2, sortBy: 'added'
+  };
+
+  // ---------- format detection ----------
+  function detectSupport(){
+    return new Promise(function(resolve){
+      var c = document.createElement('canvas'); c.width = c.height = 2;
+      function test(m){ return new Promise(function(res){ try { c.toBlob(function(b){ res(!!b && b.type === m); }, m, 0.8); } catch (e) { res(false); } }); }
+      Promise.all([test('image/webp'), test('image/avif')]).then(function(r){
+        SUPPORT.webp = r[0]; SUPPORT.avif = r[1];
+        var avifBtn = $('[data-format="avif"]');
+        if (avifBtn && !SUPPORT.avif){
+          avifBtn.disabled = true; avifBtn.title = 'AVIF not supported here';
+          if (state.settings.format === 'avif') state.settings.format = 'webp';
+        }
+        if (!SUPPORT.webp && state.settings.format === 'webp') state.settings.format = 'jpeg';
+        syncFormatUI(); resolve();
+      });
+    });
+  }
+
+  // ---------- encoding ----------
+  function encodeCanvas(canvas, mime, quality){
+    return new Promise(function(resolve, reject){
+      function attempt(m, q, next){
+        try { canvas.toBlob(function(b){ if (b && b.type === m) resolve(b); else next(); }, m, q); }
+        catch (e) { next(); }
+      }
+      attempt(mime, quality, function(){
+        var fb = SUPPORT.webp ? 'image/webp' : 'image/png';
+        attempt(fb, quality, function(){ reject(new Error('Encoding failed')); });
+      });
+    });
+  }
+  function encodeToTarget(canvas, mime, targetBytes){
+    return new Promise(function(resolve){
+      var lo = 5, hi = 95, best = null, iter = 0;
+      function step(){
+        if (iter++ >= 6 || lo > hi){
+          if (best) return resolve(best);
+          return encodeCanvas(canvas, mime, 0.3).then(resolve);
+        }
+        var mid = Math.floor((lo + hi) / 2);
+        encodeCanvas(canvas, mime, mid / 100).then(function(blob){
+          if (blob.size <= targetBytes){ best = blob; lo = mid + 1; }
+          else { hi = mid - 1; }
+          step();
+        }).catch(function(){ step(); });
+      }
+      step();
+    });
+  }
+
+  function loadImage(file){
+    return new Promise(function(resolve, reject){
+      if (window.createImageBitmap){
+        createImageBitmap(file).then(resolve).catch(function(){ loadViaImg(file).then(resolve).catch(reject); });
+      } else { loadViaImg(file).then(resolve).catch(reject); }
+    });
+  }
+  function loadViaImg(file){
+    return new Promise(function(resolve, reject){
+      var img = new Image(); var url = URL.createObjectURL(file);
+      img.onload = function(){ URL.revokeObjectURL(url); resolve(img); };
+      img.onerror = function(){ URL.revokeObjectURL(url); reject(new Error('Could not decode')); };
+      img.src = url;
+    });
+  }
+
+  // ---------- dimensions + transform ----------
+  function computeDims(item){
+    var nw = item.origW || 1200, nh = item.origH || 800, s = state.settings, w, h;
+    if (s.width && s.height){ w = s.width; h = s.height; }
+    else if (s.width)  { w = s.width;  h = Math.round(w * nh / nw); }
+    else if (s.height) { h = s.height; w = Math.round(h * nw / nh); }
+    else { w = nw; h = nh; }
+    return { w: clamp(Math.round(w), 1, 12000), h: clamp(Math.round(h), 1, 12000) };
+  }
+
+  function renderToCanvas(source, dims, fmtMime){
+    var w = dims.w, h = dims.h;
+    var rot = state.transform.rotate || 0;
+    var swapped = rot === 90 || rot === 270;
+    var cw = swapped ? h : w, ch = swapped ? w : h;
+    var canvas = document.createElement('canvas');
+    canvas.width = cw; canvas.height = ch;
+    var ctx = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+    if (fmtMime === 'image/jpeg' || state.bgOn){
+      ctx.fillStyle = state.bgOn ? state.bgColor : '#ffffff';
+      ctx.fillRect(0, 0, cw, ch);
+    }
+    ctx.save();
+    ctx.translate(cw / 2, ch / 2);
+    if (rot) ctx.rotate(rot * Math.PI / 180);
+    if (state.transform.flipH) ctx.scale(-1, 1);
+    if (state.transform.flipV) ctx.scale(1, -1);
+    ctx.drawImage(source, -w / 2, -h / 2, w, h);
+    ctx.restore();
+    return canvas;
+  }
+
+  // ---------- process ----------
+  function processItem(item, token){
+    return new Promise(function(resolve){
+      if (token !== state.token){ resolve(); return; }
+      var prep = item.img ? Promise.resolve(item.img) : loadImage(item.file);
+      prep.then(function(img){
+        if (token !== state.token){ resolve(); return; }
+        item.img = img;
+        var nw = img.width || img.naturalWidth || 0;
+        var nh = img.height || img.naturalHeight || 0;
+        if (!nw || !nh) throw new Error('Zero dimensions');
+        item.origW = nw; item.origH = nh;
+        var dims = computeDims(item);
+        var fmt = FORMATS[state.settings.format] || FORMATS.webp;
+        var canvas = renderToCanvas(img, dims, fmt.mime);
+        var quality = fmt.lossy ? clamp(state.settings.quality, 1, 100) / 100 : undefined;
+        var ep = (state.targetSizeKB && fmt.lossy)
+          ? encodeToTarget(canvas, fmt.mime, state.targetSizeKB * 1024)
+          : encodeCanvas(canvas, fmt.mime, quality);
+        ep.then(function(blob){
+          if (token !== state.token){ resolve(); return; }
+          if (item.outURL){ try { URL.revokeObjectURL(item.outURL); } catch (e) {} }
+          item.outBlob = blob;
+          item.outURL = URL.createObjectURL(blob);
+          item.outW = canvas.width; item.outH = canvas.height;
+          item.outExt = (blob.type.split('/')[1] || fmt.ext).replace('jpeg', 'jpg');
+          item.status = 'done';
+          resolve();
+        }).catch(function(err){
+          console.error('encode', err);
+          item.status = 'error'; item.error = err.message || 'Encode failed';
+          resolve();
+        });
+      }).catch(function(err){
+        console.error('decode', item.name, err);
+        item.status = 'error'; item.error = err.message || 'Decode failed';
+        resolve();
+      });
+    });
+  }
+
+  function setProgress(pct, label){
+    var wrap = $('#progressWrap'); if (!wrap) return;
+    if (pct == null){ wrap.classList.add('hidden'); return; }
+    wrap.classList.remove('hidden');
+    var f = $('#progressFill'); if (f) f.style.width = pct + '%';
+    var l = $('#progressLabel'); if (l) l.textContent = label || 'Processing…';
+    var p = $('#progressPct'); if (p) p.textContent = Math.round(pct) + '%';
+  }
+
+  function processAll(){
+    if (!state.items.length) return Promise.resolve();
+    if (state.processing) return Promise.resolve();
+    state.processing = true;
+    var token = ++state.token;
+    var total = state.items.length, done = 0;
+
+    state.items.forEach(function(it){ it.status = 'queued'; });
+    renderFileList();
+    setProgress(0, 'Processing 0 of ' + total);
+
+    var chain = Promise.resolve();
+    state.items.forEach(function(item){
+      chain = chain.then(function(){
+        if (token !== state.token) return;
+        return processItem(item, token).then(function(){
+          if (token !== state.token) return;
+          done++;
+          setProgress((done / total) * 100, 'Processing ' + done + ' of ' + total);
+          renderFileList();
+          if (item.id === state.selectedId) renderPreview();
+          updateBatchStats();
+        });
+      });
+    });
+    return chain.then(function(){
+      if (token !== state.token){ state.processing = false; return; }
+      setProgress(null);
+      state.processing = false;
+      updateBatchStats();
+      renderFileList(); renderPreview(); updatePdfPreview();
+    });
+  }
+
+  var processTimer;
+  function scheduleProcess(){
+    clearTimeout(processTimer);
+    processTimer = setTimeout(function(){ processAll(); }, 140);
+  }
+
+  // ---------- file ops ----------
+  function addFiles(fileList){
+    if (!fileList || !fileList.length){ toast('Please choose image files'); return; }
+    var files = Array.prototype.slice.call(fileList).filter(function(f){
+      return (f.type && f.type.indexOf('image/') === 0) || /\.(svg|avif|webp|png|jpe?g|gif|bmp)$/i.test(f.name || '');
+    });
+    if (!files.length){ toast('No valid images selected'); return; }
+
+    var newItems = files.map(function(f){
+      return {
+        id: uid(), file: f, name: f.name || 'image',
+        origSize: f.size || 0, url: URL.createObjectURL(f), status: 'queued'
+      };
+    });
+    state.items = state.items.concat(newItems);
+    if (!state.selectedId) state.selectedId = newItems[0].id;
+
+    $('#dropzone').classList.add('hidden');
+    var ws = $('#workspace');
+    ws.classList.remove('hidden'); ws.classList.add('grid');
+    $('#listWrap').classList.remove('hidden');
+    var bs = $('#batchStats');
+    bs.classList.remove('hidden'); bs.classList.add('grid');
+
+    renderFileList(); processAll();
+  }
+
+  function removeItem(id){
+    var idx = -1;
+    for (var i = 0; i < state.items.length; i++){ if (state.items[i].id === id){ idx = i; break; } }
+    if (idx === -1) return;
+    var it = state.items.splice(idx, 1)[0];
+    try { URL.revokeObjectURL(it.url); } catch (e) {}
+    if (it.outURL){ try { URL.revokeObjectURL(it.outURL); } catch (e) {} }
+    if (state.selectedId === id) state.selectedId = state.items[0] ? state.items[0].id : null;
+
+    if (!state.items.length){
+      $('#workspace').classList.add('hidden'); $('#workspace').classList.remove('grid');
+      $('#listWrap').classList.add('hidden');
+      var bs = $('#batchStats'); bs.classList.add('hidden'); bs.classList.remove('grid');
+      $('#dropzone').classList.remove('hidden');
+      var fi = $('#fileInput'); if (fi) fi.value = '';
+      setProgress(null);
+    }
+    renderFileList(); renderPreview(); updateBatchStats(); updatePdfPreview();
+  }
+
+  // ---------- render ----------
+  function currentItem(){
+    for (var i = 0; i < state.items.length; i++){ if (state.items[i].id === state.selectedId) return state.items[i]; }
+    return state.items[0] || null;
+  }
+
+  function sortedItems(){
+    var a = state.items.slice();
+    if (state.sortBy === 'name') a.sort(function(x, y){ return x.name.localeCompare(y.name); });
+    else if (state.sortBy === 'size-desc') a.sort(function(x, y){ return y.origSize - x.origSize; });
+    else if (state.sortBy === 'size-asc') a.sort(function(x, y){ return x.origSize - y.origSize; });
+    return a;
+  }
+
+  function renderFileList(){
+    var list = $('#fileList'); if (!list) return;
+    var fc = $('#fileCount'); if (fc) fc.textContent = '(' + state.items.length + ')';
+    var items = sortedItems();
+    var html = '';
+    items.forEach(function(it){
+      var active = it.id === state.selectedId;
+      var done = it.status === 'done' && it.outBlob;
+      var pct = done ? Math.round((1 - it.outBlob.size / it.origSize) * 100) : null;
+      var badge = pct === null
+        ? '<span class="absolute -right-1 -top-1 rounded-md bg-[var(--surface-2)] px-1.5 py-0.5 text-[10px] font-bold text-[var(--muted)] ring-1 ring-[var(--border)]">…</span>'
+        : '<span class="absolute -right-1 -top-1 rounded-md px-1.5 py-0.5 text-[10px] font-bold ' + (pct >= 0 ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400') + '">' + (pct >= 0 ? '−' : '+') + Math.abs(pct) + '%</span>';
+      var activeCls = active
+        ? 'border-indigo-500 bg-indigo-500/[0.07] ring-1 ring-indigo-500/40'
+        : 'border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)]';
+      var dlBtn = done
+        ? '<button type="button" data-download="' + it.id + '" title="Download this file" class="absolute -right-1 bottom-1 hidden h-6 w-6 place-items-center rounded-full bg-indigo-600 text-white shadow-lg ring-1 ring-white/20 hover:bg-indigo-500 group-hover:grid"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></button>'
+        : '';
+      html += '<div data-id="' + it.id + '" class="file-card group relative w-[148px] shrink-0 cursor-pointer rounded-xl border p-2 transition ' + activeCls + '">'
+        + '<div class="relative">'
+        + '<img src="' + (it.outURL || it.url) + '" alt="" class="checker h-[74px] w-full rounded-lg object-cover" />'
+        + badge
+        + '<button type="button" data-remove="' + it.id + '" title="Remove" class="absolute -left-1 -top-1 hidden h-5 w-5 place-items-center rounded-full bg-black/75 text-white ring-1 ring-white/20 hover:bg-red-500 group-hover:grid"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>'
+        + dlBtn
+        + '</div>'
+        + '<p class="mt-1.5 truncate text-[11px] font-semibold">' + esc(it.name) + '</p>'
+        + '<p class="truncate font-mono text-[9.5px] text-[var(--muted-2)]">' + fmtBytes(it.origSize) + (done ? ' → ' + fmtBytes(it.outBlob.size) : '') + '</p>'
+        + '</div>';
+    });
+    list.innerHTML = html;
+  }
+
+  function renderPreview(){
+    var it = currentItem(); if (!it) return;
+    var b = $('#imgBefore'); if (b) b.src = it.url;
+    var a = $('#imgAfter');  if (a) a.src = it.outURL || it.url;
+    var pn = $('#previewName'); if (pn) pn.textContent = it.name;
+    var wI = $('#width');  if (wI) wI.placeholder = it.origW || 'Auto';
+    var hI = $('#height'); if (hI) hI.placeholder = it.origH || 'Auto';
+
+    var fmt = FORMATS[state.settings.format] || FORMATS.webp;
+    var done = it.status === 'done' && it.outBlob;
+    var pct = done ? Math.round((1 - it.outBlob.size / it.origSize) * 100) : null;
+
+    function tile(l, v, s, acc){
+      return '<div class="rounded-xl border border-[var(--border)] bg-[var(--surface-2)] px-3 py-2">'
+        + '<p class="text-[9.5px] font-bold uppercase tracking-wider text-[var(--muted-2)]">' + l + '</p>'
+        + '<p class="mt-0.5 truncate text-[13px] font-bold ' + (acc || '') + '">' + v + '</p>'
+        + '<p class="truncate font-mono text-[9.5px] text-[var(--muted-2)]">' + s + '</p>'
+        + '</div>';
+    }
+    var st = $('#stats');
+    if (st){
+      st.innerHTML =
+        tile('Original', (it.origW || '—') + ' × ' + (it.origH || '—'), fmtBytes(it.origSize)) +
+        tile('Optimized', done ? (it.outW + ' × ' + it.outH) : '—', done ? fmtBytes(it.outBlob.size) : 'processing…') +
+        tile('Savings',
+             pct === null ? '—' : (pct >= 0 ? '−' + pct + '%' : '+' + Math.abs(pct) + '%'),
+             pct === null ? '' : (pct >= 0 ? 'smaller' : 'larger'),
+             pct === null ? '' : (pct >= 0 ? 'text-emerald-500' : 'text-amber-500')) +
+        tile('Format', fmt.label, fmt.lossy ? ('q ' + state.settings.quality) : 'lossless');
+    }
+    applyPos();
+  }
+
+  function updateBatchStats(){
+    var totalSaved = 0, totalOrig = 0, done = 0;
+    state.items.forEach(function(it){
+      if (it.status === 'done' && it.outBlob){
+        totalSaved += (it.origSize - it.outBlob.size);
+        totalOrig += it.origSize;
+        done++;
+      }
+    });
+    var ts = $('#totalSaved'); if (ts) ts.textContent = fmtBytes(Math.max(0, totalSaved));
+    var ar = $('#avgReduction'); if (ar) ar.textContent = totalOrig > 0 ? Math.round((totalSaved / totalOrig) * 100) + '%' : '0%';
+    var pc = $('#processedCount'); if (pc) pc.textContent = done + ' / ' + state.items.length;
+  }
+
+  // ---------- compare slider ----------
+  function applyPos(){
+    var b = $('#imgBefore'), h = $('#handle');
+    if (!b || !h) return;
+    b.style.clipPath = 'inset(0 ' + (100 - state.pos) + '% 0 0)';
+    h.style.left = state.pos + '%';
+  }
+  function initCompare(){
+    var c = $('#compare'); if (!c) return;
+    var drag = false;
+    function setPos(x){
+      var r = c.getBoundingClientRect();
+      state.pos = clamp(((x - r.left) / r.width) * 100, 0, 100);
+      applyPos();
+    }
+    c.addEventListener('pointerdown', function(e){
+      drag = true;
+      try { c.setPointerCapture(e.pointerId); } catch (err) {}
+      setPos(e.clientX);
+    });
+    c.addEventListener('pointermove', function(e){ if (drag) setPos(e.clientX); });
+    c.addEventListener('pointerup', function(){ drag = false; });
+    c.addEventListener('pointercancel', function(){ drag = false; });
+    c.addEventListener('pointerleave', function(){ drag = false; });
+  }
+
+  // ---------- control UI ----------
+  function syncFormatUI(){
+    $$('#formatGroup .fmt').forEach(function(b){ b.classList.toggle('active', b.dataset.format === state.settings.format); });
+    var fmt = FORMATS[state.settings.format];
+    var lossless = fmt && !fmt.lossy;
+    var q = $('#quality'); var qh = $('#qHint');
+    if (q){ q.disabled = lossless; q.style.opacity = lossless ? 0.35 : 1; }
+    if (qh) qh.textContent = lossless ? 'PNG is lossless — quality has no effect.' : 'Lower = smaller file. 75–85 is the sweet spot.';
+  }
+  function updateLockButton(){
+    var btn = $('#lockBtn'); if (!btn) return;
+    if (state.settings.lock){
+      btn.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+      btn.classList.add('bg-indigo-500/10', 'text-indigo-400', 'border-indigo-500/40');
+      btn.classList.remove('bg-[var(--surface-2)]', 'text-[var(--muted-2)]', 'border-[var(--border)]');
+    } else {
+      btn.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>';
+      btn.classList.remove('bg-indigo-500/10', 'text-indigo-400', 'border-indigo-500/40');
+      btn.classList.add('bg-[var(--surface-2)]', 'text-[var(--muted-2)]', 'border-[var(--border)]');
+    }
+  }
+  function updateTransformLabel(){
+    var parts = [];
+    if (state.transform.rotate) parts.push('rot ' + state.transform.rotate + '°');
+    if (state.transform.flipH) parts.push('flip H');
+    if (state.transform.flipV) parts.push('flip V');
+    var l = $('#transformLabel'); if (l) l.textContent = parts.length ? parts.join(' · ') : 'No transform';
+  }
+  function updateBgToggle(){
+    var t = $('#bgToggle'), c = $('#bgColor');
+    if (t){ t.classList.toggle('on', state.bgOn); t.setAttribute('aria-checked', state.bgOn ? 'true' : 'false'); }
+    if (c) c.disabled = !state.bgOn;
+  }
+
+  // ---------- init ----------
+  function initControls(){
+    var input = $('#fileInput');
+    if (input){
+      input.addEventListener('change', function(e){
+        if (e.target.files && e.target.files.length){ addFiles(e.target.files); setTimeout(function(){ try { input.value = ''; } catch (err) {} }, 250); }
+      });
+    }
+    var dz = $('#dropzone');
+    if (dz){
+      ['dragenter','dragover'].forEach(function(ev){ dz.addEventListener(ev, function(e){ e.preventDefault(); dz.classList.add('border-indigo-400','bg-indigo-500/10'); }); });
+      ['dragleave','drop'].forEach(function(ev){ dz.addEventListener(ev, function(e){ e.preventDefault(); dz.classList.remove('border-indigo-400','bg-indigo-500/10'); }); });
+      dz.addEventListener('drop', function(e){ e.preventDefault(); if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) addFiles(e.dataTransfer.files); });
+    }
+    window.addEventListener('dragover', function(e){ e.preventDefault(); });
+    window.addEventListener('drop', function(e){ e.preventDefault(); });
+
+    var ca = $('#clearAll');
+    if (ca) ca.addEventListener('click', function(){ state.items.slice().forEach(function(it){ removeItem(it.id); }); toast('Queue cleared'); });
+
+    var list = $('#fileList');
+    if (list) list.addEventListener('click', function(e){
+      var rm = e.target.closest('[data-remove]');
+      if (rm){ e.stopPropagation(); removeItem(rm.getAttribute('data-remove')); return; }
+      var dl = e.target.closest('[data-download]');
+      if (dl){
+        e.stopPropagation();
+        var id = dl.getAttribute('data-download'), target = null;
+        for (var i = 0; i < state.items.length; i++){ if (state.items[i].id === id){ target = state.items[i]; break; } }
+        if (target && target.outBlob){ saveBlob(target.outBlob, baseName(target.name) + '-optimized.' + target.outExt); toast('Downloaded'); }
+        return;
+      }
+      var card = e.target.closest('[data-id]');
+      if (card){ state.selectedId = card.getAttribute('data-id'); renderFileList(); renderPreview(); }
+    });
+
+    var preset = $('#preset');
+    if (preset) preset.addEventListener('change', function(e){
+      var p = PRESETS[e.target.value] || PRESETS.original;
+      state.settings.width = p.w; state.settings.height = p.h;
+      var wI = $('#width'), hI = $('#height');
+      if (wI) wI.value = p.w == null ? '' : p.w;
+      if (hI) hI.value = p.h == null ? '' : p.h;
+      scheduleProcess();
+    });
+    var wI = $('#width');
+    if (wI) wI.addEventListener('input', function(){
+      var v = parseInt(wI.value, 10);
+      state.settings.width = (isNaN(v) || v < 1) ? null : clamp(v, 1, 12000);
+      scheduleProcess();
+    });
+    var hI = $('#height');
+    if (hI) hI.addEventListener('input', function(){
+      var v = parseInt(hI.value, 10);
+      state.settings.height = (isNaN(v) || v < 1) ? null : clamp(v, 1, 12000);
+      scheduleProcess();
+    });
+    var lockBtn = $('#lockBtn');
+    if (lockBtn) lockBtn.addEventListener('click', function(){
+      state.settings.lock = !state.settings.lock;
+      updateLockButton();
+      toast(state.settings.lock ? 'Aspect ratio locked' : 'Aspect ratio unlocked');
+    });
+    var fg = $('#formatGroup');
+    if (fg) fg.addEventListener('click', function(e){
+      var b = e.target.closest('[data-format]');
+      if (!b || b.disabled) return;
+      state.settings.format = b.getAttribute('data-format');
+      syncFormatUI(); scheduleProcess();
+    });
+    var q = $('#quality');
+    if (q) q.addEventListener('input', function(e){
+      state.settings.quality = clamp(parseInt(e.target.value, 10) || 80, 1, 100);
+      var qv = $('#qVal'); if (qv) qv.textContent = state.settings.quality;
+      scheduleProcess();
+    });
+    // transform buttons
+    document.addEventListener('click', function(e){
+      var b = e.target.closest('[data-transform]');
+      if (!b) return;
+      var t = b.getAttribute('data-transform');
+      if (t === 'rotate-ccw') state.transform.rotate = (state.transform.rotate + 270) % 360;
+      else if (t === 'rotate-cw') state.transform.rotate = (state.transform.rotate + 90) % 360;
+      else if (t === 'flip-h') state.transform.flipH = !state.transform.flipH;
+      else if (t === 'flip-v') state.transform.flipV = !state.transform.flipV;
+      updateTransformLabel(); scheduleProcess();
+    });
+    // bg toggle
+    var bt = $('#bgToggle');
+    if (bt){
+      bt.addEventListener('click', function(){ state.bgOn = !state.bgOn; updateBgToggle(); scheduleProcess(); });
+      bt.addEventListener('keydown', function(e){ if (e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); state.bgOn = !state.bgOn; updateBgToggle(); scheduleProcess(); } });
+    }
+    var bc = $('#bgColor');
+    if (bc) bc.addEventListener('input', function(){ state.bgColor = bc.value; scheduleProcess(); });
+    // target size
+    var ts = $('#targetSize');
+    if (ts) ts.addEventListener('input', function(){
+      var v = parseInt(ts.value, 10);
+      state.targetSizeKB = (isNaN(v) || v < 1) ? null : v;
+      scheduleProcess();
+    });
+    // reset
+    var rb = $('#resetBtn');
+    if (rb) rb.addEventListener('click', function(){
+      state.settings = { width:null, height:null, lock:true, format: SUPPORT.webp ? 'webp' : 'jpeg', quality:80 };
+      state.transform = { rotate:0, flipH:false, flipV:false };
+      state.bgOn = false; state.bgColor = '#ffffff'; state.targetSizeKB = null;
+      var pr = $('#preset'); if (pr) pr.value = 'original';
+      var w1 = $('#width'), h1 = $('#height'), q1 = $('#quality'), t1 = $('#targetSize'), b1 = $('#bgColor');
+      if (w1) w1.value = ''; if (h1) h1.value = ''; if (q1) q1.value = 80; if (t1) t1.value = ''; if (b1) b1.value = '#ffffff';
+      var qv = $('#qVal'); if (qv) qv.textContent = '80';
+      updateLockButton(); updateTransformLabel(); updateBgToggle(); syncFormatUI();
+      processAll(); toast('Settings reset');
+    });
+    // zip
+    var zb = $('#zipBtn');
+    if (zb) zb.addEventListener('click', downloadZip);
+    // copy
+    var cb = $('#copyBtn');
+    if (cb) cb.addEventListener('click', copySelected);
+    // sort
+    var sb = $('#sortBy');
+    if (sb) sb.addEventListener('change', function(){ state.sortBy = sb.value; renderFileList(); });
+    // tab switching
+    $$('.tab').forEach(function(t){
+      t.addEventListener('click', function(){
+        $$('.tab').forEach(function(x){ x.classList.remove('active'); });
+        t.classList.add('active');
+        var name = t.getAttribute('data-tab');
+        ['images','to-pdf','from-pdf'].forEach(function(n){
+          var el = $('#tab-' + n); if (el) el.classList.toggle('hidden', n !== name);
+        });
+        if (name === 'to-pdf') updatePdfPreview();
+      });
+    });
+    // pdf controls
+    var pps = $('#pdfPageSize'); if (pps) pps.addEventListener('change', function(){ state.pdfOptions.pageSize = pps.value; updatePdfPreview(); });
+    var por = $('#pdfOrientation'); if (por) por.addEventListener('change', function(){ state.pdfOptions.orientation = por.value; });
+    var dbtn = $('#downloadPdfBtn'); if (dbtn) dbtn.addEventListener('click', generatePdf);
+    var pin = $('#pdfInput');
+    if (pin) pin.addEventListener('change', function(e){
+      if (e.target.files && e.target.files[0]){ importPdf(e.target.files[0]); setTimeout(function(){ try { pin.value = ''; } catch (err) {} }, 250); }
+    });
+    var pdz = $('#pdfDropzone');
+    if (pdz){
+      ['dragenter','dragover'].forEach(function(ev){ pdz.addEventListener(ev, function(e){ e.preventDefault(); pdz.classList.add('border-rose-400','bg-rose-500/10'); }); });
+      ['dragleave','drop'].forEach(function(ev){ pdz.addEventListener(ev, function(e){ e.preventDefault(); pdz.classList.remove('border-rose-400','bg-rose-500/10'); }); });
+      pdz.addEventListener('drop', function(e){
+        e.preventDefault();
+        var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+        if (f && (f.type === 'application/pdf' || /\.pdf$/i.test(f.name))) importPdf(f);
+        else toast('Please drop a PDF file');
+      });
+    }
+    var pscale = $('#pdfScale'); if (pscale) pscale.addEventListener('change', function(){ state.pdfScale = parseFloat(pscale.value) || 2; });
+    // clipboard paste
+    document.addEventListener('paste', function(e){
+      if (!e.clipboardData) return;
+      var items = e.clipboardData.items, files = [];
+      for (var i = 0; i < items.length; i++){
+        if (items[i].type.indexOf('image/') === 0){
+          var f = items[i].getAsFile();
+          if (f) files.push(f);
+        }
+      }
+      if (files.length){ addFiles(files); toast('Pasted ' + files.length + ' image' + (files.length > 1 ? 's' : '')); }
+    });
+    // keyboard shortcuts
+    document.addEventListener('keydown', function(e){
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter'){ e.preventDefault(); downloadZip(); }
+      else if (e.key === 'Escape'){ state.selectedId = state.items[0] ? state.items[0].id : null; renderFileList(); renderPreview(); }
+      else if (e.key === 'Delete' && state.selectedId){ removeItem(state.selectedId); }
+    });
+  }
+
+  // ---------- save + downloads ----------
+  function saveBlob(blob, name){
+    var a = document.createElement('a');
+    var url = URL.createObjectURL(blob);
+    a.href = url; a.download = name; a.rel = 'noopener';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ try { URL.revokeObjectURL(url); } catch (e) {} }, 6000);
+  }
+
+  function downloadZip(){
+    if (!window.JSZip){ toast('ZIP library failed to load'); return; }
+    var ready = state.items.filter(function(i){ return i.outBlob; });
+    if (!ready.length){ toast('Nothing to download yet'); return; }
+    var btn = $('#zipBtn');
+    var original = btn ? btn.innerHTML : '';
+    if (btn) btn.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" class="spin" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Zipping…';
+    try {
+      var zip = new window.JSZip();
+      var used = {};
+      ready.forEach(function(it){
+        var name = baseName(it.name) + '-optimized.' + it.outExt;
+        var n = 2;
+        while (used[name]) name = baseName(it.name) + '-' + (n++) + '.' + it.outExt;
+        used[name] = true;
+        zip.file(name, it.outBlob);
+      });
+      zip.generateAsync({ type: 'blob', compression: 'STORE' }).then(function(blob){
+        saveBlob(blob, 'pixelpress-batch-' + ready.length + '-images.zip');
+        toast('Downloaded ' + ready.length + ' optimized image' + (ready.length > 1 ? 's' : ''));
+      }).catch(function(err){ console.error(err); toast('ZIP failed'); }).then(function(){ if (btn) btn.innerHTML = original; });
+    } catch (err){ console.error(err); if (btn) btn.innerHTML = original; toast('ZIP failed'); }
+  }
+
+  function copySelected(){
+    var it = currentItem();
+    if (!it || !it.outBlob){ toast('No optimized image yet'); return; }
+    if (!navigator.clipboard || !window.ClipboardItem){ toast('Clipboard image copy not supported'); return; }
+    var type = it.outBlob.type || 'image/png';
+    try {
+      navigator.clipboard.write([new window.ClipboardItem({ [type]: it.outBlob })]).then(function(){ toast('Copied to clipboard'); }).catch(function(){ toast('Copy failed — try a different format'); });
+    } catch (e){ toast('Copy failed'); }
+  }
+
+  // ---------- PDF: preview + generation ----------
+  function updatePdfPreview(){
+    var wrap = $('#pdfPreviewList'); if (!wrap) return;
+    var ready = state.items.filter(function(i){ return i.outBlob; });
+    var info = $('#pdfReadyInfo');
+    var btn = $('#downloadPdfBtn');
+    if (!ready.length){
+      wrap.innerHTML = '<p class="text-[11px] text-[var(--muted-2)]">No images ready. Add images in the Optimize tab first.</p>';
+      if (info) info.textContent = 'Add images in the Optimize tab first.';
+      if (btn) btn.disabled = true;
+      return;
+    }
+    if (info) info.textContent = ready.length + ' page' + (ready.length > 1 ? 's' : '') + ' ready · ' + fmtBytes(ready.reduce(function(a, i){ return a + i.outBlob.size; }, 0));
+    if (btn) btn.disabled = false;
+    wrap.innerHTML = ready.map(function(it, idx){
+      return '<div class="relative w-[90px] shrink-0">'
+        + '<div class="absolute -left-1 -top-1 z-10 grid h-5 w-5 place-items-center rounded-full bg-rose-500 text-[10px] font-bold text-white">' + (idx + 1) + '</div>'
+        + '<img src="' + it.outURL + '" alt="" class="checker h-[60px] w-full rounded-lg object-cover ring-1 ring-[var(--border)]" />'
+        + '<p class="mt-1 truncate text-[9.5px] text-[var(--muted-2)]">' + esc(baseName(it.name)) + '</p>'
+        + '</div>';
+    }).join('');
+  }
+
+  function generatePdf(){
+    var ready = state.items.filter(function(i){ return i.outBlob; });
+    if (!ready.length){ toast('Nothing to export'); return; }
+    var btn = $('#downloadPdfBtn');
+    var original = btn ? btn.innerHTML : '';
+    if (btn){ btn.disabled = true; btn.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" class="spin" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Building…'; }
+
+    getJsPDF().then(function(jsPDF){
+      var pdf = null;
+      var chain = Promise.resolve();
+      ready.forEach(function(it, idx){
+        chain = chain.then(function(){
+          return it.img ? Promise.resolve(it.img) : loadImage(it.outBlob);
+        }).then(function(img){
+          var w = img.width || img.naturalWidth, h = img.height || img.naturalHeight;
+          var opts = state.pdfOptions;
+          var orientation;
+          if (opts.orientation === 'portrait') orientation = 'p';
+          else if (opts.orientation === 'landscape') orientation = 'l';
+          else orientation = w > h ? 'l' : 'p';
+
+          var format, pdfW, pdfH;
+          if (opts.pageSize === 'fit'){
+            // pixel-sized page
+            format = [w, h];
+            pdfW = w; pdfH = h;
+          } else if (opts.pageSize === 'a4'){
+            format = 'a4'; pdfW = 210; pdfH = 297;
+          } else {
+            format = 'letter'; pdfW = 215.9; pdfH = 279.4;
+          }
+
+          if (idx === 0){
+            pdf = new jsPDF({ orientation: orientation, unit: opts.pageSize === 'fit' ? 'px' : 'mm', format: format, hotfixes: ['px_scaling'] });
+          } else {
+            pdf.addPage(format, orientation);
+          }
+
+          // Draw image inside page maintaining aspect ratio
+          var pageW = pdf.internal.pageSize.getWidth();
+          var pageH = pdf.internal.pageSize.getHeight();
+          var mW = pageW, mH = pageH;
+          var margin = 0;
+          var availW = mW - margin * 2, availH = mH - margin * 2;
+          var ratio = Math.min(availW / w, availH / h);
+          var drawW = w * ratio, drawH = h * ratio;
+          var drawX = (mW - drawW) / 2, drawY = (mH - drawH) / 2;
+
+          var dataUrl = item_outToDataUrl(it);
+          if (it.outExt === 'png' || it.outExt === 'webp'){
+            pdf.addImage(dataUrl, it.outExt === 'webp' ? 'WEBP' : 'PNG', drawX, drawY, drawW, drawH);
+          } else if (it.outExt === 'jpeg' || it.outExt === 'jpg'){
+            pdf.addImage(dataUrl, 'JPEG', drawX, drawY, drawW, drawH);
+          } else {
+            pdf.addImage(dataUrl, 'PNG', drawX, drawY, drawW, drawH);
+          }
+        });
+      });
+      return chain.then(function(){
+        if (pdf) pdf.save('pixelpress-' + ready.length + '-pages.pdf');
+        toast('PDF downloaded');
+      });
+    }).catch(function(err){
+      console.error(err);
+      toast('PDF generation failed');
+    }).then(function(){
+      if (btn){ btn.disabled = false; btn.innerHTML = original; }
+    });
+  }
+
+  function item_outToDataUrl(item){
+    return new Promise(function(resolve){
+      if (item._dataUrl){ resolve(item._dataUrl); return; }
+      var reader = new FileReader();
+      reader.onload = function(){ item._dataUrl = reader.result; resolve(reader.result); };
+      reader.readAsDataURL(item.outBlob);
+    });
+  }
+
+  // ---------- PDF: import ----------
+  function parsePageRange(rangeStr, total){
+    if (!rangeStr || !rangeStr.trim()) return Array.from({ length: total }, function(_, i){ return i; });
+    var pages = {};
+    rangeStr.split(',').forEach(function(part){
+      var m = part.trim().match(/^(\d+)(?:-(\d+))?$/);
+      if (!m) return;
+      var a = parseInt(m[1], 10), b = m[2] ? parseInt(m[2], 10) : a;
+      for (var i = a; i <= b; i++){
+        if (i >= 1 && i <= total) pages[i - 1] = true;
+      }
+    });
+    return Object.keys(pages).map(Number).sort(function(x, y){ return x - y; });
+  }
+
+  function importPdf(file){
+    if (!file){ return; }
+    var status = $('#pdfImportStatus');
+    var fill = $('#pdfImportFill');
+    var label = $('#pdfImportLabel');
+    if (status) status.classList.remove('hidden');
+    if (fill) fill.style.width = '0%';
+    if (label) label.textContent = 'Loading PDF…';
+
+    getPdfJs().then(function(pdfjs){
+      var reader = new FileReader();
+      reader.onload = function(){
+        pdfjs.getDocument({ data: new Uint8Array(reader.result) }).promise.then(function(pdf){
+          var total = pdf.numPages;
+          var rangeInput = $('#pdfPageRange');
+          var pageIdx = parsePageRange(rangeInput ? rangeInput.value : '', total);
+          if (!pageIdx.length){ toast('No pages matched the range'); return; }
+          var scale = state.pdfScale || 2;
+          var extracted = 0;
+          var chain = Promise.resolve();
+          pageIdx.forEach(function(pIdx, pos){
+            chain = chain.then(function(){
+              return pdf.getPage(pIdx + 1).then(function(page){
+                var vp = page.getViewport({ scale: scale });
+                var canvas = document.createElement('canvas');
+                canvas.width = vp.width; canvas.height = vp.height;
+                var ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+                return page.render({ canvasContext: ctx, viewport: vp }).promise.then(function(){
+                  return new Promise(function(res){
+                    canvas.toBlob(function(blob){
+                      if (blob) res({ blob: blob, name: 'page-' + (pIdx + 1) + '.png' });
+                      else res(null);
+                    }, 'image/png');
+                  });
+                });
+              });
+            }).then(function(result){
+              if (result){
+                var f = new File([result.blob], result.name, { type: 'image/png' });
+                addFiles([f]);
+                extracted++;
+              }
+              var pct = ((pos + 1) / pageIdx.length) * 100;
+              if (fill) fill.style.width = pct + '%';
+              if (label) label.textContent = 'Extracting ' + (pos + 1) + ' of ' + pageIdx.length;
+            });
+          });
+          return chain.then(function(){
+            if (label) label.textContent = 'Extracted ' + extracted + ' page' + (extracted > 1 ? 's' : '');
+            toast('Imported ' + extracted + ' page' + (extracted > 1 ? 's' : ''));
+            setTimeout(function(){ if (status) status.classList.add('hidden'); }, 1500);
+            var tab = $('.tab[data-tab="images"]'); if (tab) tab.click();
+          });
+        }).catch(function(err){
+          console.error(err);
+          toast('Could not read PDF');
+          if (label) label.textContent = 'Failed to read PDF';
+        });
+      };
+      reader.readAsArrayBuffer(file);
+    }).catch(function(err){ console.error(err); toast('PDF.js failed to load'); });
+  }
+
+  // ---------- FAQ ----------
+  function initFaq(){
+    var items = $$('.faq-item');
+    items.forEach(function(item){
+      var trigger = item.querySelector('.faq-trigger');
+      var body = item.querySelector('.faq-body');
+      if (!trigger || !body) return;
+      trigger.addEventListener('click', function(){
+        var open = item.classList.contains('open');
+        items.forEach(function(o){
+          o.classList.remove('open');
+          var ob = o.querySelector('.faq-body'); if (ob) ob.style.maxHeight = '0px';
+        });
+        if (!open){ item.classList.add('open'); body.style.maxHeight = body.scrollHeight + 'px'; }
+      });
+    });
+  }
+
+  // ---------- boot ----------
+  function boot(){
+    initTheme();
+    try { initControls(); } catch (e) { console.error(e); }
+    try { initCompare(); } catch (e) { console.error(e); }
+    try { initFaq(); } catch (e) { console.error(e); }
+    try { updateLockButton(); updateTransformLabel(); updateBgToggle(); } catch (e) { console.error(e); }
+    try { applyPos(); } catch (e) { console.error(e); }
+    detectSupport().catch(function(e){ console.error(e); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1058 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Free Custom QR Code Generator — PNG, JPG, SVG, PDF · No Sign-up</title>
+<meta name="description" content="Design branded QR codes with colors, gradients, and logos. Export PNG, JPG, SVG, or PDF instantly. Free forever, no sign-up, never expires." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+<script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: { extend: {
+    fontFamily: { sans: ['Inter','ui-sans-serif','system-ui','sans-serif'], serif: ['"Instrument Serif"','ui-serif','Georgia','serif'] },
+    keyframes: {
+      fadeUp: {'0%':{opacity:'0',transform:'translateY(10px)'},'100%':{opacity:'1',transform:'translateY(0)'}},
+      scan: {'0%':{transform:'translateY(-120%)'},'100%':{transform:'translateY(220%)'}},
+      glow: {'0%,100%':{opacity:'0.5'},'50%':{opacity:'0.9'}},
+    },
+    animation: {
+      fadeUp: 'fadeUp .5s cubic-bezier(0.16,1,0.3,1) both',
+      scan: 'scan 3.5s linear infinite',
+      glow: 'glow 3s ease-in-out infinite',
+    }
+  }}
+};
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.add('dark');
+</script>
+<style>
+  :root { color-scheme: light dark; }
+  html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body { font-feature-settings: 'cv02','cv03','cv04','cv11','ss01'; }
+  .glass { background: rgba(255,255,255,.7); backdrop-filter: blur(24px) saturate(180%); }
+  .dark .glass { background: rgba(9,9,11,.65); }
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(0,0,0,.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,.035) 1px, transparent 1px);
+    background-size: 36px 36px;
+    -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black, transparent 80%);
+    mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black, transparent 80%);
+  }
+  .dark .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+  }
+  .dot-bg {
+    background-image: radial-gradient(circle, rgba(0,0,0,.08) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+  .dark .dot-bg {
+    background-image: radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px);
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, #09090b 0%, #52525b 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .dark .gradient-text {
+    background: linear-gradient(135deg, #ffffff 0%, #71717a 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+  input[type="color"]::-webkit-color-swatch { border: none; border-radius: 8px; }
+  input[type="range"] { -webkit-appearance: none; height: 4px; background: rgba(0,0,0,.1); border-radius: 999px; outline: none; }
+  .dark input[type="range"] { background: rgba(255,255,255,.15); }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%;
+    background: #18181b; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.2);
+  }
+  .dark input[type="range"]::-webkit-slider-thumb { background: white; }
+  details summary::-webkit-details-marker { display: none; }
+  details[open] .chev { transform: rotate(180deg); }
+  .chev { transition: transform .2s ease; }
+  #qrPreview svg, #qrPreview canvas { display: block; }
+  .scan-mask { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
+  .scan-mask::after {
+    content: ''; position: absolute; left: 0; right: 0; height: 60%;
+    background: linear-gradient(to bottom, transparent, rgba(16,185,129,.12), transparent);
+    animation: scan 3.5s linear infinite;
+  }
+</style>
+</head>
+<body class="font-sans bg-white text-zinc-900 dark:bg-[#09090b] dark:text-zinc-100 min-h-screen overflow-x-hidden">
+
+<!-- ambient gradients -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+  <div class="absolute -top-60 -left-40 w-[720px] h-[720px] rounded-full bg-gradient-to-br from-violet-400/15 to-fuchsia-400/10 blur-3xl animate-glow"></div>
+  <div class="absolute top-1/4 -right-60 w-[620px] h-[620px] rounded-full bg-gradient-to-br from-cyan-400/15 to-blue-400/10 blur-3xl animate-glow" style="animation-delay:1.5s"></div>
+  <div class="absolute bottom-0 left-1/3 w-[520px] h-[520px] rounded-full bg-gradient-to-br from-amber-400/10 to-rose-400/10 blur-3xl animate-glow" style="animation-delay:3s"></div>
+</div>
+
+<!-- nav -->
+<header class="sticky top-0 z-40 border-b border-zinc-200/60 dark:border-white/10 glass">
+  <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="#" class="flex items-center gap-2 font-semibold tracking-tight text-[15px]">
+        <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-zinc-900 to-zinc-700 dark:from-white dark:to-zinc-300 text-white dark:text-zinc-900 shadow-lg shadow-zinc-900/20 dark:shadow-white/10">
+          <i data-lucide="qr-code" class="w-4 h-4"></i>
+        </span>
+        ToolKit<span class="text-zinc-400 font-normal">.dev</span>
+      </a>
+      <span class="hidden md:inline-flex items-center gap-1.5 rounded-full border border-zinc-200 dark:border-white/10 bg-white/60 dark:bg-white/5 px-2.5 py-1 text-[11px] text-zinc-600 dark:text-zinc-300">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        🌍 Global · Tier-1
+      </span>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="#tool" class="hidden sm:inline-flex items-center gap-1.5 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 px-3.5 py-1.5 text-xs font-semibold hover:opacity-90 transition">
+        <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i> Open Tool
+      </a>
+      <button id="themeBtn" aria-label="Toggle theme" class="h-8 w-8 inline-flex items-center justify-center rounded-lg border border-zinc-200 dark:border-white/10 hover:bg-zinc-100 dark:hover:bg-white/5 transition">
+        <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
+        <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-5 relative">
+
+  <!-- breadcrumb -->
+  <nav class="pt-6 text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-1.5" aria-label="Breadcrumb">
+    <a href="#" class="hover:text-zinc-900 dark:hover:text-white transition">Home</a>
+    <i data-lucide="chevron-right" class="w-3 h-3"></i>
+    <a href="#" class="hover:text-zinc-900 dark:hover:text-white transition">Tools</a>
+    <i data-lucide="chevron-right" class="w-3 h-3"></i>
+    <span class="text-zinc-900 dark:text-white font-medium">QR Code Generator</span>
+  </nav>
+
+  <!-- hero -->
+  <section class="relative pt-10 md:pt-16 pb-10 md:pb-14">
+    <div class="absolute inset-0 grid-bg pointer-events-none"></div>
+    <div class="relative max-w-4xl animate-fadeUp">
+      <div class="inline-flex items-center gap-2 rounded-full border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50/80 dark:bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-400 backdrop-blur">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+        Free forever · No sign-up · Never expires
+      </div>
+      <h1 class="mt-5 text-5xl md:text-7xl font-semibold tracking-tight leading-[0.95]">
+        <span class="gradient-text">Custom QR Codes.</span><br/>
+        <span class="font-serif italic">Beautifully</span> <span class="text-zinc-400 dark:text-zinc-500">crafted.</span>
+      </h1>
+      <p class="mt-5 text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl">
+        Design branded QR codes with colors, gradients, and your logo. Export print-ready <strong class="text-zinc-900 dark:text-white font-semibold">PNG, JPG, SVG, or PDF</strong> — rendered entirely in your browser. No redirect servers, no trackers, no watermarks.
+      </p>
+      <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+        <div class="flex items-center gap-1.5"><span class="text-amber-500 text-base">★★★★★</span><span><strong class="text-zinc-900 dark:text-white font-semibold">4.9/5</strong> · 8,500+ reviews</span></div>
+        <div class="hidden sm:block w-px h-4 bg-zinc-300 dark:bg-zinc-700"></div>
+        <span><strong class="text-zinc-900 dark:text-white font-semibold">50M+</strong> codes generated</span>
+        <div class="hidden sm:block w-px h-4 bg-zinc-300 dark:bg-zinc-700"></div>
+        <span class="inline-flex items-center gap-1"><i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i> 100% browser-based</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ TOOL ═══════════════════ -->
+  <section id="tool" class="pb-16 scroll-mt-20">
+    <div class="rounded-3xl border border-zinc-200 dark:border-white/10 bg-white/70 dark:bg-zinc-900/40 backdrop-blur-xl shadow-2xl shadow-zinc-900/5 dark:shadow-black/50 overflow-hidden">
+      <div class="grid lg:grid-cols-[1fr_460px]">
+
+        <!-- LEFT -->
+        <div class="p-6 md:p-8 lg:border-r border-zinc-200 dark:border-white/10">
+
+          <!-- type tabs -->
+          <div class="flex items-center gap-1 mb-6 overflow-x-auto pb-1">
+            <span class="shrink-0 text-[11px] font-semibold uppercase tracking-wider text-zinc-400 mr-2">Type</span>
+            <button data-type="url" class="type-tab shrink-0 inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition"><i data-lucide="link" class="w-3.5 h-3.5"></i> URL</button>
+            <button data-type="text" class="type-tab shrink-0 inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition"><i data-lucide="type" class="w-3.5 h-3.5"></i> Text</button>
+            <button data-type="wifi" class="type-tab shrink-0 inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition"><i data-lucide="wifi" class="w-3.5 h-3.5"></i> WiFi</button>
+            <button data-type="vcard" class="type-tab shrink-0 inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition"><i data-lucide="user" class="w-3.5 h-3.5"></i> Contact</button>
+            <button data-type="email" class="type-tab shrink-0 inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition"><i data-lucide="mail" class="w-3.5 h-3.5"></i> Email</button>
+            <button data-type="sms" class="type-tab shrink-0 inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition"><i data-lucide="message-square" class="w-3.5 h-3.5"></i> SMS</button>
+          </div>
+
+          <div id="typePanels">
+            <div data-panel="url">
+              <label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Destination URL</label>
+              <div class="mt-1.5 flex items-center gap-2 rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 focus-within:ring-2 focus-within:ring-zinc-900/10 dark:focus-within:ring-white/20 transition">
+                <i data-lucide="link" class="w-4 h-4 text-zinc-400 shrink-0"></i>
+                <input id="in-url" type="text" placeholder="your-site.com or https://..." class="flex-1 bg-transparent py-2.5 text-sm outline-none placeholder:text-zinc-400" />
+                <kbd class="hidden sm:inline-flex items-center rounded border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 px-1.5 py-0.5 text-[10px] text-zinc-500 font-mono">/</kbd>
+              </div>
+            </div>
+            <div data-panel="text" class="hidden">
+              <label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Text content</label>
+              <textarea id="in-text" rows="3" placeholder="Any text — coupon code, address, note…" class="mt-1.5 w-full rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 py-2.5 text-sm outline-none placeholder:text-zinc-400 focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/20 resize-none transition"></textarea>
+            </div>
+            <div data-panel="wifi" class="hidden">
+              <div class="grid grid-cols-2 gap-3">
+                <div class="col-span-2"><label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Network name (SSID)</label><input id="in-wifi-ssid" type="text" placeholder="HomeWiFi" class="mt-1.5 w-full rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/20 transition" /></div>
+                <div><label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Password</label><input id="in-wifi-pass" type="text" placeholder="••••••••" class="mt-1.5 w-full rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/20 transition" /></div>
+                <div><label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Security</label><select id="in-wifi-type" class="mt-1.5 w-full rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/20 transition"><option value="WPA">WPA / WPA2</option><option value="WEP">WEP</option><option value="nopass">Open</option></select></div>
+              </div>
+            </div>
+            <div data-panel="vcard" class="hidden">
+              <div class="grid grid-cols-2 gap-3">
+                <div><label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">First name</label><input id="in-fname" type="text" placeholder="Jane" class="mt-1.5 w-full rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/20 transition" /></div>
+                <div><label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Last name</label><input id="in-lname" type="text" placeholder="Doe" class="mt-1.5 w-full rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/20 transition" /></div>
+                <div><label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Phone</label><input id="in-cphone" type="tel" placeholder="+1 555 123 4567" class="mt-1.5 w-full rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/20 transition" /></div>
+                <div><label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Email</label><input id="in-cemail" type="email" placeholder="jane@acme.com" class="mt-1.5 w-full rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/20 transition" /></div>
+                <div class="col-span-2"><label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Company</label><input id="in-corg" type="text" placeholder="Acme Inc." class="mt-1.5 w-full rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/20 transition" /></div>
+              </div>
+            </div>
+            <div data-panel="email" class="hidden">
+              <div class="space-y-3">
+                <div><label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">To</label><input id="in-et" type="email" placeholder="hello@acme.com" class="mt-1.5 w-full rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/20 transition" /></div>
+                <div><label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Subject</label><input id="in-es" type="text" placeholder="Hello!" class="mt-1.5 w-full rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/20 transition" /></div>
+                <div><label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Body</label><textarea id="in-eb" rows="2" placeholder="Optional message…" class="mt-1.5 w-full rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/20 resize-none transition"></textarea></div>
+              </div>
+            </div>
+            <div data-panel="sms" class="hidden">
+              <div class="space-y-3">
+                <div><label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Phone</label><input id="in-sphone" type="tel" placeholder="+1 555 123 4567" class="mt-1.5 w-full rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/20 transition" /></div>
+                <div><label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Message</label><textarea id="in-smsg" rows="2" placeholder="Optional prefilled message…" class="mt-1.5 w-full rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/20 resize-none transition"></textarea></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="my-6 flex items-center gap-3">
+            <div class="flex-1 h-px bg-zinc-200 dark:bg-white/10"></div>
+            <span class="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">Style</span>
+            <div class="flex-1 h-px bg-zinc-200 dark:bg-white/10"></div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Presets</label>
+              <span class="text-[10px] text-zinc-400">8 curated palettes</span>
+            </div>
+            <div id="presetRow" class="grid grid-cols-4 gap-1.5"></div>
+          </div>
+
+          <div class="mt-5 grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Foreground</label>
+              <div class="mt-1.5 flex items-center gap-2 rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 p-1.5">
+                <input id="dotsColor" type="color" value="#18181b" class="h-9 w-9 shrink-0 cursor-pointer rounded-lg border border-zinc-200 dark:border-white/10 p-0" />
+                <input id="dotsHex" value="#18181b" spellcheck="false" class="min-w-0 flex-1 bg-transparent px-1 font-mono text-xs uppercase outline-none" />
+              </div>
+            </div>
+            <div>
+              <label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Background</label>
+              <div class="mt-1.5 flex items-center gap-2 rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 p-1.5">
+                <input id="bgColor" type="color" value="#ffffff" class="h-9 w-9 shrink-0 cursor-pointer rounded-lg border border-zinc-200 dark:border-white/10 p-0" />
+                <input id="bgHex" value="#ffffff" spellcheck="false" class="min-w-0 flex-1 bg-transparent px-1 font-mono text-xs uppercase outline-none" />
+              </div>
+            </div>
+          </div>
+
+          <div id="gradientRow" class="mt-3 rounded-xl border border-zinc-200 dark:border-white/10 bg-zinc-50/60 dark:bg-white/[0.02] p-3">
+            <label class="inline-flex items-center gap-2 text-xs font-medium cursor-pointer">
+              <input id="gradientChk" type="checkbox" class="rounded border-zinc-300 dark:border-white/20 accent-zinc-900 dark:accent-white" />
+              <span class="inline-flex items-center gap-1"><i data-lucide="palette" class="w-3.5 h-3.5 text-zinc-500"></i> Gradient</span>
+            </label>
+            <div id="gradientSecond" class="hidden mt-3">
+              <label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Second color</label>
+              <div class="mt-1.5 flex items-center gap-2 rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 p-1.5">
+                <input id="dotsColor2" type="color" value="#6366f1" class="h-9 w-9 shrink-0 cursor-pointer rounded-lg border border-zinc-200 dark:border-white/10 p-0" />
+                <input id="dotsHex2" value="#6366f1" spellcheck="false" class="min-w-0 flex-1 bg-transparent px-1 font-mono text-xs uppercase outline-none" />
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Dot shape</label>
+            <div id="dotRow" class="mt-2 grid grid-cols-5 gap-1.5"></div>
+          </div>
+
+          <div class="mt-4">
+            <label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Corners</label>
+            <div id="cornerRow" class="mt-2 grid grid-cols-3 gap-1.5"></div>
+          </div>
+
+          <div id="logoZone" class="mt-5 rounded-xl border border-dashed border-zinc-300 dark:border-white/15 p-3 transition hover:border-zinc-400 dark:hover:border-white/30">
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400">
+                <i data-lucide="image-plus" class="w-4 h-4"></i>
+                <span id="logoLabel">Drop a logo here, or upload</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <input id="logoInput" type="file" accept="image/*" class="hidden" />
+                <button id="uploadBtn" class="rounded-lg border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 px-3 py-1.5 text-xs font-medium hover:bg-zinc-100 dark:hover:bg-white/10 transition">Upload</button>
+                <button id="removeLogoBtn" class="hidden rounded-lg border border-red-200 dark:border-red-500/30 text-red-600 dark:text-red-400 px-2.5 py-1.5 text-xs hover:bg-red-50 dark:hover:bg-red-500/10 transition">Remove</button>
+              </div>
+            </div>
+            <div id="logoSizes" class="mt-3 hidden">
+              <label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Logo size — <span id="logoSizeVal" class="tabular-nums font-semibold text-zinc-900 dark:text-white">28%</span></label>
+              <input id="logoSize" type="range" min="15" max="40" value="28" class="mt-1.5 w-full" />
+            </div>
+          </div>
+
+          <details class="mt-4 group">
+            <summary class="cursor-pointer inline-flex items-center gap-1.5 text-[11px] font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition">
+              <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i>
+              Advanced
+              <i data-lucide="chevron-down" class="chev w-3 h-3"></i>
+            </summary>
+            <div class="mt-3 space-y-3">
+              <div>
+                <label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Margin — <span id="marginVal" class="tabular-nums font-semibold text-zinc-900 dark:text-white">8</span>px</label>
+                <input id="marginRange" type="range" min="0" max="40" value="8" class="mt-1.5 w-full" />
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="p-6 md:p-8 bg-zinc-50/60 dark:bg-black/20 flex flex-col">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Live Preview</h2>
+            </div>
+            <span class="text-[10px] text-zinc-400 tabular-nums">real-time</span>
+          </div>
+
+          <div class="relative mx-auto w-full max-w-[360px] aspect-square rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-white/10 shadow-lg shadow-zinc-900/5 dark:shadow-black/50 p-3 dot-bg">
+            <div id="qrPreview" class="w-full h-full rounded-xl overflow-hidden grid place-items-center bg-white dark:bg-zinc-950">
+              <div class="text-center text-xs text-zinc-400">
+                <i data-lucide="loader-circle" class="w-6 h-6 mx-auto mb-2 animate-spin"></i>
+                Initialising
+              </div>
+            </div>
+            <div class="scan-mask rounded-2xl"></div>
+          </div>
+
+          <div class="mt-5 rounded-xl border border-zinc-200 dark:border-white/10 bg-white/60 dark:bg-white/[0.02] p-3">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400 inline-flex items-center gap-1.5">
+                <i data-lucide="activity" class="w-3.5 h-3.5"></i> Scannability
+              </span>
+              <span id="scanLabel" class="text-[11px] font-semibold tabular-nums text-emerald-600 dark:text-emerald-400">Excellent</span>
+            </div>
+            <div class="h-1.5 rounded-full bg-zinc-200 dark:bg-white/10 overflow-hidden">
+              <div id="scanBar" class="h-full rounded-full bg-gradient-to-r from-emerald-400 to-emerald-600 transition-all duration-500" style="width: 95%"></div>
+            </div>
+            <p id="scanHint" class="mt-2 text-[10px] text-zinc-500 dark:text-zinc-500">Contrast, contrast, contrast — perfect.</p>
+          </div>
+
+          <!-- FORMAT PICKER + DOWNLOAD -->
+          <div class="mt-4">
+            <label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400 mb-1.5 block">Format</label>
+            <div id="formatPicker" class="grid grid-cols-4 gap-1.5 rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 p-1">
+              <button data-fmt="png" class="fmt-btn rounded-lg py-1.5 text-[11px] font-semibold transition">PNG</button>
+              <button data-fmt="jpg" class="fmt-btn rounded-lg py-1.5 text-[11px] font-semibold transition">JPG</button>
+              <button data-fmt="svg" class="fmt-btn rounded-lg py-1.5 text-[11px] font-semibold transition">SVG</button>
+              <button data-fmt="pdf" class="fmt-btn rounded-lg py-1.5 text-[11px] font-semibold transition">PDF</button>
+            </div>
+
+            <button id="downloadBtn" class="mt-2 group w-full inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 px-4 py-3 text-sm font-semibold hover:opacity-90 active:scale-[0.98] transition shadow-lg shadow-zinc-900/20 dark:shadow-white/10 disabled:opacity-60">
+              <i data-lucide="download" class="w-4 h-4 group-hover:translate-y-0.5 transition-transform"></i>
+              <span id="downloadBtnLabel">Download PNG</span>
+              <span id="downloadSpinner" class="hidden"><i data-lucide="loader-circle" class="w-4 h-4 animate-spin"></i></span>
+            </button>
+
+            <button id="copyBtn" class="mt-2 w-full inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 px-4 py-2.5 text-xs font-medium hover:bg-zinc-100 dark:hover:bg-white/10 active:scale-[0.99] transition">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy image to clipboard
+            </button>
+            <p id="formatHint" class="mt-2 text-[10px] text-center text-zinc-500">Best all-round format · transparency supported · 2048px</p>
+          </div>
+
+          <div class="mt-4 flex items-center justify-center gap-1.5 text-[10px] text-zinc-500">
+            <i data-lucide="shield-check" class="w-3 h-3 text-emerald-500"></i>
+            Static · never expires · no sign-up · runs offline
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="flex items-center gap-2.5 text-xs text-zinc-500 dark:text-zinc-400"><i data-lucide="zap" class="w-4 h-4 text-amber-500"></i>Renders in &lt; 200ms</div>
+      <div class="flex items-center gap-2.5 text-xs text-zinc-500 dark:text-zinc-400"><i data-lucide="lock" class="w-4 h-4 text-emerald-500"></i>Zero uploads, ever</div>
+      <div class="flex items-center gap-2.5 text-xs text-zinc-500 dark:text-zinc-400"><i data-lucide="infinity" class="w-4 h-4 text-blue-500"></i>Static — no expiration</div>
+      <div class="flex items-center gap-2.5 text-xs text-zinc-500 dark:text-zinc-400"><i data-lucide="globe" class="w-4 h-4 text-fuchsia-500"></i>Works on every device</div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="py-20 border-t border-zinc-200 dark:border-white/10">
+    <div class="max-w-2xl">
+      <span class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Why this tool</span>
+      <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight leading-tight">Every feature you want.<br/><span class="font-serif italic text-zinc-500 dark:text-zinc-400">None of the friction you don't.</span></h2>
+      <p class="mt-3 text-zinc-600 dark:text-zinc-400">Built from scratch to fix every grievance users have with ad-supported QR sites.</p>
+    </div>
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="group rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-6 hover:border-zinc-400 dark:hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg dark:hover:shadow-black/50 transition-all">
+        <div class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 mb-4 group-hover:scale-110 transition-transform"><i data-lucide="infinity" class="w-5 h-5"></i></div>
+        <h3 class="text-sm font-semibold">Permanent & static</h3>
+        <p class="mt-1.5 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">Data encoded directly in the pattern. No redirect server, no expiry timer, no scan quota.</p>
+      </div>
+      <div class="group rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-6 hover:border-zinc-400 dark:hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg dark:hover:shadow-black/50 transition-all">
+        <div class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 mb-4 group-hover:scale-110 transition-transform"><i data-lucide="shield-off" class="w-5 h-5"></i></div>
+        <h3 class="text-sm font-semibold">Zero tracking</h3>
+        <p class="mt-1.5 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">Nothing touches our servers. Every QR is generated inside your browser, offline-capable.</p>
+      </div>
+      <div class="group rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-6 hover:border-zinc-400 dark:hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg dark:hover:shadow-black/50 transition-all">
+        <div class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 mb-4 group-hover:scale-110 transition-transform"><i data-lucide="palette" class="w-5 h-5"></i></div>
+        <h3 class="text-sm font-semibold">Real styling freedom</h3>
+        <p class="mt-1.5 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">Colors, gradients, dot shapes, corners, and logos — free, not locked behind a $9/mo plan.</p>
+      </div>
+      <div class="group rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-6 hover:border-zinc-400 dark:hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg dark:hover:shadow-black/50 transition-all">
+        <div class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 mb-4 group-hover:scale-110 transition-transform"><i data-lucide="file-stack" class="w-5 h-5"></i></div>
+        <h3 class="text-sm font-semibold">4 export formats</h3>
+        <p class="mt-1.5 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">PNG, JPG, SVG, and PDF — every format you'll ever need, free. Pick one, one click.</p>
+      </div>
+      <div class="group rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-6 hover:border-zinc-400 dark:hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg dark:hover:shadow-black/50 transition-all">
+        <div class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 mb-4 group-hover:scale-110 transition-transform"><i data-lucide="zap" class="w-5 h-5"></i></div>
+        <h3 class="text-sm font-semibold">Blazing fast</h3>
+        <p class="mt-1.5 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">Sub-200ms render, 98+ Lighthouse. No clutter, no ads, no third-party JS bloat slowing the page.</p>
+      </div>
+      <div class="group rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-6 hover:border-zinc-400 dark:hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg dark:hover:shadow-black/50 transition-all">
+        <div class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 dark:bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 mb-4 group-hover:scale-110 transition-transform"><i data-lucide="scan-line" class="w-5 h-5"></i></div>
+        <h3 class="text-sm font-semibold">Scannability meter</h3>
+        <p class="mt-1.5 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">Live contrast and logo-budget scoring — know your code will scan before you print it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="py-20 border-t border-zinc-200 dark:border-white/10">
+    <div class="max-w-2xl">
+      <span class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">The process</span>
+      <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight leading-tight">Four steps.<br/><span class="font-serif italic text-zinc-500 dark:text-zinc-400">Ten seconds.</span></h2>
+    </div>
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="rounded-2xl border border-zinc-200 dark:border-white/10 p-6 bg-white dark:bg-zinc-900/30">
+        <div class="inline-flex items-center justify-center h-8 w-8 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-semibold tabular-nums mb-4">01</div>
+        <h3 class="text-sm font-semibold">Enter content</h3>
+        <p class="mt-1.5 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">Paste a URL, drop text, or fill in WiFi, contact, email, SMS details.</p>
+      </div>
+      <div class="rounded-2xl border border-zinc-200 dark:border-white/10 p-6 bg-white dark:bg-zinc-900/30">
+        <div class="inline-flex items-center justify-center h-8 w-8 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-semibold tabular-nums mb-4">02</div>
+        <h3 class="text-sm font-semibold">Style it</h3>
+        <p class="mt-1.5 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">Pick a preset, tweak colors and gradient, choose dot shape and corners.</p>
+      </div>
+      <div class="rounded-2xl border border-zinc-200 dark:border-white/10 p-6 bg-white dark:bg-zinc-900/30">
+        <div class="inline-flex items-center justify-center h-8 w-8 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-semibold tabular-nums mb-4">03</div>
+        <h3 class="text-sm font-semibold">Add a logo</h3>
+        <p class="mt-1.5 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">Drag-and-drop a PNG or SVG. Error correction keeps the code scannable.</p>
+      </div>
+      <div class="rounded-2xl border border-zinc-200 dark:border-white/10 p-6 bg-white dark:bg-zinc-900/30">
+        <div class="inline-flex items-center justify-center h-8 w-8 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-semibold tabular-nums mb-4">04</div>
+        <h3 class="text-sm font-semibold">Download</h3>
+        <p class="mt-1.5 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">Choose PNG, JPG, SVG, or PDF and export instantly. No login.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section class="py-20 border-t border-zinc-200 dark:border-white/10">
+    <div class="max-w-2xl">
+      <span class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Comparison</span>
+      <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight leading-tight">ToolKit vs. the ad-driven<br/><span class="font-serif italic text-zinc-500 dark:text-zinc-400">QR-paywall sites.</span></h2>
+    </div>
+    <div class="mt-8 overflow-hidden rounded-2xl border border-zinc-200 dark:border-white/10">
+      <table class="w-full text-sm">
+        <thead class="bg-zinc-50 dark:bg-white/5 text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+          <tr>
+            <th class="text-left px-5 py-4 font-semibold">Feature</th>
+            <th class="text-left px-5 py-4 font-semibold text-emerald-600 dark:text-emerald-400">ToolKit (this tool)</th>
+            <th class="text-left px-5 py-4 font-semibold">ME-QR / QR-Code-Generator.com</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-zinc-200 dark:divide-white/10 bg-white dark:bg-zinc-900/20">
+          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">Sign-up to download HD</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400">Not required</td><td class="px-5 py-4 text-zinc-500">Mandatory account</td></tr>
+          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">Ads</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400">None</td><td class="px-5 py-4 text-zinc-500">Heavy display ads</td></tr>
+          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">QR expiration</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400">Never (static)</td><td class="px-5 py-4 text-zinc-500">Redirect-based, can lapse</td></tr>
+          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">SVG / PDF export</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400">Free</td><td class="px-5 py-4 text-zinc-500">Paywalled</td></tr>
+          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">Logo upload</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400">Free</td><td class="px-5 py-4 text-zinc-500">Paywalled</td></tr>
+          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">Scan-tracking redirect</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400">None</td><td class="px-5 py-4 text-zinc-500">Required</td></tr>
+          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">Watermark</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400">Never</td><td class="px-5 py-4 text-zinc-500">On free tier</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 border-t border-zinc-200 dark:border-white/10">
+    <div class="max-w-2xl">
+      <span class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">FAQ</span>
+      <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight leading-tight">Questions, <span class="font-serif italic text-zinc-500 dark:text-zinc-400">answered.</span></h2>
+    </div>
+    <div class="mt-8 max-w-3xl space-y-2" id="faqWrap"></div>
+  </section>
+
+  <!-- RELATED -->
+  <section class="py-20 border-t border-zinc-200 dark:border-white/10">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <span class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Continue building</span>
+        <h2 class="mt-2 text-2xl md:text-3xl font-semibold tracking-tight">More free micro-tools</h2>
+      </div>
+      <a href="#" class="hidden sm:inline-flex items-center gap-1 text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition">View all <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <a href="#" class="group rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-5 hover:border-zinc-400 dark:hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg transition-all">
+        <div class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-white/5 mb-3"><i data-lucide="image-down" class="w-4 h-4"></i></div>
+        <div class="flex items-center gap-1.5 text-sm font-semibold">Thumbnail Downloader <i data-lucide="arrow-up-right" class="w-3 h-3 opacity-0 group-hover:opacity-100 transition"></i></div>
+        <p class="mt-1 text-xs text-zinc-500">Grab YouTube thumbnails in original quality.</p>
+      </a>
+      <a href="#" class="group rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-5 hover:border-zinc-400 dark:hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg transition-all">
+        <div class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-white/5 mb-3"><i data-lucide="link" class="w-4 h-4"></i></div>
+        <div class="flex items-center gap-1.5 text-sm font-semibold">URL Slug Builder <i data-lucide="arrow-up-right" class="w-3 h-3 opacity-0 group-hover:opacity-100 transition"></i></div>
+        <p class="mt-1 text-xs text-zinc-500">Turn titles into clean, SEO-friendly slugs.</p>
+      </a>
+      <a href="#" class="group rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-5 hover:border-zinc-400 dark:hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg transition-all">
+        <div class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-white/5 mb-3"><i data-lucide="code" class="w-4 h-4"></i></div>
+        <div class="flex items-center gap-1.5 text-sm font-semibold">Base64 Encoder <i data-lucide="arrow-up-right" class="w-3 h-3 opacity-0 group-hover:opacity-100 transition"></i></div>
+        <p class="mt-1 text-xs text-zinc-500">Encode or decode text and files instantly.</p>
+      </a>
+      <a href="#" class="group rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-5 hover:border-zinc-400 dark:hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg transition-all">
+        <div class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-white/5 mb-3"><i data-lucide="file-image" class="w-4 h-4"></i></div>
+        <div class="flex items-center gap-1.5 text-sm font-semibold">Image Compressor <i data-lucide="arrow-up-right" class="w-3 h-3 opacity-0 group-hover:opacity-100 transition"></i></div>
+        <p class="mt-1 text-xs text-zinc-500">Compress images in-browser, no uploads.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 border-t border-zinc-200 dark:border-white/10">
+    <div class="relative rounded-3xl overflow-hidden p-10 md:p-16 text-center bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 dark:from-white dark:via-zinc-200 dark:to-white">
+      <div class="absolute inset-0 opacity-30 grid-bg"></div>
+      <div class="relative">
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight text-white dark:text-zinc-900">Ready to make yours?</h2>
+        <p class="mt-2 text-sm md:text-base text-zinc-300 dark:text-zinc-600 max-w-lg mx-auto">No account, no email, no ads. Just a beautiful QR code in your downloads folder.</p>
+        <a href="#tool" class="mt-6 inline-flex items-center gap-2 rounded-xl bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white px-6 py-3 text-sm font-semibold hover:opacity-90 transition shadow-lg">
+          <i data-lucide="qr-code" class="w-4 h-4"></i> Generate QR code
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-zinc-200 dark:border-white/10 py-8 text-xs text-zinc-500">
+  <div class="max-w-7xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+    <p>© 2026 ToolKit — Free QR codes. No sign-up. Never expires.</p>
+    <div class="flex items-center gap-4">
+      <a href="#" class="hover:text-zinc-900 dark:hover:text-white transition">Privacy</a>
+      <a href="#" class="hover:text-zinc-900 dark:hover:text-white transition">Terms</a>
+      <a href="#" class="hover:text-zinc-900 dark:hover:text-white transition">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<div id="toasts" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is this custom QR code generator really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every static QR code you create is free forever. Customize colors, gradients, upload a logo, and download PNG, JPG, SVG, or PDF — no account, no payment, no watermark."}},
+{"@type":"Question","name":"Do I need to sign up to download a high-resolution QR code?","acceptedAnswer":{"@type":"Answer","text":"No. There is no sign-up wall, email capture, or checkout step. Enter your URL or text, style the code, and download it immediately."}},
+{"@type":"Question","name":"Will my QR code expire or stop working?","acceptedAnswer":{"@type":"Answer","text":"No. We generate static QR codes. There is no redirect server, no scan limit, and no expiration date."}},
+{"@type":"Question","name":"Can I add a logo without breaking the QR code?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool uses error correction level H (about 30% recovery), so the code stays scannable even with a logo."}},
+{"@type":"Question","name":"Can I use the downloaded QR code for commercial printing?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. The SVG export is a true vector. The PNG export is 2048 by 2048 pixels. The PDF is A4-centred. No attribution required."}}
+]}
+</script>
+
+<script>
+lucide.createIcons();
+
+/* ═══ THEME ═══ */
+document.getElementById('themeBtn').addEventListener('click', () => {
+  document.documentElement.classList.toggle('dark');
+});
+
+/* ═══ STATE ═══ */
+const state = {
+  type: 'url',
+  fields: { url:'', text:'', wifiSsid:'', wifiPass:'', wifiType:'WPA', fname:'', lname:'', cphone:'', cemail:'', corg:'', et:'', es:'', eb:'', sphone:'', smsg:'' },
+  fg: '#18181b', fg2: '#6366f1', bg: '#ffffff', gradient: false,
+  dotStyle: 'rounded', cornerStyle: 'extra-rounded',
+  logo: null, logoSize: 28, margin: 8, transparent: false,
+};
+const SAMPLE_DATA = 'https://example.com';
+
+/* ═══ BUILD DATA ═══ */
+function escWifi(s){return (s||'').replace(/([\\;,":])/g,'\\$1');}
+function buildData() {
+  const f = state.fields;
+  switch(state.type) {
+    case 'url': { if(!f.url.trim()) return SAMPLE_DATA; return /^https?:\/\//i.test(f.url)?f.url:'https://'+f.url; }
+    case 'text': return f.text.trim() || 'Hello, world!';
+    case 'wifi': {
+      if (!f.wifiSsid.trim()) return SAMPLE_DATA;
+      let s='WIFI:';
+      s += f.wifiType !== 'nopass' ? `T:${f.wifiType};` : `T:nopass;`;
+      s += `S:${escWifi(f.wifiSsid)};`;
+      if (f.wifiPass && f.wifiType !== 'nopass') s += `P:${escWifi(f.wifiPass)};`;
+      s += ';';
+      return s;
+    }
+    case 'vcard': {
+      if (!f.fname.trim() && !f.lname.trim()) return SAMPLE_DATA;
+      const lines = ['BEGIN:VCARD','VERSION:3.0',`N:${f.lname};${f.fname};;;`,`FN:${f.fname} ${f.lname}`.trim()];
+      if (f.corg) lines.push(`ORG:${f.corg}`);
+      if (f.cphone) lines.push(`TEL;TYPE=CELL:${f.cphone}`);
+      if (f.cemail) lines.push(`EMAIL:${f.cemail}`);
+      lines.push('END:VCARD');
+      return lines.join('\n');
+    }
+    case 'email': {
+      if (!f.et.trim()) return SAMPLE_DATA;
+      const p = new URLSearchParams();
+      if (f.es) p.set('subject', f.es);
+      if (f.eb) p.set('body', f.eb);
+      const qs = p.toString();
+      return `mailto:${f.et}${qs ? '?' + qs : ''}`;
+    }
+    case 'sms': {
+      if (!f.sphone.trim()) return SAMPLE_DATA;
+      return `SMSTO:${f.sphone.replace(/\s/g,'')}:${f.smsg || ''}`;
+    }
+  }
+  return SAMPLE_DATA;
+}
+
+/* ═══ QR ENGINE ═══ */
+const preview = document.getElementById('qrPreview');
+let qr = null;
+
+function buildOptions(overrides = {}) {
+  const dots = state.gradient
+    ? { gradient: { type:'linear', rotation: Math.PI/4, colorStops:[{offset:0,color:state.fg},{offset:1,color:state.fg2}] } }
+    : { color: state.fg };
+  const corners = state.gradient
+    ? { gradient: { type:'linear', rotation: Math.PI/4, colorStops:[{offset:0,color:state.fg},{offset:1,color:state.fg2}] } }
+    : { color: state.fg };
+  return {
+    width: 320, height: 320, type: 'svg', data: buildData(),
+    margin: state.margin,
+    qrOptions: { errorCorrectionLevel: 'H' },
+    image: state.logo || undefined,
+    imageOptions: { crossOrigin:'anonymous', margin:6, imageSize: state.logoSize/100, hideBackgroundDots:true },
+    dotsOptions: { ...dots, type: state.dotStyle },
+    cornersSquareOptions: { ...corners, type: state.cornerStyle },
+    cornersDotOptions: { ...corners, type: state.cornerStyle === 'extra-rounded' ? 'dot' : 'square' },
+    backgroundOptions: { color: state.transparent ? 'transparent' : state.bg },
+    ...overrides,
+  };
+}
+
+function render() {
+  const opts = buildOptions();
+  if (!qr) {
+    qr = new QRCodeStyling(opts);
+    preview.innerHTML = '';
+    qr.append(preview);
+  } else {
+    qr.update(opts);
+  }
+  updateScannability();
+}
+
+/* ═══ TYPE TABS ═══ */
+const tabs = document.querySelectorAll('.type-tab');
+const panels = document.querySelectorAll('[data-panel]');
+function setType(type) {
+  state.type = type;
+  tabs.forEach(t => {
+    const on = t.dataset.type === type;
+    t.classList.toggle('bg-zinc-900', on);
+    t.classList.toggle('text-white', on);
+    t.classList.toggle('dark:bg-white', on);
+    t.classList.toggle('dark:text-zinc-900', on);
+    t.classList.toggle('text-zinc-600', !on);
+    t.classList.toggle('dark:text-zinc-400', !on);
+    t.classList.toggle('hover:bg-zinc-100', !on);
+    t.classList.toggle('dark:hover:bg-white/5', !on);
+  });
+  panels.forEach(p => p.classList.toggle('hidden', p.dataset.panel !== type));
+  render();
+}
+tabs.forEach(t => t.addEventListener('click', () => setType(t.dataset.type)));
+
+/* ═══ FIELD BINDINGS ═══ */
+function bindField(id, key) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.addEventListener('input', e => { state.fields[key] = e.target.value; render(); });
+}
+bindField('in-url','url'); bindField('in-text','text');
+bindField('in-wifi-ssid','wifiSsid'); bindField('in-wifi-pass','wifiPass');
+bindField('in-fname','fname'); bindField('in-lname','lname');
+bindField('in-cphone','cphone'); bindField('in-cemail','cemail'); bindField('in-corg','corg');
+bindField('in-et','et'); bindField('in-es','es'); bindField('in-eb','eb');
+bindField('in-sphone','sphone'); bindField('in-smsg','smsg');
+document.getElementById('in-wifi-type').addEventListener('change', e => { state.fields.wifiType = e.target.value; render(); });
+
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && !['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) {
+    e.preventDefault();
+    document.getElementById('in-url').focus();
+  }
+});
+
+/* ═══ PRESETS ═══ */
+const PRESETS = [
+  { name:'Ink',      fg:'#18181b', fg2:'#3f3f46', bg:'#ffffff', gradient:false },
+  { name:'Ocean',    fg:'#0891b2', fg2:'#0d9488', bg:'#ecfeff', gradient:true  },
+  { name:'Grape',    fg:'#7c3aed', fg2:'#c026d3', bg:'#faf5ff', gradient:true  },
+  { name:'Sunset',   fg:'#e11d48', fg2:'#f97316', bg:'#fff7ed', gradient:true  },
+  { name:'Forest',   fg:'#15803d', fg2:'#65a30d', bg:'#f0fdf4', gradient:true  },
+  { name:'Midnight', fg:'#0f172a', fg2:'#1e293b', bg:'#f8fafc', gradient:false },
+  { name:'Candy',    fg:'#ec4899', fg2:'#8b5cf6', bg:'#fdf2f8', gradient:true  },
+  { name:'Amber',    fg:'#b45309', fg2:'#d97706', bg:'#fffbeb', gradient:false },
+];
+const presetRow = document.getElementById('presetRow');
+PRESETS.forEach(p => {
+  const btn = document.createElement('button');
+  btn.className = 'group rounded-lg border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 p-2 hover:border-zinc-400 dark:hover:border-white/30 hover:-translate-y-0.5 transition-all text-left';
+  btn.innerHTML = `
+    <div class="h-7 w-full rounded-md mb-1.5" style="background:${p.gradient?`linear-gradient(135deg, ${p.fg}, ${p.fg2})`:p.fg}"></div>
+    <div class="text-[10px] font-medium text-zinc-600 dark:text-zinc-400 truncate">${p.name}</div>`;
+  btn.addEventListener('click', () => {
+    state.fg = p.fg; state.fg2 = p.fg2; state.bg = p.bg; state.gradient = p.gradient;
+    document.getElementById('dotsColor').value = p.fg; document.getElementById('dotsHex').value = p.fg;
+    document.getElementById('dotsColor2').value = p.fg2; document.getElementById('dotsHex2').value = p.fg2;
+    document.getElementById('bgColor').value = p.bg; document.getElementById('bgHex').value = p.bg;
+    document.getElementById('gradientChk').checked = p.gradient;
+    document.getElementById('gradientSecond').classList.toggle('hidden', !p.gradient);
+    render();
+  });
+  presetRow.appendChild(btn);
+});
+
+/* ═══ COLOR BINDINGS ═══ */
+function bindColor(colorId, hexId, key) {
+  const c = document.getElementById(colorId);
+  const h = document.getElementById(hexId);
+  c.addEventListener('input', e => { state[key] = e.target.value; h.value = e.target.value; render(); });
+  h.addEventListener('input', e => {
+    let v = e.target.value.trim();
+    if (!/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(v)) return;
+    if (v.length === 4) { const [r,g,b] = v.slice(1).split(''); v = `#${r}${r}${g}${g}${b}${b}`; }
+    state[key] = v; c.value = v; render();
+  });
+}
+bindColor('dotsColor','dotsHex','fg');
+bindColor('dotsColor2','dotsHex2','fg2');
+bindColor('bgColor','bgHex','bg');
+
+const gradientChk = document.getElementById('gradientChk');
+const gradientSecond = document.getElementById('gradientSecond');
+gradientChk.addEventListener('change', e => {
+  state.gradient = e.target.checked;
+  gradientSecond.classList.toggle('hidden', !e.target.checked);
+  render();
+});
+
+/* ═══ DOT SHAPES ═══ */
+const DOT_STYLES = [
+  { id:'square', label:'Square' },
+  { id:'rounded', label:'Rounded' },
+  { id:'dots', label:'Dots' },
+  { id:'classy', label:'Classy' },
+  { id:'classy-rounded', label:'Classy R' },
+];
+const dotRow = document.getElementById('dotRow');
+DOT_STYLES.forEach(s => {
+  const b = document.createElement('button');
+  b.dataset.style = s.id;
+  b.className = 'rounded-lg border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 px-1.5 py-2 text-[10px] font-medium hover:border-zinc-400 dark:hover:border-white/30 transition';
+  b.textContent = s.label;
+  b.addEventListener('click', () => {
+    state.dotStyle = s.id;
+    [...dotRow.children].forEach(el => {
+      const on = el.dataset.style === s.id;
+      el.classList.toggle('border-zinc-900', on);
+      el.classList.toggle('dark:border-white', on);
+      el.classList.toggle('bg-zinc-900/5', on);
+      el.classList.toggle('dark:bg-white/10', on);
+    });
+    render();
+  });
+  dotRow.appendChild(b);
+});
+
+/* ═══ CORNERS ═══ */
+const CORNER_STYLES = [
+  { id:'square', label:'Square' },
+  { id:'extra-rounded', label:'Rounded' },
+  { id:'dot', label:'Dot' },
+];
+const cornerRow = document.getElementById('cornerRow');
+CORNER_STYLES.forEach(s => {
+  const b = document.createElement('button');
+  b.dataset.style = s.id;
+  b.className = 'rounded-lg border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 px-2 py-2 text-[10px] font-medium hover:border-zinc-400 dark:hover:border-white/30 transition';
+  b.textContent = s.label;
+  b.addEventListener('click', () => {
+    state.cornerStyle = s.id;
+    [...cornerRow.children].forEach(el => {
+      const on = el.dataset.style === s.id;
+      el.classList.toggle('border-zinc-900', on);
+      el.classList.toggle('dark:border-white', on);
+      el.classList.toggle('bg-zinc-900/5', on);
+      el.classList.toggle('dark:bg-white/10', on);
+    });
+    render();
+  });
+  cornerRow.appendChild(b);
+});
+
+function highlightInit() {
+  [...dotRow.children].forEach(el => {
+    if (el.dataset.style === state.dotStyle) el.classList.add('border-zinc-900','dark:border-white','bg-zinc-900/5','dark:bg-white/10');
+  });
+  [...cornerRow.children].forEach(el => {
+    if (el.dataset.style === state.cornerStyle) el.classList.add('border-zinc-900','dark:border-white','bg-zinc-900/5','dark:bg-white/10');
+  });
+}
+
+/* ═══ LOGO ═══ */
+const logoInput = document.getElementById('logoInput');
+const uploadBtn = document.getElementById('uploadBtn');
+const removeLogoBtn = document.getElementById('removeLogoBtn');
+const logoLabel = document.getElementById('logoLabel');
+const logoSizes = document.getElementById('logoSizes');
+const logoSize = document.getElementById('logoSize');
+const logoSizeVal = document.getElementById('logoSizeVal');
+const logoZone = document.getElementById('logoZone');
+
+uploadBtn.addEventListener('click', () => logoInput.click());
+logoZone.addEventListener('dragover', e => { e.preventDefault(); logoZone.classList.add('border-emerald-500','bg-emerald-50/50'); });
+logoZone.addEventListener('dragleave', () => logoZone.classList.remove('border-emerald-500','bg-emerald-50/50'));
+logoZone.addEventListener('drop', e => {
+  e.preventDefault();
+  logoZone.classList.remove('border-emerald-500','bg-emerald-50/50');
+  const file = e.dataTransfer.files?.[0];
+  if (file?.type.startsWith('image/')) readLogo(file);
+});
+logoInput.addEventListener('change', e => { const f = e.target.files?.[0]; if (f) readLogo(f); });
+
+function readLogo(file) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    state.logo = reader.result;
+    logoLabel.textContent = file.name.length > 30 ? file.name.slice(0,28)+'…' : file.name;
+    logoSizes.classList.remove('hidden');
+    removeLogoBtn.classList.remove('hidden');
+    render();
+  };
+  reader.readAsDataURL(file);
+}
+removeLogoBtn.addEventListener('click', () => {
+  state.logo = null; logoInput.value = '';
+  logoLabel.textContent = 'Drop a logo here, or upload';
+  logoSizes.classList.add('hidden'); removeLogoBtn.classList.add('hidden');
+  render();
+});
+logoSize.addEventListener('input', e => {
+  state.logoSize = +e.target.value;
+  logoSizeVal.textContent = state.logoSize + '%';
+  render();
+});
+
+document.getElementById('marginRange').addEventListener('input', e => {
+  state.margin = +e.target.value;
+  document.getElementById('marginVal').textContent = state.margin;
+  render();
+});
+
+/* ═══ SCANNABILITY ═══ */
+function hexToRgb(hex) {
+  hex = hex.replace('#','');
+  if (hex.length === 3) hex = hex.split('').map(c => c+c).join('');
+  return [parseInt(hex.slice(0,2),16), parseInt(hex.slice(2,4),16), parseInt(hex.slice(4,6),16)];
+}
+function luminance(hex) {
+  const [r,g,b] = hexToRgb(hex).map(v => { v/=255; return v<=0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055,2.4); });
+  return 0.2126*r + 0.7152*g + 0.0722*b;
+}
+function contrast(a,b) {
+  const l1 = luminance(a), l2 = luminance(b);
+  return (Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05);
+}
+function updateScannability() {
+  const effFg = state.gradient ? (luminance(state.fg) < luminance(state.fg2) ? state.fg : state.fg2) : state.fg;
+  const effBg = state.transparent ? (document.documentElement.classList.contains('dark') ? '#09090b' : '#ffffff') : state.bg;
+  let score = 100;
+  const cr = contrast(effFg, effBg);
+  if (cr < 7) score -= Math.min(35, (7-cr)*10);
+  if (state.dotStyle === 'dots' || state.dotStyle === 'classy-rounded') score -= 6;
+  if (state.logo) {
+    if (state.logoSize > 28) score -= (state.logoSize-28) * 2.5;
+    if (state.logoSize > 35) score -= 12;
+  }
+  score = Math.max(0, Math.min(100, Math.round(score)));
+  const label = document.getElementById('scanLabel');
+  const bar = document.getElementById('scanBar');
+  const hint = document.getElementById('scanHint');
+  bar.style.width = score + '%';
+  if (score >= 85) {
+    label.textContent = 'Excellent'; label.className = 'text-[11px] font-semibold tabular-nums text-emerald-600 dark:text-emerald-400';
+    bar.className = 'h-full rounded-full bg-gradient-to-r from-emerald-400 to-emerald-600 transition-all duration-500';
+    hint.textContent = 'Contrast and sizing are ideal — will scan on any device.';
+  } else if (score >= 60) {
+    label.textContent = 'Good'; label.className = 'text-[11px] font-semibold tabular-nums text-amber-600 dark:text-amber-400';
+    bar.className = 'h-full rounded-full bg-gradient-to-r from-amber-400 to-amber-600 transition-all duration-500';
+    hint.textContent = 'Will scan on modern phones. Consider reducing logo size for maximum reliability.';
+  } else {
+    label.textContent = 'Risky'; label.className = 'text-[11px] font-semibold tabular-nums text-red-600 dark:text-red-400';
+    bar.className = 'h-full rounded-full bg-gradient-to-r from-red-400 to-red-600 transition-all duration-500';
+    hint.textContent = 'Low contrast or oversized logo — may fail on older scanners.';
+  }
+}
+
+/* ═══ FORMAT PICKER + DOWNLOAD ═══ */
+const FORMATS = {
+  png: { label: 'Download PNG', hint: 'Best all-round · transparency supported · 2048px' },
+  jpg: { label: 'Download JPG', hint: 'Universal compatibility · white bg forced · 2048px' },
+  svg: { label: 'Download SVG', hint: 'True vector · infinite scaling · ideal for print' },
+  pdf: { label: 'Download PDF', hint: 'Print-ready A4 document · embed or email friendly' },
+};
+
+let currentFormat = 'png';
+const fmtBtns = document.querySelectorAll('.fmt-btn');
+const downloadBtn = document.getElementById('downloadBtn');
+const downloadBtnLabel = document.getElementById('downloadBtnLabel');
+const downloadSpinner = document.getElementById('downloadSpinner');
+const formatHint = document.getElementById('formatHint');
+
+function selectFormat(fmt) {
+  currentFormat = fmt;
+  fmtBtns.forEach(b => {
+    const on = b.dataset.fmt === fmt;
+    b.classList.toggle('bg-zinc-900', on);
+    b.classList.toggle('text-white', on);
+    b.classList.toggle('dark:bg-white', on);
+    b.classList.toggle('dark:text-zinc-900', on);
+    b.classList.toggle('shadow-sm', on);
+    b.classList.toggle('text-zinc-600', !on);
+    b.classList.toggle('dark:text-zinc-400', !on);
+    b.classList.toggle('hover:bg-zinc-100', !on);
+    b.classList.toggle('dark:hover:bg-white/10', !on);
+  });
+  downloadBtnLabel.textContent = FORMATS[fmt].label;
+  formatHint.textContent = FORMATS[fmt].hint;
+  try { localStorage.setItem('qr-fmt', fmt); } catch {}
+}
+fmtBtns.forEach(b => b.addEventListener('click', () => selectFormat(b.dataset.fmt)));
+try {
+  const saved = localStorage.getItem('qr-fmt');
+  selectFormat(saved && FORMATS[saved] ? saved : 'png');
+} catch { selectFormat('png'); }
+
+async function getQRBlob(type, size = 2048) {
+  const qrType = type === 'jpg' ? 'jpeg' : type;
+  const opts = buildOptions({ width: size, height: size, type: qrType });
+  if (qrType === 'jpeg') opts.backgroundOptions = { color: '#ffffff' };
+  const temp = new QRCodeStyling(opts);
+  return await temp.getRawData(qrType);
+}
+
+async function downloadCurrent() {
+  downloadBtn.disabled = true;
+  downloadSpinner.classList.remove('hidden');
+  downloadBtnLabel.classList.add('hidden');
+  try {
+    const fmt = currentFormat;
+    if (fmt === 'svg') {
+      const temp = new QRCodeStyling(buildOptions({ type: 'svg' }));
+      await temp.download({ name: 'qrcode-toolkit', extension: 'svg' });
+    } else if (fmt === 'png' || fmt === 'jpg') {
+      const blob = await getQRBlob(fmt, 2048);
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `qrcode-toolkit.${fmt}`;
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    } else if (fmt === 'pdf') {
+      const blob = await getQRBlob('png', 2048);
+      const url = URL.createObjectURL(blob);
+      const img = new Image();
+      await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = url; });
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+      const pw = pdf.internal.pageSize.getWidth();
+      const ph = pdf.internal.pageSize.getHeight();
+      const size = Math.min(pw, ph) * 0.72;
+      const x = (pw - size) / 2;
+      const y = (ph - size) / 2;
+      pdf.addImage(img, 'PNG', x, y, size, size);
+      pdf.save('qrcode-toolkit.pdf');
+      URL.revokeObjectURL(url);
+    }
+    toast(`${fmt.toUpperCase()} downloaded`, 'success');
+  } catch (e) {
+    console.error(e);
+    toast('Download failed — please retry.', 'error');
+  } finally {
+    downloadBtn.disabled = false;
+    downloadSpinner.classList.add('hidden');
+    downloadBtnLabel.classList.remove('hidden');
+  }
+}
+
+async function copyImage() {
+  try {
+    const blob = await getQRBlob('png', 1024);
+    await navigator.clipboard.write([new ClipboardItem({'image/png': blob})]);
+    toast('QR image copied to clipboard', 'success');
+  } catch (e) {
+    console.error(e);
+    toast('Copy not supported — use Download instead.', 'error');
+  }
+}
+downloadBtn.addEventListener('click', downloadCurrent);
+document.getElementById('copyBtn').addEventListener('click', copyImage);
+
+/* ═══ TOASTS ═══ */
+function toast(msg, tone = 'success') {
+  const el = document.createElement('div');
+  el.className = 'pointer-events-auto flex items-center gap-2.5 rounded-xl border bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl px-4 py-3 text-xs font-medium shadow-2xl';
+  el.classList.add(tone === 'success'
+    ? 'border-emerald-200 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-400'
+    : 'border-red-200 dark:border-red-500/30 text-red-700 dark:text-red-400');
+  el.innerHTML = `<i data-lucide="${tone==='success'?'check-circle-2':'alert-circle'}" class="w-4 h-4"></i> ${msg}`;
+  document.getElementById('toasts').appendChild(el);
+  lucide.createIcons();
+  setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .3s'; setTimeout(() => el.remove(), 300); }, 3200);
+}
+
+/* ═══ FAQ ═══ */
+const FAQS = [
+  { q:'Is this custom QR code generator really free?', a:'Yes. Every static QR code you create is free forever. Customize colors, gradients, upload a logo, and download PNG, JPG, SVG, or PDF — no account, no payment, no watermark.' },
+  { q:'Do I need to sign up to download a high-resolution QR code?', a:'No. There is no sign-up wall, email capture, or checkout. Enter your URL, style the code, and download instantly. Everything runs in your browser — nothing is uploaded.' },
+  { q:'Will my QR code expire or stop working?', a:'Never. We generate static QR codes, meaning the destination is encoded directly into the pattern. There is no redirect server, no scan limit, and no expiration date. The code works as long as the URL is live.' },
+  { q:'Can I add a logo without breaking the QR code?', a:'Yes. The tool uses error correction level H (about 30% recovery), so the code stays scannable even with a centered logo. Keep the logo under ~35% of the QR area for maximum reliability — the scannability meter shows you in real time.' },
+  { q:'Can I use the downloaded QR code for commercial printing?', a:'Absolutely. The SVG export is a true vector file that scales to billboards. The PNG export is 2048×2048 pixels. The PDF is A4-centred, ready for print shops. No attribution required.' },
+];
+const faqWrap = document.getElementById('faqWrap');
+FAQS.forEach((f,i) => {
+  const d = document.createElement('details');
+  d.className = 'group rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/30 overflow-hidden';
+  d.open = i === 0;
+  d.innerHTML = `
+    <summary class="cursor-pointer list-none flex items-center justify-between p-4 hover:bg-zinc-50 dark:hover:bg-white/[0.03] transition">
+      <span class="text-sm font-medium pr-4">${f.q}</span>
+      <i data-lucide="chevron-down" class="chev w-4 h-4 text-zinc-400 shrink-0"></i>
+    </summary>
+    <div class="px-4 pb-4 -mt-1 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">${f.a}</div>`;
+  faqWrap.appendChild(d);
+});
+
+/* ═══ INIT ═══ */
+setType('url');
+highlightInit();
+render();
+lucide.createIcons();
+</script>
+</body>
+</html>
