@@ -708,7 +708,7 @@ function closeToolModal() {
 }
 function demoNav(e, slug) {
   e.preventDefault();
-  showToast(`Demo: would navigate to /tools/${slug}`);
+  window.location.href = `/tools/${slug}.html`;
 }
 function copyLink(slug) {
   const url = location.href.split('#')[0].split('?')[0] + `#/tools/${slug}`;
