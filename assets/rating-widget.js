@@ -636,6 +636,16 @@
     tighten(node);
   }
 
+  // The footer year must never go stale, and editing 27 pages every January is
+  // how it does. Every page loads this script, so the year is set from here.
+  function stampYear() {
+    var y = String(new Date().getFullYear());
+    var nodes = document.querySelectorAll("[id='year']");
+    for (var i = 0; i < nodes.length; i++) {
+      if (nodes[i].textContent !== y) nodes[i].textContent = y;
+    }
+  }
+
   function mount() {
     if (document.querySelector(".tgr")) return;
 
@@ -670,8 +680,13 @@
     }
   }
 
+  stampYear();
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", mount);
+    document.addEventListener("DOMContentLoaded", function () {
+      stampYear();
+      mount();
+    });
   } else {
     mount();
   }

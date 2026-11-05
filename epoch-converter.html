@@ -17,15 +17,17 @@
 <meta name="target" content="all" />
 <meta name="rating" content="general" />
 <link rel="canonical" href="https://toolguest.com/epoch-converter" />
+  <link rel="alternate" hreflang="en-GB" href="https://toolguest.com/epoch-converter" />
+  <link rel="alternate" hreflang="en-US" href="https://toolguest.com/epoch-converter" />
   <link rel="alternate" hreflang="en" href="https://toolguest.com/epoch-converter" />
   <link rel="alternate" hreflang="x-default" href="https://toolguest.com/epoch-converter" />
 
 <meta property="og:type" content="website" />
-  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale" content="en_GB" />
   <meta property="og:locale:alternate" content="en_GB" />
   <meta property="og:locale:alternate" content="en_CA" />
   <meta property="og:locale:alternate" content="en_AU" />
-  <meta http-equiv="content-language" content="en-US" />
+  <meta http-equiv="content-language" content="en-GB" />
 <meta property="og:site_name" content="ToolGuest" />
 <meta property="og:title" content="Unix Epoch Timestamp Converter — Live Clock, Seconds &amp; Milliseconds" />
 <meta property="og:description" content="Instant, private epoch conversion. Live ticking clock, bi-directional conversion, ISO 8601, UTC and multi-timezone output for global engineering teams." />
@@ -45,6 +47,20 @@
       "applicationCategory": "DeveloperApplication",
       "applicationSubCategory": "Developer Utilities",
       "operatingSystem": "Any",
+      "areaServed": [
+          {"@type": "Country", "name": "United Kingdom"},
+          {"@type": "Country", "name": "United States"},
+          {"@type": "Country", "name": "Germany"},
+          {"@type": "Country", "name": "Ireland"},
+          {"@type": "Country", "name": "France"},
+          {"@type": "Country", "name": "Netherlands"},
+          {"@type": "Country", "name": "Spain"},
+          {"@type": "Country", "name": "Italy"},
+          {"@type": "Country", "name": "Poland"},
+          {"@type": "Country", "name": "Sweden"},
+          {"@type": "Country", "name": "Canada"},
+          {"@type": "Country", "name": "Australia"}
+      ],
       "browserRequirements": "Requires JavaScript. Runs in Chrome, Firefox, Safari and Edge on desktop and mobile.",
       "isAccessibleForFree": true,
       "inLanguage": "en-US",
@@ -129,7 +145,7 @@
           "name": "How do I tell whether a timestamp is in seconds or milliseconds?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Count the digits. Ten digits (1735689600) is seconds and lands in a sensible year; thirteen digits (1735689600000) is milliseconds. JavaScript's Date.now() returns milliseconds, while most Unix tools and database columns store seconds — which is where the “year 55000” bug comes from."
+            "text": "Count the digits. Ten digits (1767225600) is seconds and lands in a sensible year; thirteen digits (1767225600000) is milliseconds. JavaScript's Date.now() returns milliseconds, while most Unix tools and database columns store seconds — which is where the “year 55000” bug comes from."
           }
         },
         {
@@ -555,7 +571,7 @@
         <div class="grid gap-3 sm:grid-cols-[1fr_auto]">
           <div>
             <label for="epochInput" class="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">Epoch timestamp</label>
-            <input id="epochInput" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" class="field font-mono" placeholder="e.g. 1735689600 or 1735689600000" />
+            <input id="epochInput" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" class="field font-mono" placeholder="e.g. 1767225600 or 1767225600000" />
           </div>
           <div>
             <label for="unitSelect" class="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">Unit</label>
@@ -687,7 +703,7 @@
         <div class="flex flex-wrap items-end justify-between gap-3">
           <div class="min-w-[220px] flex-1">
             <label for="batchInput" class="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">Paste timestamps or dates — one per line</label>
-            <textarea id="batchInput" rows="6" spellcheck="false" class="field pane-area resize-y font-mono !text-[12.5px] leading-relaxed" placeholder="1735689600&#10;1735689600000&#10;2025-01-01T00:00:00Z&#10;2025-06-15 09:30:00"></textarea>
+            <textarea id="batchInput" rows="6" spellcheck="false" class="field pane-area resize-y font-mono !text-[12.5px] leading-relaxed" placeholder="1767225600&#10;1767225600000&#10;2026-01-01T00:00:00Z&#10;2026-06-15 09:30:00"></textarea>
           </div>
           <div class="flex flex-col gap-2">
             <button type="button" id="batchRun" class="inline-flex items-center justify-center gap-1.5 rounded-xl bg-zinc-900 px-4 py-2 text-[12.5px] font-semibold text-white hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">
@@ -813,7 +829,7 @@
       <article class="rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
         <h3 class="flex items-center gap-2 text-base font-bold tracking-tight">🇺🇸 San Francisco &amp; the US West Coast</h3>
         <p class="mt-2.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-          A Pacific-time engineer triaging a Stripe or Cloudflare webhook sees <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">created: 1735689600</code> and needs it in a human date before the incident call starts. Paste it once and the tool prints the ISO 8601 string for the ticket, the local Pacific time for the stand-up and the UTC value that the API actually recorded — all three side by side, so nobody argues about the offset on the bridge.
+          A Pacific-time engineer triaging a Stripe or Cloudflare webhook sees <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">created: 1767225600</code> and needs it in a human date before the incident call starts. Paste it once and the tool prints the ISO 8601 string for the ticket, the local Pacific time for the stand-up and the UTC value that the API actually recorded — all three side by side, so nobody argues about the offset on the bridge.
         </p>
       </article>
       <article class="rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
@@ -883,14 +899,14 @@
           JavaScript’s <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">Date</code>
           constructor takes milliseconds. The whole decode is a single expression:
         </p>
-        <pre class="mt-3 max-w-full overflow-x-auto rounded-xl bg-zinc-900/[0.04] p-3.5 font-mono text-[12px] leading-relaxed text-zinc-700 dark:bg-black/40 dark:text-zinc-300"><code>new Date(1735689600 * 1000).toISOString();
-// "2025-01-01T00:00:00.000Z"</code></pre>
+        <pre class="mt-3 max-w-full overflow-x-auto rounded-xl bg-zinc-900/[0.04] p-3.5 font-mono text-[12px] leading-relaxed text-zinc-700 dark:bg-black/40 dark:text-zinc-300"><code>new Date(1767225600 * 1000).toISOString();
+// "2026-01-01T00:00:00.000Z"</code></pre>
         <p class="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
           The reverse direction parses an ISO 8601 string to an absolute instant and floors it back to whole seconds,
           which is exactly what a database column expects:
         </p>
-        <pre class="mt-3 max-w-full overflow-x-auto rounded-xl bg-zinc-900/[0.04] p-3.5 font-mono text-[12px] leading-relaxed text-zinc-700 dark:bg-black/40 dark:text-zinc-300"><code>Math.floor(Date.parse("2025-01-01T00:00:00Z") / 1000);
-// 1735689600</code></pre>
+        <pre class="mt-3 max-w-full overflow-x-auto rounded-xl bg-zinc-900/[0.04] p-3.5 font-mono text-[12px] leading-relaxed text-zinc-700 dark:bg-black/40 dark:text-zinc-300"><code>Math.floor(Date.parse("2026-01-01T00:00:00Z") / 1000);
+// 1767225600</code></pre>
       </div>
 
       <div class="min-w-0 rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
@@ -903,8 +919,8 @@
         <pre class="mt-3 max-w-full overflow-x-auto rounded-xl bg-zinc-900/[0.04] p-3.5 font-mono text-[12px] leading-relaxed text-zinc-700 dark:bg-black/40 dark:text-zinc-300"><code>new Intl.DateTimeFormat("en-GB", {
   timeZone: "Europe/Berlin",
   dateStyle: "medium", timeStyle: "long"
-}).format(1735689600 * 1000);
-// "1 Jan 2025, 01:00:00 CET"</code></pre>
+}).format(1767225600 * 1000);
+// "1 Jan 2026, 01:00:00 CET"</code></pre>
         <p class="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
           That is why the same instant can legitimately be Tuesday in San Francisco and Wednesday in Berlin, and why
           the grid is more useful than a single “converted” value. Relative wording such as
@@ -1074,7 +1090,7 @@
       </div>
     </div>
     <p class="mt-3 text-center text-[11px] text-zinc-500 dark:text-zinc-400">
-      Our figures are measured in Chrome DevTools against this live page in November 2025: 15 requests and 190.9&nbsp;KB over the wire, of which 25.2&nbsp;KB is the HTML document and 121.2&nbsp;KB is the Tailwind runtime. The page’s own conversion logic is under 20&nbsp;KB. Competitor figures are indicative, and competitor behaviour may change over time.
+      Our figures are measured in Chrome DevTools against this live page in November 2026: 15 requests and 190.9&nbsp;KB over the wire, of which 25.2&nbsp;KB is the HTML document and 121.2&nbsp;KB is the Tailwind runtime. The page’s own conversion logic is under 20&nbsp;KB. Competitor figures are indicative, and competitor behaviour may change over time.
     </p>
   </section>
 
@@ -1102,7 +1118,7 @@
             <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-500 dark:text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           </button>
           <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Count the digits. Ten digits (<code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">1735689600</code>) is seconds and lands in a sensible year; thirteen digits (<code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">1735689600000</code>) is milliseconds. JavaScript's <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">Date.now()</code> returns milliseconds, while most Unix tools and database columns store seconds — which is where the “year 55000” bug comes from.
+            Count the digits. Ten digits (<code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">1767225600</code>) is seconds and lands in a sensible year; thirteen digits (<code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">1767225600000</code>) is milliseconds. JavaScript's <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">Date.now()</code> returns milliseconds, while most Unix tools and database columns store seconds — which is where the “year 55000” bug comes from.
           </p></div></div>
         </div>
         <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
@@ -1285,7 +1301,7 @@
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer class="border-t border-zinc-200/80 dark:border-white/[0.07]">
   <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-xs text-zinc-500 dark:text-zinc-400 sm:flex-row">
-    <p>© 2025 ToolGuest — free developer micro-tools, built for speed.</p>
+    <p>© <span id="year">2026</span> ToolGuest — free developer micro-tools, built for speed.</p>
     <p class="inline-flex items-center gap-1.5">
       <svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       No trackers · No cookies · No uploads
@@ -1420,7 +1436,7 @@
     var clean = String(raw).trim().replace(/[\s,_]/g, '');
     if (!clean) return { empty: true };
     if (!/^-?\d+(\.\d+)?$/.test(clean)) {
-      return { error: 'That is not a number. Enter digits only — for example 1735689600 or 1735689600000.' };
+      return { error: 'That is not a number. Enter digits only — for example 1767225600 or 1767225600000.' };
     }
     var n = Number(clean);
     if (!isFinite(n)) return { error: 'That number is too large to convert.' };
