@@ -107,6 +107,37 @@ Two deliberate exceptions:
 Words such as `dialog`, `meter` (a device), `practice` (noun) and `program` are
 correct in UK English and must not be changed.
 
+## Dates must never go stale
+
+A past year in prose reads as an abandoned site, and search engines rank it that
+way. The footer year is set by JavaScript from `assets/rating-widget.js`, which
+every page loads, so the copyright line maintains itself.
+
+When you write a year into body copy, use the current year. Three numbers are
+exempt because they describe the tools, not the site: **2038** (Unix timestamp
+overflow), **2048** (QR bitmap size) and **1970** (the epoch). The health audit
+knows to skip them.
+
+## Target markets
+
+The site is English-only, aimed at the UK, USA, Germany, Ireland, France, the
+Netherlands, Spain, Italy, Poland, Sweden, Canada and Australia.
+
+Two signals carry that, and both are on every page:
+
+- `hreflang` declares `en-GB`, `en-US`, `en` and `x-default`, all pointing at
+  the same URL. One English page serves every market; the tags tell engines
+  which countries it is for.
+- `areaServed` on each tool's `SoftwareApplication` block lists the twelve
+  countries.
+
+`<html lang>` is `en-GB` and `og:locale` is `en_GB` on every page, including
+`epoch-converter`. Keep them consistent.
+
+If a language is ever translated, that is a different job: it needs a real
+localised URL per language and its own `hreflang` pair. Do not fake it by
+adding a `lang` attribute.
+
 ## Automations
 
 Two cron automations keep the site healthy. Both run without an LLM.
@@ -122,9 +153,9 @@ published outside Git is still captured.
 **ToolGuest Site Health + UK English Audit** — every 6 hours.
 
 Audits all 27 pages for HTTP status, titles, descriptions, canonicals, H1s,
-Open Graph tags and JSON-LD, then reads visible text only to flag US spellings.
-It updates a single GitHub issue titled `Site health report` (labelled
-`site-health`) rather than opening a new one each run.
+Open Graph tags and JSON-LD, then reads visible text only to flag US spellings
+and stale years. It updates a single GitHub issue titled `Site health report`
+(labelled `site-health`) rather than opening a new one each run.
 
 Both scripts live in `automation/` so the automations can be rebuilt from the
 repository if the deployment is lost.

@@ -17,6 +17,7 @@ Env injected by the automation service:
 """
 
 import concurrent.futures as cf
+import datetime
 import json
 import os
 import re
@@ -39,6 +40,10 @@ ISSUE_LABEL = "site-health"
 MAX_TITLE = 60
 MAX_DESC = 158
 MIN_DESC = 70
+
+# Years that belong to the tool's subject rather than to the site's own copy.
+# 2038 is the Unix timestamp overflow, 2048 a QR bitmap size, 1970 the epoch.
+TECHNICAL_YEARS = {"1969", "1970", "2038", "2048"}
 EXPECTED_LANG = "en-GB"
 
 # US spellings that must be UK English. Word boundaries only, matched against
@@ -130,8 +135,9 @@ def publish_report(body, counts):
     marker = "<!-- site-health-report -->"
     body = f"{marker}\n\n{body}"
     title = ISSUE_TITLE
-    if any(counts[k] for k in ("meta_problems", "us_spellings", "broken_text")):
-        title = f"{ISSUE_TITLE} — {sum(counts[k] for k in ('meta_problems','us_spellings','broken_text'))} issue(s)"
+    watched = ("meta_problems", "us_spellings", "broken_text", "stale_years")
+    if any(counts[k] for k in watched):
+        title = f"{ISSUE_TITLE} — {sum(counts[k] for k in watched)} issue(s)"
 
     try:
         issues = gh("GET", f"/repos/{REPO}/issues?state=open&per_page=100")
@@ -153,6 +159,23 @@ def publish_report(body, counts):
     except Exception as e:
         print(f"  could not publish issue: {e}")
         return None
+
+
+def find_stale_years(slug, text, today_year):
+    """Years written into the site's own copy that are no longer current.
+
+    A past year in prose reads as an abandoned site, and search engines and
+    answer engines treat it that way. Future years are left alone: a forecast or
+    a copyright notice may legitimately name one.
+    """
+    out = []
+    for m in re.finditer(r"\b(19[7-9]\d|20[0-9]{2})\b", text):
+        y = m.group(1)
+        if y in TECHNICAL_YEARS or int(y) >= today_year:
+            continue
+        ctx = re.sub(r"\s+", " ", text[max(0, m.start() - 60):m.end() + 60])
+        out.append((slug, {"year": y, "context": ctx}))
+    return out
 
 
 def fire_callback(status="COMPLETED", error=None):
@@ -322,11 +345,14 @@ def audit_page(slug):
             ctx = re.sub(r"\s+", " ", text[max(0, m.start() - 55):m.end() + 55])
             broken.append({"marker": pat, "context": ctx})
 
+    stale_years = find_stale_years(slug or "/", text, datetime.date.today().year)
+
     return {
         "slug": slug or "/", "status": status, "bytes": len(body),
         "title": title, "desc": desc, "lang": lang, "h1_count": len(h1s),
         "structured_data": types, "problems": problems,
         "us_spellings": us_hits, "broken_text": broken,
+        "stale_years": [h for _, h in stale_years],
     }
 
 
@@ -340,6 +366,7 @@ def main():
     problems = [(p["slug"], i) for p in results for i in p["problems"]]
     us = [(p["slug"], h) for p in results for h in p["us_spellings"]]
     broken = [(p["slug"], b) for p in results for b in p["broken_text"]]
+    stale = [(p["slug"], y) for p in results for y in p["stale_years"]]
 
     dup_titles = [(k, v) for k, v in Counter(p["title"] for p in results if p["title"]).items() if v > 1]
     dup_descs = [(k, v) for k, v in Counter(p["desc"] for p in results if p["desc"]).items() if v > 1]
@@ -354,6 +381,7 @@ def main():
     print(f"  meta problems     : {len(problems)}")
     print(f"  US spellings      : {len(us)}")
     print(f"  broken text       : {len(broken)}")
+    print(f"  stale years       : {len(stale)}")
     print(f"  duplicate titles  : {len(dup_titles)}")
     print(f"  duplicate descs   : {len(dup_descs)}")
 
@@ -370,17 +398,23 @@ def main():
         print("\n  --- broken text ---")
         for slug, b in broken:
             print(f"    {slug:26} [{b['marker']}] …{b['context']}…")
-    if not (problems or us or broken):
+    if stale:
+        print("\n  --- stale years (should be the current year) ---")
+        for slug, y in stale:
+            print(f"    {slug:26} [{y['year']}] …{y['context']}…")
+    if not (problems or us or broken or stale):
         print("\n  no issues found")
 
     report = {
         "site": BASE, "score": score, "pages": len(pages),
         "counts": {"meta_problems": len(problems), "us_spellings": len(us),
-                   "broken_text": len(broken), "duplicate_titles": len(dup_titles),
+                   "broken_text": len(broken), "stale_years": len(stale),
+                   "duplicate_titles": len(dup_titles),
                    "duplicate_descriptions": len(dup_descs)},
         "meta_problems": [{"page": s, "issue": i} for s, i in problems],
         "us_spellings": [{"page": s, **h} for s, h in us],
         "broken_text": [{"page": s, **b} for s, b in broken],
+        "stale_years": [{"page": s, **y} for s, y in stale],
         "duplicate_titles": [{"value": k, "count": v} for k, v in dup_titles],
         "duplicate_descriptions": [{"value": k, "count": v} for k, v in dup_descs],
         "pages_audited": results,
@@ -396,6 +430,7 @@ def main():
              f"| Meta problems | {len(problems)} |",
              f"| US spellings (should be UK) | {len(us)} |",
              f"| Broken text | {len(broken)} |",
+             f"| Stale years | {len(stale)} |",
              f"| Duplicate titles | {len(dup_titles)} |",
              f"| Duplicate descriptions | {len(dup_descs)} |",
              ""]
@@ -428,7 +463,16 @@ def main():
             lines.append(f"| `{s}` | `{b['marker']}` | …{ctx}… |")
         lines.append("")
 
-    if not (problems or us or broken):
+    if stale:
+        lines += ["## Stale years", "",
+                  "These read as an out-of-date site and should be the current year:", "",
+                  "| Page | Year | Context |", "|---|---|---|"]
+        for s_, y in stale:
+            ctx = y["context"].replace("|", "\\|")[:120]
+            lines.append(f"| `{s_}` | {y['year']} | …{ctx}… |")
+        lines.append("")
+
+    if not (problems or us or broken or stale):
         lines += ["No issues found. The site passed every check.", ""]
 
     lines += ["---", f"*Updated by an AI agent (OpenHands) on each scheduled run.*"]
