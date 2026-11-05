@@ -4,41 +4,42 @@ Static tool site. 27 HTML pages, no build step, no framework.
 
 - Live: https://toolguest.com
 - Vercel project: `25tools` (team `mk-aamir`), region `lhr1`
-- Deploy: production has been published by **direct upload**, so this repo is a
-  **backup mirror** of what is deployed, not the deploy source.
+- Vercel is **git-linked** to this repository, so **pushing to `main` deploys to
+  production**. There is no separate manual upload step.
 
-## Always push tool changes to GitHub
+Because of that link, never push a half-finished change to `main`. Work on a
+branch and open a pull request.
 
-When you add or edit a tool page, **push it to this repository** before you finish.
-The site's only other copy is the Vercel deployment, and that is easy to lose.
+## What is served and what is not
 
-```bash
-git clone "https://x-access-token:${GIithub_publish}@github.com/aamiraj60/25tools.git"
-cd 25tools && git checkout -b add-<tool-name>
-# ... edit files ...
-git add -A && git commit -m "Add <tool name> tool"
-git push -u origin add-<tool-name>
+Vercel publishes every file in the repository by default. `.vercelignore` keeps
+the internal files out of the served output:
+
+```
+AGENTS.md  README.md  .gitignore  automation/  tools/  .github/
 ```
 
-Then open a pull request. Do not push directly to `main` by hand; the daily
-backup automation owns `main`.
+Anything not listed there becomes publicly readable at
+`https://toolguest.com/<path>`. Add to `.vercelignore` before committing notes,
+scripts, or tooling.
 
-### Before you add a tool, check whether it is already there
+## Adding a tool
 
-Adding a page that already exists silently overwrites it. Check first:
+Adding a tool means touching **three** places:
+
+1. the new page `<slug>.html`
+2. the `CATEGORIES` array in `index.html` (name, slug, desc, tags, icon)
+3. `sitemap.xml`
+
+### Check whether it already exists first
+
+Adding a page that already exists silently overwrites it.
 
 ```bash
-# does the file already exist on GitHub?
 curl -s -o /dev/null -w "%{http_code}\n" \
   "https://raw.githubusercontent.com/aamiraj60/25tools/main/<slug>.html"
-# 200 = already uploaded (update it)   404 = new (create it)
-
-# does the live site already serve it?
-curl -s -o /dev/null -w "%{http_code}\n" "https://toolguest.com/<slug>"
+# 200 = already there (edit it)   404 = new (create it)
 ```
-
-Then push only what is actually new or changed. A tool added on the live site
-is picked up by the backup automation on its next run even if you forget.
 
 ### File naming
 
@@ -52,21 +53,23 @@ One file per tool, named after the URL slug with a `.html` extension:
 | `/epoch-converter` | `epoch-converter.html` |
 | `/` | `index.html` |
 
-Lowercase, hyphen-separated, `.html` suffix. The slug in the filename must match
-the slug used in `index.html` and `sitemap.xml`.
+Lowercase, hyphen-separated, `.html` suffix. The slug must match the one used in
+`index.html` and `sitemap.xml`.
 
 ## Which token to use
 
 `GITHUB_TOKEN` in this environment is a GitHub App token (`ghu_...`) and is
 **read-only** — pushes fail with `403 Resource not accessible by integration`.
 
-Use **`GIithub_publish`** (a classic PAT) for any write: clone URLs, `git push`,
-and the REST API. `gh` CLI and the `create_pr` tool both default to
-`GITHUB_TOKEN`, so pass the token explicitly instead:
+Use **`GIithub_publish`** (a classic PAT) for every write: clone URLs, `git push`
+and the REST API. `gh` CLI and the `create_pr` tool default to `GITHUB_TOKEN`, so
+pass the token explicitly:
 
 ```bash
+git clone "https://x-access-token:${GIithub_publish}@github.com/aamiraj60/25tools.git"
+
 curl -X POST -H "Authorization: token ${GIithub_publish}" \
-  https://api.github.com/repos/aamiraj60/25tools/pulls -d @pr.json
+  https://api.github.com/repos/aamiraj60/25tools/issues -d @issue.json
 ```
 
 ## Site conventions
@@ -83,19 +86,45 @@ Every page is self-contained HTML that pulls a shared bundle:
 - `vercel.json` sets `cleanUrls: true`, so pages are served at `/<slug>`, not
   `/<slug>.html`. **Link with clean URLs** (`href="/hash-generator"`), never
   `.html` — the `.html` form costs a 308 redirect hop.
-- Adding a tool means touching **three** places:
-  1. the new page `<slug>.html`
-  2. the `CATEGORIES` array in `index.html` (name, slug, desc, tags, icon)
-  3. `sitemap.xml`
 - `robots.txt` deliberately allows AI crawlers (GPTBot, OAI-SearchBot,
   PerplexityBot, ClaudeBot, Google-Extended, Bingbot, Applebot). Keep it that way.
 - `llms.txt` is a plain-text summary for answer engines.
 
-## Automatic backup
+## UK English
 
-A cron automation mirrors the live production deployment into this repo daily.
-It pulls the newest Vercel production deployment, diffs it against `main`, and
-pushes only when something changed. It removes files that the site no longer
-serves, so `main` always equals production.
+The site targets UK readers. Write `colour`, `behaviour`, `analyse`, `centre`,
+`organise`, `customise`, `labelled`, `cancelled`, `favourite`, `grey`.
 
-It leaves `AGENTS.md`, `automation/`, and `.gitignore` alone.
+Use `<html lang="en-GB">`. Every page must match.
+
+Two deliberate exceptions:
+
+- **`Color Palette Generator`** is a product name. Leave it as-is, including in
+  titles, `og:` tags and JSON-LD.
+- `scroll-behavior` is a CSS property and `Math.floor` is a JavaScript call.
+  Never "correct" code.
+
+Words such as `dialog`, `meter` (a device), `practice` (noun) and `program` are
+correct in UK English and must not be changed.
+
+## Automations
+
+Two cron automations keep the site healthy. Both run without an LLM.
+
+**ToolGuest GitHub Backup (check then upload)** — weekly, Sunday 02:30 UTC.
+
+Reads `sitemap.xml`, fetches every page and asset over HTTP, and compares each
+against this repository. It uploads only what is **missing or different**. If
+nothing changed it does nothing. It never deletes a file, so `AGENTS.md` and
+`automation/` are safe. The live site is the source of truth, so a tool
+published outside Git is still captured.
+
+**ToolGuest Site Health + UK English Audit** — every 6 hours.
+
+Audits all 27 pages for HTTP status, titles, descriptions, canonicals, H1s,
+Open Graph tags and JSON-LD, then reads visible text only to flag US spellings.
+It updates a single GitHub issue titled `Site health report` (labelled
+`site-health`) rather than opening a new one each run.
+
+Both scripts live in `automation/` so the automations can be rebuilt from the
+repository if the deployment is lost.
