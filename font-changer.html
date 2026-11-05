@@ -831,7 +831,7 @@ footer nav a:hover{color:var(--text)}
       <a href="/">About</a>
       <a href="/">Contact</a>
     </nav>
-    <p>© <span id="yr"></span> ToolGuest. Free Font Changer &amp; Fancy Text Generator — 100% client-side, ad-free, forever.</p>
+    <p>© <span id="year">2026</span> ToolGuest. Free Font Changer &amp; Fancy Text Generator — 100% client-side, ad-free, forever.</p>
   </div>
 </footer>
 
@@ -1282,7 +1282,6 @@ footer nav a:hover{color:var(--text)}
   }
 
   /* ---------- init ---------- */
-  document.getElementById("yr").textContent = new Date().getFullYear();
   input.addEventListener("input", scheduleRender);
   render();
 })();

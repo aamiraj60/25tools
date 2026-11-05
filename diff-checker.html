@@ -692,7 +692,7 @@ html.light .toast{background:rgba(17,20,24,.94)}
 
 <footer>
   <div class="wrap">
-    <span>© <span id="yr"></span> Diff Checker — free forever, 100% client-side.</span>
+    <span>© <span id="year">2026</span> Diff Checker — free forever, 100% client-side.</span>
     <span>No trackers · No uploads · No account</span>
   </div>
 </footer>
@@ -1342,7 +1342,6 @@ const SAMPLE_B = [
 
 leftEl.value = SAMPLE_A;
 rightEl.value = SAMPLE_B;
-document.getElementById('yr').textContent = new Date().getFullYear();
 runDiff();
 
 })();
