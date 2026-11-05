@@ -1,13 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en-GB" data-theme="dark">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>YouTube Transcript Generator & AI Summarizer — Free, Instant, No Ads</title>
-<meta name="description" content="Extract YouTube transcripts with timestamps instantly. AI TL;DR summaries, auto chapters, multi-language captions, and 1-click SRT / VTT / Markdown / TXT export." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<title>YouTube Transcript Generator &amp; AI Summarizer</title>
+  <meta property="og:title" content="YouTube Transcript Generator &amp; AI Summarizer" />
+  <meta property="og:description" content="Extract YouTube transcripts with timestamps instantly. AI TL;DR summaries, auto chapters and 1-click SRT, VTT, Markdown or TXT export." />
+  <meta property="og:url" content="https://toolguest.com/youtube-transcript" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="en_AU" />
+  <meta property="og:locale:alternate" content="en_CA" />
+  <meta http-equiv="content-language" content="en-GB" />
+  <meta property="og:image" content="https://toolguest.com/assets/og/youtube-transcript.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="YouTube Transcript Generator &amp; AI Summarizer" />
+  <meta name="twitter:description" content="Extract YouTube transcripts with timestamps instantly. AI TL;DR summaries, auto chapters and 1-click SRT, VTT, Markdown or TXT export." />
+  <meta name="twitter:image" content="https://toolguest.com/assets/og/youtube-transcript.png" />
+<link rel="canonical" href="https://toolguest.com/youtube-transcript" />
+  <link rel="alternate" hreflang="en" href="https://toolguest.com/youtube-transcript" />
+  <link rel="alternate" hreflang="x-default" href="https://toolguest.com/youtube-transcript" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "YouTube Transcript Generator & AI Summarizer",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "GBP"
+  },
+  "featureList": [
+    "Instant Extraction — Paste any URL or Video ID and get the full timestamped caption track in under a second. No queue, no waiting screen.",
+    "Zero-Ad Experience — No pop-unders, no redirects, no \"download our app\" modals. A clean reading surface that respects your attention.",
+    "Interactive Video Sync — Click any timestamp and the embedded player jumps to that exact second. Playback highlights the current line automatically.",
+    "Pro Export Suite — One click for plain text, .SRT, .VTT, Markdown or .TXT. Files are generated locally in your browser — instantly.",
+    "Copy the video link — Grab any YouTube URL — watch, youtu.be, shorts, embed or live. A bare Video ID works too.",
+    "Paste it above — Drop it into the input field. We parse the ID and load the player instantly."
+  ],
+  "dateModified": "2026-11-05",
+  "datePublished": "2026-11-05",
+  "url": "https://toolguest.com/youtube-transcript"
+}
+</script>
+<meta name="description" content="Extract YouTube transcripts with timestamps instantly. AI TL;DR summaries, auto chapters and 1-click SRT, VTT, Markdown or TXT export." />
+<link href="assets/fonts.css" rel="stylesheet">
 <style>
 :root {
   --bg: #08090b;
@@ -286,16 +326,48 @@ footer{margin-top:70px;border-top:1px solid var(--border);padding:34px 0 50px;co
 .spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 </style>
+<link rel="stylesheet" href="assets/related.css">
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://toolguest.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tools",
+      "item": "https://toolguest.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "YouTube Transcript Generator & AI Summarizer",
+      "item": "https://toolguest.com/youtube-transcript"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
 <header class="nav">
   <div class="nav-inner">
-    <a href="#" class="brand">
+    <a href="/" class="brand">
       <span class="brand-mark">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
       </span>
-      <span>Transcript<span style="color:var(--accent)">Lift</span></span>
+      <span>Tool<span style="color:var(--accent)">Guest</span></span>
     </a>
     <nav class="nav-links">
       <a href="#tool">Tool</a>
@@ -319,16 +391,16 @@ footer{margin-top:70px;border-top:1px solid var(--border);padding:34px 0 50px;co
 <main class="container">
 
   <div class="crumbs">
-    <a href="#">Home</a><span class="sep">/</span>
-    <a href="#">Tools</a><span class="sep">/</span>
+    <a href="/">Home</a><span class="sep">/</span>
+    <a href="/">Tools</a><span class="sep">/</span>
     <span class="cur">YouTube Transcript Generator</span>
     <span class="region-tag"><span class="live-dot"></span>Global · Creator Grade</span>
   </div>
 
   <section class="hero">
     <div class="badge-rating">
-      <span class="stars">★★★★★</span>
-      <span>4.97/5 from 60,000+ creators &amp; students</span>
+      <span class="stars">✓</span>
+      <span>Free for creators &amp; students — no signup</span>
     </div>
     <h1>Free YouTube Transcript Generator &amp; <span class="grad">AI Summarizer</span></h1>
     <p class="hero-sub">Extract timestamps, copy subtitles, generate TL;DR summaries &amp; export SRT files instantly — no ads, no sign-up, no software.</p>
@@ -473,7 +545,7 @@ footer{margin-top:70px;border-top:1px solid var(--border);padding:34px 0 50px;co
     </div>
     <div class="table-wrap reveal">
       <table>
-        <thead><tr><th>Capability</th><th class="us">TranscriptLift</th><th>DownSub</th><th>Tactiq</th></tr></thead>
+        <thead><tr><th>Capability</th><th class="us">ToolGuest</th><th>DownSub</th><th>Tactiq</th></tr></thead>
         <tbody>
           <tr><td>No pop-up / redirect ads</td><td class="us"><span class="yes">✓</span></td><td><span class="no">✗</span></td><td><span class="mid">~</span></td></tr>
           <tr><td>No sign-up or extension required</td><td class="us"><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="no">✗</span></td></tr>
@@ -500,24 +572,113 @@ footer{margin-top:70px;border-top:1px solid var(--border);padding:34px 0 50px;co
     </div>
   </section>
 
-  <div class="related reveal">
-    <h3>Related free tools</h3>
-    <div class="related-chips">
-      <a href="#">YouTube Video Downloader</a>
-      <a href="#">YouTube Thumbnail Grabber</a>
-      <a href="#">YouTube Tag Extractor</a>
-      <a href="#">YouTube Timestamp Generator</a>
-      <a href="#">SRT to VTT Converter</a>
-      <a href="#">Video to Text Transcriber</a>
-      <a href="#">YouTube Chapter Generator</a>
-    </div>
+  
+
+<!-- TF-RELATED -->
+<section class="tf-related" aria-label="Related tools">
+  <div class="tf-related-glow" aria-hidden="true">
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
   </div>
+  <div class="tf-related-head">
+    <div>
+      <p class="tf-related-eyebrow"><span class="tf-related-pulse"></span>Keep going</p>
+      <h2 class="tf-related-title">Related free tools</h2>
+      <p class="tf-related-sub">Hand-picked tools that pair with this one — all free, all private.</p>
+    </div>
+    <a class="tf-related-all" href="/#directory"><span>All 26 tools</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="tf-related-grid">
+      <a class="tf-related-card" href="/shorts-hooks" style="--tf-card-accent: #ea580c; --i: 0">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Shorts Hook Generator</span>
+          <span class="tf-related-desc">Generate scroll-stopping first-3-second hooks for Shorts &amp; Reels.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/video-to-blog" style="--tf-card-accent: #db2777; --i: 1">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Video to Blog</span>
+          <span class="tf-related-desc">Turn any video link into a structured, SEO-ready blog article.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/thumbnail-downloader" style="--tf-card-accent: #f43f5e; --i: 2">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10l-3.1-3.1a2 2 0 0 0-2.814.014L6 21"/><path d="m14 19 3 3v-5.5"/><path d="m17 22 3-3"/><circle cx="9" cy="9" r="2"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Thumbnail Downloader</span>
+          <span class="tf-related-desc">Download any YouTube thumbnail in max resolution — HD &amp; 4K.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/youtube-timestamp" style="--tf-card-accent: #fb7185; --i: 3">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Timestamp Link Generator</span>
+          <span class="tf-related-desc">Create shareable YouTube links that jump to an exact second.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/creator-calculator" style="--tf-card-accent: #f97316; --i: 4">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Creator Calculator</span>
+          <span class="tf-related-desc">Estimate RPM, sponsorship rates and monthly ad revenue.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/ai-humanizer" style="--tf-card-accent: #6366f1; --i: 5">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">AI Humanizer</span>
+          <span class="tf-related-desc">Rewrite AI text so it reads naturally and bypasses detectors.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/word-counter" style="--tf-card-accent: #7c3aed; --i: 6">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="7" cy="12" r="3"/><path d="M10 9v6"/><circle cx="17" cy="12" r="3"/><path d="M14 7v8"/><path d="M22 17v1c0 .5-.5 1-1 1H3c-.5 0-1-.5-1-1v-1"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Word Counter</span>
+          <span class="tf-related-desc">Live word, character, sentence and reading-time statistics.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+  </div>
+</section>
 
 </main>
 
 <footer>
   <div class="foot-inner">
-    <span>© 2025 TranscriptLift — Free YouTube Transcript Generator &amp; AI Summarizer.</span>
+    <span>© 2025 ToolGuest — Free YouTube Transcript Generator &amp; AI Summarizer.</span>
     <span>Built for creators, students &amp; researchers · No ads, ever.</span>
   </div>
 </footer>
@@ -1031,7 +1192,7 @@ footer{margin-top:70px;border-top:1px solid var(--border);padding:34px 0 50px;co
   }
   function toMD() {
     var title = state.title || 'YouTube Transcript';
-    var md = '# ' + title + '\n\n> Source: https://youtu.be/' + state.videoId + '\n> Exported with TranscriptLift\n\n---\n\n';
+    var md = '# ' + title + '\n\n> Source: https://youtu.be/' + state.videoId + '\n> Exported with ToolGuest\n\n---\n\n';
     state.segments.forEach(function(s) {
       md += '**[' + fmtTime(s.start) + ']** ' + s.text + '\n\n';
     });
@@ -1332,5 +1493,7 @@ footer{margin-top:70px;border-top:1px solid var(--border);padding:34px 0 50px;co
   }
 })();
 </script>
+  <script src="/assets/rating-widget.js" defer></script>
+<script src="assets/related.js" defer></script>
 </body>
 </html>

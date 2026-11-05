@@ -1,33 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Free AI Humanizer — Unlimited Words, 10 Languages | ToolForge</title>
-<meta name="description" content="Humanize AI text in 10 languages with unlimited words. 4 tones, auto language detection, no sign-up. Trusted in US, UK, Canada, Australia, Germany, France, Spain, India, Japan and Brazil." />
+<title>Free AI Humanizer — Unlimited Words, 10 Languages</title>
+  <meta property="og:url" content="https://toolguest.com/ai-humanizer" />
+  <meta property="og:image" content="https://toolguest.com/assets/og/ai-humanizer.png" />
+  <meta name="twitter:title" content="Free AI Humanizer — Unlimited Words, 10 Languages | ToolGuest" />
+  <meta name="twitter:description" content="Humanize AI text in 10 languages with unlimited words. 4 tones, auto language detection, no sign-up. 100% free." />
+  <meta name="twitter:image" content="https://toolguest.com/assets/og/ai-humanizer.png" />
+<meta name="description" content="Humanize AI text in 10 languages with unlimited words. 4 tones, auto language detection, no sign-up. 100% free." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 
-<link rel="canonical" href="https://toolforge.com/tools/ai-detector-humanizer" />
-<link rel="alternate" hreflang="x-default" href="https://toolforge.com/tools/ai-detector-humanizer" />
-<link rel="alternate" hreflang="en-US" href="https://toolforge.com/tools/ai-detector-humanizer/us" />
-<link rel="alternate" hreflang="en-GB" href="https://toolforge.com/tools/ai-detector-humanizer/uk" />
-<link rel="alternate" hreflang="en-CA" href="https://toolforge.com/tools/ai-detector-humanizer/ca" />
-<link rel="alternate" hreflang="en-AU" href="https://toolforge.com/tools/ai-detector-humanizer/au" />
-<link rel="alternate" hreflang="de-DE" href="https://toolforge.com/tools/ai-detector-humanizer/de" />
-<link rel="alternate" hreflang="fr-FR" href="https://toolforge.com/tools/ai-detector-humanizer/fr" />
-<link rel="alternate" hreflang="es-ES" href="https://toolforge.com/tools/ai-detector-humanizer/es" />
-<link rel="alternate" hreflang="pt-BR" href="https://toolforge.com/tools/ai-detector-humanizer/br" />
-<link rel="alternate" hreflang="ja-JP" href="https://toolforge.com/tools/ai-detector-humanizer/jp" />
-<link rel="alternate" hreflang="hi-IN" href="https://toolforge.com/tools/ai-detector-humanizer/in" />
+<link rel="canonical" href="https://toolguest.com/ai-humanizer" />
+  <link rel="alternate" hreflang="en" href="https://toolguest.com/ai-humanizer" />
+  <link rel="alternate" hreflang="x-default" href="https://toolguest.com/ai-humanizer" />
 
 <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="en_AU" />
+  <meta property="og:locale:alternate" content="en_CA" />
+  <meta http-equiv="content-language" content="en-GB" />
 <meta property="og:title" content="Free AI Humanizer — Unlimited Words, 10 Languages" />
 <meta property="og:description" content="Unlimited words, 4 tones, 10 languages, auto-detect. No sign-up." />
 <meta name="twitter:card" content="summary_large_image" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="assets/fonts.css" rel="stylesheet">
 
 <script>(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark')}catch(e){}})();</script>
 
@@ -60,6 +59,15 @@ header{position:sticky;top:0;z-index:40;border-bottom:1px solid var(--line);back
 .logo-mark{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;background:var(--ink);color:var(--canvas);font-size:12px;font-weight:700}
 .icon-btn{width:32px;height:32px;display:grid;place-items:center;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font-size:14px;transition:.15s;flex-shrink:0}
 .icon-btn:hover{color:var(--ink);border-color:var(--muted)}
+/* The icon carries the control's meaning, so it needs to clear 3:1 against the
+   button. --muted only reaches 2.15:1 on the light surface; --ink at .72 opacity
+   lands near 3.1:1 and stays quiet next to the rest of the header. */
+.icon-btn svg{width:16px;height:16px;color:var(--ink);opacity:.72}
+.icon-btn:hover svg{opacity:1}
+.icon-btn .icon-sun{display:none}
+.icon-btn .icon-moon{display:block}
+.dark .icon-btn .icon-sun{display:block}
+.dark .icon-btn .icon-moon{display:none}
 
 .locbar{border-bottom:1px solid var(--line);background:var(--surface);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .locbar::-webkit-scrollbar{display:none}
@@ -199,35 +207,155 @@ tbody td.us{background:color-mix(in srgb,var(--brand) 6%,transparent);font-weigh
 </style>
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
-{"@type":"SoftwareApplication","name":"ToolForge AI Humanizer","url":"https://toolforge.com/tools/ai-detector-humanizer","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","description":"Free unlimited AI humanizer supporting 10 languages with 4 tones and auto language detection.","inLanguage":["en-US","en-GB","en-CA","en-AU","de-DE","fr-FR","es-ES","pt-BR","ja-JP","hi-IN"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","ratingCount":"1240","bestRating":"5"}},
-{"@type":"HowTo","name":"How to humanize AI text","step":[{"@type":"HowToStep","position":1,"name":"Paste AI text","text":"Paste any AI-generated text."},{"@type":"HowToStep","position":2,"name":"Pick language and tone","text":"Choose a language or auto-detect, then a tone."},{"@type":"HowToStep","position":3,"name":"Humanize","text":"Click the button — no word limit."},{"@type":"HowToStep","position":4,"name":"Copy","text":"Copy or download the result."}]},
-{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is it really free and unlimited?","acceptedAnswer":{"@type":"Answer","text":"Yes — no account, no credits, no word limit."}},{"@type":"Question","name":"Which languages are supported?","acceptedAnswer":{"@type":"Answer","text":"English (US, UK, CA, AU), German, French, Spanish, Portuguese (BR), Japanese and Hindi."}}]}
-]}
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "ToolGuest AI Humanizer",
+      "url": "https://toolguest.com/ai-humanizer",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web",
+      "description": "Free unlimited AI humanizer supporting 10 languages with 4 tones and auto language detection.",
+      "inLanguage": [
+        "en-US",
+        "en-GB",
+        "en-CA",
+        "en-AU",
+        "de-DE",
+        "fr-FR",
+        "es-ES",
+        "pt-BR",
+        "ja-JP",
+        "hi-IN"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP"
+      },
+      "featureList": [
+        "♾️ Unlimited words — No character caps, no credits. Humanize a sentence or a full dissertation.",
+        "🌐 10 languages — English (US/UK/CA/AU), German, French, Spanish, Portuguese, Japanese and Hindi.",
+        "🎭 4 tone presets — Standard, Casual, Academic, Simple — each visibly reshapes the output.",
+        "🔍 Auto-detect — Paste text in any supported language and the tool picks it up automatically.",
+        "📊 Live text metrics — Burstiness, lexical diversity and readability computed on every result.",
+        "🔒 Never stored — Processed in memory and discarded the moment your result is returned."
+      ],
+      "dateModified": "2026-11-05",
+      "datePublished": "2026-11-05"
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to humanize AI text",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Paste AI text",
+          "text": "Paste any AI-generated text."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Pick language and tone",
+          "text": "Choose a language or auto-detect, then a tone."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Humanize",
+          "text": "Click the button — no word limit."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Copy",
+          "text": "Copy or download the result."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is it really free and unlimited?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — no account, no credits, no word limit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which languages are supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "English (US, UK, CA, AU), German, French, Spanish, Portuguese (BR), Japanese and Hindi."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolguest.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://toolguest.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI Humanizer",
+          "item": "https://toolguest.com/ai-humanizer"
+        }
+      ]
+    }
+  ]
+}
 </script>
+<link rel="stylesheet" href="assets/related.css">
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
 </head>
 
 <body>
 
 <header>
   <div class="header-inner">
-    <a href="/" class="logo"><span class="logo-mark">T</span> ToolForge</a>
-    <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode">◐</button>
+    <a href="/" class="logo"><span class="logo-mark">T</span> ToolGuest</a>
+    <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+      </svg>
+    </button>
   </div>
 </header>
 
 <nav class="locbar" aria-label="Region">
   <div class="locbar-inner">
     <span class="loc-label">Region</span>
-    <button class="loc-pill" data-loc="global" aria-pressed="false">🌍 Global</button>
-    <button class="loc-pill" data-loc="us" aria-pressed="false">🇺🇸 United States</button>
     <button class="loc-pill" data-loc="uk" aria-pressed="true">🇬🇧 United Kingdom</button>
+    <button class="loc-pill" data-loc="us" aria-pressed="false">🇺🇸 United States</button>
+    <button class="loc-pill" data-loc="de" aria-pressed="false">🇩🇪 Deutschland</button>
     <button class="loc-pill" data-loc="ca" aria-pressed="false">🇨🇦 Canada</button>
     <button class="loc-pill" data-loc="au" aria-pressed="false">🇦🇺 Australia</button>
-    <button class="loc-pill" data-loc="de" aria-pressed="false">🇩🇪 Deutschland</button>
-    <button class="loc-pill" data-loc="fr" aria-pressed="false">🇫🇷 France</button>
     <button class="loc-pill" data-loc="es" aria-pressed="false">🇪🇸 España</button>
-    <button class="loc-pill" data-loc="in" aria-pressed="false">🇮🇳 India</button>
+    <button class="loc-pill" data-loc="global" aria-pressed="false">🌍 Global</button>
+    <button class="loc-pill" data-loc="fr" aria-pressed="false">🇫🇷 France</button>
     <button class="loc-pill" data-loc="jp" aria-pressed="false">🇯🇵 日本</button>
     <button class="loc-pill" data-loc="br" aria-pressed="false">🇧🇷 Brasil</button>
   </div>
@@ -236,8 +364,8 @@ tbody td.us{background:color-mix(in srgb,var(--brand) 6%,transparent);font-weigh
 <div class="wrap">
   <nav class="crumbs" aria-label="Breadcrumb">
     <a href="/">Home</a><span class="sep">/</span>
-    <a href="/tools">Tools</a><span class="sep">/</span>
-    <a href="/tools/ai-detector-humanizer">AI Humanizer</a><span class="sep">/</span>
+    <a href="/#directory">Tools</a><span class="sep">/</span>
+    <a href="/#directory">AI Humanizer</a><span class="sep">/</span>
     <span class="cur" id="crumbLoc">United Kingdom</span>
   </nav>
 </div>
@@ -252,8 +380,8 @@ tbody td.us{background:color-mix(in srgb,var(--brand) 6%,transparent);font-weigh
   <p class="tagline" id="tagline">Paste AI-generated copy and get natural, human-sounding UK English in one click — free, unlimited words, and never stored.</p>
 
   <div class="trustbar">
-    <span><i class="dot"></i> 2.4M words humanized this month</span>
-    <span><i class="dot"></i> 4.8/5 from 1,240 reviews</span>
+    <span><i class="dot"></i> Free · no signup · unlimited words</span>
+    <span><i class="dot"></i> Runs entirely in your browser — no upload</span>
     <span><i class="dot"></i> 10 languages supported</span>
   </div>
 
@@ -369,7 +497,7 @@ tbody td.us{background:color-mix(in srgb,var(--brand) 6%,transparent);font-weigh
     <div class="table-scroll">
       <table>
         <thead>
-          <tr><th scope="col">Feature</th><th scope="col" class="us">ToolForge</th><th scope="col">Undetectable.ai</th><th scope="col">StealthWriter</th><th scope="col">QuillBot</th></tr>
+          <tr><th scope="col">Feature</th><th scope="col" class="us">ToolGuest</th><th scope="col">Undetectable.ai</th><th scope="col">StealthWriter</th><th scope="col">QuillBot</th></tr>
         </thead>
         <tbody>
           <tr><td>No sign-up to see results</td><td class="us yes">Yes</td><td class="no">No</td><td class="no">No</td><td class="no">No</td></tr>
@@ -387,24 +515,116 @@ tbody td.us{background:color-mix(in srgb,var(--brand) 6%,transparent);font-weigh
     <div class="faq" id="faqList"></div>
   </section>
 
-  <section aria-labelledby="related-h">
-    <h2 id="related-h">Related tools</h2>
-    <ul class="related">
-      <li><a href="/tools/word-counter">Word Counter</a></li>
-      <li><a href="/tools/ai-detector">AI Detector Checker</a></li>
-      <li><a href="/tools/readability-checker">Readability Checker</a></li>
-      <li><a href="/tools/case-converter">Case Converter</a></li>
-    </ul>
-  </section>
+  
 
   <div class="updated">
     <span>Last updated <time datetime="2025-01-15">15 January 2025</time></span>
     <span>·</span>
-    <span>Reviewed by the ToolForge editorial team</span>
+    <span>Reviewed by the ToolGuest editorial team</span>
   </div>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- TF-RELATED -->
+<section class="tf-related" aria-label="Related tools">
+  <div class="tf-related-glow" aria-hidden="true">
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+  </div>
+  <div class="tf-related-head">
+    <div>
+      <p class="tf-related-eyebrow"><span class="tf-related-pulse"></span>Keep going</p>
+      <h2 class="tf-related-title">Related free tools</h2>
+      <p class="tf-related-sub">Hand-picked tools that pair with this one — all free, all private.</p>
+    </div>
+    <a class="tf-related-all" href="/#directory"><span>All 26 tools</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="tf-related-grid">
+      <a class="tf-related-card" href="/word-counter" style="--tf-card-accent: #7c3aed; --i: 0">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="7" cy="12" r="3"/><path d="M10 9v6"/><circle cx="17" cy="12" r="3"/><path d="M14 7v8"/><path d="M22 17v1c0 .5-.5 1-1 1H3c-.5 0-1-.5-1-1v-1"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Word Counter</span>
+          <span class="tf-related-desc">Live word, character, sentence and reading-time statistics.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/case-converter" style="--tf-card-accent: #8b5cf6; --i: 1">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m3 15 4-8 4 8"/><path d="M4 13h6"/><circle cx="18" cy="12" r="3"/><path d="M21 9v6"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Case Converter</span>
+          <span class="tf-related-desc">Switch between sentence, title, camel, snake and kebab case.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/diff-checker" style="--tf-card-accent: #818cf8; --i: 2">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M11 18H8a2 2 0 0 1-2-2V9"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Text &amp; Code Diff Checker</span>
+          <span class="tf-related-desc">Compare two blocks of text or code and highlight every change.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/lorem-ipsum" style="--tf-card-accent: #9333ea; --i: 3">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 12H3"/><path d="M17 18H3"/><path d="M21 6H3"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Lorem Ipsum</span>
+          <span class="tf-related-desc">Generate placeholder paragraphs, words or lists on demand.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/markdown-to-html" style="--tf-card-accent: #6d28d9; --i: 4">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 12.5 8 15l2 2.5"/><path d="m14 12.5 2 2.5-2 2.5"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Markdown to HTML</span>
+          <span class="tf-related-desc">Convert Markdown into clean, copy-ready semantic HTML.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/font-changer" style="--tf-card-accent: #4f46e5; --i: 5">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Font Changer &amp; Bio Generator</span>
+          <span class="tf-related-desc">Fancy Unicode fonts and aesthetic bios for every social profile.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/video-to-blog" style="--tf-card-accent: #db2777; --i: 6">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Video to Blog</span>
+          <span class="tf-related-desc">Turn any video link into a structured, SEO-ready blog article.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+  </div>
+</section>
 
 <script>
 (function(){
@@ -470,13 +690,6 @@ var LOCALES = {
     lede:"Diseñado para el español de España, con cumplimiento del RGPD y sin muro de registro.",
     proof:[["🇪🇸 Salida en español nativo","Estructuras y vocabulario españoles — no una traducción literal."],["♾️ Palabras ilimitadas","Sin créditos, sin límites — de una frase a un capítulo completo."],["🔒 Cumple el RGPD","Los textos se procesan en memoria y nunca se almacenan."]],
     faqs:[{q:"¿Es realmente gratis e ilimitado?",a:"Sí. Sin cuenta, sin créditos y sin límite de palabras.",tag:"ES"},{q:"¿Admite español?",a:"Sí. La salida utiliza estructuras y vocabulario españoles naturales.",tag:"ES"}]},
-  in:{name:"India",crumb:"India",lang:"en-IN",dialect:"en-GB",
-    badge:"Free · No sign-up · English + Hindi · Unlimited",
-    h1:"Humanize AI text in natural Indian English or Hindi. Unlimited & free.",
-    tagline:"Rewrite ChatGPT, Claude or Gemini output into natural Indian English or Hindi — free, unlimited words, never stored.",
-    lede:"Built for Indian writers with British English conventions and full Hindi support.",
-    proof:[["🇮🇳 Indian English + Hindi","British spelling conventions alongside full Hindi language support."],["♾️ Unlimited words","No credits, no word caps — essays, articles or entire assignments."],["🎓 Academic-aware","Rewrite AI-assisted drafts before submission to Indian universities."]],
-    faqs:[{q:"Is this humanizer free in India?",a:"Yes. No account, no credits and no word limit for Indian users.",tag:"India"},{q:"Does it support Hindi?",a:"Yes. Select Hindi from the output dialect, or let auto-detect pick it up from Devanagari script.",tag:"India"}]},
   jp:{name:"日本",crumb:"日本",lang:"ja-JP",dialect:"ja-JP",
     badge:"無料 · 登録不要 · 日本語 · 無制限",
     h1:"AIテキストを自然な日本語に。無制限・無料。",
@@ -773,7 +986,7 @@ function renderLocale(key){
   current = key;
   var L = LOCALES[key];
   document.documentElement.lang = L.lang;
-  document.title = "Free AI Humanizer — " + L.crumb + ", Unlimited & No Sign-Up | ToolForge";
+  document.title = "Free AI Humanizer — " + L.crumb + ", Unlimited & No Sign-Up | ToolGuest";
 
   $("h1").textContent = L.h1;
   $("tagline").textContent = L.tagline;
@@ -960,5 +1173,7 @@ updateCount();
 
 })();
 </script>
+  <script src="/assets/rating-widget.js" defer></script>
+<script src="assets/related.js" defer></script>
 </body>
 </html>

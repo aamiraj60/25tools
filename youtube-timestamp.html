@@ -1,14 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en-GB" class="dark">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Free YouTube Timestamp Generator · Jump-To Link Creator</title>
+  <meta property="og:title" content="Free YouTube Timestamp Generator · Jump-To Link Creator" />
+  <meta property="og:description" content="Create precise YouTube timestamp links, embed codes, and chapter lists instantly. 100% client-side, ad-free, blazing fast." />
+  <meta property="og:url" content="https://toolguest.com/youtube-timestamp" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="en_AU" />
+  <meta property="og:locale:alternate" content="en_CA" />
+  <meta http-equiv="content-language" content="en-GB" />
+  <meta property="og:image" content="https://toolguest.com/assets/og/youtube-timestamp.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free YouTube Timestamp Generator · Jump-To Link Creator" />
+  <meta name="twitter:description" content="Create precise YouTube timestamp links, embed codes, and chapter lists instantly. 100% client-side, ad-free, blazing fast." />
+  <meta name="twitter:image" content="https://toolguest.com/assets/og/youtube-timestamp.png" />
+<link rel="canonical" href="https://toolguest.com/youtube-timestamp" />
+  <link rel="alternate" hreflang="en" href="https://toolguest.com/youtube-timestamp" />
+  <link rel="alternate" hreflang="x-default" href="https://toolguest.com/youtube-timestamp" />
 <meta name="description" content="Create precise YouTube timestamp links, embed codes, and chapter lists instantly. 100% client-side, ad-free, blazing fast." />
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+<script src="assets/tailwind.js"></script>
+<script src="assets/lucide.js"></script>
+<link href="assets/fonts.css" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
   * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
   html { scroll-behavior: smooth; }
   body { background: #f8fafc; color: #0f172a; }
@@ -80,6 +97,38 @@
   .chapter-row { transition: background .15s; }
   .chapter-row:hover { background: rgba(99,102,241,0.08); }
 </style>
+<link rel="stylesheet" href="assets/related.css">
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://toolguest.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tools",
+      "item": "https://toolguest.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Free YouTube Timestamp Link Generator",
+      "item": "https://toolguest.com/youtube-timestamp"
+    }
+  ]
+}
+</script>
 </head>
 <body class="antialiased">
 
@@ -89,9 +138,9 @@
 <!-- Breadcrumb -->
 <div class="max-w-6xl mx-auto px-5 pt-6 pb-2 flex items-center justify-between text-sm">
   <nav class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
-    <a href="#" class="hover:text-indigo-500 transition">Home</a>
+    <a href="/" class="hover:text-indigo-500 transition">Home</a>
     <span>/</span>
-    <a href="#" class="hover:text-indigo-500 transition">Tools</a>
+    <a href="/" class="hover:text-indigo-500 transition">Tools</a>
     <span>/</span>
     <span class="text-slate-900 dark:text-white font-medium">YouTube Timestamp Generator</span>
   </nav>
@@ -132,7 +181,7 @@
         <div class="flex gap-2">
           <input id="videoInput" type="text" value="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
             placeholder="https://youtu.be/dQw4w9WgXcQ or dQw4w9WgXcQ"
-            class="flex-1 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
+              class="min-w-0 flex-1 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition" />
           <button id="loadBtn" class="btn-primary px-5 py-3 rounded-xl text-sm font-semibold flex items-center gap-2">
             <i data-lucide="play" class="w-4 h-4"></i> Load
           </button>
@@ -256,6 +305,97 @@
       </div>
     </div>
   </div>
+
+<!-- TF-RELATED -->
+<section class="tf-related" aria-label="Related tools">
+  <div class="tf-related-glow" aria-hidden="true">
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+  </div>
+  <div class="tf-related-head">
+    <div>
+      <p class="tf-related-eyebrow"><span class="tf-related-pulse"></span>Keep going</p>
+      <h2 class="tf-related-title">Related free tools</h2>
+      <p class="tf-related-sub">Hand-picked tools that pair with this one — all free, all private.</p>
+    </div>
+    <a class="tf-related-all" href="/#directory"><span>All 26 tools</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="tf-related-grid">
+      <a class="tf-related-card" href="/youtube-transcript" style="--tf-card-accent: #e11d48; --i: 0">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="18" height="14" x="3" y="5" rx="2" ry="2"/><path d="M7 15h4M15 15h2M7 11h2M13 11h4"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">YouTube Transcript</span>
+          <span class="tf-related-desc">Pull accurate, timestamped transcripts from any video in seconds.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/video-to-blog" style="--tf-card-accent: #db2777; --i: 1">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Video to Blog</span>
+          <span class="tf-related-desc">Turn any video link into a structured, SEO-ready blog article.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/shorts-hooks" style="--tf-card-accent: #ea580c; --i: 2">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Shorts Hook Generator</span>
+          <span class="tf-related-desc">Generate scroll-stopping first-3-second hooks for Shorts &amp; Reels.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/creator-calculator" style="--tf-card-accent: #f97316; --i: 3">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Creator Calculator</span>
+          <span class="tf-related-desc">Estimate RPM, sponsorship rates and monthly ad revenue.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/thumbnail-downloader" style="--tf-card-accent: #f43f5e; --i: 4">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10l-3.1-3.1a2 2 0 0 0-2.814.014L6 21"/><path d="m14 19 3 3v-5.5"/><path d="m17 22 3-3"/><circle cx="9" cy="9" r="2"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Thumbnail Downloader</span>
+          <span class="tf-related-desc">Download any YouTube thumbnail in max resolution — HD &amp; 4K.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/url-slug-generator" style="--tf-card-accent: #22c55e; --i: 5">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">URL Slug Generator</span>
+          <span class="tf-related-desc">Convert any title into a clean, SEO-friendly URL slug.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+  </div>
+  <p class="tf-related-note">© 2025 YouTube Timestamp Generator · Free forever</p>
+</section>
+
 </main>
 
 <!-- Why Grid -->
@@ -359,18 +499,7 @@
 </section>
 
 <!-- Related tools -->
-<footer class="border-t border-slate-200 dark:border-slate-800 py-8">
-  <div class="max-w-6xl mx-auto px-5">
-    <p class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-3 text-center">Related tools</p>
-    <div class="flex flex-wrap justify-center gap-4 text-sm">
-      <a href="#" class="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-indigo-500 transition"><i data-lucide="link-2" class="w-4 h-4"></i> URL Shortener</a>
-      <a href="#" class="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-indigo-500 transition"><i data-lucide="image" class="w-4 h-4"></i> Thumbnail Downloader</a>
-      <a href="#" class="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-indigo-500 transition"><i data-lucide="file-text" class="w-4 h-4"></i> Subtitle Extractor</a>
-      <a href="#" class="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-indigo-500 transition"><i data-lucide="clock" class="w-4 h-4"></i> Time Zone Converter</a>
-    </div>
-    <p class="text-center text-xs text-slate-400 mt-6">© 2025 YouTube Timestamp Generator · Free forever</p>
-  </div>
-</footer>
+
 
 <!-- JSON-LD Schema -->
 <script type="application/ld+json">
@@ -380,10 +509,66 @@
   "name": "Free YouTube Timestamp Link Generator",
   "applicationCategory": "MultimediaApplication",
   "operatingSystem": "Any",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "description": "Create precise YouTube timestamp links, embed codes, and chapter lists instantly. 100% client-side and ad-free."
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "GBP"
+  },
+  "description": "Create precise YouTube timestamp links, embed codes, and chapter lists instantly. 100% client-side and ad-free.",
+  "featureList": [
+    "Instant, zero-latency — All processing happens in your browser. No server round trips, no waiting.",
+    "Ad-free & private — No tracking, no ads. Your video URLs never leave your device.",
+    "Multi-format export — Standard URLs, short links, embed iframes, markdown, and chapters.",
+    "Precise time control — H:M:S inputs, total seconds, and a slider for perfect jumps.",
+    "Paste your video — Copy any YouTube URL or video ID into the input field above.",
+    "Set your time — Enter hours, minutes, seconds, or total seconds — everything syncs live."
+  ],
+  "dateModified": "2026-11-05",
+  "datePublished": "2026-11-05",
+  "url": "https://toolguest.com/youtube-timestamp"
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I create a YouTube link that starts at a specific time?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paste your video URL, set the time above, and copy the generated link. The tool appends ?t=…s so it jumps directly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this work for YouTube Shorts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — the timestamp format works across regular videos and Shorts. Just paste the Shorts URL and the tool extracts the ID automatically."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I create a chapter list for my video description?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely — use the Chapter Builder to add timestamps and labels, then copy the whole list in one click."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data ever sent to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Everything runs entirely in your browser. Your video URLs and inputs never leave your device."
+      }
+    }
+  ]
+}
+</script>
+
 
 <script>
 (function(){
@@ -660,5 +845,7 @@
   });
 })();
 </script>
+  <script src="/assets/rating-widget.js" defer></script>
+<script src="assets/related.js" defer></script>
 </body>
 </html>

@@ -1,13 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CreatorCalc — Free Creator & Social Media Earnings Calculator</title>
+  <title>ToolGuest — Free Creator Earnings Calculator</title>
+  <meta property="og:title" content="ToolGuest — Free Creator & Social Media Earnings Calculator" />
+  <meta property="og:description" content="Estimate YouTube, TikTok, Instagram, Twitch earnings with real-time sliders. Free, ad-free, privacy-first creator calculator." />
+  <meta property="og:url" content="https://toolguest.com/creator-calculator" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="en_AU" />
+  <meta property="og:locale:alternate" content="en_CA" />
+  <meta http-equiv="content-language" content="en-GB" />
+  <meta property="og:image" content="https://toolguest.com/assets/og/creator-calculator.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ToolGuest — Free Creator & Social Media Earnings Calculator" />
+  <meta name="twitter:description" content="Estimate YouTube, TikTok, Instagram, Twitch earnings with real-time sliders. Free, ad-free, privacy-first creator calculator." />
+  <meta name="twitter:image" content="https://toolguest.com/assets/og/creator-calculator.png" />
+<link rel="canonical" href="https://toolguest.com/creator-calculator" />
+  <link rel="alternate" hreflang="en" href="https://toolguest.com/creator-calculator" />
+  <link rel="alternate" hreflang="x-default" href="https://toolguest.com/creator-calculator" />
   <meta name="description" content="Estimate YouTube, TikTok, Instagram, Twitch earnings with real-time sliders. Free, ad-free, privacy-first creator calculator.">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+  <script src="assets/tailwind.js"></script>
+  <script src="assets/lucide.js"></script>
+  <link href="assets/fonts.css" rel="stylesheet">
   <style>
     * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
     html { scroll-behavior: smooth; }
@@ -160,6 +177,38 @@
 
     .number-flip { transition: color 0.15s; }
   </style>
+<link rel="stylesheet" href="assets/related.css">
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://toolguest.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tools",
+      "item": "https://toolguest.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "— Free Social Media Earnings Calculator",
+      "item": "https://toolguest.com/creator-calculator"
+    }
+  ]
+}
+</script>
 </head>
 <body class="text-gray-200 antialiased selection:bg-indigo-500/40 min-h-screen">
 
@@ -400,7 +449,7 @@
     <!-- WHY USE -->
     <section class="mb-20">
       <div class="mb-8">
-        <h2 class="text-2xl md:text-3xl font-bold mb-2">Why use <span class="gradient-num">CreatorCalc</span>?</h2>
+        <h2 class="text-2xl md:text-3xl font-bold mb-2">Why use <span class="gradient-num">ToolGuest</span>?</h2>
         <p class="text-gray-500 text-sm">Built for creators who value speed, privacy, and clarity.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -469,14 +518,14 @@
     <section class="mb-20">
       <div class="mb-6">
         <h2 class="text-2xl md:text-3xl font-bold mb-2">Better than legacy calculators</h2>
-        <p class="text-gray-500 text-sm">See how CreatorCalc compares to popular tools.</p>
+        <p class="text-gray-500 text-sm">See how ToolGuest compares to popular tools.</p>
       </div>
       <div class="overflow-x-auto glass-card rounded-2xl border border-white/10">
         <table class="w-full text-sm min-w-[640px]">
           <thead>
             <tr class="border-b border-white/10 text-left">
               <th class="py-4 px-6 font-semibold text-gray-400">Feature</th>
-              <th class="py-4 px-6 font-semibold text-indigo-300">CreatorCalc</th>
+              <th class="py-4 px-6 font-semibold text-indigo-300">ToolGuest</th>
               <th class="py-4 px-6 font-semibold text-gray-400">Noxinfluencer</th>
               <th class="py-4 px-6 font-semibold text-gray-400">Social Blade</th>
             </tr>
@@ -575,19 +624,100 @@
     </section>
 
     <!-- RELATED TOOLS -->
-    <div class="border-t border-white/10 pt-6 flex flex-wrap items-center justify-between text-sm text-gray-500 gap-4">
-      <div class="flex items-center gap-3 flex-wrap">
-        <i data-lucide="calculator" class="w-4 h-4 text-indigo-400"></i>
-        <span class="text-gray-400">Related:</span>
-        <a href="#" class="text-gray-400 hover:text-indigo-400 transition">TikTok Money Calculator</a>
-        <span class="text-gray-700">·</span>
-        <a href="#" class="text-gray-400 hover:text-indigo-400 transition">Instagram Engagement Tool</a>
-        <span class="text-gray-700">·</span>
-        <a href="#" class="text-gray-400 hover:text-indigo-400 transition">Twitch Revenue Estimator</a>
-      </div>
-      <span class="text-xs text-gray-600">© 2025 CreatorCalc · Free forever</span>
+    
+  
+
+<!-- TF-RELATED -->
+<section class="tf-related" aria-label="Related tools">
+  <div class="tf-related-glow" aria-hidden="true">
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+  </div>
+  <div class="tf-related-head">
+    <div>
+      <p class="tf-related-eyebrow"><span class="tf-related-pulse"></span>Keep going</p>
+      <h2 class="tf-related-title">Related free tools</h2>
+      <p class="tf-related-sub">Hand-picked tools that pair with this one — all free, all private.</p>
     </div>
-  </main>
+    <a class="tf-related-all" href="/#directory"><span>All 26 tools</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="tf-related-grid">
+      <a class="tf-related-card" href="/youtube-transcript" style="--tf-card-accent: #e11d48; --i: 0">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="18" height="14" x="3" y="5" rx="2" ry="2"/><path d="M7 15h4M15 15h2M7 11h2M13 11h4"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">YouTube Transcript</span>
+          <span class="tf-related-desc">Pull accurate, timestamped transcripts from any video in seconds.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/shorts-hooks" style="--tf-card-accent: #ea580c; --i: 1">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Shorts Hook Generator</span>
+          <span class="tf-related-desc">Generate scroll-stopping first-3-second hooks for Shorts &amp; Reels.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/thumbnail-downloader" style="--tf-card-accent: #f43f5e; --i: 2">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10l-3.1-3.1a2 2 0 0 0-2.814.014L6 21"/><path d="m14 19 3 3v-5.5"/><path d="m17 22 3-3"/><circle cx="9" cy="9" r="2"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Thumbnail Downloader</span>
+          <span class="tf-related-desc">Download any YouTube thumbnail in max resolution — HD &amp; 4K.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/video-to-blog" style="--tf-card-accent: #db2777; --i: 3">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Video to Blog</span>
+          <span class="tf-related-desc">Turn any video link into a structured, SEO-ready blog article.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/youtube-timestamp" style="--tf-card-accent: #fb7185; --i: 4">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Timestamp Link Generator</span>
+          <span class="tf-related-desc">Create shareable YouTube links that jump to an exact second.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/invoice-generator" style="--tf-card-accent: #ca8a04; --i: 5">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Invoice Generator</span>
+          <span class="tf-related-desc">Build branded, downloadable PDF invoices in under a minute.</span>
+          <span class="tf-related-tag">Media</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+  </div>
+  <p class="tf-related-note">© 2025 ToolGuest · Free forever</p>
+</section>
+
+</main>
 
   <!-- Toast -->
   <div id="toast" class="fixed bottom-6 right-6 bg-emerald-600/95 text-white px-5 py-3 rounded-xl shadow-2xl backdrop-blur-md flex items-center gap-2 z-50 border border-emerald-400/30">
@@ -597,17 +727,80 @@
 
   <!-- JSON-LD -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "CreatorCalc — Free Social Media Earnings Calculator",
-    "url": "https://creatorcalc.example.com/tools/creator-social-calculator",
-    "description": "Estimate YouTube, TikTok, Instagram, Twitch earnings & engagement health. Free, ad-free, privacy-first.",
-    "applicationCategory": "FinanceApplication",
-    "operatingSystem": "Any",
-    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ToolGuest — Free Social Media Earnings Calculator",
+  "url": "https://toolguest.com/creator-calculator",
+  "description": "Estimate YouTube, TikTok, Instagram, Twitch earnings & engagement health. Free, ad-free, privacy-first.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "GBP"
+  },
+  "featureList": [
+    "Privacy-first — All calculations run locally in your browser.",
+    "Benchmarked data — Industry CPMs & engagement benchmarks from 2024.",
+    "All platforms — YouTube, TikTok, Instagram, Twitch — unified.",
+    "Enter audience size — Use the subscriber slider or type exact numbers.",
+    "Set avg views — Typical views per post — reflects real reach.",
+    "Adjust engagement — Higher engagement → premium brand deals."
+  ],
+  "dateModified": "2026-11-05",
+  "datePublished": "2026-11-05"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How accurate is this calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our estimates are based on public CPM/CPC benchmarks and creator-reported data from 2024. Actual earnings may vary by niche, geography, seasonality, and audience quality. Use this as a directional guide rather than a guarantee."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you store any of my data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely not. Everything runs 100% in your browser using JavaScript. No data is sent to our servers — we don't even have a backend. Your inputs disappear when you close the tab."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is engagement health?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It's a ratio of likes + comments to followers. Under 2% = poor, 2–5% = good, above 5% = excellent. Brands use this to assess how likely an audience is to act on your recommendations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I calculate for multiple platforms?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Use the platform tabs at the top to switch between YouTube, TikTok, Instagram, and Twitch. Each platform applies its own CPM base, posting frequency, and audience behavior multipliers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is the brand deal rate calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We use a base rate per 1,000 followers, adjusted by niche (finance commands 2.5×), audience geography (US = 1.0×, UK = 0.9×, DE = 0.85×), and engagement. Dedicated video integrations typically command 1.8× a standard post."
+      }
+    }
+  ]
+}
+</script>
+
 
   <script>
     // ---------- Init icons ----------
@@ -770,7 +963,7 @@
       const brandMult = nicheMult[state.niche] * geoMult[state.geo] * (0.8 + state.engagement / 25);
       const brandDeal = (state.followers / 1000) * baseRate * brandMult;
 
-      const summary = `🎬 CreatorCalc Summary
+      const summary = `🎬 ToolGuest Summary
 ━━━━━━━━━━━━━━━━━━━━━━━━━
 Platform: ${platformLabels[state.platform]}
 Niche: ${nicheLabels[state.niche]}
@@ -790,7 +983,7 @@ Yearly: ${formatMoney(low * 12)} – ${formatMoney(high * 12)}
 Per post: ${formatMoney(brandDeal)}
 Dedicated video: ${formatMoney(brandDeal * 1.8)}
 
-Generated with CreatorCalc — creatorcalc.app`;
+Generated with ToolGuest — toolguest.app`;
 
       const showToast = () => {
         toast.classList.add('show');
@@ -848,5 +1041,7 @@ Generated with CreatorCalc — creatorcalc.app`;
     // ---------- Initial render ----------
     update();
   </script>
+  <script src="/assets/rating-widget.js" defer></script>
+<script src="assets/related.js" defer></script>
 </body>
 </html>

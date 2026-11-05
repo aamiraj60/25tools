@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- ═══════════════ SEO HEADER ═══════════════ -->
+<title>JSON Formatter &amp; Validator — Beautify &amp; Minify</title>
+  <meta property="og:image" content="https://toolguest.com/assets/og/json-formatter.png" />
+  <meta name="twitter:image" content="https://toolguest.com/assets/og/json-formatter.png" />
+<meta name="description" content="Free JSON formatter, validator and minifier. Beautify messy JSON, catch syntax errors with the exact line and column, sort keys." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+<link rel="canonical" href="https://toolguest.com/json-formatter" />
+  <link rel="alternate" hreflang="en" href="https://toolguest.com/json-formatter" />
+  <link rel="alternate" hreflang="x-default" href="https://toolguest.com/json-formatter" />
+
+<meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="en_AU" />
+  <meta property="og:locale:alternate" content="en_CA" />
+  <meta http-equiv="content-language" content="en-GB" />
+<meta property="og:site_name" content="ToolGuest" />
+<meta property="og:title" content="JSON Formatter & Validator — Beautify, Minify, Validate | ToolGuest" />
+<meta property="og:description" content="Free online JSON formatter, validator and minifier. Beautify messy JSON, catch syntax errors with the exact line and column, sort keys and download the result — 100% in your browser, no uploads." />
+<meta property="og:url" content="https://toolguest.com/json-formatter" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="JSON Formatter & Validator — Beautify, Minify, Validate | ToolGuest" />
+<meta name="twitter:description" content="Free online JSON formatter, validator and minifier. Beautify messy JSON, catch syntax errors with the exact line and column, sort keys and download the result — 100% in your browser, no uploads." />
+<meta name="theme-color" content="#08080a" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "JSON Formatter & Validator",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP"
+      },
+      "description": "Free online JSON formatter, validator and minifier. Beautify messy JSON, catch syntax errors with the exact line and column, sort keys and download the result — 100% in your browser, no uploads.",
+      "featureList": [
+        "Errors point to the exact line — V8 gives a character position — we convert it to a line and column number so you jump straight to the broken comma or quote.",
+        "Handles multi-megabyte payloads — Formatting runs on the main thread with native JSON.parse, so a few megabytes of JSON render in milliseconds.",
+        "Your data never leaves the tab — No upload endpoint, no logging, no analytics. Turn off your Wi-Fi and the tool keeps working.",
+        "Paste or type your JSON — Drop in anything from a one-line API response to a multi-megabyte export.",
+        "Click Format or Minify — Format pretty-prints with your chosen indent; Minify strips every unnecessary byte.",
+        "Fix any highlighted error — An invalid document shows the exact line and column plus the parser's own message."
+      ],
+      "dateModified": "2026-11-05",
+      "datePublished": "2026-11-05"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolguest.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://toolguest.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "JSON Formatter & Validator",
+          "item": "https://toolguest.com/json-formatter"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is this JSON formatter really free and private?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. There is no account, no ad slot and no server call. Your JSON is parsed by your own browser's <code class=\"rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10\">JSON.parse</code> implementation, so nothing is transmitted, logged or stored."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does my JSON say “invalid” when it looks fine?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The usual culprits are a trailing comma before a closing bracket, single quotes instead of double quotes, unquoted object keys, or a stray comment. The error bar shows the line and column where the parser gave up, which is normally a character or two after the real mistake."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can it handle very large files?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Formatting is done with the browser's native parser, which is far faster than hand-written JavaScript. The practical limit is your machine's available memory rather than anything in the tool."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does “Sort keys” do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It reorders object keys alphabetically at every level of the document, which makes diffs between two versions of a payload far easier to read. Arrays keep their original order, because order is meaningful there."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it support JSON Lines or NDJSON?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not directly — each line of an NDJSON file is a separate JSON document. Paste one line at a time, or wrap the lines in an array and format that."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════ PRE-PAINT THEME (no FOUC) ═══════════════ -->
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('tf-theme');
+      if (t === 'light') document.documentElement.classList.remove('dark');
+      else document.documentElement.classList.add('dark');
+    } catch (e) {}
+  })();
+</script>
+
+<link href="assets/fonts.css" rel="stylesheet">
+<script src="assets/tailwind.js"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace']
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  ::selection { background: rgba(99,102,241,.28); }
+
+  /* ── Segmented tabs ── */
+  .seg { padding: .4rem .95rem; border-radius: .55rem; font-size: .8rem; font-weight: 600; color: #71717a; transition: all .18s ease; white-space: nowrap; }
+  .seg:hover { color: #18181b; }
+  .dark .seg:hover { color: #fff; }
+  .seg[aria-selected="true"] { background: #fff; color: #18181b; box-shadow: 0 1px 2px rgba(0,0,0,.07); }
+  .dark .seg[aria-selected="true"] { background: rgba(255,255,255,.1); color: #fff; }
+
+  /* ── FAQ smooth accordion (grid-rows trick = no JS height calc) ── */
+  .faq-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s cubic-bezier(.4,0,.2,1); }
+  .faq-item[data-open="true"] .faq-body { grid-template-rows: 1fr; }
+  .faq-body > div { overflow: hidden; }
+  .faq-chevron { transition: transform .3s ease; }
+  .faq-item[data-open="true"] .faq-chevron { transform: rotate(180deg); }
+
+  /* ── Textarea ── */
+  .pane-area { scrollbar-width: thin; scrollbar-color: rgba(113,113,122,.4) transparent; }
+  .pane-area::-webkit-scrollbar { width: 8px; height: 8px; }
+  .pane-area::-webkit-scrollbar-thumb { background: rgba(113,113,122,.35); border-radius: 99px; }
+  .pane-area::-webkit-scrollbar-track { background: transparent; }
+
+  /* ── Toast ── */
+  #toast { transition: opacity .25s ease, transform .25s ease; }
+  #toast[data-show="false"] { opacity: 0; transform: translate(-50%, 12px); pointer-events: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+<link rel="stylesheet" href="assets/related.css">
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+</head>
+
+<body class="bg-white text-zinc-900 dark:bg-[#08080a] dark:text-zinc-100 font-sans antialiased">
+
+<!-- Ambient gradient blobs (glassmorphism backdrop) -->
+<div aria-hidden="true" class="pointer-events-none fixed inset-0 overflow-hidden -z-10">
+  <div class="absolute -top-40 left-1/2 -translate-x-1/2 h-[520px] w-[900px] rounded-full bg-indigo-500/10 dark:bg-indigo-500/[0.13] blur-[120px]"></div>
+  <div class="absolute top-[30%] -left-40 h-[400px] w-[600px] rounded-full bg-cyan-400/10 dark:bg-cyan-400/[0.07] blur-[120px]"></div>
+  <div class="absolute bottom-0 right-0 h-[400px] w-[600px] rounded-full bg-violet-500/10 dark:bg-violet-500/[0.08] blur-[120px]"></div>
+</div>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="sticky top-0 z-40 border-b border-zinc-200/70 dark:border-white/[0.07] bg-white/70 dark:bg-[#08080a]/70 backdrop-blur-xl">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+    <a href="/" class="flex items-center gap-2.5">
+      <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-500/25">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m7 8-4 4 4 4"/><path d="m17 8 4 4-4 4"/></svg>
+      </span>
+      <span class="text-[15px] font-bold tracking-tight">ToolGuest</span>
+    </a>
+
+    <nav class="hidden items-center gap-1 md:flex">
+      <a href="#tool" class="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">Tool</a>
+      <a href="#why" class="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">Why us</a>
+      <a href="#compare" class="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">Compare</a>
+      <a href="#faq" class="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">FAQ</a>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <span class="hidden items-center gap-1.5 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3 py-1.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 sm:inline-flex">
+        <span class="relative flex h-1.5 w-1.5">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
+          <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+        </span>
+        Live preview
+      </span>
+      <button id="themeToggle" type="button" aria-label="Toggle dark mode"
+        class="grid h-9 w-9 place-items-center rounded-lg border border-zinc-200 text-zinc-600 transition hover:bg-zinc-100 dark:border-white/10 dark:text-zinc-400 dark:hover:bg-white/5">
+        <svg class="h-4 w-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <svg class="hidden h-4 w-4 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="mx-auto max-w-6xl px-5">
+
+  <!-- ═══════════════ 1. BREADCRUMB + REGION ═══════════════ -->
+  <div class="flex flex-wrap items-center justify-between gap-3 pt-6">
+    <nav aria-label="Breadcrumb">
+      <ol class="flex items-center gap-2 text-[13px] text-zinc-500 dark:text-zinc-500">
+        <li><a href="/" class="transition hover:text-zinc-900 dark:hover:text-zinc-200">Home</a></li>
+        <li aria-hidden="true" class="text-zinc-300 dark:text-zinc-700">/</li>
+        <li><a href="/#directory" class="transition hover:text-zinc-900 dark:hover:text-zinc-200">Tools</a></li>
+        <li aria-hidden="true" class="text-zinc-300 dark:text-zinc-700">/</li>
+        <li aria-current="page" class="font-medium text-zinc-900 dark:text-zinc-200">JSON Formatter & Validator</li>
+      </ol>
+    </nav>
+    <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-[11px] font-medium text-zinc-600 dark:border-white/10 dark:bg-white/5 dark:text-zinc-400">
+      🌍 Global&nbsp;·&nbsp;Tier‑1 optimized
+    </span>
+  </div>
+
+  <!-- ═══════════════ 2. HERO ═══════════════ -->
+  <section class="pt-10 pb-8 text-center sm:pt-14">
+    <div class="mx-auto mb-5 inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white/60 px-3.5 py-1.5 text-xs font-medium text-zinc-600 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-zinc-400">
+      <span class="text-emerald-500">✓</span>
+      <span>No signup · no tracking · runs 100% in your browser</span>
+    </div>
+
+    <h1 class="mx-auto max-w-4xl text-balance text-4xl font-extrabold leading-[1.08] tracking-[-0.03em] sm:text-5xl lg:text-[3.6rem]">
+      Free Online JSON
+      <span class="bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-500 bg-clip-text text-transparent">Formatter</span>
+      &amp; Validator
+    </h1>
+
+    <p class="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg">
+      Paste messy JSON and get clean, readable output instantly. It validates as you type, points to the <strong class="font-semibold text-zinc-900 dark:text-zinc-200">exact line and column</strong> of any error, minifies, sorts keys — and never sends your data anywhere.
+    </p>
+
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a href="#tool" class="group inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-zinc-900/20 transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:shadow-white/10 dark:hover:bg-zinc-100">
+        Open the tool
+        <svg class="h-4 w-4 transition group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+      </a>
+      <a href="#how" class="inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white/60 px-6 py-3 text-sm font-semibold text-zinc-700 backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-zinc-300 dark:hover:bg-white/10">
+        How it works
+      </a>
+    </div>
+
+    <div class="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-zinc-500 dark:text-zinc-500">
+      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No signup</span>
+      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No ads</span>
+      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>100% client-side</span>
+      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Works offline</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 3. THE CORE INTERACTIVE TOOL ═══════════════ -->
+  <section id="tool" class="scroll-mt-24 pb-4">
+    <div class="overflow-hidden rounded-3xl border border-zinc-200/90 bg-white/70 shadow-2xl shadow-zinc-900/[0.06] backdrop-blur-2xl dark:border-white/10 dark:bg-white/[0.035] dark:shadow-black/40">
+
+      <!-- Toolbar -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-200/80 px-4 py-3 dark:border-white/[0.07]">
+        <div class="flex flex-wrap items-center gap-1.5">
+          <button id="formatBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg bg-zinc-900 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">Format</button>
+          <button id="minifyBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-white/10 dark:text-zinc-400 dark:hover:bg-white/5">Minify</button>
+          <button id="validateBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-white/10 dark:text-zinc-400 dark:hover:bg-white/5">Validate</button>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+          <label for="sortKeys" class="flex cursor-pointer select-none items-center gap-2 text-xs font-medium text-zinc-600 dark:text-zinc-400">
+            <span class="relative inline-flex h-5 w-9 shrink-0 items-center">
+              <input id="sortKeys" type="checkbox" class="peer sr-only" />
+              <span class="absolute inset-0 rounded-full bg-zinc-300 transition peer-checked:bg-indigo-500 peer-focus-visible:ring-2 peer-focus-visible:ring-indigo-500/40 dark:bg-zinc-700"></span>
+              <span class="absolute left-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform peer-checked:translate-x-4"></span>
+            </span>
+            Sort keys
+          </label>
+          <label for="indentSel" class="flex items-center gap-2 text-xs font-medium text-zinc-600 dark:text-zinc-400">
+            Indent
+            <select id="indentSel" class="rounded-lg border border-zinc-200 bg-white px-2 py-1 text-xs font-semibold text-zinc-700 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300">
+              <option value="2">2 spaces</option>
+              <option value="4">4 spaces</option>
+              <option value="tab">Tab</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <!-- Dual pane -->
+      <div class="grid md:grid-cols-2">
+        <div class="flex flex-col border-b border-zinc-200/80 md:border-b-0 md:border-r dark:border-white/[0.07]">
+          <div class="flex items-center justify-between gap-2 px-4 py-2.5">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Input JSON</span>
+            <div class="flex items-center gap-1">
+              <button id="sampleBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white">Sample</button>
+              <button id="pasteBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white">Paste</button>
+              <button id="clearBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white">Clear</button>
+            </div>
+          </div>
+          <textarea id="source" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder='Paste JSON here — e.g. {"hello":"world","items":[1,2,3]}'
+            class="pane-area h-[320px] w-full resize-none bg-transparent px-4 pb-2 font-mono text-[13.5px] leading-relaxed text-zinc-900 outline-none placeholder:text-zinc-400 focus:ring-0 dark:text-zinc-100 dark:placeholder:text-zinc-600"></textarea>
+          <div class="flex items-center justify-between px-4 py-2 text-[11px] text-zinc-400 dark:text-zinc-600">
+            <span id="srcStats">0 lines · 0 characters</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col bg-zinc-50/60 dark:bg-black/20">
+          <div class="flex items-center justify-between gap-2 px-4 py-2.5">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Result</span>
+            <div class="flex items-center gap-1">
+              <button id="copyBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg bg-zinc-900 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">Copy</button>
+              <button id="downloadBtn" type="button" aria-label="Download result" class="grid h-7 w-7 place-items-center rounded-lg text-zinc-500 transition hover:bg-zinc-200/70 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/10 dark:hover:text-white">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              </button>
+            </div>
+          </div>
+          <textarea id="output" readonly spellcheck="false" placeholder="Formatted JSON appears here…"
+            class="pane-area h-[320px] w-full resize-none bg-transparent px-4 pb-2 font-mono text-[13.5px] leading-relaxed text-zinc-900 outline-none placeholder:text-zinc-400 focus:ring-0 dark:text-zinc-100 dark:placeholder:text-zinc-600"></textarea>
+          <div class="flex items-center justify-between px-4 py-2 text-[11px] text-zinc-400 dark:text-zinc-600">
+            <span id="outStats">0 lines · 0 characters</span>
+            <span id="validBadge" class="hidden items-center gap-1 text-emerald-600 dark:text-emerald-500">
+              <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Valid JSON
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div id="error" class="hidden items-start gap-2 border-t border-rose-500/20 bg-rose-500/[0.07] px-4 py-3 text-[13px] text-rose-600 dark:text-rose-400">
+        <svg class="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        <span id="errorMsg"></span>
+      </div>
+    </div>
+
+    <p class="mt-3 text-center text-[11px] text-zinc-400 dark:text-zinc-600">
+      Parsed with the native <code class="font-mono">JSON.parse</code> in your browser. Zero network requests.
+    </p>
+  </section>
+  <!-- ═══════════════ 4. WHY CHOOSE US ═══════════════ -->
+  <section id="why" class="scroll-mt-24 py-16 sm:py-20">
+    <div class="text-center">
+      <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">Why ToolGuest</span>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Built to be the fastest JSON formatter on the web</h2>
+    </div>
+    <div class="mt-10 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-white/[0.03]">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>
+          </span>
+          <h3 class="mt-4 font-bold tracking-tight">Errors point to the exact line</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">V8 gives a character position — we convert it to a line and column number so you jump straight to the broken comma or quote.</p>
+        </div>
+        <div class="rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-white/[0.03]">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+          </span>
+          <h3 class="mt-4 font-bold tracking-tight">Handles multi-megabyte payloads</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Formatting runs on the main thread with native JSON.parse, so a few megabytes of JSON render in milliseconds.</p>
+        </div>
+        <div class="rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-white/[0.03]">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14 4 6"/><circle cx="12" cy="14" r="8"/><path d="M12 6v2"/></svg>
+          </span>
+          <h3 class="mt-4 font-bold tracking-tight">Your data never leaves the tab</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">No upload endpoint, no logging, no analytics. Turn off your Wi-Fi and the tool keeps working.</p>
+        </div>
+    </div>
+  </section>
+  <!-- ═══════════════ 5. HOW IT WORKS ═══════════════ -->
+  <section id="how" class="scroll-mt-24 pb-16 sm:pb-20">
+    <div class="text-center">
+      <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">How it works</span>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Format JSON in 4 steps</h2>
+    </div>
+    <div class="mx-auto mt-10 grid max-w-3xl gap-6 sm:grid-cols-2">
+        <div class="flex gap-4">
+          <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">1</span>
+          <div>
+            <h3 class="font-semibold tracking-tight">Paste or type your JSON</h3>
+            <p class="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Drop in anything from a one-line API response to a multi-megabyte export.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">2</span>
+          <div>
+            <h3 class="font-semibold tracking-tight">Click Format or Minify</h3>
+            <p class="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Format pretty-prints with your chosen indent; Minify strips every unnecessary byte.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">3</span>
+          <div>
+            <h3 class="font-semibold tracking-tight">Fix any highlighted error</h3>
+            <p class="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">An invalid document shows the exact line and column plus the parser's own message.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">4</span>
+          <div>
+            <h3 class="font-semibold tracking-tight">Copy or download</h3>
+            <p class="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Grab the result to your clipboard, or save it as formatted.json.</p>
+          </div>
+        </div>
+    </div>
+  </section>
+  <!-- ═══════════════ 6. COMPARISON ═══════════════ -->
+  <section id="compare" class="scroll-mt-24 pb-16 sm:pb-20">
+    <div class="text-center">
+      <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">Compare</span>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">ToolGuest vs. other JSON formatters</h2>
+    </div>
+    <div class="mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
+      <table class="w-full text-left text-sm">
+        <thead class="bg-zinc-50/80 text-xs uppercase tracking-wider text-zinc-500 dark:bg-white/[0.04] dark:text-zinc-500">
+          <tr>
+            <th class="py-3.5 pr-4 font-bold">Feature</th>
+            <th class="px-4 py-3.5 text-center font-bold text-zinc-900 dark:text-white">ToolGuest</th>
+            <th class="px-4 py-3.5 text-center font-bold">Typical formatter</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
+              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Works fully offline</td>
+              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">Yes</td>
+              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">No</td>
+            </tr>
+            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
+              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Error line &amp; column</td>
+              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">Yes</td>
+              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">Sometimes</td>
+            </tr>
+            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
+              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Sort keys deep</td>
+              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">Yes</td>
+              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">Rarely</td>
+            </tr>
+            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
+              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Ads &amp; trackers</td>
+              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">None</td>
+              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">Many</td>
+            </tr>
+            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
+              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Uploads your data</td>
+              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">Never</td>
+              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">Sometimes</td>
+            </tr>
+            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
+              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Signup required</td>
+              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">Never</td>
+              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">Often</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <!-- ═══════════════ 7. FAQ ═══════════════ -->
+  <section id="faq" class="scroll-mt-24 pb-16 sm:pb-20">
+    <div class="mx-auto max-w-3xl">
+      <div class="text-center">
+        <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">FAQ</span>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">JSON questions, answered</h2>
+      </div>
+      <div class="mt-10 space-y-3">
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">Is this JSON formatter really free and private?</span>
+            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Yes. There is no account, no ad slot and no server call. Your JSON is parsed by your own browser's <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">JSON.parse</code> implementation, so nothing is transmitted, logged or stored.
+          </p></div></div>
+        </div>
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">Why does my JSON say “invalid” when it looks fine?</span>
+            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            The usual culprits are a trailing comma before a closing bracket, single quotes instead of double quotes, unquoted object keys, or a stray comment. The error bar shows the line and column where the parser gave up, which is normally a character or two after the real mistake.
+          </p></div></div>
+        </div>
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">Can it handle very large files?</span>
+            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Yes. Formatting is done with the browser's native parser, which is far faster than hand-written JavaScript. The practical limit is your machine's available memory rather than anything in the tool.
+          </p></div></div>
+        </div>
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">What does “Sort keys” do?</span>
+            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            It reorders object keys alphabetically at every level of the document, which makes diffs between two versions of a payload far easier to read. Arrays keep their original order, because order is meaningful there.
+          </p></div></div>
+        </div>
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">Does it support JSON Lines or NDJSON?</span>
+            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Not directly — each line of an NDJSON file is a separate JSON document. Paste one line at a time, or wrap the lines in an array and format that.
+          </p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ═══════════════ 8. RELATED TOOLS ═══════════════ -->
+  <section class="pb-20">
+    <div class="rounded-3xl border border-zinc-200 bg-white/60 p-6 backdrop-blur sm:p-8 dark:border-white/10 dark:bg-white/[0.03]">
+      <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 class="text-xl font-extrabold tracking-tight">Related developer tools</h2>
+          <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Same speed. Same privacy. Zero ads.</p>
+        </div>
+        <a href="/#directory" class="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 transition hover:gap-2.5 dark:text-indigo-400">
+          All tools
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="grid gap-3 sm:grid-cols-3">
+        <a href="/base64-encoder" class="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-indigo-500/40">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 8-4 4 4 4"/><path d="m17 8 4 4-4 4"/></svg>
+          </span>
+          <span>
+            <span class="block font-semibold tracking-tight transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Base64 Encoder</span>
+            <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">Encode and decode UTF-8 safe Base64</span>
+          </span>
+        </a>
+        <a href="/hash-generator" class="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-indigo-500/40">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg>
+          </span>
+          <span>
+            <span class="block font-semibold tracking-tight transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Hash Generator</span>
+            <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">MD5, SHA-1 and SHA-256 in your browser</span>
+          </span>
+        </a>
+        <a href="/diff-checker" class="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-indigo-500/40">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5"/></svg>
+          </span>
+          <span>
+            <span class="block font-semibold tracking-tight transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Diff Checker</span>
+            <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">Spot the difference between two texts</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+<!-- TF-RELATED -->
+<section class="tf-related" aria-label="Related tools">
+  <div class="tf-related-glow" aria-hidden="true">
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+  </div>
+  <div class="tf-related-head">
+    <div>
+      <p class="tf-related-eyebrow"><span class="tf-related-pulse"></span>Keep going</p>
+      <h2 class="tf-related-title">Related free tools</h2>
+      <p class="tf-related-sub">Hand-picked tools that pair with this one — all free, all private.</p>
+    </div>
+    <a class="tf-related-all" href="/#directory"><span>All 26 tools</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="tf-related-grid">
+      <a class="tf-related-card" href="/base64-encoder" style="--tf-card-accent: #0e7490; --i: 0">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="14" y="14" width="4" height="6" rx="2"/><rect x="6" y="4" width="4" height="6" rx="2"/><path d="M6 20h4"/><path d="M14 10h4"/><path d="M6 14h2v6"/><path d="M14 4h2v6"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Base64 Encoder</span>
+          <span class="tf-related-desc">Encode and decode Base64 strings, files and data URIs.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/hash-generator" style="--tf-card-accent: #a855f7; --i: 1">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Hash Generator</span>
+          <span class="tf-related-desc">Generate MD5, SHA-1, SHA-256 and SHA-512 hashes instantly.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/diff-checker" style="--tf-card-accent: #818cf8; --i: 2">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M11 18H8a2 2 0 0 1-2-2V9"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Text &amp; Code Diff Checker</span>
+          <span class="tf-related-desc">Compare two blocks of text or code and highlight every change.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/markdown-to-html" style="--tf-card-accent: #6d28d9; --i: 3">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 12.5 8 15l2 2.5"/><path d="m14 12.5 2 2.5-2 2.5"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Markdown to HTML</span>
+          <span class="tf-related-desc">Convert Markdown into clean, copy-ready semantic HTML.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/url-slug-generator" style="--tf-card-accent: #22c55e; --i: 4">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">URL Slug Generator</span>
+          <span class="tf-related-desc">Convert any title into a clean, SEO-friendly URL slug.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/meta-tag-preview" style="--tf-card-accent: #14b8a6; --i: 5">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m15 5 6.3 6.3a2.4 2.4 0 0 1 0 3.4L17 19"/><path d="M9.586 5.586A2 2 0 0 0 8.172 5H3a1 1 0 0 0-1 1v5.172a2 2 0 0 0 .586 1.414L8.29 18.29a2.426 2.426 0 0 0 3.42 0l3.58-3.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="6.5" cy="9.5" r=".5" fill="currentColor"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Meta Tag Preview</span>
+          <span class="tf-related-desc">Preview Google, X and Facebook cards before you publish.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/aspect-ratio-calculator" style="--tf-card-accent: #059669; --i: 6">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="12" height="20" x="6" y="2" rx="2"/><rect width="20" height="12" x="2" y="6" rx="2"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Aspect Ratio Calculator</span>
+          <span class="tf-related-desc">Resolve 16:9, 4:5, 21:9 dimensions and scale perfectly.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="border-t border-zinc-200/80 dark:border-white/[0.07]">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-xs text-zinc-500 dark:text-zinc-600 sm:flex-row">
+    <p>© 2025 ToolGuest — free micro-tools, built for speed.</p>
+    <p class="inline-flex items-center gap-1.5">
+      <svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      No trackers · No cookies · No uploads
+    </p>
+  </div>
+</footer>
+
+<!-- ═══════════════ TOAST ═══════════════ -->
+<div id="toast" data-show="false" role="status" aria-live="polite"
+  class="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-xl bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white shadow-2xl dark:bg-white dark:text-zinc-900"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  var toastEl = document.getElementById('toast');
+  var toastTimer = 0;
+  function toast(message) {
+    toastEl.textContent = message;
+    toastEl.dataset.show = 'true';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.dataset.show = 'false'; }, 1800);
+  }
+
+  async function copyText(text, okMsg) {
+    if (!text) { toast('Nothing to copy'); return; }
+    try {
+      await navigator.clipboard.writeText(text);
+      toast(okMsg || 'Copied to clipboard ✓');
+    } catch (e) {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); toast(okMsg || 'Copied to clipboard ✓'); }
+      catch (_) { toast('Copy failed — select manually'); }
+      document.body.removeChild(ta);
+    }
+  }
+
+  function downloadText(text, name) {
+    if (!text) { toast('Nothing to download'); return; }
+    var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast('Downloaded ✓');
+  }
+
+  var themeBtn = document.getElementById('themeToggle');
+  if (themeBtn) themeBtn.addEventListener('click', function () {
+    var isDark = document.documentElement.classList.toggle('dark');
+    try { localStorage.setItem('tf-theme', isDark ? 'dark' : 'light'); } catch (e) {}
+  });
+
+  document.querySelectorAll('.faq-trigger').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var item = btn.closest('.faq-item');
+      var open = item.getAttribute('data-open') === 'true';
+      document.querySelectorAll('.faq-item').forEach(function (i) { i.setAttribute('data-open', 'false'); });
+      item.setAttribute('data-open', open ? 'false' : 'true');
+    });
+  });
+
+  /* ─────────── JSON formatter ─────────── */
+  var src = document.getElementById('source');
+  var out = document.getElementById('output');
+  var errBox = document.getElementById('error');
+  var errMsg = document.getElementById('errorMsg');
+  var validBadge = document.getElementById('validBadge');
+  var srcStats = document.getElementById('srcStats');
+  var outStats = document.getElementById('outStats');
+  var sortKeys = document.getElementById('sortKeys');
+  var indentSel = document.getElementById('indentSel');
+
+  var SAMPLE = '{"name":"ToolGuest","version":3,"tools":[{"slug":"json-formatter","free":true,"tags":["json","dev"]},{"slug":"lorem-ipsum","free":true,"tags":["text"]}],"stats":{"tools":25,"ads":0,"uploads":null},"privacy":"client-side"}';
+
+  function indentValue() {
+    var v = indentSel.value;
+    if (v === 'tab') return '\t';
+    return parseInt(v, 10);
+  }
+
+  function sortDeep(value) {
+    if (Array.isArray(value)) return value.map(sortDeep);
+    if (value && typeof value === 'object') {
+      var outObj = {};
+      Object.keys(value).sort().forEach(function (k) { outObj[k] = sortDeep(value[k]); });
+      return outObj;
+    }
+    return value;
+  }
+
+  function countLines(s) { return s ? s.split('\n').length : 0; }
+  function plural(n, w) { return n + ' ' + w + (n === 1 ? '' : 's'); }
+
+  function stats() {
+    srcStats.textContent = plural(countLines(src.value), 'line') + ' · ' + plural(src.value.length, 'character');
+    outStats.textContent = plural(countLines(out.value), 'line') + ' · ' + plural(out.value.length, 'character');
+  }
+
+  function showError(msg) {
+    if (msg) { errMsg.textContent = msg; errBox.classList.remove('hidden'); errBox.classList.add('flex'); }
+    else { errBox.classList.add('hidden'); errBox.classList.remove('flex'); }
+  }
+
+  function positionToLineCol(text, pos) {
+    var upto = text.slice(0, pos);
+    var line = upto.split('\n').length;
+    var col = pos - upto.lastIndexOf('\n');
+    return { line: line, col: col };
+  }
+
+  function parseInput() {
+    var text = src.value.trim();
+    if (!text) return { empty: true };
+    try {
+      return { value: JSON.parse(text) };
+    } catch (e) {
+      var m = /position (\d+)/.exec(e.message);
+      var where = '';
+      if (m) {
+        var p = positionToLineCol(src.value, parseInt(m[1], 10));
+        where = ' (line ' + p.line + ', column ' + p.col + ')';
+      } else {
+        var lm = /line (\d+) column (\d+)/.exec(e.message);
+        if (lm) where = ' (line ' + lm[1] + ', column ' + lm[2] + ')';
+      }
+      return { error: 'Invalid JSON' + where + ' — ' + e.message.replace(/^JSON\.parse: /, '') };
+    }
+  }
+
+  function render(mode) {
+    var r = parseInput();
+    if (r.empty) { out.value = ''; showError(''); validBadge.classList.add('hidden'); validBadge.classList.remove('inline-flex'); stats(); return; }
+    if (r.error) { out.value = ''; showError(r.error); validBadge.classList.add('hidden'); validBadge.classList.remove('inline-flex'); stats(); return; }
+    var data = sortKeys.checked ? sortDeep(r.value) : r.value;
+    try {
+      out.value = mode === 'minify' ? JSON.stringify(data) : JSON.stringify(data, null, indentValue());
+      showError('');
+      validBadge.classList.remove('hidden'); validBadge.classList.add('inline-flex');
+    } catch (e) {
+      showError('Could not serialise this JSON — ' + e.message);
+    }
+    stats();
+  }
+
+  document.getElementById('formatBtn').addEventListener('click', function () { render('format'); toast('Formatted ✓'); });
+  document.getElementById('minifyBtn').addEventListener('click', function () { render('minify'); toast('Minified ✓'); });
+  document.getElementById('validateBtn').addEventListener('click', function () {
+    var r = parseInput();
+    if (r.empty) { toast('Nothing to validate'); return; }
+    if (r.error) { showError(r.error); toast('Invalid JSON ✗'); }
+    else { showError(''); toast('Valid JSON ✓'); }
+  });
+  indentSel.addEventListener('change', function () { if (out.value) render('format'); });
+  sortKeys.addEventListener('change', function () { if (out.value) render('format'); });
+  src.addEventListener('input', function () { if (out.value) render('format'); stats(); });
+
+  document.getElementById('copyBtn').addEventListener('click', function () { copyText(out.value); });
+  document.getElementById('downloadBtn').addEventListener('click', function () { downloadText(out.value, 'formatted.json'); });
+  document.getElementById('clearBtn').addEventListener('click', function () {
+    src.value = ''; out.value = ''; showError(''); validBadge.classList.add('hidden'); validBadge.classList.remove('inline-flex'); stats(); src.focus(); toast('Cleared');
+  });
+  document.getElementById('sampleBtn').addEventListener('click', function () {
+    src.value = SAMPLE; render('format'); toast('Sample loaded');
+  });
+  document.getElementById('pasteBtn').addEventListener('click', async function () {
+    try {
+      var text = await navigator.clipboard.readText();
+      if (!text) { toast('Clipboard is empty'); return; }
+      src.value = text; render('format'); toast('Pasted ✓');
+    } catch (e) { src.focus(); toast('Press Ctrl/⌘+V to paste'); }
+  });
+
+  stats();
+  src.focus({ preventScroll: true });
+})();
+</script>
+  <script src="/assets/rating-widget.js" defer></script>
+<script src="assets/related.js" defer></script>
+</body>
+</html>

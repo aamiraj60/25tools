@@ -1,17 +1,57 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en-GB" class="scroll-smooth">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Free Custom QR Code Generator — PNG, JPG, SVG, PDF · No Sign-up</title>
+<title>Free QR Code Generator — PNG, SVG &amp; PDF Export</title>
+  <meta property="og:title" content="Free QR Code Generator — PNG, SVG &amp; PDF Export" />
+  <meta property="og:description" content="Design branded QR codes with colors, gradients, and logos. Export PNG, JPG, SVG, or PDF instantly. Free forever, no sign-up, never expires." />
+  <meta property="og:url" content="https://toolguest.com/qr-generator" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="en_AU" />
+  <meta property="og:locale:alternate" content="en_CA" />
+  <meta http-equiv="content-language" content="en-GB" />
+  <meta property="og:image" content="https://toolguest.com/assets/og/qr-generator.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free QR Code Generator — PNG, SVG &amp; PDF Export" />
+  <meta name="twitter:description" content="Design branded QR codes with colors, gradients, and logos. Export PNG, JPG, SVG, or PDF instantly. Free forever, no sign-up, never expires." />
+  <meta name="twitter:image" content="https://toolguest.com/assets/og/qr-generator.png" />
+<link rel="canonical" href="https://toolguest.com/qr-generator" />
+  <link rel="alternate" hreflang="en" href="https://toolguest.com/qr-generator" />
+  <link rel="alternate" hreflang="x-default" href="https://toolguest.com/qr-generator" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Free QR Code Generator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "GBP"
+  },
+  "featureList": [
+    "Permanent & static — Data encoded directly in the pattern. No redirect server, no expiry timer, no scan quota.",
+    "Zero tracking — Nothing touches our servers. Every QR is generated inside your browser, offline-capable.",
+    "Real styling freedom — Colors, gradients, dot shapes, corners, and logos — free, not locked behind a $9/mo plan.",
+    "4 export formats — PNG, JPG, SVG, and PDF — every format you'll ever need, free. Pick one, one click.",
+    "Blazing fast — Sub-200ms render, 98+ Lighthouse. No clutter, no ads, no third-party JS bloat slowing the page.",
+    "Scannability meter — Live contrast and logo-budget scoring — know your code will scan before you print it."
+  ],
+  "dateModified": "2026-11-05",
+  "datePublished": "2026-11-05",
+  "url": "https://toolguest.com/qr-generator"
+}
+</script>
 <meta name="description" content="Design branded QR codes with colors, gradients, and logos. Export PNG, JPG, SVG, or PDF instantly. Free forever, no sign-up, never expires." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
-<script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+<link href="assets/fonts.css" rel="stylesheet">
+<script src="assets/tailwind.js"></script>
+<script src="assets/qr-code-styling.js"></script>
+<script src="assets/jspdf.umd.min.js"></script>
+<script src="assets/lucide.js"></script>
 <script>
 tailwind.config = {
   darkMode: 'class',
@@ -77,7 +117,25 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
   details summary::-webkit-details-marker { display: none; }
   details[open] .chev { transform: rotate(180deg); }
   .chev { transition: transform .2s ease; }
-  #qrPreview svg, #qrPreview canvas { display: block; }
+  #qrPreview svg, #qrPreview canvas { display: block; width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; }
+  /* On a phone the three-column comparison is wider than the screen. Instead of
+     a scroller the visitor has to discover, stack the rows so every cell is
+     readable at once. The thead is hidden and each row becomes a card, with the
+     column name carried by a data-label on each cell. */
+  @media (max-width: 640px) {
+    .cmp-table thead { display: none; }
+    .cmp-table, .cmp-table tbody, .cmp-table tr, .cmp-table td { display: block; width: 100%; }
+    .cmp-table tr { padding: 14px 16px; border-bottom: 1px solid rgba(0,0,0,.06); }
+    .dark .cmp-table tr { border-color: rgba(255,255,255,.08); }
+    .cmp-table tr:last-child { border-bottom: 0; }
+    .cmp-table td { padding: 2px 0; border: 0 !important; }
+    .cmp-table td:first-child { font-weight: 600; margin-bottom: 4px; }
+    .cmp-table td[data-label]::before {
+      content: attr(data-label);
+      display: block; font-size: 10px; text-transform: uppercase; letter-spacing: .06em;
+      color: #a1a1aa; margin-top: 6px;
+    }
+  }
   .scan-mask { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
   .scan-mask::after {
     content: ''; position: absolute; left: 0; right: 0; height: 60%;
@@ -85,6 +143,38 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
     animation: scan 3.5s linear infinite;
   }
 </style>
+<link rel="stylesheet" href="assets/related.css">
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://toolguest.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tools",
+      "item": "https://toolguest.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Free QR Code Generator",
+      "item": "https://toolguest.com/qr-generator"
+    }
+  ]
+}
+</script>
 </head>
 <body class="font-sans bg-white text-zinc-900 dark:bg-[#09090b] dark:text-zinc-100 min-h-screen overflow-x-hidden">
 
@@ -99,11 +189,11 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
 <header class="sticky top-0 z-40 border-b border-zinc-200/60 dark:border-white/10 glass">
   <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <a href="#" class="flex items-center gap-2 font-semibold tracking-tight text-[15px]">
+      <a href="/" class="flex items-center gap-2 font-semibold tracking-tight text-[15px]">
         <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-zinc-900 to-zinc-700 dark:from-white dark:to-zinc-300 text-white dark:text-zinc-900 shadow-lg shadow-zinc-900/20 dark:shadow-white/10">
           <i data-lucide="qr-code" class="w-4 h-4"></i>
         </span>
-        ToolKit<span class="text-zinc-400 font-normal">.dev</span>
+        ToolGuest
       </a>
       <span class="hidden md:inline-flex items-center gap-1.5 rounded-full border border-zinc-200 dark:border-white/10 bg-white/60 dark:bg-white/5 px-2.5 py-1 text-[11px] text-zinc-600 dark:text-zinc-300">
         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -126,9 +216,9 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
 
   <!-- breadcrumb -->
   <nav class="pt-6 text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-1.5" aria-label="Breadcrumb">
-    <a href="#" class="hover:text-zinc-900 dark:hover:text-white transition">Home</a>
+    <a href="/" class="hover:text-zinc-900 dark:hover:text-white transition">Home</a>
     <i data-lucide="chevron-right" class="w-3 h-3"></i>
-    <a href="#" class="hover:text-zinc-900 dark:hover:text-white transition">Tools</a>
+    <a href="/" class="hover:text-zinc-900 dark:hover:text-white transition">Tools</a>
     <i data-lucide="chevron-right" class="w-3 h-3"></i>
     <span class="text-zinc-900 dark:text-white font-medium">QR Code Generator</span>
   </nav>
@@ -149,9 +239,9 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
         Design branded QR codes with colors, gradients, and your logo. Export print-ready <strong class="text-zinc-900 dark:text-white font-semibold">PNG, JPG, SVG, or PDF</strong> — rendered entirely in your browser. No redirect servers, no trackers, no watermarks.
       </p>
       <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-zinc-600 dark:text-zinc-400">
-        <div class="flex items-center gap-1.5"><span class="text-amber-500 text-base">★★★★★</span><span><strong class="text-zinc-900 dark:text-white font-semibold">4.9/5</strong> · 8,500+ reviews</span></div>
+        <div class="flex items-center gap-1.5"><span class="text-emerald-500 text-base">✓</span><span><strong class="text-zinc-900 dark:text-white font-semibold">Free</strong> · no signup, no watermark</span></div>
         <div class="hidden sm:block w-px h-4 bg-zinc-300 dark:bg-zinc-700"></div>
-        <span><strong class="text-zinc-900 dark:text-white font-semibold">50M+</strong> codes generated</span>
+        <span><strong class="text-zinc-900 dark:text-white font-semibold">Unlimited</strong> codes, free forever</span>
         <div class="hidden sm:block w-px h-4 bg-zinc-300 dark:bg-zinc-700"></div>
         <span class="inline-flex items-center gap-1"><i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i> 100% browser-based</span>
       </div>
@@ -161,10 +251,10 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
   <!-- ═══════════════════ TOOL ═══════════════════ -->
   <section id="tool" class="pb-16 scroll-mt-20">
     <div class="rounded-3xl border border-zinc-200 dark:border-white/10 bg-white/70 dark:bg-zinc-900/40 backdrop-blur-xl shadow-2xl shadow-zinc-900/5 dark:shadow-black/50 overflow-hidden">
-      <div class="grid lg:grid-cols-[1fr_460px]">
+      <div class="grid min-w-0 lg:grid-cols-[minmax(0,1fr)_460px]">
 
         <!-- LEFT -->
-        <div class="p-6 md:p-8 lg:border-r border-zinc-200 dark:border-white/10">
+        <div class="min-w-0 p-6 md:p-8 lg:border-r border-zinc-200 dark:border-white/10">
 
           <!-- type tabs -->
           <div class="flex items-center gap-1 mb-6 overflow-x-auto pb-1">
@@ -182,7 +272,7 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
               <label class="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Destination URL</label>
               <div class="mt-1.5 flex items-center gap-2 rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-black/20 px-3 focus-within:ring-2 focus-within:ring-zinc-900/10 dark:focus-within:ring-white/20 transition">
                 <i data-lucide="link" class="w-4 h-4 text-zinc-400 shrink-0"></i>
-                <input id="in-url" type="text" placeholder="your-site.com or https://..." class="flex-1 bg-transparent py-2.5 text-sm outline-none placeholder:text-zinc-400" />
+                <input id="in-url" type="text" placeholder="your-site.com or https://..." class="min-w-0 flex-1 bg-transparent py-2.5 text-sm outline-none placeholder:text-zinc-400" />
                 <kbd class="hidden sm:inline-flex items-center rounded border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 px-1.5 py-0.5 text-[10px] text-zinc-500 font-mono">/</kbd>
               </div>
             </div>
@@ -310,7 +400,7 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
         </div>
 
         <!-- RIGHT -->
-        <div class="p-6 md:p-8 bg-zinc-50/60 dark:bg-black/20 flex flex-col">
+        <div class="min-w-0 p-6 md:p-8 bg-zinc-50/60 dark:bg-black/20 flex flex-col">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2">
               <span class="inline-flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -455,25 +545,25 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
   <section class="py-20 border-t border-zinc-200 dark:border-white/10">
     <div class="max-w-2xl">
       <span class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Comparison</span>
-      <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight leading-tight">ToolKit vs. the ad-driven<br/><span class="font-serif italic text-zinc-500 dark:text-zinc-400">QR-paywall sites.</span></h2>
+      <h2 class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight leading-tight">ToolGuest vs. the ad-driven<br/><span class="font-serif italic text-zinc-500 dark:text-zinc-400">QR-paywall sites.</span></h2>
     </div>
-    <div class="mt-8 overflow-hidden rounded-2xl border border-zinc-200 dark:border-white/10">
-      <table class="w-full text-sm">
+    <div class="mt-8 rounded-2xl border border-zinc-200 dark:border-white/10 overflow-hidden">
+      <table class="cmp-table w-full text-sm">
         <thead class="bg-zinc-50 dark:bg-white/5 text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
           <tr>
             <th class="text-left px-5 py-4 font-semibold">Feature</th>
-            <th class="text-left px-5 py-4 font-semibold text-emerald-600 dark:text-emerald-400">ToolKit (this tool)</th>
+            <th class="text-left px-5 py-4 font-semibold text-emerald-600 dark:text-emerald-400">ToolGuest (this tool)</th>
             <th class="text-left px-5 py-4 font-semibold">ME-QR / QR-Code-Generator.com</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-zinc-200 dark:divide-white/10 bg-white dark:bg-zinc-900/20">
-          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">Sign-up to download HD</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400">Not required</td><td class="px-5 py-4 text-zinc-500">Mandatory account</td></tr>
-          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">Ads</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400">None</td><td class="px-5 py-4 text-zinc-500">Heavy display ads</td></tr>
-          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">QR expiration</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400">Never (static)</td><td class="px-5 py-4 text-zinc-500">Redirect-based, can lapse</td></tr>
-          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">SVG / PDF export</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400">Free</td><td class="px-5 py-4 text-zinc-500">Paywalled</td></tr>
-          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">Logo upload</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400">Free</td><td class="px-5 py-4 text-zinc-500">Paywalled</td></tr>
-          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">Scan-tracking redirect</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400">None</td><td class="px-5 py-4 text-zinc-500">Required</td></tr>
-          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">Watermark</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400">Never</td><td class="px-5 py-4 text-zinc-500">On free tier</td></tr>
+          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">Sign-up to download HD</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400" data-label="ToolGuest">Not required</td><td class="px-5 py-4 text-zinc-500" data-label="ME-QR">Mandatory account</td></tr>
+          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">Ads</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400" data-label="ToolGuest">None</td><td class="px-5 py-4 text-zinc-500" data-label="ME-QR">Heavy display ads</td></tr>
+          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">QR expiration</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400" data-label="ToolGuest">Never (static)</td><td class="px-5 py-4 text-zinc-500" data-label="ME-QR">Redirect-based, can lapse</td></tr>
+          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">SVG / PDF export</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400" data-label="ToolGuest">Free</td><td class="px-5 py-4 text-zinc-500" data-label="ME-QR">Paywalled</td></tr>
+          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">Logo upload</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400" data-label="ToolGuest">Free</td><td class="px-5 py-4 text-zinc-500" data-label="ME-QR">Paywalled</td></tr>
+          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">Scan-tracking redirect</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400" data-label="ToolGuest">None</td><td class="px-5 py-4 text-zinc-500" data-label="ME-QR">Required</td></tr>
+          <tr><td class="px-5 py-4 text-zinc-700 dark:text-zinc-300">Watermark</td><td class="px-5 py-4 font-medium text-emerald-600 dark:text-emerald-400" data-label="ToolGuest">Never</td><td class="px-5 py-4 text-zinc-500" data-label="ME-QR">On free tier</td></tr>
         </tbody>
       </table>
     </div>
@@ -489,37 +579,7 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
   </section>
 
   <!-- RELATED -->
-  <section class="py-20 border-t border-zinc-200 dark:border-white/10">
-    <div class="flex items-end justify-between mb-8">
-      <div>
-        <span class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Continue building</span>
-        <h2 class="mt-2 text-2xl md:text-3xl font-semibold tracking-tight">More free micro-tools</h2>
-      </div>
-      <a href="#" class="hidden sm:inline-flex items-center gap-1 text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition">View all <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
-    </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-      <a href="#" class="group rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-5 hover:border-zinc-400 dark:hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg transition-all">
-        <div class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-white/5 mb-3"><i data-lucide="image-down" class="w-4 h-4"></i></div>
-        <div class="flex items-center gap-1.5 text-sm font-semibold">Thumbnail Downloader <i data-lucide="arrow-up-right" class="w-3 h-3 opacity-0 group-hover:opacity-100 transition"></i></div>
-        <p class="mt-1 text-xs text-zinc-500">Grab YouTube thumbnails in original quality.</p>
-      </a>
-      <a href="#" class="group rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-5 hover:border-zinc-400 dark:hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg transition-all">
-        <div class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-white/5 mb-3"><i data-lucide="link" class="w-4 h-4"></i></div>
-        <div class="flex items-center gap-1.5 text-sm font-semibold">URL Slug Builder <i data-lucide="arrow-up-right" class="w-3 h-3 opacity-0 group-hover:opacity-100 transition"></i></div>
-        <p class="mt-1 text-xs text-zinc-500">Turn titles into clean, SEO-friendly slugs.</p>
-      </a>
-      <a href="#" class="group rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-5 hover:border-zinc-400 dark:hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg transition-all">
-        <div class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-white/5 mb-3"><i data-lucide="code" class="w-4 h-4"></i></div>
-        <div class="flex items-center gap-1.5 text-sm font-semibold">Base64 Encoder <i data-lucide="arrow-up-right" class="w-3 h-3 opacity-0 group-hover:opacity-100 transition"></i></div>
-        <p class="mt-1 text-xs text-zinc-500">Encode or decode text and files instantly.</p>
-      </a>
-      <a href="#" class="group rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/30 p-5 hover:border-zinc-400 dark:hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg transition-all">
-        <div class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-white/5 mb-3"><i data-lucide="file-image" class="w-4 h-4"></i></div>
-        <div class="flex items-center gap-1.5 text-sm font-semibold">Image Compressor <i data-lucide="arrow-up-right" class="w-3 h-3 opacity-0 group-hover:opacity-100 transition"></i></div>
-        <p class="mt-1 text-xs text-zinc-500">Compress images in-browser, no uploads.</p>
-      </a>
-    </div>
-  </section>
+  
 
   <!-- CTA -->
   <section class="py-20 border-t border-zinc-200 dark:border-white/10">
@@ -534,15 +594,116 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
       </div>
     </div>
   </section>
+
+<!-- TF-RELATED -->
+<section class="tf-related" aria-label="Related tools">
+  <div class="tf-related-glow" aria-hidden="true">
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+  </div>
+  <div class="tf-related-head">
+    <div>
+      <p class="tf-related-eyebrow"><span class="tf-related-pulse"></span>Keep going</p>
+      <h2 class="tf-related-title">Related free tools</h2>
+      <p class="tf-related-sub">Hand-picked tools that pair with this one — all free, all private.</p>
+    </div>
+    <a class="tf-related-all" href="/#directory"><span>All 26 tools</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="tf-related-grid">
+      <a class="tf-related-card" href="/password-checker" style="--tf-card-accent: #0d9488; --i: 0">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Password Checker</span>
+          <span class="tf-related-desc">Measure entropy and breach risk without sending a byte anywhere.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/hash-generator" style="--tf-card-accent: #a855f7; --i: 1">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Hash Generator</span>
+          <span class="tf-related-desc">Generate MD5, SHA-1, SHA-256 and SHA-512 hashes instantly.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/base64-encoder" style="--tf-card-accent: #0e7490; --i: 2">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="14" y="14" width="4" height="6" rx="2"/><rect x="6" y="4" width="4" height="6" rx="2"/><path d="M6 20h4"/><path d="M14 10h4"/><path d="M6 14h2v6"/><path d="M14 4h2v6"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Base64 Encoder</span>
+          <span class="tf-related-desc">Encode and decode Base64 strings, files and data URIs.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/url-slug-generator" style="--tf-card-accent: #22c55e; --i: 3">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">URL Slug Generator</span>
+          <span class="tf-related-desc">Convert any title into a clean, SEO-friendly URL slug.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/json-formatter" style="--tf-card-accent: #0284c7; --i: 4">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">JSON Formatter</span>
+          <span class="tf-related-desc">Beautify, minify and validate JSON with instant error pointing.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/color-palette-generator" style="--tf-card-accent: #ec4899; --i: 5">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Color Palette Generator</span>
+          <span class="tf-related-desc">Extract cohesive palettes and generate accessible HEX combos.</span>
+          <span class="tf-related-tag">Media</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/invoice-generator" style="--tf-card-accent: #ca8a04; --i: 6">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Invoice Generator</span>
+          <span class="tf-related-desc">Build branded, downloadable PDF invoices in under a minute.</span>
+          <span class="tf-related-tag">Media</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+  </div>
+</section>
+
 </main>
 
 <footer class="border-t border-zinc-200 dark:border-white/10 py-8 text-xs text-zinc-500">
   <div class="max-w-7xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-    <p>© 2026 ToolKit — Free QR codes. No sign-up. Never expires.</p>
+    <p>© 2026 ToolGuest — Free QR codes. No sign-up. Never expires.</p>
     <div class="flex items-center gap-4">
-      <a href="#" class="hover:text-zinc-900 dark:hover:text-white transition">Privacy</a>
-      <a href="#" class="hover:text-zinc-900 dark:hover:text-white transition">Terms</a>
-      <a href="#" class="hover:text-zinc-900 dark:hover:text-white transition">Contact</a>
+      <a href="/" class="hover:text-zinc-900 dark:hover:text-white transition">Privacy</a>
+      <a href="/" class="hover:text-zinc-900 dark:hover:text-white transition">Terms</a>
+      <a href="/" class="hover:text-zinc-900 dark:hover:text-white transition">Contact</a>
     </div>
   </div>
 </footer>
@@ -652,7 +813,21 @@ function render() {
   } else {
     qr.update(opts);
   }
+  fitPreview();
   updateScannability();
+}
+
+// QRCodeStyling draws an SVG sized in user units (e.g. width="320") with no
+// viewBox. Stretching that with CSS does not scale the drawing, it just clips
+// it, so the code looks cut off. Give the SVG a viewBox matching its own
+// dimensions and it scales cleanly to whatever the panel is.
+function fitPreview() {
+  const svg = preview.querySelector('svg');
+  if (!svg) return;
+  const w = parseFloat(svg.getAttribute('width')) || 320;
+  const h = parseFloat(svg.getAttribute('height')) || w;
+  if (!svg.getAttribute('viewBox')) svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+  svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
 }
 
 /* ═══ TYPE TABS ═══ */
@@ -964,13 +1139,13 @@ async function downloadCurrent() {
     const fmt = currentFormat;
     if (fmt === 'svg') {
       const temp = new QRCodeStyling(buildOptions({ type: 'svg' }));
-      await temp.download({ name: 'qrcode-toolkit', extension: 'svg' });
+      await temp.download({ name: 'toolguest-qr', extension: 'svg' });
     } else if (fmt === 'png' || fmt === 'jpg') {
       const blob = await getQRBlob(fmt, 2048);
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `qrcode-toolkit.${fmt}`;
+      a.download = `toolguest-qr.${fmt}`;
       document.body.appendChild(a); a.click(); a.remove();
       URL.revokeObjectURL(url);
     } else if (fmt === 'pdf') {
@@ -986,7 +1161,7 @@ async function downloadCurrent() {
       const x = (pw - size) / 2;
       const y = (ph - size) / 2;
       pdf.addImage(img, 'PNG', x, y, size, size);
-      pdf.save('qrcode-toolkit.pdf');
+      pdf.save('toolguest-qr.pdf');
       URL.revokeObjectURL(url);
     }
     toast(`${fmt.toUpperCase()} downloaded`, 'success');
@@ -1054,5 +1229,7 @@ highlightInit();
 render();
 lucide.createIcons();
 </script>
+  <script src="/assets/rating-widget.js" defer></script>
+<script src="assets/related.js" defer></script>
 </body>
 </html>

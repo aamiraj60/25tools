@@ -1,40 +1,123 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en-GB" data-theme="dark">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>HashForge — Secure Online MD5, SHA-1, SHA-256 &amp; SHA-512 Hash Generator Tool</title>
-<meta name="description" content="The most beautiful secure online hash generator. Instantly compute MD5, SHA-1, SHA-256, SHA-384 and SHA-512 for any text or file — 100% in your browser, nothing uploaded. Free, fast, offline-capable." />
+<title>Free Hash Generator — MD5, SHA-1, SHA-256 &amp; SHA-512</title>
+  <meta property="og:url" content="https://toolguest.com/hash-generator" />
+  <meta property="og:image" content="https://toolguest.com/assets/og/hash-generator.png" />
+  <meta name="twitter:title" content="Free Hash Generator — MD5, SHA-1, SHA-256 &amp; SHA-512" />
+  <meta name="twitter:description" content="Instantly compute MD5, SHA-1, SHA-256, SHA-384 and SHA-512 for any text or file — 100% in your browser, nothing uploaded." />
+  <meta name="twitter:image" content="https://toolguest.com/assets/og/hash-generator.png" />
+<meta name="description" content="Instantly compute MD5, SHA-1, SHA-256, SHA-384 and SHA-512 for any text or file — 100% in your browser, nothing uploaded." />
 <meta name="keywords" content="md5 generator, sha256 generator, sha1 hash, sha512 online, file checksum, hash generator, checksum verifier, hash tool" />
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-<link rel="canonical" href="https://hashforge.app/" />
+<link rel="canonical" href="https://toolguest.com/hash-generator" />
+  <link rel="alternate" hreflang="en" href="https://toolguest.com/hash-generator" />
+  <link rel="alternate" hreflang="x-default" href="https://toolguest.com/hash-generator" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="HashForge — Secure Online MD5, SHA-1, SHA-256 &amp; SHA-512 Hash Generator" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="en_AU" />
+  <meta property="og:locale:alternate" content="en_CA" />
+  <meta http-equiv="content-language" content="en-GB" />
+<meta property="og:title" content="ToolGuest — Secure Online MD5, SHA-1, SHA-256 &amp; SHA-512 Hash Generator" />
 <meta property="og:description" content="Hash any text or file in your browser. Zero uploads. Five algorithms at once. Beautifully fast." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="theme-color" content="#06060a" />
 
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@graph":[
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@type":"SoftwareApplication",
-      "name":"HashForge — Secure Online MD5, SHA-1, SHA-256 & SHA-512 Hash Generator",
-      "applicationCategory":"DeveloperApplication",
-      "operatingSystem":"Any (Web Browser)",
-      "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
-      "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","ratingCount":"2184"},
-      "description":"Client-side hash generator producing MD5, SHA-1, SHA-256, SHA-384 and SHA-512 digests for text and files."
+      "@type": "SoftwareApplication",
+      "name": "ToolGuest — Secure Online MD5, SHA-1, SHA-256 & SHA-512 Hash Generator",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any (Web Browser)",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP"
+      },
+      "description": "Client-side hash generator producing MD5, SHA-1, SHA-256, SHA-384 and SHA-512 digests for text and files.",
+      "featureList": [
+        "Five algorithms, one pass — MD5, SHA-1, SHA-256, SHA-384 and SHA-512 compute simultaneously as you type. No buttons to mash.",
+        "Zero-knowledge by design — Hashing runs in your browser via the Web Crypto API. There is no backend, so there is nothing to leak.",
+        "Drag-and-drop checksums — Verify downloaded ISOs, builds and archives against published checksums — without uploading gigabytes.",
+        "Case toggle & smart copy — Flip every digest between lowercase and UPPERCASE in one click. Per-row copy with instant toast feedback.",
+        "Built-in hash verifier — Paste a known checksum and ToolGuest highlights the matching algorithm instantly, with a green glow.",
+        "Keyboard-first workflow — ⌘ / Ctrl + Enter to recompute, ⌘ / Ctrl + C for your SHA-256, ⌘ + K to focus."
+      ],
+      "dateModified": "2026-11-05",
+      "datePublished": "2026-11-05"
     },
     {
-      "@type":"FAQPage",
-      "mainEntity":[
-        {"@type":"Question","name":"Is this MD5 / SHA-256 hash generator safe and private?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every digest is computed locally in your browser using the Web Crypto API and a pure-JavaScript MD5 implementation. Your text and files never leave your device — no server, no upload, no logging."}},
-        {"@type":"Question","name":"Can I decrypt or reverse an MD5 hash?","acceptedAnswer":{"@type":"Answer","text":"No. Hashing is a one-way function. You cannot decrypt a hash back into the original input. So-called MD5 decrypters are just lookup tables of common inputs."}},
-        {"@type":"Question","name":"Which algorithm should I use: MD5, SHA-1, SHA-256, SHA-384 or SHA-512?","acceptedAnswer":{"@type":"Answer","text":"Use SHA-256 or SHA-512 for anything security-related. SHA-1 and MD5 are cryptographically broken and should only be used for legacy compatibility or non-security checksums."}},
-        {"@type":"Question","name":"Can I generate a checksum for a large file?","acceptedAnswer":{"@type":"Answer","text":"Yes. Switch to File mode and drop any file in. The file is read locally with the FileReader API and hashed in memory — nothing is transmitted."}},
-        {"@type":"Question","name":"Should I hash passwords with SHA-256 or MD5?","acceptedAnswer":{"@type":"Answer","text":"No. General-purpose hashes are far too fast for password storage. Use Argon2id, scrypt or bcrypt with a per-user salt and a high work factor."}}
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is this MD5 / SHA-256 hash generator safe and private?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Every digest is computed locally in your browser using the Web Crypto API and a pure-JavaScript MD5 implementation. Your text and files never leave your device — no server, no upload, no logging."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I decrypt or reverse an MD5 hash?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Hashing is a one-way function. You cannot decrypt a hash back into the original input. So-called MD5 decrypters are just lookup tables of common inputs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which algorithm should I use: MD5, SHA-1, SHA-256, SHA-384 or SHA-512?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use SHA-256 or SHA-512 for anything security-related. SHA-1 and MD5 are cryptographically broken and should only be used for legacy compatibility or non-security checksums."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I generate a checksum for a large file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Switch to File mode and drop any file in. The file is read locally with the FileReader API and hashed in memory — nothing is transmitted."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I hash passwords with SHA-256 or MD5?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. General-purpose hashes are far too fast for password storage. Use Argon2id, scrypt or bcrypt with a per-user salt and a high work factor."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolguest.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://toolguest.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "— Secure Online MD5, SHA-1, SHA-256 & SHA-512 Hash Generator",
+          "item": "https://toolguest.com/hash-generator"
+        }
       ]
     }
   ]
@@ -638,6 +721,11 @@ footer{border-top:1px solid var(--border);padding:48px 0 64px;position:relative;
   html{scroll-behavior:auto}
 }
 </style>
+<link rel="stylesheet" href="assets/related.css">
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
 </head>
 <body>
 
@@ -648,11 +736,11 @@ footer{border-top:1px solid var(--border);padding:48px 0 64px;position:relative;
 <!-- ================= NAV ================= -->
 <nav class="nav">
   <div class="wrap nav-in">
-    <a href="#" class="logo">
+    <a href="/" class="logo">
       <span class="logo-mark">
         <svg viewBox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z"/><path d="m3 7 9 5 9-5"/><path d="M12 12v10"/></svg>
       </span>
-      HashForge
+      ToolGuest
     </a>
     <div class="nav-links">
       <a href="#tool" class="hide-sm">Tool</a>
@@ -802,7 +890,7 @@ footer{border-top:1px solid var(--border);padding:48px 0 64px;position:relative;
 <section id="features">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-eyebrow">Why HashForge</div>
+      <div class="sec-eyebrow">Why ToolGuest</div>
       <h2>Built like a product. Not a page.</h2>
       <p class="sec-sub">Every interaction is instant, every byte stays on your machine. No ads, no accounts, no nonsense.</p>
     </div>
@@ -830,7 +918,7 @@ footer{border-top:1px solid var(--border);padding:48px 0 64px;position:relative;
       <div class="card">
         <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
         <h3>Built-in hash verifier</h3>
-        <p>Paste a known checksum and HashForge highlights the matching algorithm instantly, with a green glow.</p>
+        <p>Paste a known checksum and ToolGuest highlights the matching algorithm instantly, with a green glow.</p>
       </div>
       <div class="card">
         <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/></svg></div>
@@ -861,7 +949,7 @@ footer{border-top:1px solid var(--border);padding:48px 0 64px;position:relative;
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-eyebrow">Competitor benchmark</div>
-      <h2>How HashForge compares to the top 3.</h2>
+      <h2>How ToolGuest compares to the top 3.</h2>
       <p class="sec-sub">We benchmarked the most popular hash generator sites on the web. Here's the honest breakdown.</p>
     </div>
     <div class="cmp-wrap">
@@ -869,7 +957,7 @@ footer{border-top:1px solid var(--border);padding:48px 0 64px;position:relative;
         <thead>
           <tr>
             <th>Capability</th>
-            <th class="self">HashForge</th>
+            <th class="self">ToolGuest</th>
             <th>MD5HashGenerator.com</th>
             <th>OnlineMD5.com</th>
             <th>EMN178 Tools</th>
@@ -1014,12 +1102,113 @@ footer{border-top:1px solid var(--border);padding:48px 0 64px;position:relative;
     </div>
   </div>
 </section>
+
+<!-- TF-RELATED -->
+<section class="tf-related" aria-label="Related tools">
+  <div class="tf-related-glow" aria-hidden="true">
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+  </div>
+  <div class="tf-related-head">
+    <div>
+      <p class="tf-related-eyebrow"><span class="tf-related-pulse"></span>Keep going</p>
+      <h2 class="tf-related-title">Related free tools</h2>
+      <p class="tf-related-sub">Hand-picked tools that pair with this one — all free, all private.</p>
+    </div>
+    <a class="tf-related-all" href="/#directory"><span>All 26 tools</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="tf-related-grid">
+      <a class="tf-related-card" href="/password-checker" style="--tf-card-accent: #0d9488; --i: 0">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Password Checker</span>
+          <span class="tf-related-desc">Measure entropy and breach risk without sending a byte anywhere.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/base64-encoder" style="--tf-card-accent: #0e7490; --i: 1">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="14" y="14" width="4" height="6" rx="2"/><rect x="6" y="4" width="4" height="6" rx="2"/><path d="M6 20h4"/><path d="M14 10h4"/><path d="M6 14h2v6"/><path d="M14 4h2v6"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Base64 Encoder</span>
+          <span class="tf-related-desc">Encode and decode Base64 strings, files and data URIs.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/json-formatter" style="--tf-card-accent: #0284c7; --i: 2">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">JSON Formatter</span>
+          <span class="tf-related-desc">Beautify, minify and validate JSON with instant error pointing.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/qr-generator" style="--tf-card-accent: #0891b2; --i: 3">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">QR Generator</span>
+          <span class="tf-related-desc">Create high-resolution QR codes for URLs, WiFi and vCards.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/diff-checker" style="--tf-card-accent: #818cf8; --i: 4">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M11 18H8a2 2 0 0 1-2-2V9"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Text &amp; Code Diff Checker</span>
+          <span class="tf-related-desc">Compare two blocks of text or code and highlight every change.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/meta-tag-preview" style="--tf-card-accent: #14b8a6; --i: 5">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m15 5 6.3 6.3a2.4 2.4 0 0 1 0 3.4L17 19"/><path d="M9.586 5.586A2 2 0 0 0 8.172 5H3a1 1 0 0 0-1 1v5.172a2 2 0 0 0 .586 1.414L8.29 18.29a2.426 2.426 0 0 0 3.42 0l3.58-3.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="6.5" cy="9.5" r=".5" fill="currentColor"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Meta Tag Preview</span>
+          <span class="tf-related-desc">Preview Google, X and Facebook cards before you publish.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/url-slug-generator" style="--tf-card-accent: #22c55e; --i: 6">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">URL Slug Generator</span>
+          <span class="tf-related-desc">Convert any title into a clean, SEO-friendly URL slug.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+  </div>
+</section>
+
 </main>
 
 <!-- ================= FOOTER ================= -->
 <footer>
   <div class="wrap foot-in">
-    <p>© <span id="year"></span> HashForge — hashing that never leaves your browser.</p>
+    <p>© <span id="year"></span> ToolGuest — hashing that never leaves your browser.</p>
     <div class="foot-links">
       <a href="#tool">Tool</a>
       <a href="#features">Features</a>
@@ -1571,14 +1760,14 @@ footer{border-top:1px solid var(--border);padding:48px 0 64px;position:relative;
   downloadBtn.addEventListener("click", function () {
     if (!state.results) { toast("Nothing to download yet"); return; }
     var lines = hashLines(state.upper);
-    var header = "# HashForge digest\n# Generated: " + new Date().toISOString() + "\n";
+    var header = "# ToolGuest digest\n# Generated: " + new Date().toISOString() + "\n";
     header += state.mode === "file" && state.file
       ? "# File: " + state.file.name + " (" + fmtSize(state.file.size) + ")\n\n"
       : "# Input: text (" + inputEl.value.length + " chars)\n\n";
     var blob = new Blob([header + lines.join("\n") + "\n"], { type: "text/plain" });
     var url = URL.createObjectURL(blob);
     var a = document.createElement("a");
-    a.href = url; a.download = "hashforge-digest.txt";
+    a.href = url; a.download = "toolguest-digest.txt";
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
     toast("Downloaded .txt");
@@ -1699,5 +1888,7 @@ footer{border-top:1px solid var(--border);padding:48px 0 64px;position:relative;
 
 })();
 </script>
+  <script src="/assets/rating-widget.js" defer></script>
+<script src="assets/related.js" defer></script>
 </body>
 </html>
