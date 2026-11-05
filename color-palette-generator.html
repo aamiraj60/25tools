@@ -1,20 +1,54 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en-GB" data-theme="dark">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Color Palette Generator — Free HEX/RGB/HSL Converter, Contrast Checker & Image Extractor</title>
-<meta name="description" content="Free, instant color palette generator. Press Spacebar for harmonious palettes, extract colors from images, check WCAG contrast, and export to CSS, Tailwind, SCSS or PNG. No sign-up, no ads, 100% in-browser." />
+<title>Free Color Palette Generator — HEX, RGB &amp; Contrast</title>
+  <meta property="og:image" content="https://toolguest.com/assets/og/color-palette-generator.png" />
+  <meta name="twitter:title" content="Free Color Palette Generator — HEX, RGB &amp; Contrast" />
+  <meta name="twitter:description" content="Free color palette generator. Press Spacebar for harmonious palettes, extract colors from images, check WCAG contrast, export to CSS." />
+  <meta name="twitter:image" content="https://toolguest.com/assets/og/color-palette-generator.png" />
+<meta name="description" content="Free color palette generator. Press Spacebar for harmonious palettes, extract colors from images, check WCAG contrast, export to CSS." />
 <meta name="theme-color" content="#07080a" />
-<link rel="canonical" href="https://palettestudio.app/tools/color-palette-generator" />
+<link rel="canonical" href="https://toolguest.com/color-palette-generator" />
+  <link rel="alternate" hreflang="en" href="https://toolguest.com/color-palette-generator" />
+  <link rel="alternate" hreflang="x-default" href="https://toolguest.com/color-palette-generator" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Free Color Palette Generator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "GBP"
+  },
+  "featureList": [
+    "WCAG Contrast Checker — Test any text-on-background combination against real WCAG 2.1 accessibility thresholds.",
+    "Image Palette Extractor — Drop any image — a photo, UI screenshot, or brand asset — and we'll extract its dominant colors instantly, right in your browser.",
+    "Instant keyboard engine — Tap Space anywhere on the page for a fresh harmonious palette. Lock the swatches you love with 1–5 and shuffle the rest.",
+    "WCAG accessibility built in — Live AA / AAA contrast scoring on every pairing. Ship interfaces that are readable for everyone — not just on your calibrated monitor.",
+    "Zero login walls — No account, no email capture, no \"sign up to save\" modal after three palettes. Everything runs client-side and your work never leaves the tab.",
+    "Developer-grade export — One click to CSS variables, Tailwind config, SCSS maps, JSON tokens, or a share-ready PNG. Plus a permalink that restores the exact palette."
+  ],
+  "dateModified": "2026-11-05",
+  "datePublished": "2026-11-05",
+  "url": "https://toolguest.com/color-palette-generator"
+}
+</script>
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Color Palette Generator & HEX/RGB Converter — PaletteStudio" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="en_AU" />
+  <meta property="og:locale:alternate" content="en_CA" />
+  <meta http-equiv="content-language" content="en-GB" />
+<meta property="og:title" content="Color Palette Generator & HEX/RGB Converter — ToolGuest" />
 <meta property="og:description" content="Spacebar palette engine, WCAG contrast checker, image color extractor and one-click Tailwind/CSS export. Free forever, zero login walls." />
-<meta property="og:url" content="https://palettestudio.app/tools/color-palette-generator" />
+<meta property="og:url" content="https://toolguest.com/color-palette-generator" />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link href="assets/fonts.css" rel="stylesheet">
 <style>
 :root{--bg:#07080a;--bg-2:#0b0d10;--panel:rgba(255,255,255,.035);--panel-2:rgba(255,255,255,.06);--border:rgba(255,255,255,.09);--border-strong:rgba(255,255,255,.16);--text:#f4f6f8;--muted:#8d95a3;--faint:#5b636f;--accent:#7c5cff;--accent-2:#22d3ee;--good:#34d399;--bad:#f87171;--radius:18px;--shadow:0 24px 60px -20px rgba(0,0,0,.7)}
 [data-theme="light"]{--bg:#fafafb;--bg-2:#ffffff;--panel:rgba(0,0,0,.025);--panel-2:rgba(0,0,0,.05);--border:rgba(0,0,0,.09);--border-strong:rgba(0,0,0,.16);--text:#0b0c0e;--muted:#5b636f;--faint:#8b939f;--shadow:0 24px 60px -24px rgba(0,0,0,.18)}
@@ -36,6 +70,7 @@ p{margin:0}
 .brand{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:-.02em;font-size:15px}
 .brand .mark{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#7c5cff,#22d3ee);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 6px 18px -6px rgba(124,92,255,.9);display:grid;place-items:center;font-size:12px;color:#fff}
 .brand span{color:var(--muted);font-weight:500}
+.brand .brand-txt{color:var(--text);font-weight:700}
 .nav-links{display:flex;gap:26px;font-size:13.5px;color:var(--muted);font-weight:500}
 .nav-links a:hover{color:var(--text)}
 .nav-right{display:flex;align-items:center;gap:10px}
@@ -45,6 +80,7 @@ p{margin:0}
 .icon-btn{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;border:1px solid var(--border);background:var(--panel);color:var(--muted);transition:.18s}
 .icon-btn:hover{color:var(--text);border-color:var(--border-strong);background:var(--panel-2)}
 @media(max-width:820px){.nav-links{display:none}}
+@media(max-width:400px){.nav-inner{gap:12px}.live-pill{display:none}}
 .crumbs{padding:22px 0 0;font-size:13px;color:var(--faint);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .crumbs a:hover{color:var(--text)}
 .crumbs .sep{opacity:.5}
@@ -60,9 +96,10 @@ p{margin:0}
 .tool-wrap{margin:8px 0 0}
 .tool{border:1px solid var(--border);border-radius:26px;background:linear-gradient(180deg,var(--panel-2),var(--panel));padding:14px;box-shadow:var(--shadow)}
 .tool-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:4px 6px 14px;flex-wrap:wrap}
-.tool-bar-left{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);font-weight:500}
+.tool-bar-left{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);font-weight:500;flex-wrap:wrap;min-width:0}
 .tool-bar-left .kbd{font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 7px;border-radius:6px;border:1px solid var(--border-strong);background:var(--panel-2);color:var(--text)}
-.tool-bar-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tool-bar-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
+@media(max-width:520px){.tool-bar-right{width:100%}}
 .btn{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 15px;border-radius:11px;font-size:13.5px;font-weight:600;letter-spacing:-.01em;border:1px solid var(--border);background:var(--panel-2);color:var(--text);transition:.18s ease;white-space:nowrap}
 .btn:hover{border-color:var(--border-strong);transform:translateY(-1px)}
 .btn:active{transform:translateY(0)}
@@ -72,7 +109,7 @@ p{margin:0}
 .btn-accent{background:linear-gradient(135deg,#7c5cff,#22d3ee);color:#fff;border-color:transparent;box-shadow:0 10px 30px -12px rgba(124,92,255,.85)}
 .btn-ghost{background:transparent}
 .btn svg{flex:none}
-.segmented{display:inline-flex;padding:3px;border-radius:12px;border:1px solid var(--border);background:var(--panel);gap:2px}
+.segmented{display:inline-flex;flex-wrap:wrap;padding:3px;border-radius:12px;border:1px solid var(--border);background:var(--panel);gap:2px}
 .segmented button{padding:6px 11px;border-radius:9px;font-size:12px;font-weight:600;color:var(--muted);transition:.16s;letter-spacing:.02em}
 .segmented button:hover{color:var(--text)}
 .segmented button.active{background:var(--panel-2);color:var(--text);box-shadow:0 1px 0 rgba(255,255,255,.06) inset}
@@ -102,7 +139,7 @@ p{margin:0}
 .card h3 svg{color:var(--accent-2)}
 .card .sub{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.55}
 .contrast-inputs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
-.field{display:flex;flex-direction:column;gap:7px}
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
 .field label{font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--faint)}
 .color-input{display:flex;align-items:center;gap:10px;height:46px;padding:0 12px;border-radius:12px;border:1px solid var(--border);background:var(--panel-2)}
 .color-input input[type=color]{width:26px;height:26px;border:none;border-radius:7px;padding:0;background:none;cursor:pointer;overflow:hidden}
@@ -204,12 +241,44 @@ footer{margin-top:84px;border-top:1px solid var(--border);padding:36px 0;color:v
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 ::selection{background:rgba(124,92,255,.35)}
 </style>
+<link rel="stylesheet" href="assets/related.css">
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://toolguest.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tools",
+      "item": "https://toolguest.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Free Color Palette Generator",
+      "item": "https://toolguest.com/color-palette-generator"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
 <header class="nav">
   <div class="container nav-inner">
-    <a class="brand" href="#top"><span class="mark">◆</span> Palette<span>Studio</span></a>
+    <a class="brand" href="#top"><span class="mark">◆</span> <span class="brand-txt">Tool<span style="background:linear-gradient(120deg,#7c5cff,#22d3ee);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">Guest</span></span></a>
     <nav class="nav-links">
       <a href="#tool">Palette Generator</a>
       <a href="#why">Why Us</a>
@@ -229,8 +298,8 @@ footer{margin-top:84px;border-top:1px solid var(--border);padding:36px 0;color:v
   <div class="container">
 
     <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="#">Home</a><span class="sep">/</span>
-      <a href="#">Tools</a><span class="sep">/</span>
+      <a href="/">Home</a><span class="sep">/</span>
+      <a href="/">Tools</a><span class="sep">/</span>
       <span class="cur">Color Palette Generator</span>
     </nav>
     <div class="region-tag">🌍 Global · Designer Grade</div>
@@ -239,8 +308,8 @@ footer{margin-top:84px;border-top:1px solid var(--border);padding:36px 0;color:v
       <h1>Free Color Palette Generator<br /><span class="grad">HEX / RGB / HSL Converter</span></h1>
       <p class="lede">Spacebar-powered palette generation, WCAG contrast checking, in-browser image color extraction, and one-click Tailwind / CSS export. No sign-up. No paywall. No ads. Just instant, beautiful color.</p>
       <div class="hero-badges">
-        <div class="badge"><span class="stars">★★★★★</span> <strong>4.96/5</strong> from 30,000+ UI designers</div>
-        <div class="badge">⚡ <strong>150M+</strong> palettes generated</div>
+        <div class="badge"><span class="stars">✓</span> <strong>Free</strong> for UI designers — no signup</div>
+        <div class="badge">⚡ <strong>Unlimited</strong> palettes, free forever</div>
         <div class="badge">🔒 <strong>100%</strong> client-side &amp; private</div>
       </div>
     </section>
@@ -386,14 +455,14 @@ footer{margin-top:84px;border-top:1px solid var(--border);padding:36px 0;color:v
     <section class="block" id="compare">
       <div class="section-head">
         <span class="eyebrow">Head to head</span>
-        <h2>PaletteStudio vs. Coolors</h2>
+        <h2>ToolGuest vs. Coolors</h2>
         <p>Same core idea. Radically less friction. Here's the honest breakdown.</p>
       </div>
       <div class="table-shell">
         <div class="table-scroll">
           <table>
             <thead>
-              <tr><th style="width:32%">Capability</th><th class="us" style="width:34%">◆ PaletteStudio</th><th style="width:34%">Coolors</th></tr>
+              <tr><th style="width:32%">Capability</th><th class="us" style="width:34%">◆ ToolGuest</th><th style="width:34%">Coolors</th></tr>
             </thead>
             <tbody>
               <tr><td class="feat">Palette generation</td><td class="col-us"><span class="tick">✓</span> Unlimited, instant</td><td class="col-them"><span class="neutral">•</span> Rate-limited before prompting</td></tr>
@@ -440,23 +509,105 @@ footer{margin-top:84px;border-top:1px solid var(--border);padding:36px 0;color:v
       </div>
     </section>
 
-    <section class="block">
-      <div class="section-head"><span class="eyebrow">Keep building</span><h2>Related free tools</h2></div>
-      <div class="related">
-        <a class="rcard" href="#"><span class="ric"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></span><span><span class="rt">Image Resizer</span><span class="rs">Compress &amp; resize</span></span></a>
-        <a class="rcard" href="#"><span class="ric"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg></span><span><span class="rt">Markdown Converter</span><span class="rs">MD → HTML</span></span></a>
-        <a class="rcard" href="#"><span class="ric"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14h1M14 20h3M20 20h1"/></svg></span><span><span class="rt">QR Code Generator</span><span class="rs">SVG &amp; PNG</span></span></a>
-        <a class="rcard" href="#"><span class="ric"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><span><span class="rt">Password Generator</span><span class="rs">Cryptographically secure</span></span></a>
-      </div>
-    </section>
+    
 
   </div>
+
+<!-- TF-RELATED -->
+<section class="tf-related" aria-label="Related tools">
+  <div class="tf-related-glow" aria-hidden="true">
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+  </div>
+  <div class="tf-related-head">
+    <div>
+      <p class="tf-related-eyebrow"><span class="tf-related-pulse"></span>Keep going</p>
+      <h2 class="tf-related-title">Related free tools</h2>
+      <p class="tf-related-sub">Hand-picked tools that pair with this one — all free, all private.</p>
+    </div>
+    <a class="tf-related-all" href="/#directory"><span>All 26 tools</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="tf-related-grid">
+      <a class="tf-related-card" href="/invoice-generator" style="--tf-card-accent: #ca8a04; --i: 0">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Invoice Generator</span>
+          <span class="tf-related-desc">Build branded, downloadable PDF invoices in under a minute.</span>
+          <span class="tf-related-tag">Media</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/image-resizer" style="--tf-card-accent: #d97706; --i: 1">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M14 15H9v-5"/><path d="M16 3h5v5"/><path d="M21 3 9 15"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Image Resizer</span>
+          <span class="tf-related-desc">Resize, crop and compress images locally at full quality.</span>
+          <span class="tf-related-tag">Media</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/heic-to-jpg" style="--tf-card-accent: #c026d3; --i: 2">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><circle cx="10" cy="12" r="2"/><path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">HEIC to JPG Converter</span>
+          <span class="tf-related-desc">Convert iPhone HEIC photos to universal JPG in one click.</span>
+          <span class="tf-related-tag">Media</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/qr-generator" style="--tf-card-accent: #0891b2; --i: 3">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">QR Generator</span>
+          <span class="tf-related-desc">Create high-resolution QR codes for URLs, WiFi and vCards.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/font-changer" style="--tf-card-accent: #4f46e5; --i: 4">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Font Changer &amp; Bio Generator</span>
+          <span class="tf-related-desc">Fancy Unicode fonts and aesthetic bios for every social profile.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/aspect-ratio-calculator" style="--tf-card-accent: #059669; --i: 5">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="12" height="20" x="6" y="2" rx="2"/><rect width="20" height="12" x="2" y="6" rx="2"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Aspect Ratio Calculator</span>
+          <span class="tf-related-desc">Resolve 16:9, 4:5, 21:9 dimensions and scale perfectly.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+  </div>
+</section>
+
 </main>
 
 <footer>
   <div class="container foot-inner">
-    <div>© <span id="year"></span> PaletteStudio — built for designers who ship.</div>
-    <div class="foot-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">API</a><a href="#tool">Back to top ↑</a></div>
+    <div>© <span id="year"></span> ToolGuest — built for designers who ship.</div>
+    <div class="foot-links"><a href="/">Privacy</a><a href="/">Terms</a><a href="/">API</a><a href="#tool">Back to top ↑</a></div>
   </div>
 </footer>
 
@@ -732,5 +883,7 @@ renderPalette();
 updateContrast();
 })();
 </script>
+  <script src="/assets/rating-widget.js" defer></script>
+<script src="assets/related.js" defer></script>
 </body>
 </html>

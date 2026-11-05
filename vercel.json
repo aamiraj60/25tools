@@ -1,0 +1,30 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "25tools-tau.vercel.app"
+        }
+      ],
+      "destination": "https://toolguest.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "25tools-mk-aamir.vercel.app"
+        }
+      ],
+      "destination": "https://toolguest.com/$1",
+      "permanent": true
+    }
+  ],
+  "regions": [
+    "lhr1"
+  ]
+}

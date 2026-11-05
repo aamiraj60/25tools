@@ -1,14 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Aspect Ratio Calculator · Image & Video Resizing Dimensions</title>
-  <meta name="description" content="World-class free aspect ratio calculator. Instantly find dimensions, simplify ratios, and preview proportions. 10x faster than legacy tools, with live video preview and 4K presets.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <title>Free Aspect Ratio Calculator — Image &amp; Video Dimensions</title>
+  <meta property="og:title" content="Free Aspect Ratio Calculator — Image &amp; Video Dimensions" />
+  <meta property="og:description" content="Free aspect ratio calculator: find dimensions, simplify ratios and preview proportions instantly. Live video preview and 4K presets." />
+  <meta property="og:url" content="https://toolguest.com/aspect-ratio-calculator" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="en_AU" />
+  <meta property="og:locale:alternate" content="en_CA" />
+  <meta http-equiv="content-language" content="en-GB" />
+  <meta property="og:image" content="https://toolguest.com/assets/og/aspect-ratio-calculator.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Aspect Ratio Calculator — Image &amp; Video Dimensions" />
+  <meta name="twitter:description" content="Free aspect ratio calculator: find dimensions, simplify ratios and preview proportions instantly. Live video preview and 4K presets." />
+  <meta name="twitter:image" content="https://toolguest.com/assets/og/aspect-ratio-calculator.png" />
+<link rel="canonical" href="https://toolguest.com/aspect-ratio-calculator" />
+  <link rel="alternate" hreflang="en" href="https://toolguest.com/aspect-ratio-calculator" />
+  <link rel="alternate" hreflang="x-default" href="https://toolguest.com/aspect-ratio-calculator" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Free Aspect Ratio Calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "GBP"
+  },
+  "featureList": [
+    "No ads. Ever. — Clean interface focused on your workflow, not distractions.",
+    "Designer-grade — Apple / Vercel aesthetic with glassmorphism & high contrast.",
+    "Multi-scale table — Auto-generated 0.5x to 4x (4K UHD) resolution presets."
+  ],
+  "dateModified": "2026-11-05",
+  "datePublished": "2026-11-05",
+  "url": "https://toolguest.com/aspect-ratio-calculator"
+}
+</script>
+  <meta name="description" content="Free aspect ratio calculator: find dimensions, simplify ratios and preview proportions instantly. Live video preview and 4K presets.">
+  <link href="assets/fonts.css" rel="stylesheet">
+  <script src="assets/lucide.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -48,7 +85,9 @@
     .dark .btn-primary { background: #fff; color: #111; border-color: #fff; }
     .btn-primary:hover { opacity: 0.85; }
     
-    .btn-outline { border-color: transparent; opacity: 0.7; }
+    /* 0.7 dropped the icon and label to 2.8:1 on white; 0.85 keeps the ghost
+       look while clearing 3:1 for the control's own text and icon. */
+    .btn-outline { border-color: transparent; opacity: 0.85; }
     .btn-outline:hover { background: rgba(0,0,0,0.03); opacity: 1; }
     .dark .btn-outline:hover { background: rgba(255,255,255,0.05); }
 
@@ -65,6 +104,7 @@
       background: transparent; border: 1px solid #ddd; border-radius: 16px;
       padding: 12px 16px; font-size: 1rem; font-weight: 500; width: 100%;
       transition: border 0.15s; outline: none; color: inherit;
+      min-width: 0;
     }
     .dark input, .dark select { border-color: #2a2a2e; background: rgba(0,0,0,0.2); }
     input:focus { border-color: #111; }
@@ -120,10 +160,11 @@
     .dark .badge { background: rgba(255,255,255,0.05); }
     
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .grid-2 > *, .grid-3 > *, .grid-4 > * { min-width: 0; }
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
     @media (max-width: 900px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
-    
+
     .scale-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
     .scale-table td, .scale-table th {
       padding: 10px 12px; border-bottom: 1px solid rgba(0,0,0,0.05); text-align: left;
@@ -159,7 +200,60 @@
     .footer-tools { display: flex; flex-wrap: wrap; gap: 8px; }
     .footer-tool-chip { padding: 6px 14px; background: rgba(0,0,0,0.03); border-radius: 40px; font-size: 0.8rem; }
     .dark .footer-tool-chip { background: rgba(255,255,255,0.05); }
+
+    /* On phones the two wide tables are denser than the screen: tighten the
+       cells so more of the table fits, and keep the horizontal scroller as the
+       fallback so nothing is ever cut off. Placed after the table rules so the
+       overrides actually win. */
+    @media (max-width: 640px) {
+      .comp-table, .scale-table { font-size: 0.78rem; }
+      .comp-table th, .comp-table td,
+      .scale-table th, .scale-table td { padding: 9px 6px; }
+      .table-scroll {
+        position: relative;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+      }
+      .table-scroll::after {
+        content: 'swipe →';
+        position: sticky; right: 0; float: right; margin-top: -26px;
+        font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase;
+        opacity: 0.45; pointer-events: none;
+      }
+    }
   </style>
+<link rel="stylesheet" href="assets/related.css">
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://toolguest.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tools",
+      "item": "https://toolguest.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Free Aspect Ratio Calculator",
+      "item": "https://toolguest.com/aspect-ratio-calculator"
+    }
+  ]
+}
+</script>
 </head>
 <body>
   <div class="container" style="padding-top: 24px; padding-bottom: 60px;">
@@ -176,7 +270,7 @@
 
     <!-- Hero Section -->
     <div style="max-width: 860px; margin-bottom: 48px;">
-      <h1 style="font-size: 3.2rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px;">
+      <h1 style="font-size: clamp(2rem, 8.5vw, 3.2rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px;">
         Free Aspect Ratio Calculator<br>
         <span style="background: linear-gradient(120deg, #2563eb, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Calculate Image & Video Dimensions Instantly</span>
       </h1>
@@ -186,14 +280,14 @@
       <div style="display: flex; flex-wrap: wrap; gap: 12px;">
         <span class="badge"><i data-lucide="zap" style="width: 14px; height: 14px;"></i> Zero server latency</span>
         <span class="badge"><i data-lucide="shield-check" style="width: 14px; height: 14px;"></i> 100% client-side</span>
-        <span class="badge"><i data-lucide="sparkles" style="width: 14px; height: 14px;"></i> 22k+ daily users prefer us</span>
+        <span class="badge"><i data-lucide="sparkles" style="width: 14px; height: 14px;"></i> Works offline — no upload needed</span>
       </div>
     </div>
 
     <!-- Main Tool Card -->
     <div class="glass" style="padding: 32px; margin-bottom: 64px;">
       <!-- Mode Toggle -->
-      <div style="display: flex; gap: 8px; margin-bottom: 32px; background: rgba(0,0,0,0.02); border-radius: 60px; padding: 4px; width: fit-content;">
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; background: rgba(0,0,0,0.02); border-radius: 60px; padding: 4px; width: fit-content; max-width: 100%;">
         <button id="modeDimensionBtn" class="btn btn-primary" style="border-radius: 40px; padding: 8px 24px;">Calculate Dimension</button>
         <button id="modeRatioBtn" class="btn btn-outline" style="border-radius: 40px; padding: 8px 24px;">Find Ratio</button>
       </div>
@@ -292,14 +386,16 @@
 
       <!-- Multi-Scale Table -->
       <div style="margin-top: 40px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; margin-bottom: 16px;">
           <h3 style="font-weight: 700; font-size: 1.1rem;">Multi-scale resolution table</h3>
           <span class="badge">based on current ratio</span>
         </div>
-        <table class="scale-table">
+        <div class="table-scroll" style="overflow-x: auto;">
+          <table class="scale-table">
           <thead><tr><th>Scale</th><th>Width</th><th>Height</th><th>Use case</th></tr></thead>
           <tbody id="scaleTbody"></tbody>
-        </table>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -334,7 +430,7 @@
     <div style="margin-bottom: 64px;">
       <h2 style="font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px;">Better than legacy calculators</h2>
       <p style="opacity: 0.7; margin-bottom: 24px;">We outperform the top 3 aspect ratio sites in the USA, UK, and Germany.</p>
-      <div style="overflow-x: auto;">
+      <div class="table-scroll" style="overflow-x: auto;">
         <table class="comp-table">
           <thead>
             <tr><th>Feature</th><th>Our Tool</th><th>RatioCalculator.com</th><th>Calculator.net</th><th>AspectRatio.io</th></tr>
@@ -370,7 +466,7 @@
 
     <!-- Footer -->
     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px;">
-      <div style="font-size: 0.9rem; opacity: 0.5;">© 2025 Aspect Ratio Pro · Built for speed</div>
+      <div style="font-size: 0.9rem; opacity: 0.5;">© 2025 ToolGuest · Built for speed</div>
       <div class="footer-tools">
         <span class="footer-tool-chip">Image Resizer</span>
         <span class="footer-tool-chip">Video Dimension Calculator</span>
@@ -380,7 +476,98 @@
     </div>
   </div>
 
-  <script>
+  
+
+<!-- TF-RELATED -->
+<section class="tf-related" aria-label="Related tools">
+  <div class="tf-related-glow" aria-hidden="true">
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+  </div>
+  <div class="tf-related-head">
+    <div>
+      <p class="tf-related-eyebrow"><span class="tf-related-pulse"></span>Keep going</p>
+      <h2 class="tf-related-title">Related free tools</h2>
+      <p class="tf-related-sub">Hand-picked tools that pair with this one — all free, all private.</p>
+    </div>
+    <a class="tf-related-all" href="/#directory"><span>All 26 tools</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="tf-related-grid">
+      <a class="tf-related-card" href="/image-resizer" style="--tf-card-accent: #d97706; --i: 0">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M14 15H9v-5"/><path d="M16 3h5v5"/><path d="M21 3 9 15"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Image Resizer</span>
+          <span class="tf-related-desc">Resize, crop and compress images locally at full quality.</span>
+          <span class="tf-related-tag">Media</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/heic-to-jpg" style="--tf-card-accent: #c026d3; --i: 1">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><circle cx="10" cy="12" r="2"/><path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">HEIC to JPG Converter</span>
+          <span class="tf-related-desc">Convert iPhone HEIC photos to universal JPG in one click.</span>
+          <span class="tf-related-tag">Media</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/color-palette-generator" style="--tf-card-accent: #ec4899; --i: 2">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Color Palette Generator</span>
+          <span class="tf-related-desc">Extract cohesive palettes and generate accessible HEX combos.</span>
+          <span class="tf-related-tag">Media</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/qr-generator" style="--tf-card-accent: #0891b2; --i: 3">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">QR Generator</span>
+          <span class="tf-related-desc">Create high-resolution QR codes for URLs, WiFi and vCards.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/base64-encoder" style="--tf-card-accent: #0e7490; --i: 4">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="14" y="14" width="4" height="6" rx="2"/><rect x="6" y="4" width="4" height="6" rx="2"/><path d="M6 20h4"/><path d="M14 10h4"/><path d="M6 14h2v6"/><path d="M14 4h2v6"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Base64 Encoder</span>
+          <span class="tf-related-desc">Encode and decode Base64 strings, files and data URIs.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/json-formatter" style="--tf-card-accent: #0284c7; --i: 5">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">JSON Formatter</span>
+          <span class="tf-related-desc">Beautify, minify and validate JSON with instant error pointing.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+  </div>
+</section>
+
+<script>
     (function() {
       // Initialize Icons
       lucide.createIcons();
@@ -599,5 +786,39 @@
       
     })();
   </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is an aspect ratio?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Aspect ratio describes the proportional relationship between width and height. Common ratios: 16:9 (widescreen), 9:16 (vertical), 1:1 (square)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the dimension calculator work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It uses the original ratio (W1:H1) and your new width (W2) to compute the new height: H2 = (H1 / W1) * W2. Or vice versa."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this for video editing and social media?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. We've included presets for YouTube, TikTok, Instagram, ultrawide, and more. The scale table helps you find 4K-ready dimensions."
+      }
+    }
+  ]
+}
+</script>
+  <script src="/assets/rating-widget.js" defer></script>
+<script src="assets/related.js" defer></script>
 </body>
 </html>

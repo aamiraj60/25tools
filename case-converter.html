@@ -1,16 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en-GB" data-theme="dark">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Free Online Case Converter — Title Case, UPPERCASE, lowercase | CaseKit</title>
-<meta name="description" content="Convert text to Title Case, UPPERCASE, lowercase, snake_case, kebab-case, PascalCase and more — instantly. Real-time word, character and sentence counters, one-click copy and .txt download. 100% free, no signup, no ads." />
+<title>Free Case Converter — Title, UPPER, lower &amp; More</title>
+  <meta property="og:image" content="https://toolguest.com/assets/og/case-converter.png" />
+  <meta name="twitter:title" content="Free Case Converter — Title, UPPER, lower &amp; More" />
+  <meta name="twitter:description" content="Convert text to Title Case, UPPERCASE, lowercase, snake_case, kebab-case and more. Live counters and one-click copy. Free, no signup." />
+  <meta name="twitter:image" content="https://toolguest.com/assets/og/case-converter.png" />
+<meta name="description" content="Convert text to Title Case, UPPERCASE, lowercase, snake_case, kebab-case and more. Live counters and one-click copy. Free, no signup." />
 <meta name="robots" content="index,follow,max-image-preview:large" />
-<link rel="canonical" href="https://casekit.app/tools/case-converter" />
+<link rel="canonical" href="https://toolguest.com/case-converter" />
+  <link rel="alternate" hreflang="en" href="https://toolguest.com/case-converter" />
+  <link rel="alternate" hreflang="x-default" href="https://toolguest.com/case-converter" />
 <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="en_AU" />
+  <meta property="og:locale:alternate" content="en_CA" />
+  <meta http-equiv="content-language" content="en-GB" />
 <meta property="og:title" content="Free Online Case Converter — Title Case, UPPERCASE, lowercase" />
 <meta property="og:description" content="Instant case conversion with live word, character and sentence counters. Copy or download in one click. No ads, no signup, fully client-side." />
-<meta property="og:url" content="https://casekit.app/tools/case-converter" />
+<meta property="og:url" content="https://toolguest.com/case-converter" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="theme-color" content="#08080a" />
 
@@ -230,7 +241,10 @@ svg { display: block; flex: none; }
   cursor: pointer;
   transition: color .16s, background .16s, border-color .16s, transform .16s;
 }
-.icon-btn:hover { color: var(--text); border-color: var(--border-strong); }
+  /* --text-2 left the icon at 2.56:1 on the light surface. Mixing it toward
+     --text clears 3:1 in both themes while staying quieter than the label. */
+  .icon-btn { color: color-mix(in srgb, var(--text) 55%, var(--text-2)); }
+  .icon-btn:hover { color: var(--text); border-color: var(--border-strong); }
 .icon-btn:active { transform: scale(.94); }
 
 [data-theme="dark"] .icon-sun { display: block; }
@@ -910,6 +924,11 @@ footer {
   }
 }
 </style>
+<link rel="stylesheet" href="assets/related.css">
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
 </head>
 
 <body>
@@ -917,9 +936,9 @@ footer {
 <!-- ============================ HEADER ============================ -->
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/" aria-label="CaseKit home">
+    <a class="brand" href="/" aria-label="ToolGuest home">
       <span class="brand-mark" aria-hidden="true">Aa</span>
-      <span>CaseKit</span>
+      <span>ToolGuest</span>
     </a>
 
     <nav class="header-nav" aria-label="Primary">
@@ -951,7 +970,7 @@ footer {
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span class="sep" aria-hidden="true">/</span>
-        <a href="/tools">Tools</a>
+        <a href="/#directory">Tools</a>
         <span class="sep" aria-hidden="true">/</span>
         <span class="current" aria-current="page">Case Converter</span>
       </nav>
@@ -966,8 +985,8 @@ footer {
   <!-- ============================== HERO ============================== -->
   <section class="hero container" style="padding-bottom:34px;">
     <div class="badge">
-      <span class="stars" aria-hidden="true">★★★★★</span>
-      <span>4.9/5 from 15,000+ writers</span>
+      <span class="stars" aria-hidden="true">✓</span>
+      <span>Free for writers everywhere — no signup</span>
       <span class="pill">FREE</span>
     </div>
 
@@ -985,7 +1004,7 @@ footer {
     <div class="proof">
       <span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-        250M+ words converted
+        Your text never leaves the browser
       </span>
       <span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
@@ -1124,7 +1143,7 @@ footer {
   <section id="why">
     <div class="container">
       <div class="sec-head">
-        <p class="eyebrow">Why CaseKit</p>
+        <p class="eyebrow">Why ToolGuest</p>
         <h2>A case converter built for people who value their time</h2>
         <p class="sec-sub">No bloat. No pop-ups. No “please disable your ad blocker.” Just a fast, beautiful tool that does exactly one thing — perfectly.</p>
       </div>
@@ -1204,17 +1223,17 @@ footer {
     <div class="container">
       <div class="sec-head">
         <p class="eyebrow">Head to head</p>
-        <h2>CaseKit vs. ConvertCase.net</h2>
+        <h2>ToolGuest vs. ConvertCase.net</h2>
         <p class="sec-sub">Same core job — a dramatically better experience. Here's the honest, side-by-side breakdown.</p>
       </div>
 
       <div class="table-wrap">
         <table class="cmp">
-          <caption class="sr-only">Feature comparison between CaseKit and ConvertCase.net</caption>
+          <caption class="sr-only">Feature comparison between ToolGuest and ConvertCase.net</caption>
           <thead>
             <tr>
               <th scope="col">Feature</th>
-              <th scope="col" class="us">CaseKit</th>
+              <th scope="col" class="us">ToolGuest</th>
               <th scope="col">ConvertCase.net</th>
             </tr>
           </thead>
@@ -1342,6 +1361,106 @@ footer {
     </div>
   </section>
 
+<!-- TF-RELATED -->
+<section class="tf-related" aria-label="Related tools">
+  <div class="tf-related-glow" aria-hidden="true">
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+  </div>
+  <div class="tf-related-head">
+    <div>
+      <p class="tf-related-eyebrow"><span class="tf-related-pulse"></span>Keep going</p>
+      <h2 class="tf-related-title">Related free tools</h2>
+      <p class="tf-related-sub">Hand-picked tools that pair with this one — all free, all private.</p>
+    </div>
+    <a class="tf-related-all" href="/#directory"><span>All 26 tools</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="tf-related-grid">
+      <a class="tf-related-card" href="/word-counter" style="--tf-card-accent: #7c3aed; --i: 0">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="7" cy="12" r="3"/><path d="M10 9v6"/><circle cx="17" cy="12" r="3"/><path d="M14 7v8"/><path d="M22 17v1c0 .5-.5 1-1 1H3c-.5 0-1-.5-1-1v-1"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Word Counter</span>
+          <span class="tf-related-desc">Live word, character, sentence and reading-time statistics.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/lorem-ipsum" style="--tf-card-accent: #9333ea; --i: 1">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 12H3"/><path d="M17 18H3"/><path d="M21 6H3"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Lorem Ipsum</span>
+          <span class="tf-related-desc">Generate placeholder paragraphs, words or lists on demand.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/font-changer" style="--tf-card-accent: #4f46e5; --i: 2">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Font Changer &amp; Bio Generator</span>
+          <span class="tf-related-desc">Fancy Unicode fonts and aesthetic bios for every social profile.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/markdown-to-html" style="--tf-card-accent: #6d28d9; --i: 3">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 12.5 8 15l2 2.5"/><path d="m14 12.5 2 2.5-2 2.5"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Markdown to HTML</span>
+          <span class="tf-related-desc">Convert Markdown into clean, copy-ready semantic HTML.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/diff-checker" style="--tf-card-accent: #818cf8; --i: 4">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M11 18H8a2 2 0 0 1-2-2V9"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Text &amp; Code Diff Checker</span>
+          <span class="tf-related-desc">Compare two blocks of text or code and highlight every change.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/ai-humanizer" style="--tf-card-accent: #6366f1; --i: 5">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">AI Humanizer</span>
+          <span class="tf-related-desc">Rewrite AI text so it reads naturally and bypasses detectors.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/url-slug-generator" style="--tf-card-accent: #22c55e; --i: 6">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">URL Slug Generator</span>
+          <span class="tf-related-desc">Convert any title into a clean, SEO-friendly URL slug.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+  </div>
+</section>
+
 </main>
 
 <!-- ============================== FOOTER ============================== -->
@@ -1349,14 +1468,14 @@ footer {
   <div class="container foot-inner">
     <div style="display:flex;align-items:center;gap:10px;">
       <span class="brand-mark" style="width:24px;height:24px;border-radius:7px;font-size:11px;" aria-hidden="true">Aa</span>
-      <span>© <span id="year">2025</span> CaseKit — Free online case converter.</span>
+      <span>© <span id="year">2025</span> ToolGuest — Free online case converter.</span>
     </div>
     <nav class="foot-links" aria-label="Footer">
       <a href="#tool">Converter</a>
-      <a href="#why">Why CaseKit</a>
+      <a href="#why">Why ToolGuest</a>
       <a href="#compare">Compare</a>
       <a href="#faq">FAQ</a>
-      <a href="/privacy">Privacy</a>
+      <a href="/#directory">Privacy</a>
     </nav>
   </div>
 </footer>
@@ -1371,18 +1490,26 @@ footer {
   "@graph": [
     {
       "@type": "SoftwareApplication",
-      "name": "CaseKit Online Case Converter",
+      "name": "ToolGuest Online Case Converter",
       "applicationCategory": "UtilitiesApplication",
       "operatingSystem": "Any",
-      "url": "https://casekit.app/tools/case-converter",
+      "url": "https://toolguest.com/case-converter",
       "description": "Free online case converter with real-time word, character and sentence counters. Convert text to Title Case, UPPERCASE, lowercase, snake_case and more.",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "ratingCount": "15000",
-        "bestRating": "5"
-      }
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP"
+      },
+      "featureList": [
+        "100% client-side privacy — Every conversion runs in your browser with JavaScript. Your text is never uploaded, stored, logged or sent to a server — ever.",
+        "12 case formats, one click — Title Case, Sentence case, UPPER, lower, aLtErNaTiNg, InVeRsE, snake_case, kebab-case, PascalCase, camelCase and dot.case.",
+        "Live text metrics — Character, word, sentence, line and reading-time counters update in real time as you type — no extra clicks required.",
+        "Distraction-free design — No banner ads, no sticky interstitials, no cookie walls. A calm, high-contrast interface that stays out of your way.",
+        "Paste your text — Drop in a paragraph, a headline, a list of filenames or a full document. The textarea accepts unlimited length.",
+        "Pick a case style — Click any of the 12 buttons — Title Case, UPPERCASE, snake_case and more. Conversion happens instantly, in place."
+      ],
+      "dateModified": "2026-11-05",
+      "datePublished": "2026-11-05"
     },
     {
       "@type": "FAQPage",
@@ -1390,27 +1517,65 @@ footer {
         {
           "@type": "Question",
           "name": "Is this online case converter really free?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes — completely. There is no paywall, no trial, no account and no usage limit." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — completely. There is no paywall, no trial, no account and no usage limit."
+          }
         },
         {
           "@type": "Question",
           "name": "Is my text safe? Does it get uploaded anywhere?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Your text never leaves your device. All conversions run locally in your browser using JavaScript — nothing is transmitted, stored or logged." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your text never leaves your device. All conversions run locally in your browser using JavaScript — nothing is transmitted, stored or logged."
+          }
         },
         {
           "@type": "Question",
           "name": "What's the difference between Title Case and Capitalized Case?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Title Case keeps short articles and prepositions lowercase unless they are the first or last word. Capitalized Case capitalizes the first letter of every word with no exceptions." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Title Case keeps short articles and prepositions lowercase unless they are the first or last word. Capitalized Case capitalizes the first letter of every word with no exceptions."
+          }
         },
         {
           "@type": "Question",
           "name": "What are snake_case, kebab-case, PascalCase and camelCase used for?",
-          "acceptedAnswer": { "@type": "Answer", "text": "They are developer naming conventions used in Python, SQL, URLs, CSS, React components, C# classes and JavaScript variables." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They are developer naming conventions used in Python, SQL, URLs, CSS, React components, C# classes and JavaScript variables."
+          }
         },
         {
           "@type": "Question",
           "name": "Is there a character or word limit?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No hard limit. Since everything runs client-side, you are only bound by your device's memory." }
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No hard limit. Since everything runs client-side, you are only bound by your device's memory."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolguest.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://toolguest.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Online Case Converter",
+          "item": "https://toolguest.com/case-converter"
         }
       ]
     }
@@ -1681,7 +1846,7 @@ footer {
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = 'casekit-text.txt';
+    a.download = 'toolguest-text.txt';
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -1750,5 +1915,7 @@ footer {
   }
 })();
 </script>
+  <script src="/assets/rating-widget.js" defer></script>
+<script src="assets/related.js" defer></script>
 </body>
 </html>

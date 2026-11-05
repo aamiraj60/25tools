@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- ═══════════════ SEO HEADER ═══════════════ -->
+<title>YouTube Thumbnail Downloader — HD, Shorts &amp; WebP</title>
+  <meta property="og:image" content="https://toolguest.com/assets/og/thumbnail-downloader.png" />
+  <meta name="twitter:image" content="https://toolguest.com/assets/og/thumbnail-downloader.png" />
+<meta name="description" content="Free YouTube thumbnail downloader. Paste any video or Shorts URL and grab the largest thumbnail YouTube publishes (1280×720) in JPG or WebP." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+<link rel="canonical" href="https://toolguest.com/thumbnail-downloader" />
+  <link rel="alternate" hreflang="en" href="https://toolguest.com/thumbnail-downloader" />
+  <link rel="alternate" hreflang="x-default" href="https://toolguest.com/thumbnail-downloader" />
+
+<meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="en_AU" />
+  <meta property="og:locale:alternate" content="en_CA" />
+  <meta http-equiv="content-language" content="en-GB" />
+<meta property="og:site_name" content="ToolGuest" />
+<meta property="og:title" content="YouTube Thumbnail Downloader — HD 1280×720, Shorts & WebP | ToolGuest" />
+<meta property="og:description" content="Free YouTube thumbnail downloader. Paste any video or Shorts URL and grab the largest thumbnail YouTube publishes (1280×720 HD) plus SD, HQ, MQ and small — in JPG or WebP, no watermark, no ads, no signup." />
+<meta property="og:url" content="https://toolguest.com/thumbnail-downloader" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="YouTube Thumbnail Downloader — HD 1280×720, Shorts & WebP | ToolGuest" />
+<meta name="twitter:description" content="Free YouTube thumbnail downloader. Paste any video or Shorts URL and grab the largest thumbnail YouTube publishes (1280×720 HD) plus SD, HQ, MQ and small — in JPG or WebP, no watermark, no ads, no signup." />
+<meta name="theme-color" content="#08080a" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "YouTube Thumbnail Downloader",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP"
+      },
+      "description": "Free YouTube thumbnail downloader. Paste any video or Shorts URL and grab the largest thumbnail YouTube publishes (1280×720 HD) plus SD, HQ, MQ and small — in JPG or WebP, no watermark, no ads, no signup.",
+      "featureList": [
+        "Every size in one view — Full HD, SD, high, medium and small are shown side by side, so you can pick the exact image you need without guessing at URLs.",
+        "JPG or WebP, your choice — Flip the format switch to pull YouTube's WebP variants when you want smaller files for a fast-loading page.",
+        "Straight from the source — Images load directly from YouTube's own image servers. ToolGuest never proxies, stores or re-hosts your thumbnail.",
+        "Copy the video link — From the YouTube address bar or the Share button — a full URL or just the video ID both work.",
+        "Paste and press Get thumbnails — The tool extracts the video ID and loads every available size at once.",
+        "Choose quality and format — Filter to HD or SD, and switch between JPG and WebP. Unavailable sizes are dimmed automatically."
+      ],
+      "dateModified": "2026-11-05",
+      "datePublished": "2026-11-05"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolguest.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://toolguest.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "YouTube Thumbnail Downloader",
+          "item": "https://toolguest.com/thumbnail-downloader"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I download a 4K or 1080p thumbnail?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No — and no tool can, because YouTube does not publish thumbnails above 1280 × 720. We tested every documented endpoint (<code class=\"rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10\">maxresdefault</code>, <code class=\"rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10\">hq720</code>, <code class=\"rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10\">maxres2</code>, <code class=\"rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10\">maxres3</code> and the numbered variants) and the ceiling is always 1280 × 720. The video itself may be 4K, but the thumbnail still is not. Any site claiming a 4K thumbnail is upscaling a 1280 × 720 image."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is the HD max thumbnail missing for some videos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "YouTube only generates the <code class=\"rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10\">maxresdefault</code> still when the uploader supplied a large enough source. Older or low-resolution uploads may only have SD and below. When that happens the card is dimmed with a note, and Full HD (1280 × 720) remains the best image available."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which sizes can I download?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Up to six: hq720 and maxresdefault at 1280 × 720, sddefault at 640 × 480, hqdefault at 480 × 360, mqdefault at 320 × 180 and default at 120 × 90. The 480 × 360 image exists for essentially every public video."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between JPG and WebP here?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Both show the same picture. YouTube's WebP versions are usually a little smaller for the same dimensions, which makes them handy when the thumbnail is going on a website and page weight matters. JPG is the safer choice if the image will be opened in older software."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this work for Shorts and live streams?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Shorts links, live URLs, embeds and youtu.be short links are all recognised, because they all resolve to the same underlying video ID."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- ═══════════════ PRE-PAINT THEME (no FOUC) ═══════════════ -->
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('tf-theme');
+      if (t === 'light') document.documentElement.classList.remove('dark');
+      else document.documentElement.classList.add('dark');
+    } catch (e) {}
+  })();
+</script>
+
+<link href="assets/fonts.css" rel="stylesheet">
+<script src="assets/tailwind.js"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace']
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  ::selection { background: rgba(99,102,241,.28); }
+
+  /* ── Segmented tabs ── */
+  .seg { padding: .4rem .95rem; border-radius: .55rem; font-size: .8rem; font-weight: 600; color: #71717a; transition: all .18s ease; white-space: nowrap; }
+  .seg:hover { color: #18181b; }
+  .dark .seg:hover { color: #fff; }
+  .seg[aria-selected="true"] { background: #fff; color: #18181b; box-shadow: 0 1px 2px rgba(0,0,0,.07); }
+  .dark .seg[aria-selected="true"] { background: rgba(255,255,255,.1); color: #fff; }
+
+  /* ── FAQ smooth accordion (grid-rows trick = no JS height calc) ── */
+  .faq-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s cubic-bezier(.4,0,.2,1); }
+  .faq-item[data-open="true"] .faq-body { grid-template-rows: 1fr; }
+  .faq-body > div { overflow: hidden; }
+  .faq-chevron { transition: transform .3s ease; }
+  .faq-item[data-open="true"] .faq-chevron { transform: rotate(180deg); }
+
+  /* ── Textarea ── */
+  .pane-area { scrollbar-width: thin; scrollbar-color: rgba(113,113,122,.4) transparent; }
+  .pane-area::-webkit-scrollbar { width: 8px; height: 8px; }
+  .pane-area::-webkit-scrollbar-thumb { background: rgba(113,113,122,.35); border-radius: 99px; }
+  .pane-area::-webkit-scrollbar-track { background: transparent; }
+
+  /* ── Toast ── */
+  #toast { transition: opacity .25s ease, transform .25s ease; }
+  #toast[data-show="false"] { opacity: 0; transform: translate(-50%, 12px); pointer-events: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+<link rel="stylesheet" href="assets/related.css">
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+</head>
+
+<body class="bg-white text-zinc-900 dark:bg-[#08080a] dark:text-zinc-100 font-sans antialiased">
+
+<!-- Ambient gradient blobs (glassmorphism backdrop) -->
+<div aria-hidden="true" class="pointer-events-none fixed inset-0 overflow-hidden -z-10">
+  <div class="absolute -top-40 left-1/2 -translate-x-1/2 h-[520px] w-[900px] rounded-full bg-indigo-500/10 dark:bg-indigo-500/[0.13] blur-[120px]"></div>
+  <div class="absolute top-[30%] -left-40 h-[400px] w-[600px] rounded-full bg-cyan-400/10 dark:bg-cyan-400/[0.07] blur-[120px]"></div>
+  <div class="absolute bottom-0 right-0 h-[400px] w-[600px] rounded-full bg-violet-500/10 dark:bg-violet-500/[0.08] blur-[120px]"></div>
+</div>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="sticky top-0 z-40 border-b border-zinc-200/70 dark:border-white/[0.07] bg-white/70 dark:bg-[#08080a]/70 backdrop-blur-xl">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+    <a href="/" class="flex items-center gap-2.5">
+      <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-500/25">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m7 8-4 4 4 4"/><path d="m17 8 4 4-4 4"/></svg>
+      </span>
+      <span class="text-[15px] font-bold tracking-tight">ToolGuest</span>
+    </a>
+
+    <nav class="hidden items-center gap-1 md:flex">
+      <a href="#tool" class="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">Tool</a>
+      <a href="#why" class="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">Why us</a>
+      <a href="#compare" class="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">Compare</a>
+      <a href="#faq" class="rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">FAQ</a>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <span class="hidden items-center gap-1.5 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3 py-1.5 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 sm:inline-flex">
+        <span class="relative flex h-1.5 w-1.5">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
+          <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+        </span>
+        Live preview
+      </span>
+      <button id="themeToggle" type="button" aria-label="Toggle dark mode"
+        class="grid h-9 w-9 place-items-center rounded-lg border border-zinc-200 text-zinc-600 transition hover:bg-zinc-100 dark:border-white/10 dark:text-zinc-400 dark:hover:bg-white/5">
+        <svg class="h-4 w-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <svg class="hidden h-4 w-4 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="mx-auto max-w-6xl px-5">
+
+  <!-- ═══════════════ 1. BREADCRUMB + REGION ═══════════════ -->
+  <div class="flex flex-wrap items-center justify-between gap-3 pt-6">
+    <nav aria-label="Breadcrumb">
+      <ol class="flex items-center gap-2 text-[13px] text-zinc-500 dark:text-zinc-500">
+        <li><a href="/" class="transition hover:text-zinc-900 dark:hover:text-zinc-200">Home</a></li>
+        <li aria-hidden="true" class="text-zinc-300 dark:text-zinc-700">/</li>
+        <li><a href="/#directory" class="transition hover:text-zinc-900 dark:hover:text-zinc-200">Tools</a></li>
+        <li aria-hidden="true" class="text-zinc-300 dark:text-zinc-700">/</li>
+        <li aria-current="page" class="font-medium text-zinc-900 dark:text-zinc-200">YouTube Thumbnail Downloader</li>
+      </ol>
+    </nav>
+    <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-[11px] font-medium text-zinc-600 dark:border-white/10 dark:bg-white/5 dark:text-zinc-400">
+      🌍 Global&nbsp;·&nbsp;Tier‑1 optimized
+    </span>
+  </div>
+
+  <!-- ═══════════════ 2. HERO ═══════════════ -->
+  <section class="pt-10 pb-8 text-center sm:pt-14">
+    <div class="mx-auto mb-5 inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white/60 px-3.5 py-1.5 text-xs font-medium text-zinc-600 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-zinc-400">
+      <span class="text-emerald-500">✓</span>
+      <span>Free · no signup · max-resolution downloads</span>
+    </div>
+
+    <h1 class="mx-auto max-w-4xl text-balance text-4xl font-extrabold leading-[1.08] tracking-[-0.03em] sm:text-5xl lg:text-[3.6rem]">
+      YouTube
+      <span class="bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-500 bg-clip-text text-transparent">Thumbnail Downloader</span>
+    </h1>
+
+    <p class="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg">
+      Paste a video or Shorts link and download its thumbnail at the <strong class="font-semibold text-zinc-900 dark:text-zinc-200">largest size YouTube publishes — 1280 × 720</strong> — in JPG or WebP, plus every smaller size.
+    </p>
+
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a href="#tool" class="group inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-zinc-900/20 transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:shadow-white/10 dark:hover:bg-zinc-100">
+        Open the tool
+        <svg class="h-4 w-4 transition group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+      </a>
+      <a href="#how" class="inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white/60 px-6 py-3 text-sm font-semibold text-zinc-700 backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-zinc-300 dark:hover:bg-white/10">
+        How it works
+      </a>
+    </div>
+
+    <div class="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-zinc-500 dark:text-zinc-500">
+      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No signup</span>
+      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No ads</span>
+      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>100% client-side</span>
+      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Works offline</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 3. THE CORE INTERACTIVE TOOL ═══════════════ -->
+  <section id="tool" class="scroll-mt-24 pb-4">
+    <div class="overflow-hidden rounded-3xl border border-zinc-200/90 bg-white/70 shadow-2xl shadow-zinc-900/[0.06] backdrop-blur-2xl dark:border-white/10 dark:bg-white/[0.035] dark:shadow-black/40">
+
+      <div class="border-b border-zinc-200/80 px-4 py-4 dark:border-white/[0.07]">
+        <label for="url" class="text-[11px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">YouTube video or Shorts URL</label>
+        <div class="mt-2 flex flex-col gap-2 sm:flex-row">
+          <input id="url" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="https://www.youtube.com/watch?v=aqz-KE-bpKQ"
+            class="w-full flex-1 rounded-xl border border-zinc-200 bg-white px-4 py-3 font-mono text-[13.5px] text-zinc-900 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20 dark:border-white/10 dark:bg-white/5 dark:text-white" />
+          <button id="extractBtn" type="button" class="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-xl bg-zinc-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">Get thumbnails</button>
+        </div>
+        <div class="mt-2 flex flex-wrap items-center gap-2">
+          <button id="sampleBtn" type="button" class="rounded-lg border border-zinc-200 px-2.5 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-white/10 dark:text-zinc-400 dark:hover:bg-white/5">Try a sample video</button>
+          <span id="videoIdLabel" class="hidden font-mono text-[11px] text-zinc-400 dark:text-zinc-600"></span>
+        </div>
+      </div>
+
+      <!-- Quality + format selector -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-200/80 px-4 py-3 dark:border-white/[0.07]">
+        <div role="tablist" aria-label="Quality" class="flex gap-1 rounded-xl bg-zinc-100 p-1 dark:bg-white/[0.06]">
+          <button role="tab" type="button" data-quality="all" aria-selected="true" class="seg">All sizes</button>
+          <button role="tab" type="button" data-quality="hd" aria-selected="false" class="seg">HD &amp; up</button>
+          <button role="tab" type="button" data-quality="sd" aria-selected="false" class="seg">SD</button>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-semibold text-zinc-600 dark:text-zinc-400">Format</span>
+          <div role="tablist" aria-label="Format" class="flex gap-1 rounded-xl bg-zinc-100 p-1 dark:bg-white/[0.06]">
+            <button role="tab" type="button" data-format="jpg" aria-selected="true" class="seg">JPG</button>
+            <button role="tab" type="button" data-format="webp" aria-selected="false" class="seg">WebP</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="error" class="hidden items-start gap-2 border-b border-rose-500/20 bg-rose-500/[0.07] px-4 py-3 text-[13px] text-rose-600 dark:border-white/[0.07] dark:text-rose-400">
+        <svg class="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        <span id="errorMsg"></span>
+      </div>
+
+      <div id="results" class="p-4">
+        <div id="empty" class="rounded-2xl border border-dashed border-zinc-300 py-14 text-center dark:border-white/10">
+          <span class="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-zinc-100 text-zinc-400 dark:bg-white/5 dark:text-zinc-500">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-4.6-4.6a2 2 0 0 0-2.8 0L4 20"/></svg>
+          </span>
+          <p class="mt-3 text-sm font-semibold">Paste a link to see every thumbnail size</p>
+          <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-500">Up to 1280 × 720 HD — the largest YouTube publishes — plus SD, HQ, MQ and small.</p>
+        </div>
+        <div id="grid" class="hidden grid gap-4 sm:grid-cols-2"></div>
+      </div>
+    </div>
+
+    <p class="mt-3 text-center text-[11px] text-zinc-400 dark:text-zinc-600">
+      Thumbnails are loaded directly from YouTube's image servers. Nothing is proxied through ToolGuest.
+    </p>
+  </section>
+  <!-- ═══════════════ 4. WHY CHOOSE US ═══════════════ -->
+  <section id="why" class="scroll-mt-24 py-16 sm:py-20">
+    <div class="text-center">
+      <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">Why ToolGuest</span>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">The fastest way to grab a thumbnail</h2>
+    </div>
+    <div class="mt-10 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-white/[0.03]">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>
+          </span>
+          <h3 class="mt-4 font-bold tracking-tight">Every size in one view</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Full HD, SD, high, medium and small are shown side by side, so you can pick the exact image you need without guessing at URLs.</p>
+        </div>
+        <div class="rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-white/[0.03]">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+          </span>
+          <h3 class="mt-4 font-bold tracking-tight">JPG or WebP, your choice</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Flip the format switch to pull YouTube's WebP variants when you want smaller files for a fast-loading page.</p>
+        </div>
+        <div class="rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-white/[0.03]">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14 4 6"/><circle cx="12" cy="14" r="8"/><path d="M12 6v2"/></svg>
+          </span>
+          <h3 class="mt-4 font-bold tracking-tight">Straight from the source</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Images load directly from YouTube's own image servers. ToolGuest never proxies, stores or re-hosts your thumbnail.</p>
+        </div>
+    </div>
+  </section>
+  <!-- ═══════════════ 5. HOW IT WORKS ═══════════════ -->
+  <section id="how" class="scroll-mt-24 pb-16 sm:pb-20">
+    <div class="text-center">
+      <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">How it works</span>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Download a thumbnail in 4 steps</h2>
+    </div>
+    <div class="mx-auto mt-10 grid max-w-3xl gap-6 sm:grid-cols-2">
+        <div class="flex gap-4">
+          <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">1</span>
+          <div>
+            <h3 class="font-semibold tracking-tight">Copy the video link</h3>
+            <p class="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">From the YouTube address bar or the Share button — a full URL or just the video ID both work.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">2</span>
+          <div>
+            <h3 class="font-semibold tracking-tight">Paste and press Get thumbnails</h3>
+            <p class="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">The tool extracts the video ID and loads every available size at once.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">3</span>
+          <div>
+            <h3 class="font-semibold tracking-tight">Choose quality and format</h3>
+            <p class="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Filter to HD or SD, and switch between JPG and WebP. Unavailable sizes are dimmed automatically.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">4</span>
+          <div>
+            <h3 class="font-semibold tracking-tight">Download or open</h3>
+            <p class="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Press Download to save the image, or the open button to view it full size in a new tab.</p>
+          </div>
+        </div>
+    </div>
+  </section>
+  <!-- ═══════════════ 6. COMPARISON ═══════════════ -->
+  <section id="compare" class="scroll-mt-24 pb-16 sm:pb-20">
+    <div class="text-center">
+      <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">Compare</span>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">ToolGuest vs. other thumbnail tools</h2>
+    </div>
+    <div class="mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
+      <table class="w-full text-left text-sm">
+        <thead class="bg-zinc-50/80 text-xs uppercase tracking-wider text-zinc-500 dark:bg-white/[0.04] dark:text-zinc-500">
+          <tr>
+            <th class="py-3.5 pr-4 font-bold">Feature</th>
+            <th class="px-4 py-3.5 text-center font-bold text-zinc-900 dark:text-white">ToolGuest</th>
+            <th class="px-4 py-3.5 text-center font-bold">Typical downloader</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
+              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Largest available size</td>
+              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">1280 × 720</td>
+              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">Varies</td>
+            </tr>
+            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
+              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">WebP option</td>
+              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">Yes</td>
+              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">Rarely</td>
+            </tr>
+            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
+              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Shorts &amp; youtu.be links</td>
+              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">Yes</td>
+              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">Sometimes</td>
+            </tr>
+            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
+              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Hides missing sizes</td>
+              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">Yes</td>
+              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">No</td>
+            </tr>
+            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
+              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Ads &amp; pop-ups</td>
+              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">None</td>
+              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">Many</td>
+            </tr>
+            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
+              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Signup required</td>
+              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">Never</td>
+              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">Often</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <!-- ═══════════════ 7. FAQ ═══════════════ -->
+  <section id="faq" class="scroll-mt-24 pb-16 sm:pb-20">
+    <div class="mx-auto max-w-3xl">
+      <div class="text-center">
+        <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">FAQ</span>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Thumbnail questions, answered</h2>
+      </div>
+      <div class="mt-10 space-y-3">
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">Can I download a 4K or 1080p thumbnail?</span>
+            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            No — and no tool can, because YouTube does not publish thumbnails above 1280 × 720. We tested every documented endpoint (<code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">maxresdefault</code>, <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">hq720</code>, <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">maxres2</code>, <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">maxres3</code> and the numbered variants) and the ceiling is always 1280 × 720. The video itself may be 4K, but the thumbnail still is not. Any site claiming a 4K thumbnail is upscaling a 1280 × 720 image.
+          </p></div></div>
+        </div>
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">Why is the HD max thumbnail missing for some videos?</span>
+            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            YouTube only generates the <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">maxresdefault</code> still when the uploader supplied a large enough source. Older or low-resolution uploads may only have SD and below. When that happens the card is dimmed with a note, and Full HD (1280 × 720) remains the best image available.
+          </p></div></div>
+        </div>
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">Which sizes can I download?</span>
+            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Up to six: hq720 and maxresdefault at 1280 × 720, sddefault at 640 × 480, hqdefault at 480 × 360, mqdefault at 320 × 180 and default at 120 × 90. The 480 × 360 image exists for essentially every public video.
+          </p></div></div>
+        </div>
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">What is the difference between JPG and WebP here?</span>
+            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Both show the same picture. YouTube's WebP versions are usually a little smaller for the same dimensions, which makes them handy when the thumbnail is going on a website and page weight matters. JPG is the safer choice if the image will be opened in older software.
+          </p></div></div>
+        </div>
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">Does this work for Shorts and live streams?</span>
+            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Yes. Shorts links, live URLs, embeds and youtu.be short links are all recognised, because they all resolve to the same underlying video ID.
+          </p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ═══════════════ 8. RELATED TOOLS ═══════════════ -->
+  <section class="pb-20">
+    <div class="rounded-3xl border border-zinc-200 bg-white/60 p-6 backdrop-blur sm:p-8 dark:border-white/10 dark:bg-white/[0.03]">
+      <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 class="text-xl font-extrabold tracking-tight">Related creator tools</h2>
+          <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Same speed. Same privacy. Zero ads.</p>
+        </div>
+        <a href="/#directory" class="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 transition hover:gap-2.5 dark:text-indigo-400">
+          All tools
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="grid gap-3 sm:grid-cols-3">
+        <a href="/youtube-transcript" class="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-indigo-500/40">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5"/></svg>
+          </span>
+          <span>
+            <span class="block font-semibold tracking-tight transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">YouTube Transcript</span>
+            <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">Timestamped transcripts from any video</span>
+          </span>
+        </a>
+        <a href="/youtube-timestamp" class="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-indigo-500/40">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 8-4 4 4 4"/><path d="m17 8 4 4-4 4"/></svg>
+          </span>
+          <span>
+            <span class="block font-semibold tracking-tight transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Timestamp Link Generator</span>
+            <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">Shareable links that jump to an exact second</span>
+          </span>
+        </a>
+        <a href="/image-resizer" class="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-indigo-500/40">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-4.6-4.6a2 2 0 0 0-2.8 0L4 20"/></svg>
+          </span>
+          <span>
+            <span class="block font-semibold tracking-tight transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Image Resizer</span>
+            <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">Resize and compress images in your browser</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+<!-- TF-RELATED -->
+<section class="tf-related" aria-label="Related tools">
+  <div class="tf-related-glow" aria-hidden="true">
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+  </div>
+  <div class="tf-related-head">
+    <div>
+      <p class="tf-related-eyebrow"><span class="tf-related-pulse"></span>Keep going</p>
+      <h2 class="tf-related-title">Related free tools</h2>
+      <p class="tf-related-sub">Hand-picked tools that pair with this one — all free, all private.</p>
+    </div>
+    <a class="tf-related-all" href="/#directory"><span>All 26 tools</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="tf-related-grid">
+      <a class="tf-related-card" href="/youtube-transcript" style="--tf-card-accent: #e11d48; --i: 0">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="18" height="14" x="3" y="5" rx="2" ry="2"/><path d="M7 15h4M15 15h2M7 11h2M13 11h4"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">YouTube Transcript</span>
+          <span class="tf-related-desc">Pull accurate, timestamped transcripts from any video in seconds.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/youtube-timestamp" style="--tf-card-accent: #fb7185; --i: 1">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Timestamp Link Generator</span>
+          <span class="tf-related-desc">Create shareable YouTube links that jump to an exact second.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/shorts-hooks" style="--tf-card-accent: #ea580c; --i: 2">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Shorts Hook Generator</span>
+          <span class="tf-related-desc">Generate scroll-stopping first-3-second hooks for Shorts &amp; Reels.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/image-resizer" style="--tf-card-accent: #d97706; --i: 3">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M14 15H9v-5"/><path d="M16 3h5v5"/><path d="M21 3 9 15"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Image Resizer</span>
+          <span class="tf-related-desc">Resize, crop and compress images locally at full quality.</span>
+          <span class="tf-related-tag">Media</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/heic-to-jpg" style="--tf-card-accent: #c026d3; --i: 4">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><circle cx="10" cy="12" r="2"/><path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">HEIC to JPG Converter</span>
+          <span class="tf-related-desc">Convert iPhone HEIC photos to universal JPG in one click.</span>
+          <span class="tf-related-tag">Media</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/video-to-blog" style="--tf-card-accent: #db2777; --i: 5">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Video to Blog</span>
+          <span class="tf-related-desc">Turn any video link into a structured, SEO-ready blog article.</span>
+          <span class="tf-related-tag">Creator</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/qr-generator" style="--tf-card-accent: #0891b2; --i: 6">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">QR Generator</span>
+          <span class="tf-related-desc">Create high-resolution QR codes for URLs, WiFi and vCards.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="border-t border-zinc-200/80 dark:border-white/[0.07]">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-xs text-zinc-500 dark:text-zinc-600 sm:flex-row">
+    <p>© 2025 ToolGuest — free micro-tools, built for speed.</p>
+    <p class="inline-flex items-center gap-1.5">
+      <svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      No trackers · No cookies · No uploads
+    </p>
+  </div>
+</footer>
+
+<!-- ═══════════════ TOAST ═══════════════ -->
+<div id="toast" data-show="false" role="status" aria-live="polite"
+  class="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-xl bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white shadow-2xl dark:bg-white dark:text-zinc-900"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  var toastEl = document.getElementById('toast');
+  var toastTimer = 0;
+  function toast(message) {
+    toastEl.textContent = message;
+    toastEl.dataset.show = 'true';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.dataset.show = 'false'; }, 1800);
+  }
+
+  async function copyText(text, okMsg) {
+    if (!text) { toast('Nothing to copy'); return; }
+    try {
+      await navigator.clipboard.writeText(text);
+      toast(okMsg || 'Copied to clipboard ✓');
+    } catch (e) {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); toast(okMsg || 'Copied to clipboard ✓'); }
+      catch (_) { toast('Copy failed — select manually'); }
+      document.body.removeChild(ta);
+    }
+  }
+
+  function downloadText(text, name) {
+    if (!text) { toast('Nothing to download'); return; }
+    var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast('Downloaded ✓');
+  }
+
+  var themeBtn = document.getElementById('themeToggle');
+  if (themeBtn) themeBtn.addEventListener('click', function () {
+    var isDark = document.documentElement.classList.toggle('dark');
+    try { localStorage.setItem('tf-theme', isDark ? 'dark' : 'light'); } catch (e) {}
+  });
+
+  document.querySelectorAll('.faq-trigger').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var item = btn.closest('.faq-item');
+      var open = item.getAttribute('data-open') === 'true';
+      document.querySelectorAll('.faq-item').forEach(function (i) { i.setAttribute('data-open', 'false'); });
+      item.setAttribute('data-open', open ? 'false' : 'true');
+    });
+  });
+
+  /* ─────────── YouTube thumbnail downloader ─────────── */
+  var urlEl = document.getElementById('url');
+  var grid = document.getElementById('grid');
+  var emptyEl = document.getElementById('empty');
+  var errBox = document.getElementById('error');
+  var errMsg = document.getElementById('errorMsg');
+  var idLabel = document.getElementById('videoIdLabel');
+
+  /* YouTube publishes these five stills. 1280x720 is the largest that exists —
+     there is no 4K thumbnail endpoint, so hq720 is the true maximum. */
+  var SIZES = [
+    { key: 'hq720',        label: 'Full HD',   note: '1280 × 720', group: 'hd', best: true },
+    { key: 'maxresdefault', label: 'HD max',   note: '1280 × 720 · may be absent', group: 'hd' },
+    { key: 'sddefault',    label: 'SD',        note: '640 × 480 · may be absent', group: 'sd' },
+    { key: 'hqdefault',    label: 'High',      note: '480 × 360 · always present', group: 'sd' },
+    { key: 'mqdefault',    label: 'Medium',    note: '320 × 180', group: 'sd' },
+    { key: 'default',      label: 'Small',     note: '120 × 90', group: 'sd' }
+  ];
+
+  var state = { id: null, quality: 'all', format: 'jpg' };
+
+  function extractId(input) {
+    var s = (input || '').trim();
+    if (!s) return null;
+    if (/^[A-Za-z0-9_-]{11}$/.test(s)) return s;
+    var patterns = [
+      /(?:youtube\.com\/watch\?(?:.*&)?v=)([A-Za-z0-9_-]{11})/,
+      /(?:youtu\.be\/)([A-Za-z0-9_-]{11})/,
+      /(?:youtube\.com\/shorts\/)([A-Za-z0-9_-]{11})/,
+      /(?:youtube\.com\/embed\/)([A-Za-z0-9_-]{11})/,
+      /(?:youtube\.com\/live\/)([A-Za-z0-9_-]{11})/,
+      /(?:youtube\.com\/v\/)([A-Za-z0-9_-]{11})/
+    ];
+    for (var i = 0; i < patterns.length; i++) {
+      var m = patterns[i].exec(s);
+      if (m) return m[1];
+    }
+    return null;
+  }
+
+  function showError(msg) {
+    if (msg) { errMsg.textContent = msg; errBox.classList.remove('hidden'); errBox.classList.add('flex'); }
+    else { errBox.classList.add('hidden'); errBox.classList.remove('flex'); }
+  }
+
+  function thumbUrl(id, key, format) {
+    return format === 'webp'
+      ? 'https://i.ytimg.com/vi_webp/' + id + '/' + key + '.webp'
+      : 'https://i.ytimg.com/vi/' + id + '/' + key + '.jpg';
+  }
+
+  function visibleSizes() {
+    return SIZES.filter(function (s) {
+      return state.quality === 'all' || s.group === state.quality;
+    });
+  }
+
+  function card(size) {
+    var src = thumbUrl(state.id, size.key, state.format);
+    var name = state.id + '-' + size.key + '.' + state.format;
+    return '<div class="thumb-card overflow-hidden rounded-2xl border border-zinc-200 bg-white dark:border-white/10 dark:bg-white/[0.03]" data-src="' + src + '">' +
+      '<div class="relative aspect-video bg-zinc-100 dark:bg-black/40">' +
+        '<img src="' + src + '" alt="' + size.label + ' YouTube thumbnail, ' + size.note + '" loading="lazy" class="h-full w-full object-cover" />' +
+        '<div class="thumb-fallback hidden absolute inset-0 flex-col items-center justify-center gap-1 bg-zinc-100/95 text-center dark:bg-black/70">' +
+          '<span class="text-xs font-semibold text-zinc-500 dark:text-zinc-400">Not available at this size</span>' +
+          '<span class="text-[11px] text-zinc-400 dark:text-zinc-600">Try High or Medium instead</span>' +
+        '</div>' +
+        (size.best ? '<span class="absolute left-3 top-3 rounded-full bg-gradient-to-r from-indigo-500 to-violet-600 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-lg">Largest</span>' : '') +
+      '</div>' +
+      '<div class="flex items-center justify-between gap-2 px-4 py-3">' +
+        '<div class="min-w-0">' +
+          '<p class="truncate text-sm font-semibold tracking-tight">' + size.label + '</p>' +
+          '<p class="truncate text-[11px] text-zinc-500 dark:text-zinc-500">' + size.note + '</p>' +
+        '</div>' +
+        '<div class="flex shrink-0 items-center gap-1.5">' +
+          '<button type="button" data-open="' + src + '" class="grid h-8 w-8 place-items-center rounded-lg border border-zinc-200 text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-900 dark:border-white/10 dark:text-zinc-400 dark:hover:bg-white/10 dark:hover:text-white" aria-label="Open ' + size.label + ' in a new tab">' +
+            '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>' +
+          '</button>' +
+          '<button type="button" data-download="' + src + '" data-name="' + name + '" class="inline-flex items-center gap-1.5 rounded-lg bg-zinc-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">' +
+            '<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>' +
+            'Download' +
+          '</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  /* Probe each URL so an absent size is hidden rather than shown broken. */
+  function verify(cardEl) {
+    var img = cardEl.querySelector('img');
+    var fb = cardEl.querySelector('.thumb-fallback');
+    function absent() {
+      fb.classList.remove('hidden'); fb.classList.add('flex');
+      cardEl.classList.add('opacity-60');
+      var dl = cardEl.querySelector('[data-download]'); if (dl) dl.disabled = true;
+    }
+    img.addEventListener('error', absent);
+    if (img.complete && img.naturalWidth === 0) absent();
+  }
+
+  function render() {
+    var sizes = visibleSizes();
+    grid.innerHTML = sizes.map(function (s) {
+      return '<div data-size="' + s.key + '">' + card(s) + '</div>';
+    }).join('');
+    grid.querySelectorAll('.thumb-card').forEach(verify);
+    emptyEl.classList.add('hidden');
+    grid.classList.remove('hidden');
+  }
+
+  function run() {
+    var id = extractId(urlEl.value);
+    if (!id) {
+      showError('That does not look like a YouTube link. Paste a full watch, youtu.be or /shorts/ URL, or an 11-character video ID.');
+      grid.classList.add('hidden');
+      emptyEl.classList.remove('hidden');
+      idLabel.classList.add('hidden');
+      state.id = null;
+      return;
+    }
+    showError('');
+    state.id = id;
+    idLabel.textContent = 'video ID: ' + id;
+    idLabel.classList.remove('hidden');
+    render();
+    toast('Thumbnails loaded ✓');
+  }
+
+  document.getElementById('extractBtn').addEventListener('click', run);
+  urlEl.addEventListener('keydown', function (e) { if (e.key === 'Enter') run(); });
+  document.getElementById('sampleBtn').addEventListener('click', function () {
+    urlEl.value = 'https://www.youtube.com/watch?v=aqz-KE-bpKQ';
+    run();
+  });
+
+  document.querySelectorAll('[data-quality]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      state.quality = btn.dataset.quality;
+      document.querySelectorAll('[data-quality]').forEach(function (b) {
+        b.setAttribute('aria-selected', String(b === btn));
+      });
+      if (state.id) render();
+    });
+  });
+
+  document.querySelectorAll('[data-format]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      state.format = btn.dataset.format;
+      document.querySelectorAll('[data-format]').forEach(function (b) {
+        b.setAttribute('aria-selected', String(b === btn));
+      });
+      if (state.id) render();
+    });
+  });
+
+  grid.addEventListener('click', async function (e) {
+    var openBtn = e.target.closest('[data-open]');
+    if (openBtn) { window.open(openBtn.dataset.open, '_blank', 'noopener'); return; }
+    var dlBtn = e.target.closest('[data-download]');
+    if (!dlBtn) return;
+    var url = dlBtn.dataset.download;
+    try {
+      var res = await fetch(url, { mode: 'cors' });
+      if (!res.ok) throw new Error('bad status');
+      var blob = await res.blob();
+      var objUrl = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = objUrl; a.download = dlBtn.dataset.name;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(objUrl);
+      toast('Downloaded ✓');
+    } catch (err) {
+      // Cross-origin fetch can be blocked — fall back to opening the image
+      window.open(url, '_blank', 'noopener');
+      toast('Opened in a new tab — right-click to save');
+    }
+  });
+
+  urlEl.focus({ preventScroll: true });
+})();
+</script>
+  <script src="/assets/rating-widget.js" defer></script>
+<script src="assets/related.js" defer></script>
+</body>
+</html>

@@ -1,25 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en-GB" class="dark">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!-- ═══════════════ SEO HEADER ═══════════════ -->
-<title>Base64 Encoder & Decoder — Free, Instant, 100% Client-Side | ToolForge</title>
-<meta name="description" content="Free online Base64 encoder and decoder. Convert text to Base64 and Base64 to text instantly — 100% in your browser, no uploads, no ads, no signup. Supports UTF-8, emoji and URL-safe Base64." />
+<title>Base64 Encoder &amp; Decoder — Free, Private, Instant</title>
+  <meta property="og:image" content="https://toolguest.com/assets/og/base64-encoder.png" />
+  <meta name="twitter:image" content="https://toolguest.com/assets/og/base64-encoder.png" />
+<meta name="description" content="Free Base64 encoder and decoder. Convert text to Base64 and back instantly, 100% in your browser. No uploads, no signup." />
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-<link rel="canonical" href="https://toolforge.dev/tools/base64-encoder-decoder" />
+<link rel="canonical" href="https://toolguest.com/base64-encoder" />
+  <link rel="alternate" hreflang="en" href="https://toolguest.com/base64-encoder" />
+  <link rel="alternate" hreflang="x-default" href="https://toolguest.com/base64-encoder" />
 
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="ToolForge" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="en_AU" />
+  <meta property="og:locale:alternate" content="en_CA" />
+  <meta http-equiv="content-language" content="en-GB" />
+<meta property="og:site_name" content="ToolGuest" />
 <meta property="og:title" content="Base64 Encoder & Decoder — Free, Instant, 100% Client-Side" />
 <meta property="og:description" content="Lightning-fast Base64 encoder and decoder. Real-time conversion, one-click copy & clear, zero data transmission. Built for developers." />
-<meta property="og:url" content="https://toolforge.dev/tools/base64-encoder-decoder" />
-<meta property="og:image" content="https://toolforge.dev/og/base64-encoder-decoder.png" />
+<meta property="og:url" content="https://toolguest.com/base64-encoder" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Base64 Encoder & Decoder — Free, Instant, 100% Client-Side" />
 <meta name="twitter:description" content="Real-time Base64 encode/decode in your browser. No ads, no uploads, no signup." />
-<meta name="twitter:image" content="https://toolforge.dev/og/base64-encoder-decoder.png" />
 
 <script type="application/ld+json">
 {
@@ -30,26 +37,89 @@
       "name": "Base64 Encoder & Decoder",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Any",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "12000" },
-      "description": "Free online Base64 encoder and decoder that runs 100% client-side in your browser."
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP"
+      },
+      "description": "Free online Base64 encoder and decoder that runs 100% client-side in your browser.",
+      "featureList": [
+        "100% client-side — Conversion happens in your tab. Your strings, tokens and secrets never touch a server.",
+        "Zero data transmission — No uploads, no analytics on your input, no clipboard polling. Nothing is logged, ever.",
+        "Instant live conversion — No submit button. Every keystroke converts in under a millisecond — even for large payloads.",
+        "Ad-free workspace — No interstitials, no pop-unders, no sticky banners stealing your focus or your screen space.",
+        "Pick a mode — Choose Encode to turn text into Base64, or Decode to turn Base64 back into readable text.",
+        "Paste your input — Type or paste into the left pane — or hit Paste to pull straight from your clipboard."
+      ],
+      "dateModified": "2026-11-05",
+      "datePublished": "2026-11-05"
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolforge.dev/" },
-        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://toolforge.dev/tools" },
-        { "@type": "ListItem", "position": 3, "name": "Base64 Encoder & Decoder", "item": "https://toolforge.dev/tools/base64-encoder-decoder" }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolguest.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://toolguest.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Base64 Encoder & Decoder",
+          "item": "https://toolguest.com/base64-encoder"
+        }
       ]
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "What is Base64 encoding and why is it used?", "acceptedAnswer": { "@type": "Answer", "text": "Base64 converts binary or text data into a 64-character ASCII alphabet so it can travel safely through systems that only support plain text — JSON payloads, data URLs, email (MIME), JWTs, and HTTP Basic Auth headers." } },
-        { "@type": "Question", "name": "Is my data uploaded to a server?", "acceptedAnswer": { "@type": "Answer", "text": "No. All encoding and decoding happens inside your browser using the native TextEncoder and atob/btoa APIs. Nothing is transmitted, logged, or stored anywhere." } },
-        { "@type": "Question", "name": "Does this tool support Unicode, emoji and non-English text?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The encoder converts your text to UTF-8 bytes before Base64-encoding, so emoji, Arabic, Japanese, Chinese and every other Unicode character round-trip perfectly." } },
-        { "@type": "Question", "name": "What is URL-safe Base64?", "acceptedAnswer": { "@type": "Answer", "text": "URL-safe Base64 (RFC 4648 §5) replaces '+' with '-' and '/' with '_' and strips '=' padding, so the string can be embedded in URLs, filenames and JWT segments without escaping." } },
-        { "@type": "Question", "name": "Is there a file size limit?", "acceptedAnswer": { "@type": "Answer", "text": "There is no imposed limit — the only constraint is your browser's memory. Strings of several megabytes convert in a few milliseconds because the work is done on the main thread with native APIs." } }
+        {
+          "@type": "Question",
+          "name": "What is Base64 encoding and why is it used?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Base64 converts binary or text data into a 64-character ASCII alphabet so it can travel safely through systems that only support plain text — JSON payloads, data URLs, email (MIME), JWTs, and HTTP Basic Auth headers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data uploaded to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. All encoding and decoding happens inside your browser using the native TextEncoder and atob/btoa APIs. Nothing is transmitted, logged, or stored anywhere."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this tool support Unicode, emoji and non-English text?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The encoder converts your text to UTF-8 bytes before Base64-encoding, so emoji, Arabic, Japanese, Chinese and every other Unicode character round-trip perfectly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is URL-safe Base64?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "URL-safe Base64 (RFC 4648 §5) replaces '+' with '-' and '/' with '_' and strips '=' padding, so the string can be embedded in URLs, filenames and JWT segments without escaping."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a file size limit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There is no imposed limit — the only constraint is your browser's memory. Strings of several megabytes convert in a few milliseconds because the work is done on the main thread with native APIs."
+          }
+        }
       ]
     }
   ]
@@ -67,10 +137,8 @@
   })();
 </script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="assets/fonts.css" rel="stylesheet">
+<script src="assets/tailwind.js"></script>
 <script>
   tailwind.config = {
     darkMode: 'class',
@@ -128,6 +196,11 @@
     html { scroll-behavior: auto; }
   }
 </style>
+<link rel="stylesheet" href="assets/related.css">
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
 </head>
 
 <body class="bg-white text-zinc-900 dark:bg-[#08080a] dark:text-zinc-100 font-sans antialiased">
@@ -142,11 +215,11 @@
 <!-- ═══════════════ HEADER ═══════════════ -->
 <header class="sticky top-0 z-40 border-b border-zinc-200/70 dark:border-white/[0.07] bg-white/70 dark:bg-[#08080a]/70 backdrop-blur-xl">
   <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-    <a href="#" class="flex items-center gap-2.5">
+    <a href="/" class="flex items-center gap-2.5">
       <span class="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-500/25">
         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m7 8-4 4 4 4"/><path d="m17 8 4 4-4 4"/></svg>
       </span>
-      <span class="text-[15px] font-bold tracking-tight">ToolForge</span>
+      <span class="text-[15px] font-bold tracking-tight">ToolGuest</span>
     </a>
 
     <nav class="hidden items-center gap-1 md:flex">
@@ -179,9 +252,9 @@
   <div class="flex flex-wrap items-center justify-between gap-3 pt-6">
     <nav aria-label="Breadcrumb">
       <ol class="flex items-center gap-2 text-[13px] text-zinc-500 dark:text-zinc-500">
-        <li><a href="#" class="transition hover:text-zinc-900 dark:hover:text-zinc-200">Home</a></li>
+        <li><a href="/" class="transition hover:text-zinc-900 dark:hover:text-zinc-200">Home</a></li>
         <li aria-hidden="true" class="text-zinc-300 dark:text-zinc-700">/</li>
-        <li><a href="#" class="transition hover:text-zinc-900 dark:hover:text-zinc-200">Tools</a></li>
+        <li><a href="/" class="transition hover:text-zinc-900 dark:hover:text-zinc-200">Tools</a></li>
         <li aria-hidden="true" class="text-zinc-300 dark:text-zinc-700">/</li>
         <li aria-current="page" class="font-medium text-zinc-900 dark:text-zinc-200">Base64 Encoder &amp; Decoder</li>
       </ol>
@@ -199,12 +272,12 @@
         <span class="h-4 w-4 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 ring-2 ring-white dark:ring-[#08080a]"></span>
         <span class="h-4 w-4 rounded-full bg-gradient-to-br from-violet-400 to-violet-600 ring-2 ring-white dark:ring-[#08080a]"></span>
       </span>
-      <span class="text-amber-500">★★★★★</span>
-      <span class="font-semibold text-zinc-900 dark:text-zinc-200">4.9/5</span>
+      <span class="text-emerald-500">✓</span>
+      <span class="font-semibold text-zinc-900 dark:text-zinc-200">No upload</span>
       <span class="text-zinc-400 dark:text-zinc-600">·</span>
-      <span>12,000+ developers</span>
+      <span>For developers</span>
       <span class="text-zinc-400 dark:text-zinc-600">·</span>
-      <span>100M+ strings converted</span>
+      <span>Runs in your browser — nothing uploaded</span>
     </div>
 
     <h1 class="mx-auto max-w-4xl text-balance text-4xl font-extrabold leading-[1.08] tracking-[-0.03em] sm:text-5xl lg:text-[3.6rem]">
@@ -330,7 +403,7 @@
   <!-- ═══════════════ 4. WHY CHOOSE US ═══════════════ -->
   <section id="why" class="scroll-mt-24 py-16 sm:py-20">
     <div class="mx-auto max-w-2xl text-center">
-      <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">Why ToolForge</span>
+      <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">Why ToolGuest</span>
       <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Built to be the fastest Base64 tool on the web</h2>
       <p class="mt-3 text-zinc-600 dark:text-zinc-400">No banners. No cookie walls. No server round-trips. Just the conversion you came for.</p>
     </div>
@@ -406,7 +479,7 @@
   <section id="compare" class="scroll-mt-24 pb-16 sm:pb-20">
     <div class="mx-auto max-w-2xl text-center">
       <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">Head to head</span>
-      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">ToolForge vs. Base64Encode.org</h2>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">ToolGuest vs. Base64Encode.org</h2>
       <p class="mt-3 text-zinc-600 dark:text-zinc-400">The same job, done in a fraction of the time — without the ad clutter.</p>
     </div>
 
@@ -418,7 +491,7 @@
               <th scope="col" class="px-5 py-4 text-xs font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Capability</th>
               <th scope="col" class="px-5 py-4 text-xs font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Base64Encode.org</th>
               <th scope="col" class="bg-indigo-500/[0.06] px-5 py-4 text-xs font-bold uppercase tracking-wider text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400">
-                ToolForge <span class="ml-1 rounded bg-indigo-500 px-1.5 py-0.5 text-[9px] font-extrabold text-white">US</span>
+                ToolGuest <span class="ml-1 rounded bg-indigo-500 px-1.5 py-0.5 text-[9px] font-extrabold text-white">US</span>
               </th>
             </tr>
           </thead>
@@ -540,58 +613,114 @@
   </section>
 
   <!-- ═══════════════ 8. RELATED TOOLS ═══════════════ -->
-  <section class="pb-20">
-    <div class="rounded-3xl border border-zinc-200 bg-white/60 p-6 backdrop-blur sm:p-8 dark:border-white/10 dark:bg-white/[0.03]">
-      <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h2 class="text-xl font-extrabold tracking-tight">Related developer tools</h2>
-          <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Same speed. Same privacy. Zero ads.</p>
-        </div>
-        <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 transition hover:gap-2.5 dark:text-indigo-400">
-          All tools
-          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
+  
 
-      <div class="grid gap-3 sm:grid-cols-3">
-        <a href="#" class="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-indigo-500/40">
-          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          </span>
-          <span>
-            <span class="block font-semibold tracking-tight transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Password Generator</span>
-            <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">Cryptographically secure, custom rules</span>
-          </span>
-        </a>
-
-        <a href="#" class="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-indigo-500/40">
-          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1"/><path d="M16 3h1a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2 2 2 0 0 0-2 2v5a2 2 0 0 1-2 2h-1"/></svg>
-          </span>
-          <span>
-            <span class="block font-semibold tracking-tight transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">JSON Formatter</span>
-            <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">Beautify, minify &amp; validate JSON</span>
-          </span>
-        </a>
-
-        <a href="#" class="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-indigo-500/40">
-          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3M21 21v.01M12 7v3a2 2 0 0 1-2 2H7M3 12h.01M12 3h.01M12 16v.01M16 12h1M21 12v.01M12 21v-1"/></svg>
-          </span>
-          <span>
-            <span class="block font-semibold tracking-tight transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">QR Code Generator</span>
-            <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">Instant SVG &amp; PNG, no watermark</span>
-          </span>
-        </a>
-      </div>
+<!-- TF-RELATED -->
+<section class="tf-related" aria-label="Related tools">
+  <div class="tf-related-glow" aria-hidden="true">
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+    <span class="tf-related-spark"></span>
+  </div>
+  <div class="tf-related-head">
+    <div>
+      <p class="tf-related-eyebrow"><span class="tf-related-pulse"></span>Keep going</p>
+      <h2 class="tf-related-title">Related free tools</h2>
+      <p class="tf-related-sub">Hand-picked tools that pair with this one — all free, all private.</p>
     </div>
-  </section>
+    <a class="tf-related-all" href="/#directory"><span>All 26 tools</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="tf-related-grid">
+      <a class="tf-related-card" href="/hash-generator" style="--tf-card-accent: #a855f7; --i: 0">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Hash Generator</span>
+          <span class="tf-related-desc">Generate MD5, SHA-1, SHA-256 and SHA-512 hashes instantly.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/json-formatter" style="--tf-card-accent: #0284c7; --i: 1">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">JSON Formatter</span>
+          <span class="tf-related-desc">Beautify, minify and validate JSON with instant error pointing.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/password-checker" style="--tf-card-accent: #0d9488; --i: 2">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Password Checker</span>
+          <span class="tf-related-desc">Measure entropy and breach risk without sending a byte anywhere.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/qr-generator" style="--tf-card-accent: #0891b2; --i: 3">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">QR Generator</span>
+          <span class="tf-related-desc">Create high-resolution QR codes for URLs, WiFi and vCards.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/url-slug-generator" style="--tf-card-accent: #22c55e; --i: 4">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">URL Slug Generator</span>
+          <span class="tf-related-desc">Convert any title into a clean, SEO-friendly URL slug.</span>
+          <span class="tf-related-tag">Dev</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/diff-checker" style="--tf-card-accent: #818cf8; --i: 5">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><path d="M11 18H8a2 2 0 0 1-2-2V9"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Text &amp; Code Diff Checker</span>
+          <span class="tf-related-desc">Compare two blocks of text or code and highlight every change.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+      <a class="tf-related-card" href="/markdown-to-html" style="--tf-card-accent: #6d28d9; --i: 6">
+        <span class="tf-related-tile" aria-hidden="true"><svg class="tf-related-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 12.5 8 15l2 2.5"/><path d="m14 12.5 2 2.5-2 2.5"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/></svg></span>
+        <span class="tf-related-body">
+          <span class="tf-related-name">Markdown to HTML</span>
+          <span class="tf-related-desc">Convert Markdown into clean, copy-ready semantic HTML.</span>
+          <span class="tf-related-tag">Text</span>
+        </span>
+        <span class="tf-related-go" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+  </div>
+</section>
+
 </main>
 
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer class="border-t border-zinc-200/80 dark:border-white/[0.07]">
   <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-xs text-zinc-500 dark:text-zinc-600 sm:flex-row">
-    <p>© 2025 ToolForge — free developer micro-tools, built for speed.</p>
+    <p>© 2025 ToolGuest — free developer micro-tools, built for speed.</p>
     <p class="inline-flex items-center gap-1.5">
       <svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       No trackers · No cookies · No uploads
@@ -853,5 +982,7 @@
   els.source.focus({ preventScroll: true });
 })();
 </script>
+  <script src="/assets/rating-widget.js" defer></script>
+<script src="assets/related.js" defer></script>
 </body>
 </html>

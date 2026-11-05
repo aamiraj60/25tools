@@ -1,0 +1,46 @@
+# ToolGuest
+
+> 26 free, private, ad-free online tools for creators, developers and
+> businesses. Every tool runs entirely in the browser: no uploads, no
+> account, no tracking. The site is a static site hosted on Vercel.
+
+## Key facts
+
+- Free to use, with no sign-up and no ads.
+- Processing happens client-side; input files and text never leave the device.
+- 26 tools across text, image, developer, video and creator categories.
+- Canonical site: https://toolguest.com/
+
+## Tools
+
+- [AI Humanizer](https://toolguest.com/ai-humanizer): Rewrite AI text so it reads naturally and bypasses detectors.
+- [Aspect Ratio Calculator](https://toolguest.com/aspect-ratio-calculator): Resolve 16:9, 4:5, 21:9 dimensions and scale perfectly.
+- [Base64 Encoder](https://toolguest.com/base64-encoder): Encode and decode Base64 strings, files and data URIs.
+- [Case Converter](https://toolguest.com/case-converter): Switch between sentence, title, camel, snake and kebab case.
+- [Color Palette Generator](https://toolguest.com/color-palette-generator): Extract cohesive palettes and generate accessible HEX combos.
+- [Creator Calculator](https://toolguest.com/creator-calculator): Estimate RPM, sponsorship rates and monthly ad revenue.
+- [Unix Epoch Timestamp Converter](https://toolguest.com/epoch-converter): Convert Unix epoch seconds or milliseconds to human dates and back, with a live clock and five global timezones.
+- [Font Changer & Bio Generator](https://toolguest.com/font-changer): Fancy Unicode fonts and aesthetic bios for every social profile.
+- [Hash Generator](https://toolguest.com/hash-generator): Generate MD5, SHA-1, SHA-256 and SHA-512 hashes instantly.
+- [HEIC to JPG Converter](https://toolguest.com/heic-to-jpg): Convert iPhone HEIC photos to universal JPG in one click.
+- [Image Resizer](https://toolguest.com/image-resizer): Resize, crop and compress images locally at full quality.
+- [Invoice Generator](https://toolguest.com/invoice-generator): Build branded, downloadable PDF invoices in under a minute.
+- [JSON Formatter](https://toolguest.com/json-formatter): Beautify, minify and validate JSON with instant error pointing.
+- [Lorem Ipsum](https://toolguest.com/lorem-ipsum): Generate placeholder paragraphs, words or lists on demand.
+- [Markdown to HTML](https://toolguest.com/markdown-to-html): Convert Markdown into clean, copy-ready semantic HTML.
+- [Meta Tag Preview](https://toolguest.com/meta-tag-preview): Preview Google, X and Facebook cards before you publish.
+- [Password Checker](https://toolguest.com/password-checker): Measure entropy and breach risk without sending a byte anywhere.
+- [QR Generator](https://toolguest.com/qr-generator): Create high-resolution QR codes for URLs, WiFi and vCards.
+- [Shorts Hook Generator](https://toolguest.com/shorts-hooks): Generate scroll-stopping first-3-second hooks for Shorts & Reels.
+- [Text & Code Diff Checker](https://toolguest.com/diff-checker): Compare two blocks of text or code and highlight every change.
+- [Thumbnail Downloader](https://toolguest.com/thumbnail-downloader): Download any YouTube thumbnail in max resolution — HD & 4K.
+- [Timestamp Link Generator](https://toolguest.com/youtube-timestamp): Create shareable YouTube links that jump to an exact second.
+- [URL Slug Generator](https://toolguest.com/url-slug-generator): Convert any title into a clean, SEO-friendly URL slug.
+- [Video to Blog](https://toolguest.com/video-to-blog): Turn any video link into a structured, SEO-ready blog article.
+- [Word Counter](https://toolguest.com/word-counter): Live word, character, sentence and reading-time statistics.
+- [YouTube Transcript](https://toolguest.com/youtube-transcript): Pull accurate, timestamped transcripts from any video in seconds.
+
+## Notes
+
+- Pages are served without a .html suffix; the suffixed URL redirects.
+- Each page states its own purpose in its title and description.

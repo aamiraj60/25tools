@@ -1,0 +1,581 @@
+/* Related-tools block, shared by every tool page.
+
+   Surfaces are mixed from the page's own text colour, so one stylesheet reads
+   correctly on all 25 pages in light and dark. Colour comes from a per-card
+   `--tf-card-accent` written inline by fix-related.py, so each tool carries the
+   hue of its homepage category; `--i` carries the card's position for the
+   staggered entrance.
+
+   The entrance mirrors rating-widget.js: the section is "armed" by JS, then
+   revealed when it scrolls into view. Content is only ever hidden while armed,
+   and related.js always reveals it — on a timer at the latest — so a missing
+   observer or a disabled script leaves the block fully readable. */
+
+.tf-related {
+  --tf-accent: #6366f1;
+  --tf-grad-a: #6366f1;
+  --tf-grad-b: #ec4899;
+  --tf-card-accent: var(--tf-accent);
+  --tf-line: color-mix(in srgb, currentColor 12%, transparent);
+  --tf-fill: color-mix(in srgb, currentColor 4%, transparent);
+  --tf-chip: color-mix(in srgb, currentColor 8%, transparent);
+  --tf-ink: color-mix(in srgb, currentColor 62%, transparent);
+
+  position: relative;
+  margin: 64px auto 0;
+  max-width: 72rem;
+  padding: 48px 20px 18px;
+  font-family: inherit;
+  isolation: isolate;
+}
+
+/* A hairline that fades at both ends, instead of a hard rule. */
+.tf-related::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--tf-line) 18%, var(--tf-line) 82%, transparent);
+}
+
+/* ── Ambient layer: aurora wash plus a few drifting sparks ──────────────────
+   Clipped to the block's own box. A negative inline inset or a blur here
+   widens the document and gives narrow screens a horizontal scrollbar, so the
+   drift is done with background-position and vertical transforms only. */
+.tf-related-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: 24px;
+}
+
+.tf-related-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 320px;
+  background:
+    radial-gradient(40% 62% at 10% 0%, color-mix(in srgb, var(--tf-grad-a) 16%, transparent), transparent 70%),
+    radial-gradient(36% 62% at 90% 6%, color-mix(in srgb, var(--tf-grad-b) 14%, transparent), transparent 72%);
+  background-repeat: no-repeat;
+  background-size: 140% 100%, 140% 100%;
+  background-position: 0% 0%, 100% 0%;
+}
+
+/* The sheen that crosses the whole block, like the card in the rating widget. */
+.tf-related-glow::after {
+  content: "";
+  position: absolute;
+  inset: -30% -60%;
+  background: linear-gradient(102deg, transparent 44%, color-mix(in srgb, var(--tf-accent) 9%, transparent) 50%, transparent 56%);
+  transform: translateX(-45%);
+}
+
+.tf-related-spark {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--tf-accent) 85%, transparent);
+  opacity: 0;
+}
+
+.tf-related-spark:nth-child(1) { left: 8%; top: 30%; }
+.tf-related-spark:nth-child(2) { left: 27%; top: 58%; }
+.tf-related-spark:nth-child(3) { left: 52%; top: 22%; }
+.tf-related-spark:nth-child(4) { left: 73%; top: 52%; }
+.tf-related-spark:nth-child(5) { left: 91%; top: 34%; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .tf-related-glow::before { animation: tf-aurora 20s ease-in-out infinite alternate; }
+  .tf-related-glow::after { animation: tf-block-sheen 9s cubic-bezier(.5, 0, .5, 1) infinite; }
+  .tf-related-spark { animation: tf-float 9s ease-in-out infinite; }
+  .tf-related-spark:nth-child(1) { animation-delay: 0s; }
+  .tf-related-spark:nth-child(2) { animation-delay: 1.8s; }
+  .tf-related-spark:nth-child(3) { animation-delay: 3.6s; }
+  .tf-related-spark:nth-child(4) { animation-delay: 5.4s; }
+  .tf-related-spark:nth-child(5) { animation-delay: 7.2s; }
+}
+
+@keyframes tf-aurora {
+  0% { background-position: 0% 0%, 100% 0%; }
+  100% { background-position: 26% 0%, 74% 0%; }
+}
+
+@keyframes tf-block-sheen {
+  0%, 62% { transform: translateX(-45%); }
+  94%, 100% { transform: translateX(45%); }
+}
+
+@keyframes tf-float {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(.6); }
+  20% { opacity: .45; }
+  50% { opacity: .8; transform: translateY(-34px) scale(1); }
+  80% { opacity: .3; }
+}
+
+/* ── Entrance ───────────────────────────────────────────────────────────────
+   Only while the section is armed by related.js. Without the script, or once
+   it has revealed the block, every card is fully visible.
+
+   This is an animation rather than a transition on purpose: the rating widget
+   animates its entrance the same way, and an animation always lands on its end
+   state even when a transition would be dropped. `backwards` fill holds the
+   hidden state through each card's stagger delay and then releases it, so the
+   finished animation stops overriding the hover transform. */
+.tf-related.tf-armed .tf-related-head,
+.tf-related.tf-armed .tf-related-card {
+  opacity: 0;
+  transform: translateY(16px) scale(.985);
+}
+
+.tf-related.tf-in .tf-related-head,
+.tf-related.tf-in .tf-related-card {
+  animation: tf-rise .62s cubic-bezier(.22, 1, .36, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 65ms);
+}
+
+@keyframes tf-rise {
+  from { opacity: 0; transform: translateY(16px) scale(.985); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Belt and braces: once the entrance window has passed, the animation is
+   removed outright, so no engine can leave a card stranded mid-flight. */
+.tf-related.tf-done .tf-related-head,
+.tf-related.tf-done .tf-related-card {
+  animation: none;
+}
+
+.tf-related-head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 26px;
+  flex-wrap: wrap;
+}
+
+.tf-related-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 11px;
+  padding: 5px 12px 5px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--tf-accent) 32%, transparent);
+  background: color-mix(in srgb, var(--tf-accent) 10%, transparent);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tf-accent);
+}
+
+.tf-related-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--tf-accent) 60%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tf-related-pulse { animation: tf-ping 2.6s ease-out infinite; }
+}
+
+@keyframes tf-ping {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--tf-accent) 55%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 9px transparent; }
+}
+
+/* The heading carries a slow two-colour sheen. The solid colour is declared
+   first, so a browser that ignores background-clip on text still shows words. */
+.tf-related-title {
+  margin: 0;
+  font-size: 1.62rem;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .tf-related-title {
+    background: linear-gradient(
+      100deg,
+      currentColor 18%,
+      color-mix(in srgb, var(--tf-grad-a) 92%, currentColor) 40%,
+      color-mix(in srgb, var(--tf-grad-b) 92%, currentColor) 56%,
+      currentColor 78%
+    );
+    background-size: 260% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: tf-sheen 8s ease-in-out infinite;
+  }
+}
+
+@keyframes tf-sheen {
+  0%, 100% { background-position: 100% 0; }
+  50% { background-position: 0 0; }
+}
+
+.tf-related-sub {
+  margin: 8px 0 0;
+  max-width: 42ch;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--tf-ink);
+}
+
+.tf-related-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  border-radius: 999px;
+  border: 1px solid var(--tf-line);
+  background: var(--tf-fill);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.85;
+  transition: opacity 0.2s, border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.tf-related-all svg {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.25s cubic-bezier(.22, 1, .36, 1);
+}
+
+.tf-related-all:hover,
+.tf-related-all:focus-visible {
+  opacity: 1;
+  border-color: color-mix(in srgb, var(--tf-accent) 50%, transparent);
+  background: color-mix(in srgb, var(--tf-accent) 12%, transparent);
+  color: var(--tf-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -16px color-mix(in srgb, var(--tf-accent) 90%, transparent);
+}
+
+.tf-related-all:hover svg,
+.tf-related-all:focus-visible svg { transform: translateX(3px); }
+
+.tf-related-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(252px, 1fr));
+}
+
+.tf-related-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 16px 17px;
+  border-radius: 18px;
+  border: 1px solid var(--tf-line);
+  background:
+    radial-gradient(120% 90% at 0% 0%, transparent, transparent 60%),
+    linear-gradient(180deg, color-mix(in srgb, currentColor 4%, transparent), transparent 62%),
+    var(--tf-fill);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition:
+    transform 0.28s cubic-bezier(.22, 1, .36, 1),
+    border-color 0.25s, box-shadow 0.28s, background 0.25s;
+}
+
+/* Accent hairline that grows across the top edge. */
+.tf-related-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, var(--tf-card-accent), color-mix(in srgb, var(--tf-card-accent) 18%, transparent));
+  transition: width 0.42s cubic-bezier(.22, 1, .36, 1);
+}
+
+/* A diagonal shine that sweeps the card on hover. */
+.tf-related-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 34%, color-mix(in srgb, var(--tf-card-accent) 17%, transparent) 50%, transparent 66%);
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.65s ease, opacity 0.3s;
+}
+
+.tf-related-card:hover,
+.tf-related-card:focus-visible {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--tf-card-accent) 48%, transparent);
+  background:
+    radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--tf-card-accent) 12%, transparent), transparent 62%),
+    linear-gradient(180deg, color-mix(in srgb, var(--tf-card-accent) 8%, transparent), transparent 62%),
+    var(--tf-chip);
+  box-shadow:
+    0 22px 48px -26px color-mix(in srgb, var(--tf-card-accent) 85%, transparent),
+    0 2px 6px -2px rgba(0, 0, 0, .18);
+  outline: none;
+}
+
+.tf-related-card:hover::before,
+.tf-related-card:focus-visible::before { width: 100%; }
+
+.tf-related-card:hover::after,
+.tf-related-card:focus-visible::after {
+  transform: translateX(100%);
+  opacity: 1;
+}
+
+/* The icon tile holds the inline SVG, or the two-letter monogram for a tool
+   that has no icon, so both sit in the same square. */
+.tf-related-tile {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  border: 1px solid color-mix(in srgb, var(--tf-card-accent) 34%, transparent);
+  background:
+    radial-gradient(120% 120% at 30% 8%, color-mix(in srgb, #fff 30%, transparent), transparent 62%),
+    linear-gradient(150deg, color-mix(in srgb, var(--tf-card-accent) 34%, transparent), color-mix(in srgb, var(--tf-card-accent) 10%, transparent));
+  color: color-mix(in srgb, var(--tf-card-accent) 88%, currentColor);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 22%, transparent);
+  transition: transform 0.32s cubic-bezier(.34, 1.56, .64, 1), box-shadow 0.3s, border-color 0.3s;
+}
+
+/* A conic ring that spins up behind the tile on hover — the same idea as the
+   ring around the rating card, scaled down to a 44px square. */
+.tf-related-tile::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 16px;
+  padding: 1.5px;
+  background: conic-gradient(
+    from 0deg,
+    color-mix(in srgb, var(--tf-card-accent) 90%, transparent),
+    transparent 28%,
+    transparent 60%,
+    color-mix(in srgb, var(--tf-card-accent) 55%, transparent)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tf-related-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+/* Legacy monogram, kept for any tool that has no icon yet. */
+.tf-related-mono {
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.tf-related-card:hover .tf-related-tile,
+.tf-related-card:focus-visible .tf-related-tile {
+  transform: translateY(-2px) scale(1.09) rotate(-5deg);
+  border-color: color-mix(in srgb, var(--tf-card-accent) 60%, transparent);
+  box-shadow: 0 12px 26px -12px color-mix(in srgb, var(--tf-card-accent) 90%, transparent);
+}
+
+.tf-related-card:hover .tf-related-tile::after,
+.tf-related-card:focus-visible .tf-related-tile::after {
+  opacity: 1;
+  animation: tf-ring 3.2s linear infinite;
+}
+
+@keyframes tf-ring {
+  to { transform: rotate(1turn); }
+}
+
+/* A gentle idle bob, offset per card, so the row never looks frozen. Kept
+   tiny because it runs on every card of every page. */
+@media (prefers-reduced-motion: no-preference) {
+  .tf-related-card .tf-related-tile { animation: tf-bob 6s ease-in-out infinite; }
+  .tf-related-card:nth-child(2) .tf-related-tile { animation-delay: 0.5s; }
+  .tf-related-card:nth-child(3) .tf-related-tile { animation-delay: 1s; }
+  .tf-related-card:nth-child(4) .tf-related-tile { animation-delay: 1.5s; }
+  .tf-related-card:nth-child(5) .tf-related-tile { animation-delay: 2s; }
+  .tf-related-card:nth-child(6) .tf-related-tile { animation-delay: 2.5s; }
+  .tf-related-card:nth-child(7) .tf-related-tile { animation-delay: 3s; }
+}
+
+@keyframes tf-bob {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -3px; }
+}
+
+.tf-related-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.tf-related-name {
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  transition: color 0.25s;
+}
+
+.tf-related-card:hover .tf-related-name,
+.tf-related-card:focus-visible .tf-related-name { color: var(--tf-card-accent); }
+
+.tf-related-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--tf-ink);
+}
+
+/* Category chip, tinted with the card's own hue. */
+.tf-related-tag {
+  margin-top: 2px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--tf-card-accent) 30%, transparent);
+  background: color-mix(in srgb, var(--tf-card-accent) 11%, transparent);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--tf-card-accent) 88%, currentColor);
+}
+
+/* Arrow chip: faintly present so the card reads as a link, then slides in. */
+.tf-related-go {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  align-self: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--tf-line);
+  background: var(--tf-fill);
+  color: var(--tf-card-accent);
+  opacity: 0.55;
+  transition: opacity 0.25s, transform 0.3s cubic-bezier(.34, 1.56, .64, 1), background 0.25s, border-color 0.25s;
+}
+
+.tf-related-go svg { width: 15px; height: 15px; }
+
+.tf-related-card:hover .tf-related-go,
+.tf-related-card:focus-visible .tf-related-go {
+  opacity: 1;
+  transform: translateX(2px);
+  border-color: color-mix(in srgb, var(--tf-card-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--tf-card-accent) 14%, transparent);
+}
+
+.tf-related-note {
+  position: relative;
+  margin: 22px 0 0;
+  font-size: 12px;
+  opacity: 0.45;
+}
+
+@media (max-width: 640px) {
+  .tf-related { margin-top: 46px; padding-top: 34px; }
+  .tf-related-title { font-size: 1.32rem; }
+  .tf-related-sub { font-size: 12.5px; }
+  .tf-related-grid { gap: 11px; }
+  .tf-related-card { padding: 14px 15px; }
+  .tf-related-card:hover { transform: translateY(-2px); }
+  .tf-related-tile { width: 40px; height: 40px; border-radius: 12px; }
+  .tf-related-icon { width: 20px; height: 20px; }
+  .tf-related-go { width: 26px; height: 26px; }
+}
+
+/* Tailwind pages toggle a `dark` class on <html> and define no custom
+   properties, so the page-level accent is lifted for them. The per-card hues
+   are fixed, so only the shared accent needs the bump. */
+html:not([data-theme]).dark .tf-related {
+  --tf-accent: #818cf8;
+  --tf-grad-a: #818cf8;
+  --tf-grad-b: #f472b6;
+}
+
+[data-theme="dark"] .tf-related {
+  --tf-accent: #a5b4fc;
+  --tf-grad-a: #a5b4fc;
+  --tf-grad-b: #f9a8d4;
+}
+
+/* On dark pages the tile sits on a near-black card, so its gradient is raised
+   to keep the icon readable. */
+html.dark .tf-related-tile,
+[data-theme="dark"] .tf-related-tile {
+  background:
+    radial-gradient(120% 120% at 30% 8%, color-mix(in srgb, #fff 20%, transparent), transparent 62%),
+    linear-gradient(150deg, color-mix(in srgb, var(--tf-card-accent) 52%, transparent), color-mix(in srgb, var(--tf-card-accent) 20%, transparent));
+  color: color-mix(in srgb, var(--tf-card-accent) 42%, #fff);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tf-related-glow::before,
+  .tf-related-glow::after,
+  .tf-related-spark,
+  .tf-related-pulse,
+  .tf-related-title,
+  .tf-related-card .tf-related-tile { animation: none; }
+  .tf-related-title {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: inherit;
+  }
+  /* Armed or not, content is shown: no motion, nothing to wait for. */
+  .tf-related.tf-armed .tf-related-head,
+  .tf-related.tf-armed .tf-related-card {
+    opacity: 1;
+    transform: none;
+  }
+  .tf-related.tf-in .tf-related-head,
+  .tf-related.tf-in .tf-related-card {
+    animation: none;
+  }
+  .tf-related-card,
+  .tf-related-tile,
+  .tf-related-all,
+  .tf-related-all svg,
+  .tf-related-go,
+  .tf-related-card::before,
+  .tf-related-card::after,
+  .tf-related-name { transition: none; }
+  .tf-related-card:hover,
+  .tf-related-card:hover .tf-related-tile,
+  .tf-related-card:hover .tf-related-go { transform: none; }
+  .tf-related-card:hover::before { width: 0; }
+  .tf-related-card:hover::after { transform: translateX(-100%); opacity: 0; }
+}
