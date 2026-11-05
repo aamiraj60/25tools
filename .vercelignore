@@ -1,0 +1,9 @@
+# Never serve these from the site. Vercel reads this at deploy time; without it
+# every repo file is published, so AGENTS.md and the automation script were
+# publicly readable at /AGENTS.md and /automation/mirror/main.py.
+AGENTS.md
+README.md
+.gitignore
+automation/
+tools/
+.github/
