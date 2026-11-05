@@ -40,11 +40,14 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
+  "@type": ["WebApplication", "SoftwareApplication"],
   "name": "URL Slug Generator",
   "url": "https://toolguest.com/url-slug-generator",
   "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Any",
+  "operatingSystem": "Any (Web Browser)",
+  "browserRequirements": "Requires JavaScript",
+  "isAccessibleForFree": true,
+  "inLanguage": "en-GB",
   "areaServed": [
           {"@type": "Country", "name": "United Kingdom"},
           {"@type": "Country", "name": "United States"},
@@ -127,6 +130,14 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "No. This tool runs entirely client-side. Nothing you type is transmitted or stored."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a URL slug affect SEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Google lists the URL as a minor ranking signal, but the bigger effect is on click-through: a short, readable slug tells a searcher what the page is about before they click. Keep it lowercase, hyphen-separated and under about 60 characters."
       }
     }
   ]
@@ -492,6 +503,64 @@
   html[data-theme="light"] .out-card{background:#fff;border-color:rgba(10,12,16,.08)}
 
   @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+  /* ============ SEO / AEO LONG-FORM CONTENT ============ */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .tool-seo-content{max-width:1180px;margin:0 auto;padding:8px 24px 84px;scroll-margin-top:84px}
+  .tool-seo-content h2{font-size:clamp(22px,3.4vw,31px);letter-spacing:-.028em;line-height:1.16;margin:0 0 10px;font-weight:650}
+  .tool-seo-content h3{font-size:17.5px;letter-spacing:-.02em;margin:0 0 8px;font-weight:600}
+  .tool-seo-content p{color:var(--muted);font-size:15px;line-height:1.78;margin:0 0 14px}
+  .tool-seo-content a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(124,92,255,.35);transition:border-color .2s,color .2s}
+  .tool-seo-content a:hover{border-bottom-color:var(--accent)}
+  .tool-seo-content strong{color:var(--text);font-weight:600}
+  .tool-seo-content code{font-family:var(--mono);font-size:.86em;background:rgba(124,92,255,.12);color:#b8a4ff;padding:2px 6px;border-radius:6px;border:1px solid rgba(124,92,255,.2)}
+  html[data-theme="light"] .tool-seo-content code{background:rgba(124,92,255,.09);color:#4b2fd6;border-color:rgba(124,92,255,.22)}
+  .seo-block{margin-top:52px}
+  .seo-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  .seo-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+  .seo-lede{font-size:16.5px!important;color:var(--text)!important;opacity:.92}
+
+  .seo-aeo{position:relative;border:1px solid rgba(124,92,255,.28);border-radius:18px;padding:26px 28px;background:linear-gradient(150deg,rgba(124,92,255,.12),rgba(34,211,238,.06));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 26px 70px -46px rgba(124,92,255,.85)}
+  .seo-aeo::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(140deg,rgba(124,92,255,.55),transparent 42%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  .seo-aeo .seo-aeo-label{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  .seo-aeo p{color:var(--text);font-size:16px;line-height:1.7;margin:0}
+  html[data-theme="light"] .seo-aeo{background:linear-gradient(150deg,rgba(124,92,255,.1),rgba(34,211,238,.05));border-color:rgba(124,92,255,.3)}
+
+  .seo-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .seo-card{border:1px solid var(--border);border-radius:16px;padding:22px;background:rgba(255,255,255,.025);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:transform .25s cubic-bezier(.2,.9,.3,1),border-color .25s,box-shadow .25s}
+  .seo-card:hover{transform:translateY(-3px);border-color:rgba(124,92,255,.4);box-shadow:0 24px 60px -40px rgba(124,92,255,.9)}
+  .seo-card h3{margin-bottom:7px}
+  .seo-card p{font-size:14px;line-height:1.72;margin:0}
+  .seo-card .seo-city{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);margin-bottom:9px}
+  html[data-theme="light"] .seo-card{background:#fff;border-color:rgba(10,12,16,.09)}
+
+  .seo-tablewrap{overflow-x:auto;border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.02);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  .seo-table{width:100%;border-collapse:collapse;min-width:620px;font-size:14px}
+  .seo-table th,.seo-table td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--border);vertical-align:top}
+  .seo-table thead th{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;background:rgba(255,255,255,.03)}
+  .seo-table tbody tr:last-child td{border-bottom:0}
+  .seo-table tbody tr:hover{background:rgba(124,92,255,.06)}
+  .seo-table td:first-child{color:var(--text);font-weight:550}
+  .seo-table .yes{color:var(--green);font-weight:600}
+  .seo-table .no{color:#f87171;font-weight:600}
+  html[data-theme="light"] .seo-table thead th{background:rgba(10,12,16,.04)}
+  html[data-theme="light"] .seo-table tbody tr:hover{background:rgba(124,92,255,.05)}
+
+  .seo-faq{display:grid;gap:10px}
+  .seo-faq details{border:1px solid var(--border);border-radius:13px;background:rgba(255,255,255,.02);overflow:hidden;transition:border-color .2s,background .2s}
+  .seo-faq details[open]{border-color:rgba(124,92,255,.34);background:rgba(124,92,255,.045)}
+  .seo-faq summary{cursor:pointer;list-style:none;padding:16px 20px;font-weight:550;font-size:14.6px;display:flex;align-items:center;gap:12px;letter-spacing:-.012em}
+  .seo-faq summary::-webkit-details-marker{display:none}
+  .seo-faq summary::after{content:"+";margin-left:auto;font-family:var(--mono);font-size:17px;color:var(--accent);transition:transform .25s}
+  .seo-faq details[open] summary::after{transform:rotate(45deg)}
+  .seo-faq p{padding:0 20px 18px;margin:0;font-size:14.2px;line-height:1.75}
+  html[data-theme="light"] .seo-faq details{background:#fff;border-color:rgba(10,12,16,.09)}
+
+  .seo-cta{margin-top:52px;text-align:center;border:1px solid rgba(124,92,255,.3);border-radius:20px;padding:38px 26px;background:linear-gradient(150deg,rgba(124,92,255,.14),rgba(34,211,238,.07));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  .seo-cta h2{margin-bottom:8px}
+  .seo-cta p{max-width:560px;margin:0 auto 20px}
+  .seo-cta .btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;border:0}
+  html[data-theme="light"] .seo-cta{background:linear-gradient(150deg,rgba(124,92,255,.11),rgba(34,211,238,.06));border-color:rgba(124,92,255,.3)}
 </style>
 <link rel="stylesheet" href="assets/related.css">
 
@@ -529,7 +598,7 @@
     <a class="brand" href="#top"><span class="brand-mark">/</span><span>ToolGuest</span></a>
     <div class="nav-right">
       <nav class="nav-links">
-        <a href="#tool">Tool</a><a href="#features">Features</a><a href="#faq">FAQ</a>
+        <a href="#tool">Tool</a><a href="#features">Features</a><a href="#guide">Guide</a><a href="#faq">FAQ</a>
         <a class="nav-cta" href="#tool">Generate a slug</a>
       </nav>
       <button class="cmd-trigger" id="cmdTrigger" type="button" aria-label="Open command palette">
@@ -686,15 +755,140 @@ Café Crème: The Ultimate Guide to Permalinks</textarea>
     </div>
   </section>
 
-  <section class="section" id="faq">
-    <div class="sec-head"><h2>Frequently asked</h2><p>Everything you need to know about slugs, permalinks and clean links.</p></div>
-    <div class="faq">
-      <details open><summary>What exactly is a URL slug?</summary><p>A URL slug is the human-readable portion of a web address that identifies a specific page. In <code>https://example.com/url-slug-generator</code>, the slug is <code>url-slug-generator</code>.</p></details>
-      <details><summary>Should I use hyphens or underscores?</summary><p>Hyphens. Google treats hyphens as word separators, so <code>best-seo-tools</code> reads as three distinct words. Underscores join words together.</p></details>
-      <details><summary>How long should a slug be?</summary><p>Aim for 3–5 meaningful words and keep the total under roughly 60 characters. The quality score turns green in that sweet spot.</p></details>
-      <details><summary>What are SEO stop words?</summary><p>Low-value filler words such as <em>a, an, the, and, or, in, on, of, to</em>. Stripping them produces shorter, higher-density slugs.</p></details>
-      <details><summary>Does it handle accented and non-Latin text?</summary><p>Yes. Latin characters are normalized to ASCII, and Cyrillic and Greek are transliterated. The "Keep non-Latin" switch preserves CJK intact.</p></details>
-      <details><summary>Is my data sent anywhere?</summary><p>No. This tool runs entirely client-side. Nothing you type is transmitted or stored.</p></details>
+  <!-- ═══════════════ SEO / AEO LONG-FORM CONTENT ═══════════════ -->
+  <section class="tool-seo-content" id="guide">
+    <div class="seo-block">
+      <span class="seo-eyebrow">The clean-URL playbook</span>
+      <h2>URL Slug Generator — free online slug tool for US &amp; UK developers</h2>
+      <p class="seo-lede">Every page you publish is a permanent address. A <strong>URL slug generator free online for US developers</strong> should do one job perfectly: turn a messy headline into a short, lowercase, hyphen-separated permalink that reads like a human wrote it. ToolGuest does exactly that, in your browser, in under fifty milliseconds, with no account, no upload and no advertising. Type a title, watch the slug appear, copy it, ship it.</p>
+      <p>A slug is the part of a URL that names the page — the <code>clean-url-slug-guide</code> in <code>https://toolguest.com/clean-url-slug-guide</code>. Google treats that fragment as a minor ranking signal and a major usability cue, because a readable slug tells a searcher what they will get before they click. Fixing slugs after launch is painful: the address is already in sitemaps, backlinks, analytics dashboards and people's bookmarks. Getting the slug right at authoring time costs a few seconds. This tool exists to make those few seconds effortless, whether you are a Next.js developer in Austin, a WordPress editor in Manchester or a Shopify merchant in Berlin.</p>
+    </div>
+
+    <div class="seo-block">
+      <div class="seo-aeo">
+        <span class="seo-aeo-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.4 5.4 1.9-5.4 1.9L12 17.6l-1.9-5.4L4.7 10.3l5.4-1.9Z"/></svg>Quick answer</span>
+        <p>A URL slug generator converts a page title into a URL-safe string — lowercase, hyphen-separated and free of accents, spaces or punctuation. It is used by developers and SEO teams to build readable permalinks such as <code>best-url-slug-generator</code> from the title “Best URL Slug Generator”.</p>
+      </div>
+    </div>
+
+    <div class="seo-block">
+      <span class="seo-eyebrow">Why it matters</span>
+      <h2>Why clean slugs still decide rankings and click-through</h2>
+      <p>Search engines have understood meaning from context for years, so nobody should claim a keyword-stuffed slug is a magic ranking switch. The honest position is subtler and more useful: a clean slug improves how a result <em>appears</em>, how confidently a human clicks it, and how safely it survives being copied between CMS platforms, chat apps and analytics tools. Those three effects compound.</p>
+      <p>Consider a real before-and-after. A title such as <em>“Café Crème — The Ultimate Guide to URL Slugs &amp; Permalinks (2026 Edition)”</em> naively produces <code>Caf%C3%A9%20Cr%C3%A8me%20%E2%80%94%20The%20Ultimate%20Guide...</code> — a wall of percent-encoding that no reader can parse and that breaks the moment it is pasted into a Markdown link. Run through this generator with accent stripping, lowercasing and the stop-word filter on, the same title becomes <code>cafe-creme-ultimate-guide-url-slugs-permalinks-2026</code>. Short, stable, copy-paste safe, and instantly legible in a search result.</p>
+      <p>There is a maintenance argument too. Spaces and uppercase letters in a URL are technically legal but hostile: shells, CMS routing rules and link checkers all handle them inconsistently. A slug restricted to <code>a–z</code>, <code>0–9</code> and a single delimiter behaves identically in every environment, from a static <code>vercel.json</code> rewrite to a Rails route. That consistency is the quiet reason experienced teams standardise on lowercase kebab-case and never look back.</p>
+    </div>
+
+    <div class="seo-block">
+      <span class="seo-eyebrow">Local workflows</span>
+      <h2>Built for the publishing routines of Tier-1 markets</h2>
+      <p>Slug discipline looks slightly different in each market, but the tool handles all of them with the same controls. Here is how teams actually use it.</p>
+      <div class="seo-grid">
+        <div class="seo-card">
+          <span class="seo-city">New York · United States</span>
+          <h3>Newsroom and SaaS blogs</h3>
+          <p>Editors paste a headline from the CMS and strip filler words so a three-word slug fits the space before the date. Batch mode turns a full content calendar into a copy-ready slug list in one pass, ready for a bulk import or a migration script.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">London · United Kingdom</span>
+          <h3>Agency and ecommerce</h3>
+          <p>Product names arrive with ampersands, commas and size codes. Delimiters switch to underscores where a legacy storefront requires them, while the accent stripper keeps names like “Rosé” or “Crème” resolving to plain ASCII that never 404s.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Berlin · Germany</span>
+          <h3>Multi-language docs</h3>
+          <p>German titles carry umlauts and ß. Strict ASCII transliteration turns <em>Über</em> into <code>uber</code> and <em>Straße</em> into <code>strasse</code>, so one English-language slug serves every market without a redirect chain or a percent-encoded surprise.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Toronto · Canada</span>
+          <h3>Bilingual product teams</h3>
+          <p>Marketing ships English and French variants of the same page. Generating both slugs side by side keeps the two URLs structurally parallel, which keeps hreflang pairs tidy and analytics reports readable across the two locales.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-block">
+      <span class="seo-eyebrow">Feature tour</span>
+      <h2>What the ToolGuest slug engine actually does</h2>
+      <div class="seo-grid">
+        <div class="seo-card">
+          <h3>Instant, keystroke-level transformation</h3>
+          <p>There is no Convert button to hunt for. The slug updates on every keystroke and every option toggle, so you can audition a title and its variants in a single continuous motion.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Delimiter and rule control</h3>
+          <p>Choose hyphens, underscores, slashes, dots or any custom delimiter. Layer on lowercase enforcement, stop-word removal and special-character stripping until the output matches your platform's house style.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Strict ASCII transliteration</h3>
+          <p>Accented Latin, Cyrillic and Greek characters are mapped to their closest ASCII equivalents. “é” becomes “e”, “ß” becomes “ss”, “щ” becomes “shch” — predictable, searchable, redirect-free.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Batch processing mode</h3>
+          <p>Paste a column of titles, one per line, and generate a clean slug for each. Copy the whole list at once or export it as <code>.txt</code> or <code>.csv</code> for your migration sheet.</p>
+        </div>
+        <div class="seo-card">
+          <h3>One-click copy with feedback</h3>
+          <p>Every output has its own copy control that confirms itself visually — a tick and a short toast — so you never paste a stale slug because you were unsure the click landed.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Live SERP preview and quality score</h3>
+          <p>See the slug as it would appear in a Google result, alongside a length-and-word-count quality score that flags a slug that is too short, too long or too thin on keywords.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-block">
+      <span class="seo-eyebrow">Comparison</span>
+      <h2>ToolGuest vs. legacy slug tools</h2>
+      <p>Most free slug generators were built to carry advertising. The result is a slower page, a form that posts your text to a server, and a slug box buried under interstitials. This one is built to get out of the way.</p>
+      <div class="seo-tablewrap">
+        <table class="seo-table">
+          <caption class="sr-only">Feature comparison between the ToolGuest URL slug generator and typical legacy competitors</caption>
+          <thead>
+            <tr><th scope="col">Capability</th><th scope="col">ToolGuest Slug Generator</th><th scope="col">Legacy cluttered competitors</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Advertising</td><td class="yes">Zero ads</td><td class="no">Pop-ups, banners and interstitials</td></tr>
+            <tr><td>Execution</td><td class="yes">Instant, browser-side</td><td class="no">Server round-trip per conversion</td></tr>
+            <tr><td>Data handling</td><td class="yes">Zero logging — nothing leaves the tab</td><td class="no">Text posted to a backend</td></tr>
+            <tr><td>Batch mode</td><td class="yes">Built in, with <code>.txt</code> / <code>.csv</code> export</td><td class="no">One title at a time</td></tr>
+            <tr><td>Delimiter control</td><td class="yes">Hyphen, underscore, dot, slash or custom</td><td class="no">Hyphen only, if that</td></tr>
+            <tr><td>Accent and script handling</td><td class="yes">ASCII, Cyrillic and Greek transliteration</td><td class="no">Usually ignored</td></tr>
+            <tr><td>Stop-word filtering</td><td class="yes">Toggleable, with custom words</td><td class="no">Not offered</td></tr>
+            <tr><td>Output preview</td><td class="yes">Live SERP snippet and quality score</td><td class="no">Raw text box</td></tr>
+            <tr><td>Account required</td><td class="yes">No signup, ever</td><td class="no">Email wall on export</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="seo-block">
+      <span class="seo-eyebrow">Developer notes</span>
+      <h2>Slug rules that age well in production</h2>
+      <p>Hyphens are the safest separator because Google reads them as word boundaries, so <code>seo-friendly-urls</code> is understood as three words while <code>seo_friendly_urls</code> is not. Lowercase is non-negotiable: <code>/Blog</code> and <code>/blog</code> are distinct resources on case-sensitive servers, and mixing them splits your link equity across two addresses that look identical to a human.</p>
+      <p>Keep the slug stable after publication. If a title changes, change the headline and leave the URL alone, or serve a permanent <code>301</code> redirect from the old slug to the new one. Deleting a live slug without a redirect is the fastest way to lose the backlinks and rankings a page has earned. A slug generator cannot enforce that discipline for you, but producing the right slug the first time removes most of the temptation to change it later.</p>
+      <p>Finally, remember that a slug is only one part of the address. Pair it with a canonical tag, keep it consistent with your sitemap, and — if you are drafting the metadata around it — preview the finished result before you publish.</p>
+    </div>
+
+    <div class="seo-block" id="faq">
+      <span class="seo-eyebrow">Questions</span>
+      <h2>Frequently asked questions</h2>
+      <div class="seo-faq">
+        <details open><summary>What exactly is a URL slug?</summary><p>A URL slug is the human-readable portion of a web address that identifies a specific page. In <code>https://example.com/url-slug-generator</code>, the slug is <code>url-slug-generator</code>. Everything before it is the domain, and everything after it is usually a query string or fragment.</p></details>
+        <details><summary>Should I use hyphens or underscores in a slug?</summary><p>Hyphens, in almost every case. Google treats a hyphen as a word separator, so <code>best-seo-tools</code> reads as three distinct words. Underscores join words into a single token, which is why they are reserved for programming identifiers rather than web addresses.</p></details>
+        <details><summary>How long should a URL slug be?</summary><p>Aim for three to five meaningful words and keep the total under roughly sixty characters. That range keeps the slug readable in a search result, easy to dictate over the phone and unlikely to be truncated when shared in a chat app or a spreadsheet.</p></details>
+        <details><summary>What are SEO stop words, and should I remove them?</summary><p>Stop words are low-value filler such as <em>a, an, the, and, or, in, on, of, to</em>. Removing them produces a shorter, higher-density slug. It is a stylistic choice rather than a ranking requirement, so switch the filter on when you want the tightest possible URL and leave it off when the natural phrasing reads better.</p></details>
+        <details><summary>Does it handle accented and non-Latin text?</summary><p>Yes. Latin characters are normalised to ASCII — <em>é</em> to <em>e</em>, <em>ñ</em> to <em>n</em>, <em>ü</em> to <em>u</em> — and Cyrillic and Greek are transliterated automatically. The “Keep non-Latin” switch preserves CJK characters intact when you need a native-script slug instead.</p></details>
+        <details><summary>Is my text sent to a server?</summary><p>No. The entire tool runs client-side in vanilla JavaScript. Nothing you type is transmitted, stored or logged, which is why it is safe to slugify internal product names, unreleased headlines or customer-facing drafts.</p></details>
+        <details><summary>Does a URL slug affect SEO?</summary><p>Yes, modestly. Google lists the URL as a minor ranking signal, but the larger effect is on click-through: a short, readable slug tells a searcher what the page is about before they click. Keep it lowercase, hyphen-separated and under about sixty characters.</p></details>
+      </div>
+    </div>
+
+    <div class="seo-cta">
+      <h2>Ready to build a cleaner permalink?</h2>
+      <p>Scroll back to the generator, paste your title and copy the slug. It is free, private and takes less time than reading this sentence.</p>
+      <a class="btn primary" href="#tool"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>Generate a slug now</a>
     </div>
   </section>
 
