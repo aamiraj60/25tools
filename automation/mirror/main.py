@@ -32,7 +32,7 @@ BASE = "https://toolguest.com"
 REPO_DIR = "/tmp/site-repo"
 
 # Platform config, never served as a static file.
-NON_SERVED = {"vercel.json", "netlify.toml", ".htaccess"}
+NON_SERVED = {"vercel.json", ".vercelignore", "netlify.toml", ".htaccess"}
 
 # Serverless function source. The live URL returns the function's response, not
 # the file, so it must never be fetched over the site and compared.
