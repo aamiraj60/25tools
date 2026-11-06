@@ -162,6 +162,7 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
 <link rel="stylesheet" href="assets/related.css">
 <link rel="icon" href="favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <link rel="manifest" href="site.webmanifest" />
 
@@ -191,6 +192,7 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
   ]
 }
 </script>
+<link rel="stylesheet" href="/assets/logo.css" />
 </head>
 <body class="font-sans bg-white text-zinc-900 dark:bg-[#09090b] dark:text-zinc-100 min-h-screen overflow-x-hidden">
 
@@ -206,9 +208,7 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
   <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
     <div class="flex items-center gap-3">
       <a href="/" class="flex items-center gap-2 font-semibold tracking-tight text-[15px]">
-        <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-zinc-900 to-zinc-700 dark:from-white dark:to-zinc-300 text-white dark:text-zinc-900 shadow-lg shadow-zinc-900/20 dark:shadow-white/10">
-          <i data-lucide="qr-code" class="w-4 h-4"></i>
-        </span>
+        <img src="/logo.png" alt="ToolGuest" class="tg-logo" style="height:32px;width:auto" />
         ToolGuest
       </a>
       <span class="hidden md:inline-flex items-center gap-1.5 rounded-full border border-zinc-200 dark:border-white/10 bg-white/60 dark:bg-white/5 px-2.5 py-1 text-[11px] text-zinc-600 dark:text-zinc-300">

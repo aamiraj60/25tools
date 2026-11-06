@@ -1,0 +1,14 @@
+/* ToolGuest logo mark, used in every page header and footer.
+
+   The artwork is dark blue/purple on transparency, and the site is dark by
+   default, so the mark sits on a small white chip to stay legible on both
+   themes. Sizing stays per-page via the inline `height` on each <img>. */
+.tg-logo {
+  display: block;
+  width: auto;
+  flex: 0 0 auto;
+  background: #fff;
+  padding: 2px 4px;
+  border-radius: 7px;
+  box-sizing: content-box;
+}
