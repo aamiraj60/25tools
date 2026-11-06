@@ -5,15 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!-- ═══════════════ SEO HEADER ═══════════════ -->
-<title>JSON Formatter &amp; Validator — Beautify &amp; Minify</title>
+<title>JSON Formatter &amp; Validator — Free Online Beautify &amp; Minify</title>
   <meta property="og:image" content="https://toolguest.com/assets/og/json-formatter.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="JSON Formatter & Validator — Beautify, Minify, Validate | ToolGuest" />
-  <meta name="twitter:image:alt" content="JSON Formatter & Validator — Beautify, Minify, Validate | ToolGuest" />
+  <meta property="og:image:alt" content="JSON Formatter &amp; Validator — Beautify, Minify, Validate | ToolGuest" />
+  <meta name="twitter:image:alt" content="JSON Formatter &amp; Validator — Beautify, Minify, Validate | ToolGuest" />
   <meta name="twitter:image" content="https://toolguest.com/assets/og/json-formatter.png" />
-<meta name="description" content="Free JSON formatter, validator and minifier. Beautify messy JSON, catch syntax errors with the exact line and column, sort keys." />
+<meta name="description" content="Free JSON formatter and validator for US and UK developers. Beautify messy JSON, minify it, sort keys and pinpoint every syntax error by exact line and column — 100% in your browser." />
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+<meta name="keywords" content="json formatter and validator free online for US developers, json beautifier online, json minify tool, json validator with line numbers, json key sorter, client-side json parser" />
+<meta name="geo.region" content="US;US-CA;US-NY;US-TX;GB;DE;CA;AU;ES" />
+<meta name="geo.placename" content="San Francisco, New York, London, Berlin, Toronto, Sydney, Madrid" />
+<meta name="coverage" content="United States, United Kingdom, Germany, Canada, Australia, Spain" />
+<meta name="target" content="all" />
+<meta name="rating" content="general" />
 <link rel="canonical" href="https://toolguest.com/json-formatter" />
   <link rel="alternate" hreflang="en-GB" href="https://toolguest.com/json-formatter" />
   <link rel="alternate" hreflang="en-US" href="https://toolguest.com/json-formatter" />
@@ -23,15 +29,15 @@
 <meta property="og:type" content="website" />
   <meta property="og:locale" content="en_GB" />
   <meta property="og:locale:alternate" content="en_US" />
-  <meta property="og:locale:alternate" content="en_AU" />
   <meta property="og:locale:alternate" content="en_CA" />
+  <meta property="og:locale:alternate" content="en_AU" />
   <meta http-equiv="content-language" content="en-GB" />
 <meta property="og:site_name" content="ToolGuest" />
-<meta property="og:title" content="JSON Formatter & Validator — Beautify, Minify, Validate | ToolGuest" />
-<meta property="og:description" content="Free online JSON formatter, validator and minifier. Beautify messy JSON, catch syntax errors with the exact line and column, sort keys and download the result — 100% in your browser, no uploads." />
+<meta property="og:title" content="JSON Formatter &amp; Validator — Free Online Beautify &amp; Minify" />
+<meta property="og:description" content="Beautify, minify and validate JSON in your browser. Errors point to the exact line and column, keys sort deeply, and nothing is ever uploaded." />
 <meta property="og:url" content="https://toolguest.com/json-formatter" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="JSON Formatter & Validator — Beautify, Minify, Validate | ToolGuest" />
+<meta name="twitter:title" content="JSON Formatter &amp; Validator — Free Online Beautify &amp; Minify" />
 <meta name="twitter:description" content="Free online JSON formatter, validator and minifier. Beautify messy JSON, catch syntax errors with the exact line and column, sort keys and download the result — 100% in your browser, no uploads." />
 
 <script type="application/ld+json">
@@ -40,8 +46,10 @@
   "@graph": [
     {
       "@type": "SoftwareApplication",
+      "@id": "https://toolguest.com/json-formatter#software",
       "name": "JSON Formatter & Validator",
-      "applicationCategory": "UtilitiesApplication",
+      "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "Developer Utilities",
       "operatingSystem": "Any",
       "areaServed": [
           {"@type": "Country", "name": "United Kingdom"},
@@ -64,14 +72,13 @@
       },
       "description": "Free online JSON formatter, validator and minifier. Beautify messy JSON, catch syntax errors with the exact line and column, sort keys and download the result — 100% in your browser, no uploads.",
       "featureList": [
-        "Errors point to the exact line — V8 gives a character position — we convert it to a line and column number so you jump straight to the broken comma or quote.",
-        "Handles multi-megabyte payloads — Formatting runs on the main thread with native JSON.parse, so a few megabytes of JSON render in milliseconds.",
-        "Your data never leaves the tab — No upload endpoint, no logging, no analytics. Turn off your Wi-Fi and the tool keeps working.",
-        "Paste or type your JSON — Drop in anything from a one-line API response to a multi-megabyte export.",
-        "Click Format or Minify — Format pretty-prints with your chosen indent; Minify strips every unnecessary byte.",
-        "Fix any highlighted error — An invalid document shows the exact line and column plus the parser's own message."
+        "Exact line and column error location — the parser's character offset is converted to the line and column where it gave up, so you jump straight to the broken comma or quote.",
+        "Handles multi-megabyte payloads — formatting runs with the browser's native JSON.parse, so a few megabytes render in milliseconds.",
+        "Deep key sorting — reorders object keys alphabetically at every level to make payload diffs readable.",
+        "Your data never leaves the tab — no upload endpoint, no logging, no analytics. Turn off your Wi-Fi and the tool keeps working.",
+        "Format, minify, validate — pretty-print with 2 spaces, 4 spaces or a tab, strip every unnecessary byte, or check validity as you type."
       ],
-      "dateModified": "2026-11-05",
+      "dateModified": "2026-11-06",
       "datePublished": "2026-11-05"
     },
     {
@@ -102,42 +109,58 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Is this JSON formatter really free and private?",
+          "name": "Is this JSON formatter and validator really free and private?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. There is no account, no ad slot and no server call. Your JSON is parsed by your own browser's <code class=\"rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10\">JSON.parse</code> implementation, so nothing is transmitted, logged or stored."
+            "text": "Yes. There is no account, no ad slot and no server call. Your JSON is parsed by your own browser's JSON.parse implementation, so nothing is transmitted, logged or stored. You can switch off your network connection and the tool keeps working."
           }
         },
         {
           "@type": "Question",
-          "name": "Why does my JSON say “invalid” when it looks fine?",
+          "name": "How does the tool pinpoint the exact error line and column?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The usual culprits are a trailing comma before a closing bracket, single quotes instead of double quotes, unquoted object keys, or a stray comment. The error bar shows the line and column where the parser gave up, which is normally a character or two after the real mistake."
+            "text": "When JSON.parse fails, the V8 engine reports a character position such as “at position 42”. ToolGuest counts the newlines up to that offset to derive a 1-based line and column number, then shows both alongside the parser's own message, so you can jump straight to the broken comma, quote or bracket."
           }
         },
         {
           "@type": "Question",
-          "name": "Can it handle very large files?",
+          "name": "Can it handle very large or multi-megabyte JSON files?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Formatting is done with the browser's native parser, which is far faster than hand-written JavaScript. The practical limit is your machine's available memory rather than anything in the tool."
+            "text": "Yes. Formatting and minifying run through the browser's native parser, which is far faster than hand-written JavaScript. Payloads of several megabytes render in milliseconds, and the practical ceiling is your machine's available memory rather than anything inside the tool."
           }
         },
         {
           "@type": "Question",
-          "name": "What does “Sort keys” do?",
+          "name": "What does the “Sort keys” option do?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It reorders object keys alphabetically at every level of the document, which makes diffs between two versions of a payload far easier to read. Arrays keep their original order, because order is meaningful there."
+            "text": "It reorders object keys alphabetically at every level of the document, recursively. That makes diffs between two versions of a payload far easier to read and produces stable output for snapshots and tests. Arrays keep their original order, because element order is meaningful there."
           }
         },
         {
           "@type": "Question",
-          "name": "Does it support JSON Lines or NDJSON?",
+          "name": "Why does my JSON say “invalid” when it looks perfectly fine?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Not directly — each line of an NDJSON file is a separate JSON document. Paste one line at a time, or wrap the lines in an array and format that."
+            "text": "The usual culprits are a trailing comma before a closing bracket, single quotes instead of double quotes, unquoted object keys, a stray // or /* comment, or a smart quote pasted from a document. The error bar shows the line and column where the parser gave up, which is normally a character or two after the real mistake."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it support JSON Lines or NDJSON files?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not directly, because each line of an NDJSON file is a separate JSON document rather than one valid document. Paste one line at a time to validate it, or wrap the lines in a JSON array and format the array in a single pass."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will the formatted output be stable enough to commit to version control?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Choose a fixed indent, switch on Sort keys, and the same input always produces byte-identical output, which keeps Git diffs clean and reviewable. Sorting keys means a reordered upstream payload no longer produces a noisy diff."
           }
         }
       ]
@@ -178,29 +201,105 @@
   body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
   ::selection { background: rgba(99,102,241,.28); }
 
-  /* ── Segmented tabs ── */
-  .seg { padding: .4rem .95rem; border-radius: .55rem; font-size: .8rem; font-weight: 600; color: #71717a; transition: all .18s ease; white-space: nowrap; }
-  .seg:hover { color: #18181b; }
-  .dark .seg:hover { color: #fff; }
-  .seg[aria-selected="true"] { background: #fff; color: #18181b; box-shadow: 0 1px 2px rgba(0,0,0,.07); }
-  .dark .seg[aria-selected="true"] { background: rgba(255,255,255,.1); color: #fff; }
-
-  /* ── FAQ smooth accordion (grid-rows trick = no JS height calc) ── */
-  .faq-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s cubic-bezier(.4,0,.2,1); }
-  .faq-item[data-open="true"] .faq-body { grid-template-rows: 1fr; }
-  .faq-body > div { overflow: hidden; }
-  .faq-chevron { transition: transform .3s ease; }
-  .faq-item[data-open="true"] .faq-chevron { transform: rotate(180deg); }
-
-  /* ── Textarea ── */
-  .pane-area { scrollbar-width: thin; scrollbar-color: rgba(113,113,122,.4) transparent; }
+  /* ── Textarea / editor pane ── */
+  .pane-area { line-height: 22px; scrollbar-width: thin; scrollbar-color: rgba(113,113,122,.4) transparent; }
   .pane-area::-webkit-scrollbar { width: 8px; height: 8px; }
   .pane-area::-webkit-scrollbar-thumb { background: rgba(113,113,122,.35); border-radius: 99px; }
   .pane-area::-webkit-scrollbar-track { background: transparent; }
 
+  /* ── Gutter line numbers ── */
+  .gutter { user-select: none; font-variant-numeric: tabular-nums; }
+  .gutter div, .gutter code { line-height: 22px; }
+
+  /* ── Status pill states ── */
+  #statusPill[data-state="valid"] { color: #059669; border-color: rgba(16,185,129,.35); background: rgba(16,185,129,.09); }
+  #statusPill[data-state="invalid"] { color: #e11d48; border-color: rgba(244,63,94,.35); background: rgba(244,63,94,.09); }
+  .dark #statusPill[data-state="valid"] { color: #34d399; }
+  .dark #statusPill[data-state="invalid"] { color: #fb7185; }
+
   /* ── Toast ── */
   #toast { transition: opacity .25s ease, transform .25s ease; }
   #toast[data-show="false"] { opacity: 0; transform: translate(-50%, 12px); pointer-events: none; }
+
+  /* ── Error bar pointer ── */
+  #error { animation: errIn .22s ease both; }
+  @keyframes errIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+  /* ═══════════════ SEO / AEO LONG-FORM CONTENT ═══════════════ */
+  :root {
+    --seo-text: #ededed;
+    --seo-muted: #8b8f98;
+    --seo-border: rgba(255,255,255,.08);
+    --seo-accent: #7c5cff;
+    --seo-accent-2: #22d3ee;
+    --seo-green: #34d399;
+    --seo-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  html:not(.dark) {
+    --seo-text: #0b0c0e;
+    --seo-muted: #565b63;
+    --seo-border: rgba(10,12,16,.1);
+    --seo-accent: #6a48ff;
+    --seo-accent-2: #0e9fb8;
+    --seo-green: #059669;
+  }
+  .tool-seo-content { max-width: 1180px; margin: 0 auto; padding: 8px 0 84px; scroll-margin-top: 84px; }
+  .tool-seo-content h2 { font-size: clamp(22px,3.4vw,31px); letter-spacing: -.028em; line-height: 1.16; margin: 0 0 10px; font-weight: 700; color: var(--seo-text); }
+  .tool-seo-content h3 { font-size: 17.5px; letter-spacing: -.02em; margin: 0 0 8px; font-weight: 600; color: var(--seo-text); }
+  .tool-seo-content p { color: var(--seo-muted); font-size: 15px; line-height: 1.78; margin: 0 0 14px; }
+  .tool-seo-content a { color: var(--seo-accent); text-decoration: none; border-bottom: 1px solid rgba(124,92,255,.35); transition: border-color .2s, color .2s; }
+  .tool-seo-content a:hover { border-bottom-color: var(--seo-accent); }
+  .tool-seo-content strong { color: var(--seo-text); font-weight: 600; }
+  .tool-seo-content code { font-family: var(--seo-mono); font-size: .86em; background: rgba(124,92,255,.12); color: #b8a4ff; padding: 2px 6px; border-radius: 6px; border: 1px solid rgba(124,92,255,.2); }
+  html:not(.dark) .tool-seo-content code { background: rgba(124,92,255,.09); color: #4b2fd6; border-color: rgba(124,92,255,.22); }
+  .seo-block { margin-top: 52px; }
+  .seo-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--seo-accent); margin-bottom: 12px; }
+  .seo-eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--seo-accent); box-shadow: 0 0 10px var(--seo-accent); }
+  .seo-lede { font-size: 16.5px !important; color: var(--seo-text) !important; opacity: .92; }
+
+  .seo-aeo { position: relative; border: 1px solid rgba(124,92,255,.28); border-radius: 18px; padding: 26px 28px; background: linear-gradient(150deg,rgba(124,92,255,.12),rgba(34,211,238,.06)); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 26px 70px -46px rgba(124,92,255,.85); }
+  .seo-aeo::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; background: linear-gradient(140deg,rgba(124,92,255,.55),transparent 42%); -webkit-mask: linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+  .seo-aeo .seo-aeo-label { display: inline-flex; align-items: center; gap: 7px; font-size: 10.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--seo-accent); margin-bottom: 12px; }
+  .seo-aeo p { color: var(--seo-text); font-size: 16px; line-height: 1.7; margin: 0; }
+  html:not(.dark) .seo-aeo { background: linear-gradient(150deg,rgba(124,92,255,.1),rgba(34,211,238,.05)); border-color: rgba(124,92,255,.3); }
+
+  .seo-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); }
+  .seo-card { border: 1px solid var(--seo-border); border-radius: 16px; padding: 22px; background: rgba(255,255,255,.025); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: transform .25s cubic-bezier(.2,.9,.3,1),border-color .25s,box-shadow .25s; }
+  .seo-card:hover { transform: translateY(-3px); border-color: rgba(124,92,255,.4); box-shadow: 0 24px 60px -40px rgba(124,92,255,.9); }
+  .seo-card h3 { margin-bottom: 7px; }
+  .seo-card p { font-size: 14px; line-height: 1.72; margin: 0; }
+  .seo-card .seo-city { display: inline-block; font-family: var(--seo-mono); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--seo-accent-2); margin-bottom: 9px; }
+  html:not(.dark) .seo-card { background: #fff; border-color: rgba(10,12,16,.09); }
+
+  .seo-tablewrap { overflow-x: auto; border: 1px solid var(--seo-border); border-radius: 16px; background: rgba(255,255,255,.02); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .seo-table { width: 100%; border-collapse: collapse; min-width: 620px; font-size: 14px; }
+  .seo-table th, .seo-table td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--seo-border); vertical-align: top; }
+  .seo-table thead th { font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--seo-muted); font-weight: 700; background: rgba(255,255,255,.03); }
+  .seo-table tbody tr:last-child td { border-bottom: 0; }
+  .seo-table tbody tr:hover { background: rgba(124,92,255,.06); }
+  .seo-table td:first-child { color: var(--seo-text); font-weight: 550; }
+  .seo-table .yes { color: var(--seo-green); font-weight: 600; }
+  .seo-table .no { color: #f87171; font-weight: 600; }
+  html:not(.dark) .seo-table thead th { background: rgba(10,12,16,.04); }
+  html:not(.dark) .seo-table tbody tr:hover { background: rgba(124,92,255,.05); }
+
+  .seo-faq { display: grid; gap: 10px; }
+  .seo-faq details { border: 1px solid var(--seo-border); border-radius: 13px; background: rgba(255,255,255,.02); overflow: hidden; transition: border-color .2s,background .2s; }
+  .seo-faq details[open] { border-color: rgba(124,92,255,.34); background: rgba(124,92,255,.045); }
+  .seo-faq summary { cursor: pointer; list-style: none; padding: 16px 20px; font-weight: 550; font-size: 14.6px; display: flex; align-items: center; gap: 12px; letter-spacing: -.012em; color: var(--seo-text); }
+  .seo-faq summary::-webkit-details-marker { display: none; }
+  .seo-faq summary::after { content: "+"; margin-left: auto; font-family: var(--seo-mono); font-size: 17px; color: var(--seo-accent); transition: transform .25s; }
+  .seo-faq details[open] summary::after { transform: rotate(45deg); }
+  .seo-faq p { padding: 0 20px 18px; margin: 0; font-size: 14.2px; line-height: 1.75; }
+  html:not(.dark) .seo-faq details { background: #fff; border-color: rgba(10,12,16,.09); }
+
+  .seo-cta { margin-top: 52px; text-align: center; border: 1px solid rgba(124,92,255,.3); border-radius: 20px; padding: 38px 26px; background: linear-gradient(150deg,rgba(124,92,255,.14),rgba(34,211,238,.07)); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .seo-cta h2 { margin-bottom: 8px; }
+  .seo-cta p { max-width: 560px; margin: 0 auto 20px; }
+  .seo-cta .btn { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; border: 0; border-radius: .75rem; padding: .75rem 1.5rem; font-size: .875rem; font-weight: 600; }
+  .seo-cta .btn.primary { background: var(--seo-accent); color: #fff; }
+  .seo-cta .btn.primary:hover { background: #6a48ff; }
+  html:not(.dark) .seo-cta { background: linear-gradient(150deg,rgba(124,92,255,.11),rgba(34,211,238,.06)); border-color: rgba(124,92,255,.3); }
 
   @media (prefers-reduced-motion: reduce) {
     * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
@@ -247,7 +346,7 @@
           <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
           <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
         </span>
-        Live preview
+        Live validation
       </span>
       <button id="themeToggle" type="button" aria-label="Toggle dark mode"
         class="grid h-9 w-9 place-items-center rounded-lg border border-zinc-200 text-zinc-600 transition hover:bg-zinc-100 dark:border-white/10 dark:text-zinc-400 dark:hover:bg-white/5">
@@ -268,7 +367,7 @@
         <li aria-hidden="true" class="text-zinc-300 dark:text-zinc-700">/</li>
         <li><a href="/#directory" class="transition hover:text-zinc-900 dark:hover:text-zinc-200">Tools</a></li>
         <li aria-hidden="true" class="text-zinc-300 dark:text-zinc-700">/</li>
-        <li aria-current="page" class="font-medium text-zinc-900 dark:text-zinc-200">JSON Formatter & Validator</li>
+        <li aria-current="page" class="font-medium text-zinc-900 dark:text-zinc-200">JSON Formatter &amp; Validator</li>
       </ol>
     </nav>
     <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-[11px] font-medium text-zinc-600 dark:border-white/10 dark:bg-white/5 dark:text-zinc-400">
@@ -290,7 +389,7 @@
     </h1>
 
     <p class="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg">
-      Paste messy JSON and get clean, readable output instantly. It validates as you type, points to the <strong class="font-semibold text-zinc-900 dark:text-zinc-200">exact line and column</strong> of any error, minifies, sorts keys — and never sends your data anywhere.
+      Paste messy JSON and get clean, readable output instantly. It validates as you type, points to the <strong class="font-semibold text-zinc-900 dark:text-zinc-200">exact line and column</strong> of any error, minifies, sorts keys deeply — and never sends your data anywhere.
     </p>
 
     <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -318,9 +417,18 @@
       <!-- Toolbar -->
       <div class="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-200/80 px-4 py-3 dark:border-white/[0.07]">
         <div class="flex flex-wrap items-center gap-1.5">
-          <button id="formatBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg bg-zinc-900 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">Format</button>
-          <button id="minifyBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-white/10 dark:text-zinc-400 dark:hover:bg-white/5">Minify</button>
-          <button id="validateBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-white/10 dark:text-zinc-400 dark:hover:bg-white/5">Validate</button>
+          <button id="formatBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg bg-zinc-900 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 5.4 5.4 1.9-5.4 1.9L12 17.6l-1.9-5.4L4.7 10.3l5.4-1.9Z"/></svg>
+            Format
+          </button>
+          <button id="minifyBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-white/10 dark:text-zinc-400 dark:hover:bg-white/5">
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="m9 7-5 5 5 5"/><path d="m15 7 5 5-5 5"/></svg>
+            Minify
+          </button>
+          <button id="validateBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 px-3 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 dark:border-white/10 dark:text-zinc-400 dark:hover:bg-white/5">
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            Validate
+          </button>
         </div>
         <div class="flex flex-wrap items-center gap-3">
           <label for="sortKeys" class="flex cursor-pointer select-none items-center gap-2 text-xs font-medium text-zinc-600 dark:text-zinc-400">
@@ -329,7 +437,7 @@
               <span class="absolute inset-0 rounded-full bg-zinc-300 transition peer-checked:bg-indigo-500 peer-focus-visible:ring-2 peer-focus-visible:ring-indigo-500/40 dark:bg-zinc-700"></span>
               <span class="absolute left-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform peer-checked:translate-x-4"></span>
             </span>
-            Sort keys
+            Sort keys (deep)
           </label>
           <label for="indentSel" class="flex items-center gap-2 text-xs font-medium text-zinc-600 dark:text-zinc-400">
             Indent
@@ -340,6 +448,15 @@
             </select>
           </label>
         </div>
+      </div>
+
+      <!-- Status strip -->
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-200/80 bg-zinc-50/50 px-4 py-2 dark:border-white/[0.07] dark:bg-white/[0.015]">
+        <span id="statusPill" data-state="idle" class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 px-2.5 py-1 text-[11px] font-semibold text-zinc-500 dark:border-white/10 dark:text-zinc-400">
+          <span class="h-1.5 w-1.5 rounded-full bg-current"></span>
+          Waiting for input
+        </span>
+        <span class="font-mono text-[11px] text-zinc-400 dark:text-zinc-600">parsed with native <span class="text-indigo-500 dark:text-indigo-400">JSON.parse</span> · 0 network requests</span>
       </div>
 
       <!-- Dual pane -->
@@ -353,10 +470,14 @@
               <button id="clearBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white">Clear</button>
             </div>
           </div>
-          <textarea id="source" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder='Paste JSON here — e.g. {"hello":"world","items":[1,2,3]}'
-            class="pane-area h-[320px] w-full resize-none bg-transparent px-4 pb-2 font-mono text-[13.5px] leading-relaxed text-zinc-900 outline-none placeholder:text-zinc-400 focus:ring-0 dark:text-zinc-100 dark:placeholder:text-zinc-600"></textarea>
+          <div class="relative flex flex-1">
+            <div id="srcGutter" aria-hidden="true" class="gutter hidden shrink-0 select-none overflow-hidden border-r border-zinc-200/70 bg-zinc-50/40 px-2.5 py-2 text-right font-mono text-[11px] leading-[22px] text-zinc-300 dark:border-white/[0.06] dark:bg-black/20 dark:text-zinc-700 sm:block"></div>
+            <textarea id="source" spellcheck="false" autocomplete="off" autocapitalize="off" aria-label="JSON input" placeholder='Paste JSON here — e.g. {"hello":"world","items":[1,2,3]}'
+              class="pane-area h-[320px] w-full flex-1 resize-none bg-transparent px-4 py-2 font-mono text-[13.5px] leading-[22px] text-zinc-900 outline-none placeholder:text-zinc-400 focus:ring-0 dark:text-zinc-100 dark:placeholder:text-zinc-600"></textarea>
+          </div>
           <div class="flex items-center justify-between px-4 py-2 text-[11px] text-zinc-400 dark:text-zinc-600">
             <span id="srcStats">0 lines · 0 characters</span>
+            <span id="srcBytes">0 B</span>
           </div>
         </div>
 
@@ -365,250 +486,244 @@
             <span class="text-[11px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Result</span>
             <div class="flex items-center gap-1">
               <button id="copyBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg bg-zinc-900 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">Copy</button>
-              <button id="downloadBtn" type="button" aria-label="Download result" class="grid h-7 w-7 place-items-center rounded-lg text-zinc-500 transition hover:bg-zinc-200/70 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/10 dark:hover:text-white">
+              <button id="downloadBtn" type="button" aria-label="Download result as formatted.json" class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-200/70 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/10 dark:hover:text-white">
                 <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                Download
               </button>
             </div>
           </div>
-          <textarea id="output" readonly spellcheck="false" placeholder="Formatted JSON appears here…"
-            class="pane-area h-[320px] w-full resize-none bg-transparent px-4 pb-2 font-mono text-[13.5px] leading-relaxed text-zinc-900 outline-none placeholder:text-zinc-400 focus:ring-0 dark:text-zinc-100 dark:placeholder:text-zinc-600"></textarea>
+          <div class="relative flex flex-1">
+            <div id="outGutter" aria-hidden="true" class="gutter hidden shrink-0 select-none overflow-hidden border-r border-zinc-200/70 bg-white/40 px-2.5 py-2 text-right font-mono text-[11px] leading-[22px] text-zinc-300 dark:border-white/[0.06] dark:bg-black/20 dark:text-zinc-700 sm:block"></div>
+            <textarea id="output" readonly spellcheck="false" aria-label="Formatted JSON output" placeholder="Formatted JSON appears here…"
+              class="pane-area h-[320px] w-full flex-1 resize-none bg-transparent px-4 py-2 font-mono text-[13.5px] leading-[22px] text-zinc-900 outline-none placeholder:text-zinc-400 focus:ring-0 dark:text-zinc-100 dark:placeholder:text-zinc-600"></textarea>
+          </div>
           <div class="flex items-center justify-between px-4 py-2 text-[11px] text-zinc-400 dark:text-zinc-600">
             <span id="outStats">0 lines · 0 characters</span>
-            <span id="validBadge" class="hidden items-center gap-1 text-emerald-600 dark:text-emerald-500">
-              <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              Valid JSON
-            </span>
+            <span id="outBytes">0 B</span>
           </div>
         </div>
       </div>
 
-      <div id="error" class="hidden items-start gap-2 border-t border-rose-500/20 bg-rose-500/[0.07] px-4 py-3 text-[13px] text-rose-600 dark:text-rose-400">
+      <div id="error" class="hidden items-start gap-2 border-t border-rose-500/20 bg-rose-500/[0.07] px-4 py-3 text-[13px] text-rose-600 dark:text-rose-400" role="alert">
         <svg class="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
         <span id="errorMsg"></span>
       </div>
     </div>
 
     <p class="mt-3 text-center text-[11px] text-zinc-400 dark:text-zinc-600">
-      Parsed with the native <code class="font-mono">JSON.parse</code> in your browser. Zero network requests.
+      Parsed with the native <code class="font-mono">JSON.parse</code> in your browser. Zero network requests, zero uploads.
     </p>
   </section>
+
   <!-- ═══════════════ 4. WHY CHOOSE US ═══════════════ -->
   <section id="why" class="scroll-mt-24 py-16 sm:py-20">
-    <div class="text-center">
+    <div class="mx-auto max-w-2xl text-center">
       <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">Why ToolGuest</span>
       <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Built to be the fastest JSON formatter on the web</h2>
+      <p class="mt-3 text-zinc-600 dark:text-zinc-400">No banners, no cookie wall, no sign-up. Open the page, paste the payload, read the answer.</p>
     </div>
-    <div class="mt-10 grid gap-4 sm:grid-cols-3">
-        <div class="rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-white/[0.03]">
+    <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="group rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-indigo-300 hover:shadow-xl hover:shadow-indigo-500/10 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-indigo-500/40">
           <span class="grid h-11 w-11 place-items-center rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>
           </span>
           <h3 class="mt-4 font-bold tracking-tight">Errors point to the exact line</h3>
-          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">V8 gives a character position — we convert it to a line and column number so you jump straight to the broken comma or quote.</p>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">The parser's character offset is converted to a line and column number, so you jump straight to the broken comma or quote.</p>
         </div>
-        <div class="rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-white/[0.03]">
+        <div class="group rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-emerald-300 hover:shadow-xl hover:shadow-emerald-500/10 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-emerald-500/40">
           <span class="grid h-11 w-11 place-items-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
           </span>
-          <h3 class="mt-4 font-bold tracking-tight">Handles multi-megabyte payloads</h3>
-          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Formatting runs on the main thread with native JSON.parse, so a few megabytes of JSON render in milliseconds.</p>
-        </div>
-        <div class="rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-white/[0.03]">
-          <span class="grid h-11 w-11 place-items-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14 4 6"/><circle cx="12" cy="14" r="8"/><path d="M12 6v2"/></svg>
-          </span>
           <h3 class="mt-4 font-bold tracking-tight">Your data never leaves the tab</h3>
-          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">No upload endpoint, no logging, no analytics. Turn off your Wi-Fi and the tool keeps working.</p>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">No upload endpoint, no logging, no analytics. Turn off your Wi-Fi and the tool keeps working, byte for byte.</p>
+        </div>
+        <div class="group rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-violet-300 hover:shadow-xl hover:shadow-violet-500/10 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-violet-500/40">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-violet-500/10 text-violet-600 dark:text-violet-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/></svg>
+          </span>
+          <h3 class="mt-4 font-bold tracking-tight">Deep key sorting</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Recursively alphabetise every object key to make payload diffs readable and snapshot output stable.</p>
+        </div>
+        <div class="group rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300 hover:shadow-xl hover:shadow-cyan-500/10 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-cyan-500/40">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14h6l2-4h6"/><circle cx="4" cy="14" r="2"/><circle cx="20" cy="10" r="2"/></svg>
+          </span>
+          <h3 class="mt-4 font-bold tracking-tight">Handles multi-megabyte payloads</h3>
+          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Formatting runs with native JSON.parse, so a few megabytes of JSON render in milliseconds, not seconds.</p>
         </div>
     </div>
   </section>
+
   <!-- ═══════════════ 5. HOW IT WORKS ═══════════════ -->
   <section id="how" class="scroll-mt-24 pb-16 sm:pb-20">
-    <div class="text-center">
+    <div class="mx-auto max-w-2xl text-center">
       <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">How it works</span>
       <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Format JSON in 4 steps</h2>
     </div>
-    <div class="mx-auto mt-10 grid max-w-3xl gap-6 sm:grid-cols-2">
-        <div class="flex gap-4">
-          <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">1</span>
-          <div>
-            <h3 class="font-semibold tracking-tight">Paste or type your JSON</h3>
-            <p class="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Drop in anything from a one-line API response to a multi-megabyte export.</p>
-          </div>
+    <div class="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2">
+        <div class="relative rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
+          <span class="mb-4 grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">1</span>
+          <h3 class="font-semibold tracking-tight">Paste or type your JSON</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Drop in anything from a one-line API response to a multi-megabyte export. Validation runs on every keystroke.</p>
         </div>
-        <div class="flex gap-4">
-          <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">2</span>
-          <div>
-            <h3 class="font-semibold tracking-tight">Click Format or Minify</h3>
-            <p class="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Format pretty-prints with your chosen indent; Minify strips every unnecessary byte.</p>
-          </div>
+        <div class="relative rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
+          <span class="mb-4 grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">2</span>
+          <h3 class="font-semibold tracking-tight">Fix any highlighted error</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">An invalid document shows the exact line and column plus the parser's own message, so the mistake is never a guessing game.</p>
         </div>
-        <div class="flex gap-4">
-          <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">3</span>
-          <div>
-            <h3 class="font-semibold tracking-tight">Fix any highlighted error</h3>
-            <p class="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">An invalid document shows the exact line and column plus the parser's own message.</p>
-          </div>
+        <div class="relative rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
+          <span class="mb-4 grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">3</span>
+          <h3 class="font-semibold tracking-tight">Format, minify or sort</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Pretty-print with 2 spaces, 4 spaces or a tab, strip every unnecessary byte, or alphabetise keys at every level.</p>
         </div>
-        <div class="flex gap-4">
-          <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">4</span>
-          <div>
-            <h3 class="font-semibold tracking-tight">Copy or download</h3>
-            <p class="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Grab the result to your clipboard, or save it as formatted.json.</p>
-          </div>
+        <div class="relative rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
+          <span class="mb-4 grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">4</span>
+          <h3 class="font-semibold tracking-tight">Copy or download</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Grab the result to your clipboard with a tick for confirmation, or save it straight out as <code class="font-mono">formatted.json</code>.</p>
         </div>
     </div>
   </section>
-  <!-- ═══════════════ 6. COMPARISON ═══════════════ -->
-  <section id="compare" class="scroll-mt-24 pb-16 sm:pb-20">
-    <div class="text-center">
-      <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">Compare</span>
-      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">ToolGuest vs. other JSON formatters</h2>
+
+  <!-- ═══════════════ SEO / AEO LONG-FORM CONTENT (1,200+ words) ═══════════════ -->
+  <section class="tool-seo-content" id="guide">
+
+    <div class="seo-block">
+      <span class="seo-eyebrow">The developer's JSON playbook</span>
+      <h2>JSON formatter and validator free online for US developers</h2>
+      <p class="seo-lede">A <strong>JSON formatter and validator free online for US developers</strong> should do three things perfectly: prove the document is valid, point to the exact character that broke it, and hand back clean, readable output. ToolGuest does all three in your browser, in under fifty milliseconds, with no account, no upload and no advertising. Paste the payload, read the verdict, copy the result.</p>
+      <p>JSON is the lingua franca of the modern web — every REST endpoint, every GraphQL response, every <code>package.json</code>, every Kubernetes manifest, every Stripe webhook. Yet it is also unforgiving. A single trailing comma, one unquoted key or a smart quote pasted from a document turns a thousand-line response into a wall of unreadable text with no obvious culprit. The <a href="https://www.json.org/json-en.html">JSON specification</a> allows no comments, no trailing commas and no single quotes, and a strict parser rejects all three. That strictness is a feature when your API depends on it and a frustration when you are staring at a minified blob at 2am.</p>
+      <p>That is the gap this tool closes. It is a <strong>JSON beautifier</strong>, a <strong>JSON minifier</strong> and a <strong>JSON validator with line numbers</strong> in one page, built for the way engineers actually work: paste, diagnose, fix, ship. Whether you are a backend engineer in San Francisco debugging a 4 MB API response, a platform engineer in London reviewing a Terraform state file, a data engineer in Berlin untangling an ETL export, or a full-stack developer in Toronto wiring up a config file, the workflow is the same and it takes seconds.</p>
     </div>
-    <div class="mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
-      <table class="w-full text-left text-sm">
-        <thead class="bg-zinc-50/80 text-xs uppercase tracking-wider text-zinc-500 dark:bg-white/[0.04] dark:text-zinc-500">
-          <tr>
-            <th class="py-3.5 pr-4 font-bold">Feature</th>
-            <th class="px-4 py-3.5 text-center font-bold text-zinc-900 dark:text-white">ToolGuest</th>
-            <th class="px-4 py-3.5 text-center font-bold">Typical formatter</th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
-              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Works fully offline</td>
-              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">Yes</td>
-              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">No</td>
-            </tr>
-            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
-              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Error line &amp; column</td>
-              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">Yes</td>
-              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">Sometimes</td>
-            </tr>
-            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
-              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Sort keys deep</td>
-              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">Yes</td>
-              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">Rarely</td>
-            </tr>
-            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
-              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Ads &amp; trackers</td>
-              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">None</td>
-              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">Many</td>
-            </tr>
-            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
-              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Uploads your data</td>
-              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">Never</td>
-              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">Sometimes</td>
-            </tr>
-            <tr class="border-t border-zinc-200/70 dark:border-white/[0.07]">
-              <td class="py-3.5 pr-4 font-medium text-zinc-700 dark:text-zinc-300">Signup required</td>
-              <td class="px-4 py-3.5 text-center font-semibold text-emerald-600 dark:text-emerald-400">Never</td>
-              <td class="px-4 py-3.5 text-center text-zinc-500 dark:text-zinc-500">Often</td>
-            </tr>
-        </tbody>
-      </table>
+
+    <div class="seo-block">
+      <div class="seo-aeo">
+        <span class="seo-aeo-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.4 5.4 1.9-5.4 1.9L12 17.6l-1.9-5.4L4.7 10.3l5.4-1.9Z"/></svg>Quick answer</span>
+        <p>A JSON formatter and validator parses JSON in the browser, reports syntax errors with an exact line and column, and reprints the data with consistent indentation. Developers use it to beautify minified API responses, minify payloads for transport, and confirm a document is valid before shipping.</p>
+      </div>
     </div>
+
+    <div class="seo-block">
+      <span class="seo-eyebrow">Why it matters</span>
+      <h2>Why exact error location beats “unexpected token”</h2>
+      <p>Every JSON parser in the world can tell you that something is wrong. Almost none of them tell you <em>where</em>. A browser console throws “Unexpected token } in JSON at position 2048”, and a server framework replies with a stack trace that points at its own middleware rather than your data. Position 2048 means nothing until somebody counts the newlines. On a minified single-line response, it means nothing at all.</p>
+      <p>ToolGuest converts that character offset into a human coordinate. It walks the source up to the reported position, counts the newlines, and derives a 1-based <strong>line and column number</strong> — the same way a compiler reports an error. The message reads <em>“Invalid JSON (line 42, column 8) — Unexpected token }”</em>, and line 42 column 8 is exactly where you look. On a payload of several thousand lines, that difference is the gap between a thirty-second fix and a thirty-minute hunt.</p>
+      <p>There is a second, quieter benefit: the parser's own message is preserved rather than replaced. V8's wording — “Unexpected token”, “Unexpected end of JSON input”, “Bad control character in string literal” — is precise once you know where to look, and stripping it would hide useful information. The tool shows the raw message and the coordinate together, so experienced engineers get the detail they want and newcomers get a location they can act on.</p>
+    </div>
+
+    <div class="seo-block">
+      <span class="seo-eyebrow">Local workflows</span>
+      <h2>Built for the debugging routines of Tier-1 markets</h2>
+      <p>JSON problems look different in every stack, but the tool covers all of them with the same controls. Here is how teams actually use it.</p>
+      <div class="seo-grid">
+        <div class="seo-card">
+          <span class="seo-city">San Francisco · United States</span>
+          <h3>API response debugging</h3>
+          <p>A microservice returns a 4 MB payload from a staging endpoint. Paste it, click Format, and the tree becomes readable in milliseconds. When the schema team ships a malformed fixture, the error bar names the exact line and column, and the key sorter lines up the new fields against the old ones for a clean diff.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">London · United Kingdom</span>
+          <h3>Infrastructure and config files</h3>
+          <p>Kubernetes manifests, Terraform state and CI config all live as JSON. Deep key sorting turns a reordered state file into a stable, reviewable diff, so a pull request shows the one value that changed instead of a hundred shuffled lines.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Berlin · Germany</span>
+          <h3>ETL and data pipelines</h3>
+          <p>Exports arrive minified, nested and multi-megabyte. The native parser handles them without choking, the line and column pointer finds the broken record, and the minify button squeezes the cleaned output back down before it is written to storage or queued for transport.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Toronto · Canada</span>
+          <h3>Front-end and SDK integration</h3>
+          <p>When a fetch call fails silently, the payload is usually the cause. Paste it, read the exact error location, fix the key, and copy the corrected object straight back into the editor. Nothing leaves the tab, so unreleased response shapes and test data stay private.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-block">
+      <span class="seo-eyebrow">Feature tour</span>
+      <h2>What the ToolGuest JSON engine actually does</h2>
+      <div class="seo-grid">
+        <div class="seo-card">
+          <h3>Real-time validation with a precise pointer</h3>
+          <p>Every keystroke and every paste is parsed immediately. The status pill flips between valid and invalid, and any failure reports the line, the column and the parser's message in one bar.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Formatting with your indent</h3>
+          <p>Pretty-print with two spaces, four spaces or a single tab. The choice sticks, so output matches the conventions of your repository instead of fighting them.</p>
+        </div>
+        <div class="seo-card">
+          <h3>One-click minify</h3>
+          <p>Strip every space, tab and line break to shrink a payload for transport. Minified output is byte-for-byte what <code>JSON.stringify</code> produces with no spacing argument, so it round-trips cleanly.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Deep key sorting</h3>
+          <p>Recursively alphabetise object keys at every depth. Arrays keep their order because element order carries meaning; only the keys move. The result is deterministic output for snapshots, fixtures and reviews.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Live counters on both panes</h3>
+          <p>Line and character counts update as you type on the input, and the formatted result reports its own totals plus a human-readable byte size — useful when you are trimming a payload to fit a limit.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Copy, download and sample</h3>
+          <p>Copy with a visible tick for confirmation, download the result as <code>formatted.json</code>, load a sample payload to see how the tool behaves, or clear the panes and start again.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-block" id="compare">
+      <span class="seo-eyebrow">Comparison</span>
+      <h2>ToolGuest vs. legacy cluttered JSON formatters</h2>
+      <p>Most free JSON formatters were built to carry advertising. The result is a slower page, a form that posts your payload to a server, and the actual work buried under interstitials. This one is built to get out of the way.</p>
+      <div class="seo-tablewrap">
+        <table class="seo-table">
+          <caption class="sr-only">Feature comparison between the ToolGuest JSON formatter and typical legacy JSON formatters</caption>
+          <thead>
+            <tr><th scope="col">Capability</th><th scope="col">ToolGuest JSON Formatter</th><th scope="col">Legacy cluttered formatters</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Error location</td><td class="yes">Exact line and column, always</td><td class="no">Character offset or a generic message</td></tr>
+            <tr><td>Deep key sorting</td><td class="yes">Recursive, one toggle</td><td class="no">Rarely offered, if at all</td></tr>
+            <tr><td>Advertising</td><td class="yes">Zero ads</td><td class="no">Banners, pop-ups and interstitials</td></tr>
+            <tr><td>Offline capability</td><td class="yes">Works with the network off</td><td class="no">Fails without a connection</td></tr>
+            <tr><td>Data handling</td><td class="yes">Zero uploads — nothing leaves the tab</td><td class="no">Payload posted to a backend</td></tr>
+            <tr><td>Indent control</td><td class="yes">2 spaces, 4 spaces or a tab</td><td class="no">Fixed or absent</td></tr>
+            <tr><td>Live counters</td><td class="yes">Lines, characters and bytes on both panes</td><td class="no">Seldom offered</td></tr>
+            <tr><td>Account required</td><td class="yes">No signup, ever</td><td class="no">Email wall or rate limit</td></tr>
+            <tr><td>Execution</td><td class="yes">Instant, browser-side</td><td class="no">Server round-trip per action</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="seo-block">
+      <span class="seo-eyebrow">Developer notes</span>
+      <h2>JSON habits that age well in production</h2>
+      <p>Keep payloads valid, not merely parseable. JavaScript's <code>JSON.parse</code> is stricter than the JavaScript object literal syntax it resembles, which is why <code>{ a: 1 }</code> works in a script but not in a <code>.json</code> file: keys must be double-quoted, strings must use double quotes, and no trailing comma is allowed. When a payload “works in code but fails in a file”, that mismatch is almost always the reason.</p>
+      <p>Treat formatting as part of the contract. A repository that commits formatted JSON with a fixed indent and sorted keys produces diffs a reviewer can actually read, and it removes the whole class of “whitespace-only” pull requests. Sort keys where order does not carry meaning, and leave arrays alone where it does — a list of steps is a sequence, not a set.</p>
+      <p>Finally, remember that JSON has no comments by design. If a config file needs explanation, keep it in a separate <code>README</code> or a companion schema rather than smuggling <code>//</code> into the data, where a strict parser will reject it. Validate before you commit, and let the tool tell you the exact line and column when something slips through.</p>
+    </div>
+
+    <div class="seo-block" id="faq">
+      <span class="seo-eyebrow">Questions</span>
+      <h2>Frequently asked questions</h2>
+      <div class="seo-faq">
+        <details open><summary>What is the difference between formatting and validating JSON?</summary><p>Validating checks that the document conforms to the JSON standard and parses without error. Formatting (or beautifying) reprints a valid document with consistent indentation and line breaks so a human can read it. ToolGuest does both: validation runs on every keystroke, and the Format button pretty-prints the result.</p></details>
+        <details><summary>How does it find the exact line and column of an error?</summary><p>When <code>JSON.parse</code> fails, the V8 engine reports a character position such as “at position 42”. The tool counts the newlines up to that offset to derive a 1-based line and column number, then shows both alongside the parser's own message, so you can jump straight to the broken comma, quote or bracket.</p></details>
+        <details><summary>Can it handle multi-megabyte JSON files?</summary><p>Yes. Formatting and minifying run through the browser's native parser, which is far faster than hand-written JavaScript. Payloads of several megabytes render in milliseconds, and the practical ceiling is your machine's available memory rather than anything inside the tool.</p></details>
+        <details><summary>What does the “Sort keys” option do?</summary><p>It reorders object keys alphabetically at every level of the document, recursively. That makes diffs between two versions of a payload far easier to read and produces stable output for snapshots and tests. Arrays keep their original order, because element order is meaningful there.</p></details>
+        <details><summary>Is my JSON uploaded anywhere?</summary><p>No. The entire tool runs client-side in vanilla JavaScript. There is no upload endpoint, no logging and no analytics, which is why it is safe to paste internal API responses, unreleased fixtures or customer data. Turn off your network connection and the tool keeps working.</p></details>
+        <details><summary>Does it support JSON Lines or NDJSON files?</summary><p>Not directly, because each line of an NDJSON file is a separate JSON document rather than one valid document. Paste one line at a time to validate it, or wrap the lines in a JSON array and format the array in a single pass.</p></details>
+        <details><summary>Why does my JSON say “invalid” when it looks perfectly fine?</summary><p>The usual culprits are a trailing comma before a closing bracket, single quotes instead of double quotes, unquoted object keys, a stray <code>//</code> or <code>/* */</code> comment, or a smart quote pasted from a word processor. The error bar shows the line and column where the parser gave up, which is normally a character or two after the real mistake.</p></details>
+      </div>
+    </div>
+
+    <div class="seo-cta">
+      <h2>Ready to clean up that payload?</h2>
+      <p>Scroll back to the editor, paste your JSON and click Format. It is free, private and faster than reading this sentence.</p>
+      <a class="btn primary" href="#tool"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>Format JSON now</a>
+    </div>
+
   </section>
-  <!-- ═══════════════ 7. FAQ ═══════════════ -->
-  <section id="faq" class="scroll-mt-24 pb-16 sm:pb-20">
-    <div class="mx-auto max-w-3xl">
-      <div class="text-center">
-        <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">FAQ</span>
-        <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">JSON questions, answered</h2>
-      </div>
-      <div class="mt-10 space-y-3">
-        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
-          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
-            <span class="font-semibold tracking-tight">Is this JSON formatter really free and private?</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Yes. There is no account, no ad slot and no server call. Your JSON is parsed by your own browser's <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">JSON.parse</code> implementation, so nothing is transmitted, logged or stored.
-          </p></div></div>
-        </div>
-        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
-          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
-            <span class="font-semibold tracking-tight">Why does my JSON say “invalid” when it looks fine?</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            The usual culprits are a trailing comma before a closing bracket, single quotes instead of double quotes, unquoted object keys, or a stray comment. The error bar shows the line and column where the parser gave up, which is normally a character or two after the real mistake.
-          </p></div></div>
-        </div>
-        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
-          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
-            <span class="font-semibold tracking-tight">Can it handle very large files?</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Yes. Formatting is done with the browser's native parser, which is far faster than hand-written JavaScript. The practical limit is your machine's available memory rather than anything in the tool.
-          </p></div></div>
-        </div>
-        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
-          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
-            <span class="font-semibold tracking-tight">What does “Sort keys” do?</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            It reorders object keys alphabetically at every level of the document, which makes diffs between two versions of a payload far easier to read. Arrays keep their original order, because order is meaningful there.
-          </p></div></div>
-        </div>
-        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
-          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
-            <span class="font-semibold tracking-tight">Does it support JSON Lines or NDJSON?</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Not directly — each line of an NDJSON file is a separate JSON document. Paste one line at a time, or wrap the lines in an array and format that.
-          </p></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ═══════════════ 8. RELATED TOOLS ═══════════════ -->
-  <section class="pb-20">
-    <div class="rounded-3xl border border-zinc-200 bg-white/60 p-6 backdrop-blur sm:p-8 dark:border-white/10 dark:bg-white/[0.03]">
-      <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h2 class="text-xl font-extrabold tracking-tight">Related developer tools</h2>
-          <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Same speed. Same privacy. Zero ads.</p>
-        </div>
-        <a href="/#directory" class="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 transition hover:gap-2.5 dark:text-indigo-400">
-          All tools
-          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-      <div class="grid gap-3 sm:grid-cols-3">
-        <a href="/base64-encoder" class="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-indigo-500/40">
-          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 8-4 4 4 4"/><path d="m17 8 4 4-4 4"/></svg>
-          </span>
-          <span>
-            <span class="block font-semibold tracking-tight transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Base64 Encoder</span>
-            <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">Encode and decode UTF-8 safe Base64</span>
-          </span>
-        </a>
-        <a href="/hash-generator" class="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-indigo-500/40">
-          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg>
-          </span>
-          <span>
-            <span class="block font-semibold tracking-tight transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Hash Generator</span>
-            <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">MD5, SHA-1 and SHA-256 in your browser</span>
-          </span>
-        </a>
-        <a href="/diff-checker" class="group flex items-start gap-4 rounded-2xl border border-zinc-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-indigo-500/40">
-          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5"/></svg>
-          </span>
-          <span>
-            <span class="block font-semibold tracking-tight transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">Diff Checker</span>
-            <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">Spot the difference between two texts</span>
-          </span>
-        </a>
-      </div>
-    </div>
-  </section>
+
 
 <!-- TF-RELATED -->
 <section class="tf-related" aria-label="Related tools">
@@ -714,8 +829,8 @@
 
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer class="border-t border-zinc-200/80 dark:border-white/[0.07]">
-  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-xs text-zinc-500 dark:text-zinc-600 sm:flex-row">
-    <p>© <span id="year">2026</span> ToolGuest — free micro-tools, built for speed.</p>
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-xs text-zinc-500 dark:text-zinc-400 sm:flex-row">
+    <p>© <span id="year">2026</span> ToolGuest — free developer micro-tools, built for speed.</p>
     <p class="inline-flex items-center gap-1.5">
       <svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       No trackers · No cookies · No uploads
@@ -731,6 +846,7 @@
 (function () {
   'use strict';
 
+  /* ─────────── Toast ─────────── */
   var toastEl = document.getElementById('toast');
   var toastTimer = 0;
   function toast(message) {
@@ -757,7 +873,7 @@
 
   function downloadText(text, name) {
     if (!text) { toast('Nothing to download'); return; }
-    var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    var blob = new Blob([text], { type: 'application/json;charset=utf-8' });
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url; a.download = name;
@@ -766,19 +882,11 @@
     toast('Downloaded ✓');
   }
 
+  /* ─────────── Theme ─────────── */
   var themeBtn = document.getElementById('themeToggle');
   if (themeBtn) themeBtn.addEventListener('click', function () {
     var isDark = document.documentElement.classList.toggle('dark');
     try { localStorage.setItem('tf-theme', isDark ? 'dark' : 'light'); } catch (e) {}
-  });
-
-  document.querySelectorAll('.faq-trigger').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var item = btn.closest('.faq-item');
-      var open = item.getAttribute('data-open') === 'true';
-      document.querySelectorAll('.faq-item').forEach(function (i) { i.setAttribute('data-open', 'false'); });
-      item.setAttribute('data-open', open ? 'false' : 'true');
-    });
   });
 
   /* ─────────── JSON formatter ─────────── */
@@ -786,13 +894,17 @@
   var out = document.getElementById('output');
   var errBox = document.getElementById('error');
   var errMsg = document.getElementById('errorMsg');
-  var validBadge = document.getElementById('validBadge');
+  var statusPill = document.getElementById('statusPill');
   var srcStats = document.getElementById('srcStats');
   var outStats = document.getElementById('outStats');
+  var srcBytes = document.getElementById('srcBytes');
+  var outBytes = document.getElementById('outBytes');
+  var srcGutter = document.getElementById('srcGutter');
+  var outGutter = document.getElementById('outGutter');
   var sortKeys = document.getElementById('sortKeys');
   var indentSel = document.getElementById('indentSel');
 
-  var SAMPLE = '{"name":"ToolGuest","version":3,"tools":[{"slug":"json-formatter","free":true,"tags":["json","dev"]},{"slug":"lorem-ipsum","free":true,"tags":["text"]}],"stats":{"tools":25,"ads":0,"uploads":null},"privacy":"client-side"}';
+  var SAMPLE = '{"name":"ToolGuest","version":3,"tools":[{"slug":"json-formatter","free":true,"tags":["json","dev"]},{"slug":"lorem-ipsum","free":true,"tags":["text"]}],"stats":{"tools":26,"ads":0,"uploads":null},"privacy":"client-side"}';
 
   function indentValue() {
     var v = indentSel.value;
@@ -813,9 +925,42 @@
   function countLines(s) { return s ? s.split('\n').length : 0; }
   function plural(n, w) { return n + ' ' + w + (n === 1 ? '' : 's'); }
 
+  function byteSize(s) {
+    var n = new Blob([s]).size;
+    if (n < 1024) return n + ' B';
+    if (n < 1024 * 1024) return (n / 1024).toFixed(1) + ' KB';
+    return (n / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+  function paintGutter(gutter, text) {
+    if (!gutter) return;
+    var n = countLines(text);
+    if (n === 0) { gutter.textContent = ''; return; }
+    var html = '';
+    for (var i = 1; i <= n; i++) html += '<div>' + i + '</div>';
+    gutter.innerHTML = html;
+  }
+
+  function syncScroll(area, gutter) {
+    if (!area || !gutter) return;
+    area.addEventListener('scroll', function () {
+      gutter.scrollTop = area.scrollTop;
+      gutter.style.transform = 'translateY(' + (-area.scrollTop) + 'px)';
+    });
+  }
+
+  function setStatus(state, label) {
+    statusPill.dataset.state = state;
+    statusPill.innerHTML = '<span class="h-1.5 w-1.5 rounded-full bg-current"></span>' + label;
+  }
+
   function stats() {
     srcStats.textContent = plural(countLines(src.value), 'line') + ' · ' + plural(src.value.length, 'character');
     outStats.textContent = plural(countLines(out.value), 'line') + ' · ' + plural(out.value.length, 'character');
+    srcBytes.textContent = byteSize(src.value);
+    outBytes.textContent = byteSize(out.value);
+    paintGutter(srcGutter, src.value);
+    paintGutter(outGutter, out.value);
   }
 
   function showError(msg) {
@@ -830,38 +975,184 @@
     return { line: line, col: col };
   }
 
-  function parseInput() {
-    var text = src.value.trim();
-    if (!text) return { empty: true };
-    try {
-      return { value: JSON.parse(text) };
-    } catch (e) {
-      var m = /position (\d+)/.exec(e.message);
-      var where = '';
-      if (m) {
-        var p = positionToLineCol(src.value, parseInt(m[1], 10));
-        where = ' (line ' + p.line + ', column ' + p.col + ')';
-      } else {
-        var lm = /line (\d+) column (\d+)/.exec(e.message);
-        if (lm) where = ' (line ' + lm[1] + ', column ' + lm[2] + ')';
+  /* Some parser errors — notably a trailing comma — carry no character
+     offset, so the line and column cannot be derived from the message alone.
+     This small scanner walks the document and reports the index of the first
+     structural fault, which restores an exact location for those cases. */
+  function scanJson(text) {
+    var i = 0, n = text.length;
+
+    function ws() {
+      while (i < n && (text[i] === ' ' || text[i] === '\t' || text[i] === '\n' || text[i] === '\r')) i++;
+    }
+    function err(hint) { return { index: i, hint: hint }; }
+
+    function parseString() {
+      i++;
+      while (i < n) {
+        var c = text[i];
+        if (c === '"') { i++; return null; }
+        if (c === '\\') { i += 2; continue; }
+        if (c === '\n') return err('Unescaped newline inside a string');
+        i++;
       }
-      return { error: 'Invalid JSON' + where + ' — ' + e.message.replace(/^JSON\.parse: /, '') };
+      return err('Unterminated string');
+    }
+
+    function parseLiteral(word) {
+      if (text.substr(i, word.length) === word) { i += word.length; return null; }
+      return err('Unexpected token');
+    }
+
+    function parseNumber() {
+      if (text[i] === '-') i++;
+      while (i < n && /[0-9.eE+\-]/.test(text[i])) i++;
+      return null;
+    }
+
+    function parseValue() {
+      ws();
+      if (i >= n) return err('Unexpected end of input');
+      var c = text[i];
+      if (c === '{') return parseObject();
+      if (c === '[') return parseArray();
+      if (c === '"') return parseString();
+      if (c === 't') return parseLiteral('true');
+      if (c === 'f') return parseLiteral('false');
+      if (c === 'n') return parseLiteral('null');
+      if (c === '-' || (c >= '0' && c <= '9')) return parseNumber();
+      if (c === "'") return err('Single quotes are not valid JSON — use double quotes');
+      return err('Unexpected character');
+    }
+
+    function parseObject() {
+      i++;
+      ws();
+      if (text[i] === '}') { i++; return null; }
+      for (;;) {
+        ws();
+        if (i >= n) return err('Unexpected end of input inside an object');
+        if (text[i] !== '"') {
+          if (text[i] === '}') return err('Trailing comma before }');
+          return err('Object keys must be double-quoted strings');
+        }
+        var e = parseString();
+        if (e) return e;
+        ws();
+        if (text[i] !== ':') return err("Expected ':' after the key");
+        i++;
+        e = parseValue();
+        if (e) return e;
+        ws();
+        if (text[i] === ',') {
+          var ci = i;
+          i++; ws();
+          if (text[i] === '}') return { index: ci, hint: 'Trailing comma before }' };
+          continue;
+        }
+        if (text[i] === '}') { i++; return null; }
+        if (i >= n) return err('Unexpected end of input inside an object');
+        return err("Expected ',' or '}'");
+      }
+    }
+
+    function parseArray() {
+      i++;
+      ws();
+      if (text[i] === ']') { i++; return null; }
+      for (;;) {
+        var e = parseValue();
+        if (e) return e;
+        ws();
+        if (text[i] === ',') {
+          var ci = i;
+          i++; ws();
+          if (text[i] === ']') return { index: ci, hint: 'Trailing comma before ]' };
+          continue;
+        }
+        if (text[i] === ']') { i++; return null; }
+        if (i >= n) return err('Unexpected end of input inside an array');
+        return err("Expected ',' or ']'");
+      }
+    }
+
+    var e = parseValue();
+    if (e) return e;
+    ws();
+    if (i < n) return { index: i, hint: 'Unexpected content after the JSON document' };
+    return null;
+  }
+
+  function parseInput() {
+    var raw = src.value;
+    if (!raw.trim()) return { empty: true };
+    try {
+      return { value: JSON.parse(raw) };
+    } catch (e) {
+      var msg = e.message.replace(/^JSON\.parse:\s*/, '');
+      var line = 0, col = 0, hint = '';
+
+      var pm = /position (\d+)/.exec(msg);
+      var lm = /line (\d+) column (\d+)/.exec(msg);
+
+      if (pm) {
+        var p = positionToLineCol(raw, parseInt(pm[1], 10));
+        line = p.line; col = p.col;
+      } else if (lm) {
+        line = parseInt(lm[1], 10); col = parseInt(lm[2], 10);
+      } else {
+        var scan = scanJson(raw);
+        if (scan) {
+          var sp = positionToLineCol(raw, scan.index);
+          line = sp.line; col = sp.col; hint = scan.hint;
+        }
+      }
+
+      /* Drop the parser's own location tail so it is not printed twice. */
+      msg = msg.replace(/\s*at position \d+.*$/, '')
+               .replace(/\s*\(line \d+ column \d+\)\s*$/, '')
+               .trim();
+      if (hint) msg = hint;
+      if (msg.length > 160) msg = msg.slice(0, 157) + '…';
+
+      var where = line ? ' (line ' + line + ', column ' + col + ')' : '';
+      return { error: 'Invalid JSON' + where + ' — ' + msg };
     }
   }
 
   function render(mode) {
     var r = parseInput();
-    if (r.empty) { out.value = ''; showError(''); validBadge.classList.add('hidden'); validBadge.classList.remove('inline-flex'); stats(); return; }
-    if (r.error) { out.value = ''; showError(r.error); validBadge.classList.add('hidden'); validBadge.classList.remove('inline-flex'); stats(); return; }
+    if (r.empty) {
+      out.value = '';
+      showError('');
+      setStatus('idle', 'Waiting for input');
+      stats();
+      return;
+    }
+    if (r.error) {
+      out.value = '';
+      showError(r.error);
+      setStatus('invalid', 'Invalid JSON');
+      stats();
+      return;
+    }
     var data = sortKeys.checked ? sortDeep(r.value) : r.value;
     try {
       out.value = mode === 'minify' ? JSON.stringify(data) : JSON.stringify(data, null, indentValue());
       showError('');
-      validBadge.classList.remove('hidden'); validBadge.classList.add('inline-flex');
+      setStatus('valid', mode === 'minify' ? 'Valid · minified' : 'Valid JSON');
     } catch (e) {
       showError('Could not serialise this JSON — ' + e.message);
+      setStatus('invalid', 'Cannot serialise');
     }
     stats();
+  }
+
+  function validateLive() {
+    var r = parseInput();
+    if (r.empty) { showError(''); setStatus('idle', 'Waiting for input'); return; }
+    if (r.error) { showError(r.error); setStatus('invalid', 'Invalid JSON'); }
+    else { showError(''); setStatus('valid', 'Valid JSON'); }
   }
 
   document.getElementById('formatBtn').addEventListener('click', function () { render('format'); toast('Formatted ✓'); });
@@ -869,17 +1160,17 @@
   document.getElementById('validateBtn').addEventListener('click', function () {
     var r = parseInput();
     if (r.empty) { toast('Nothing to validate'); return; }
-    if (r.error) { showError(r.error); toast('Invalid JSON ✗'); }
-    else { showError(''); toast('Valid JSON ✓'); }
+    if (r.error) { showError(r.error); setStatus('invalid', 'Invalid JSON'); toast('Invalid JSON ✗'); }
+    else { showError(''); setStatus('valid', 'Valid JSON'); toast('Valid JSON ✓'); }
   });
   indentSel.addEventListener('change', function () { if (out.value) render('format'); });
   sortKeys.addEventListener('change', function () { if (out.value) render('format'); });
-  src.addEventListener('input', function () { if (out.value) render('format'); stats(); });
+  src.addEventListener('input', function () { validateLive(); if (out.value) render('format'); else stats(); });
 
   document.getElementById('copyBtn').addEventListener('click', function () { copyText(out.value); });
   document.getElementById('downloadBtn').addEventListener('click', function () { downloadText(out.value, 'formatted.json'); });
   document.getElementById('clearBtn').addEventListener('click', function () {
-    src.value = ''; out.value = ''; showError(''); validBadge.classList.add('hidden'); validBadge.classList.remove('inline-flex'); stats(); src.focus(); toast('Cleared');
+    src.value = ''; out.value = ''; showError(''); setStatus('idle', 'Waiting for input'); stats(); src.focus(); toast('Cleared');
   });
   document.getElementById('sampleBtn').addEventListener('click', function () {
     src.value = SAMPLE; render('format'); toast('Sample loaded');
@@ -891,6 +1182,9 @@
       src.value = text; render('format'); toast('Pasted ✓');
     } catch (e) { src.focus(); toast('Press Ctrl/⌘+V to paste'); }
   });
+
+  syncScroll(src, srcGutter);
+  syncScroll(out, outGutter);
 
   stats();
   src.focus({ preventScroll: true });
