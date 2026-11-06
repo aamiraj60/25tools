@@ -192,7 +192,7 @@ adding a `lang` attribute.
 
 ## Automations
 
-Two cron automations keep the site healthy. Both run without an LLM.
+Three cron automations support the site. All run without an LLM.
 
 **ToolGuest GitHub Backup (check then upload)** — weekly, Sunday 02:30 UTC.
 
@@ -209,5 +209,17 @@ Open Graph tags and JSON-LD, then reads visible text only to flag US spellings
 and stale years. It updates a single GitHub issue titled `Site health report`
 (labelled `site-health`) rather than opening a new one each run.
 
-Both scripts live in `automation/` so the automations can be rebuilt from the
+**ToolGuest Distribution** — daily, 09:00 America/New_York (US morning).
+
+Picks one tool per day (rotates through all of them by date), writes a Dev.to
+article plus Reddit, X and LinkedIn copy, publishes to Dev.to when
+`DEVTO_API_KEY` is set, and posts the social copy through `SOCIAL_WEBHOOK_URL`
+(Ayrshare / Postiz / Make / n8n) when that is set. Everything it writes is
+recorded in a single GitHub issue titled `ToolGuest distribution` (labelled
+`distribution`), so copy for the platforms that were not automated is still
+there to paste. Platform limits are documented at the top of
+`automation/distribute/main.py`; Dev.to is the only platform with a free write
+API, so the others are webhook-or-copy by design.
+
+All scripts live in `automation/` so the automations can be rebuilt from the
 repository if the deployment is lost.
