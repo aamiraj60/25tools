@@ -14,6 +14,10 @@
   <meta property="og:locale:alternate" content="en_CA" />
   <meta http-equiv="content-language" content="en-GB" />
   <meta property="og:image" content="https://toolguest.com/assets/og/qr-generator.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Free QR Code Generator — PNG, SVG &amp; PDF Export" />
+  <meta name="twitter:image:alt" content="Free QR Code Generator — PNG, SVG &amp; PDF Export" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free QR Code Generator — PNG, SVG &amp; PDF Export" />
   <meta name="twitter:description" content="Design branded QR codes with colours, gradients, and logos. Export PNG, JPG, SVG, or PDF instantly. Free forever, no sign-up, never expires." />
@@ -63,11 +67,11 @@
 }
 </script>
 <meta name="description" content="Design branded QR codes with colours, gradients, and logos. Export PNG, JPG, SVG, or PDF instantly. Free forever, no sign-up, never expires." />
-<link href="assets/fonts.css" rel="stylesheet">
-<script src="assets/tailwind.js"></script>
-<script src="assets/qr-code-styling.js"></script>
-<script src="assets/jspdf.umd.min.js"></script>
-<script src="assets/lucide.js"></script>
+<link href="/assets/fonts.css" rel="stylesheet">
+<script src="/assets/tailwind.js"></script>
+<script src="/assets/qr-code-styling.js"></script>
+<script src="/assets/jspdf.umd.min.js"></script>
+<script src="/assets/lucide.js"></script>
 <script>
 tailwind.config = {
   darkMode: 'class',
@@ -159,12 +163,12 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
     animation: scan 3.5s linear infinite;
   }
 </style>
-<link rel="stylesheet" href="assets/related.css">
-<link rel="icon" href="favicon.ico" sizes="any" />
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
-<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
-<link rel="apple-touch-icon" href="apple-touch-icon.png" />
-<link rel="manifest" href="site.webmanifest" />
+<link rel="stylesheet" href="/assets/related.css">
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
 
 <script type="application/ld+json">
 {
@@ -193,6 +197,7 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
 }
 </script>
 <link rel="stylesheet" href="/assets/logo.css" />
+<meta name="theme-color" content="#08080a">
 </head>
 <body class="font-sans bg-white text-zinc-900 dark:bg-[#09090b] dark:text-zinc-100 min-h-screen overflow-x-hidden">
 
@@ -208,7 +213,7 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.document
   <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between">
     <div class="flex items-center gap-3">
       <a href="/" class="flex items-center gap-2 font-semibold tracking-tight text-[15px]">
-        <img src="/logo.png" alt="ToolGuest" class="tg-logo tg-logo--on-light" style="height:32px;width:auto" /><img src="/logo-dark.png" alt="ToolGuest" class="tg-logo tg-logo--on-dark" style="height:32px;width:auto" />
+        <img src="/logo.png" alt="ToolGuest" class="tg-logo" style="height:32px;width:auto" />
         ToolGuest
       </a>
       <span class="hidden md:inline-flex items-center gap-1.5 rounded-full border border-zinc-200 dark:border-white/10 bg-white/60 dark:bg-white/5 px-2.5 py-1 text-[11px] text-zinc-600 dark:text-zinc-300">
@@ -1246,6 +1251,6 @@ render();
 lucide.createIcons();
 </script>
   <script src="/assets/rating-widget.js" defer></script>
-<script src="assets/related.js" defer></script>
+<script src="/assets/related.js" defer></script>
 </body>
 </html>

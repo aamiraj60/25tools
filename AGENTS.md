@@ -77,18 +77,70 @@ curl -X POST -H "Authorization: token ${GIithub_publish}" \
 Every page is self-contained HTML that pulls a shared bundle:
 
 ```html
-<link rel="stylesheet" href="assets/fonts.css" />
-<script src="assets/tailwind.js"></script>
+<link rel="stylesheet" href="/assets/fonts.css" />
+<script src="/assets/tailwind.js"></script>
 <script src="/assets/rating-widget.js" defer></script>
-<script src="assets/related.js" defer></script>
+<script src="/assets/related.js" defer></script>
 ```
 
 - `vercel.json` sets `cleanUrls: true`, so pages are served at `/<slug>`, not
   `/<slug>.html`. **Link with clean URLs** (`href="/hash-generator"`), never
   `.html` — the `.html` form costs a 308 redirect hop.
+- **Lead every asset path with `/`.** A clean URL has no directory for a
+  relative path to resolve against, so `href="icon-192.png"` asks for
+  `/icon-192.png` only by luck and breaks the moment a page moves deeper. The
+  icon, manifest and stylesheet links are all root-absolute for this reason.
+- `assets/fonts.css` holds one `@font-face` per family, weight and subset.
+  Keep it deduplicated — repeated rules for the same family and weight are
+  dead weight the browser still has to parse.
 - `robots.txt` deliberately allows AI crawlers (GPTBot, OAI-SearchBot,
   PerplexityBot, ClaudeBot, Google-Extended, Bingbot, Applebot). Keep it that way.
 - `llms.txt` is a plain-text summary for answer engines.
+- Every page carries the same icon set (`/favicon.ico`, `/icon-192.png`,
+  `/icon-512.png`, `/apple-touch-icon.png`, `/site.webmanifest`) and a
+  `theme-color` pair, one per colour scheme. Add both when you add a page.
+
+## Logo and icons
+
+The brand mark is the uploaded artwork `ToolGuest.png` (dark navy-to-cyan on
+transparency, natural aspect **1.317**). Everything else derives from it, and
+`tools/` rebuilds every derived asset so they can never drift apart:
+
+- `logo.png` — the artwork at 384 px wide as a **truecolour** PNG. Keep it
+  truecolour: quantising it to a 256-colour palette shifts the gradient and
+  visibly changes the mark's colours. 384 px is ~7x the 40 px header, so it
+  stays sharp on retina screens.
+- `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` — the mark centred on
+  a **white rounded plate** at 78% width, natural aspect kept. The plate is
+  there because a transparent icon disappears on a dark browser tab and in
+  Google's dark search results; the mark's own colours are never touched.
+- `icon-maskable-512.png` — the same plate at 56% width, so it survives
+  Android's circular crop. `site.webmanifest` points its `maskable` entry here.
+- `favicon.ico` — the same plate at 16/32/48/64 px.
+
+```bash
+python3 tools/build-icons.py   # rebuild the whole icon set from logo.png
+python3 tools/build-og.py      # rebuild assets/og/*.png from each page's own tags
+```
+
+**Never recolour the mark.** The site is dark by default and the navy half of
+the artwork would sink into a near-black page, so `assets/logo.css` gives the
+mark a white backdrop on the dark theme instead of lightening it. The colours
+must look identical on both themes.
+
+Each placement is a single `<img src="/logo.png" class="tg-logo">`. The site has
+three dark-mode conventions — `html.dark` (most pages), `html[data-theme="dark"]`
+and `body.dark` — and `logo.css` covers all three.
+
+## Open Graph previews
+
+`assets/og/<slug>.png` is the 1200x630 preview for each page, served to social
+cards, chat apps and Google. `tools/build-og.py` renders each one with headless
+Chromium from a template that reuses the site logo, the self-hosted Inter
+webfont and the brand gradient, and it reads the title and description out of
+that page's own `og:title` and `og:description`. Edit those tags and re-run the
+script — never hand-edit a preview image, and never let a preview show different
+copy from the page it points at.
 
 ## UK English
 
