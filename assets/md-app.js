@@ -72,6 +72,20 @@
     return viaTextarea();
   }
 
+  /* Rich copy keeps headings, lists and tables when pasted into a word
+   * processor, and falls back to plain text everywhere else. */
+  function copyRich() {
+    var plain = preview.innerText;
+    if (navigator.clipboard && window.ClipboardItem) {
+      var item = new ClipboardItem({
+        "text/html": new Blob([lastHtml], { type: "text/html" }),
+        "text/plain": new Blob([plain], { type: "text/plain" })
+      });
+      return navigator.clipboard.write([item]).catch(function () { return copyText(plain); });
+    }
+    return copyText(plain);
+  }
+
   function download(filename, text, type) {
     var blob = new Blob([text], { type: type || "text/plain;charset=utf-8" });
     var url = URL.createObjectURL(blob);
@@ -136,12 +150,41 @@
     });
   }
 
+  /* The page ships a theme-color pair for the OS colour scheme. Once a visitor
+   * picks a theme explicitly, that choice wins, so both metas are set to it. */
+  function syncThemeColor(dark) {
+    var metas = document.querySelectorAll('meta[name="theme-color"]');
+    Array.prototype.forEach.call(metas, function (m) {
+      m.setAttribute("content", dark ? "#08080a" : "#ffffff");
+    });
+  }
+
   function initTheme() {
     var btn = $("themeBtn");
+    syncThemeColor(document.documentElement.classList.contains("dark"));
     btn.addEventListener("click", function () {
       var dark = document.documentElement.classList.toggle("dark");
       $("icoMoon").classList.toggle("hidden", dark);
       $("icoSun").classList.toggle("hidden", !dark);
+      try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch (e) {}
+      syncThemeColor(dark);
+    });
+  }
+
+  /* On phones the split pane collapses, so a pair of tabs chooses which pane is
+   * visible. On wider screens both tabs are hidden and the grid takes over. */
+  function initPaneTabs() {
+    var tabs = $("paneTabs");
+    if (!tabs) return;
+    Array.prototype.forEach.call(tabs.querySelectorAll("button"), function (b) {
+      b.addEventListener("click", function () {
+        var mode = b.dataset.pane;
+        grid.classList.remove("mobile-editor", "mobile-preview");
+        grid.classList.add("mobile-" + mode);
+        Array.prototype.forEach.call(tabs.querySelectorAll("button"), function (x) {
+          x.classList.toggle("active", x === b);
+        });
+      });
     });
   }
 
@@ -173,6 +216,10 @@
 
     $("copyBtn").addEventListener("click", function () {
       copyText(lastHtml).then(function () { toast("HTML copied"); },
+        function () { toast("Copy failed — select and copy"); });
+    });
+    $("copyPreviewBtn").addEventListener("click", function () {
+      copyRich().then(function () { toast("Rendered preview copied"); },
         function () { toast("Copy failed — select and copy"); });
     });
     $("dlHtml").addEventListener("click", function () {
@@ -215,6 +262,7 @@
 
   initTheme();
   initGutter();
+  initPaneTabs();
   initEvents();
   applyTemplate("readme");
 })();
