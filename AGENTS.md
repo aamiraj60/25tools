@@ -149,10 +149,17 @@ The site targets UK readers. Write `colour`, `behaviour`, `analyse`, `centre`,
 
 Use `<html lang="en-GB">`. Every page must match.
 
-Two deliberate exceptions:
+Three deliberate exceptions:
 
 - **`Color Palette Generator`** is a product name. Leave it as-is, including in
   titles, `og:` tags and JSON-LD.
+- **`Entropy Analyzer`** on `password-checker` is likewise a product name and a
+  deliberate US-spelling keyword. The target query is
+  *password strength checker and entropy analyzer*, and `analyzer` is the
+  higher-volume spelling in the US market, so the page keeps it in the title,
+  H1, `og:` tags and JSON-LD. Body prose still uses the UK verb — `analyse`,
+  `analysed`, `analysis`. The site-health audit will report `analyzer` as a US
+  spelling; that is expected and should not be "corrected".
 - `scroll-behavior` is a CSS property and `Math.floor` is a JavaScript call.
   Never "correct" code.
 
