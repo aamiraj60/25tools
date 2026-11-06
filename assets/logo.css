@@ -1,0 +1,25 @@
+/* ToolGuest logo mark, used in every page header and footer.
+
+   The artwork is a dark navy-to-cyan gradient on transparency, so it reads
+   well on light backgrounds but its navy half sinks into the dark theme.
+   Each placement therefore carries two <img> tags — the artwork as-is and a
+   shadow-lifted variant — and the theme picks one. A CSS `content` swap would
+   be less markup, but Firefox ignores `content` on replaced elements, so the
+   mark would disappear there. */
+.tg-logo {
+  display: block;
+  width: auto;
+  flex: 0 0 auto;
+}
+
+.tg-logo--on-dark { display: none; }
+
+/* The dark-mode conventions in use across the site: html.dark,
+   html[data-theme="dark"] and body.dark. */
+.dark .tg-logo--on-light,
+[data-theme="dark"] .tg-logo--on-light,
+body.dark .tg-logo--on-light { display: none; }
+
+.dark .tg-logo--on-dark,
+[data-theme="dark"] .tg-logo--on-dark,
+body.dark .tg-logo--on-dark { display: block; }

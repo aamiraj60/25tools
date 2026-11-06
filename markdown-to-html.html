@@ -403,15 +403,17 @@ footer{border-top:1px solid var(--border);padding:44px 0 60px;margin-top:20px}
 </script>
 <link rel="icon" href="favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <link rel="manifest" href="site.webmanifest" />
+<link rel="stylesheet" href="/assets/logo.css" />
 </head>
 <body>
 
 <div class="topbar">
   <div class="topbar-inner">
     <div class="brand">
-      <span class="brand-mark"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+      <img src="/logo.png" alt="ToolGuest" class="tg-logo tg-logo--on-light" style="height:26px;width:auto" /><img src="/logo-dark.png" alt="ToolGuest" class="tg-logo tg-logo--on-dark" style="height:26px;width:auto" />
       <span>ToolGuest</span>
     </div>
     <nav class="crumbs" aria-label="Breadcrumb">
@@ -694,7 +696,7 @@ footer{border-top:1px solid var(--border);padding:44px 0 60px;margin-top:20px}
 
 <footer>
   <div class="wrap foot-inner">
-    <div style="display:flex;align-items:center;gap:10px"><span class="brand-mark" style="width:22px;height:22px;border-radius:7px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span><span>ToolGuest — client-side developer tools. © <span id="year">2026</span></span></div>
+    <div style="display:flex;align-items:center;gap:10px"><img src="/logo.png" alt="ToolGuest" class="tg-logo tg-logo--on-light" style="height:22px;width:auto" /><img src="/logo-dark.png" alt="ToolGuest" class="tg-logo tg-logo--on-dark" style="height:22px;width:auto" /><span>ToolGuest — client-side developer tools. © <span id="year">2026</span></span></div>
     <div class="foot-links"><a href="#editor">Editor</a><a href="/">Markdown Cheatsheet</a><a href="/">HTML to Markdown</a><a href="/">Privacy</a></div>
   </div>
 </footer>
