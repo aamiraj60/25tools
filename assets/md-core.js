@@ -59,6 +59,80 @@
     return RAW_TAG.test(line) || RAW_OPEN.test(line);
   }
 
+  /* Keyword sets and comment styles per language family, for the highlighter
+   * below. Keeping them together makes it obvious what each language gets. */
+  var LANGS = {
+    js: {
+      kw: "const let var function return if else for while do class extends new import from export default async await try catch finally throw typeof instanceof switch case break continue delete in of this super yield null true false undefined void static get set".split(" "),
+      comments: ["\\/\\/[^\\n]*", "\\/\\*[\\s\\S]*?\\*\\/"]
+    },
+    css: {
+      kw: [],
+      comments: ["\\/\\*[\\s\\S]*?\\*\\/"]
+    },
+    html: {
+      kw: [],
+      comments: ["<!--[\\s\\S]*?-->"]
+    },
+    json: { kw: ["true", "false", "null"], comments: [] },
+    bash: {
+      kw: "if then else elif fi for while do done case esac function return echo export local cd ls rm cp mv mkdir sudo npm npx git curl wget grep cat chmod".split(" "),
+      comments: ["#[^\\n]*"]
+    },
+    py: {
+      kw: "def class return if elif else for while import from as try except finally with lambda pass raise global nonlocal yield assert del in is not and or None True False self async await".split(" "),
+      comments: ["#[^\\n]*"]
+    },
+    sql: {
+      kw: "select from where insert into values update set delete create table drop alter join left right inner outer on group by order having limit offset as and or not null distinct count sum avg min max".split(" "),
+      comments: ["--[^\\n]*"],
+      ci: true
+    }
+  };
+
+  var LANG_ALIASES = {
+    javascript: "js", jsx: "js", ts: "js", typescript: "js", tsx: "js",
+    python: "py", py: "py",
+    shell: "bash", sh: "bash", zsh: "bash", console: "bash", dockerfile: "bash",
+    yml: "bash", yaml: "bash", toml: "bash", ini: "bash",
+    xml: "html", svg: "html", vue: "html",
+    json5: "json"
+  };
+
+  /* A small, dependency-free tokeniser. It escapes as it emits, so raw angle
+   * brackets in the source can never leak into the markup. */
+  function highlightCode(src, lang) {
+    var key = LANG_ALIASES[String(lang || "").toLowerCase()] || String(lang || "").toLowerCase();
+    var spec = LANGS[key] || LANGS.js;
+    var kw = spec.kw;
+    var ci = !!spec.ci;
+    var comment = spec.comments.length ? "(" + spec.comments.join("|") + ")" : "(?!)";
+    var re = new RegExp(comment
+      + '|("(?:\\\\.|[^"\\\\])*"|\'(?:\\\\.|[^\'\\\\])*\'|`(?:\\\\.|[^`\\\\])*`)'
+      + "|(\\b\\d[\\d_]*(?:\\.\\d+)?(?:[eE][+-]?\\d+)?\\b)"
+      + "|([A-Za-z_$][\\w$]*)"
+      + "|([\\s\\S])", "g");
+    var out = "";
+    var m;
+    while ((m = re.exec(src)) !== null) {
+      if (m[1]) out += '<span class="tok-c">' + escapeHtml(m[1]) + "</span>";
+      else if (m[2]) out += '<span class="tok-s">' + escapeHtml(m[2]) + "</span>";
+      else if (m[3]) out += '<span class="tok-n">' + escapeHtml(m[3]) + "</span>";
+      else if (m[4]) {
+        var word = m[4];
+        var hit = ci ? kw.indexOf(word.toLowerCase()) >= 0 : kw.indexOf(word) >= 0;
+        if (hit) out += '<span class="tok-k">' + escapeHtml(word) + "</span>";
+        else if (src.charAt(m.index + word.length) === "(") out += '<span class="tok-t">' + escapeHtml(word) + "</span>";
+        else out += escapeHtml(word);
+      } else {
+        out += /[{}()[\];,.:=+\-*/%<>!&|?~^]/.test(m[5])
+          ? '<span class="tok-p">' + escapeHtml(m[5]) + "</span>"
+          : escapeHtml(m[5]);
+      }
+    }
+    return out;
+  }
+
   /* Raw HTML runs from an opening tag to the line that closes it. A single
    * self-contained line counts as the whole block. */
   function rawBlock(lines, start) {
@@ -116,7 +190,7 @@
         }
         i++;
         out.push('<pre><code' + (lang ? ' class="language-' + lang + '"' : "") + ">"
-          + escapeHtml(buf.join("\n")) + "</code></pre>");
+          + highlightCode(buf.join("\n"), lang) + "</code></pre>");
         continue;
       }
 
@@ -221,6 +295,7 @@
   var api = {
     escapeHtml: escapeHtml,
     inline: inline,
+    highlightCode: highlightCode,
     renderMarkdown: renderMarkdown,
     stripUnsafe: stripUnsafe,
     addTailwind: addTailwind
