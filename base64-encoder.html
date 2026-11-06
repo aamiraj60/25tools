@@ -5,14 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <!-- ═══════════════ SEO HEADER ═══════════════ -->
-<title>Base64 Encoder &amp; Decoder — Free, Private, Instant</title>
-  <meta property="og:image" content="https://toolguest.com/assets/og/base64-encoder.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Base64 Encoder & Decoder — Free, Instant, 100% Client-Side" />
-  <meta name="twitter:image:alt" content="Base64 Encoder & Decoder — Free, Instant, 100% Client-Side" />
-  <meta name="twitter:image" content="https://toolguest.com/assets/og/base64-encoder.png" />
-<meta name="description" content="Free Base64 encoder and decoder. Convert text to Base64 and back instantly, 100% in your browser. No uploads, no signup." />
+<title>Base64 Encoder &amp; Decoder — Free, Instant, Private</title>
+<meta name="description" content="Free Base64 encoder and decoder. Convert text, files and images to Base64 or data URIs instantly — UTF-8 safe, URL-safe, 100% in your browser." />
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
 <link rel="canonical" href="https://toolguest.com/base64-encoder" />
   <link rel="alternate" hreflang="en-GB" href="https://toolguest.com/base64-encoder" />
@@ -27,22 +21,32 @@
   <meta property="og:locale:alternate" content="en_CA" />
   <meta http-equiv="content-language" content="en-GB" />
 <meta property="og:site_name" content="ToolGuest" />
-<meta property="og:title" content="Base64 Encoder & Decoder — Free, Instant, 100% Client-Side" />
-<meta property="og:description" content="Lightning-fast Base64 encoder and decoder. Real-time conversion, one-click copy & clear, zero data transmission. Built for developers." />
+<meta property="og:title" content="Base64 Encoder &amp; Decoder — Free, Instant, 100% Client-Side" />
+<meta property="og:description" content="Lightning-fast Base64 encoder and decoder. Convert text, images, PDFs and SVGs to Base64 or data URIs — UTF-8 safe, URL-safe, zero data transmission." />
 <meta property="og:url" content="https://toolguest.com/base64-encoder" />
+  <meta property="og:image" content="https://toolguest.com/assets/og/base64-encoder.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Base64 Encoder &amp; Decoder — Free, Instant, 100% Client-Side" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Base64 Encoder & Decoder — Free, Instant, 100% Client-Side" />
-<meta name="twitter:description" content="Real-time Base64 encode/decode in your browser. No ads, no uploads, no signup." />
+<meta name="twitter:title" content="Base64 Encoder &amp; Decoder — Free, Instant, 100% Client-Side" />
+<meta name="twitter:description" content="Real-time Base64 encode and decode in your browser, plus file-to-data-URI conversion. No ads, no uploads, no signup." />
+  <meta name="twitter:image" content="https://toolguest.com/assets/og/base64-encoder.png" />
+  <meta name="twitter:image:alt" content="Base64 Encoder &amp; Decoder — Free, Instant, 100% Client-Side" />
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "SoftwareApplication",
+      "@type": ["WebApplication", "SoftwareApplication"],
       "name": "Base64 Encoder & Decoder",
+      "url": "https://toolguest.com/base64-encoder",
       "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "Any",
+      "operatingSystem": "Any (Web Browser)",
+      "browserRequirements": "Requires JavaScript",
+      "isAccessibleForFree": true,
+      "inLanguage": "en-GB",
       "areaServed": [
           {"@type": "Country", "name": "United Kingdom"},
           {"@type": "Country", "name": "United States"},
@@ -62,17 +66,16 @@
         "price": "0",
         "priceCurrency": "GBP"
       },
-      "description": "Free online Base64 encoder and decoder that runs 100% client-side in your browser.",
+      "description": "Free online Base64 encoder and decoder that runs 100% client-side in your browser, with UTF-8 safe conversion, file-to-data-URI generation and URL-safe output.",
       "featureList": [
-        "100% client-side — Conversion happens in your tab. Your strings, tokens and secrets never touch a server.",
-        "Zero data transmission — No uploads, no analytics on your input, no clipboard polling. Nothing is logged, ever.",
-        "Instant live conversion — No submit button. Every keystroke converts in under a millisecond — even for large payloads.",
-        "Ad-free workspace — No interstitials, no pop-unders, no sticky banners stealing your focus or your screen space.",
-        "Pick a mode — Choose Encode to turn text into Base64, or Decode to turn Base64 back into readable text.",
-        "Paste your input — Type or paste into the left pane — or hit Paste to pull straight from your clipboard."
+        "Bi-directional UTF-8 safe processing — Plain text, emoji and every Unicode script round-trip without a URI malformed error.",
+        "File to Base64 and Data URI — Drag in an image, PDF or SVG and get a copy-ready data: URI for HTML or CSS.",
+        "URL-safe Base64 toggle — One click swaps + and / for - and _ and trims padding for JWTs and query strings.",
+        "Instant live conversion — No submit button; every keystroke converts in under a millisecond.",
+        "Privacy shield — HTML5 FileReader and native Web APIs only. Zero uploads, zero logging, works offline."
       ],
-      "dateModified": "2026-11-05",
-      "datePublished": "2026-11-05"
+      "dateModified": "2026-11-06",
+      "datePublished": "2026-11-06"
     },
     {
       "@type": "BreadcrumbList",
@@ -86,8 +89,8 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Tools",
-          "item": "https://toolguest.com/"
+          "name": "Developer & Utilities",
+          "item": "https://toolguest.com/#directory"
         },
         {
           "@type": "ListItem",
@@ -105,7 +108,7 @@
           "name": "What is Base64 encoding and why is it used?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Base64 converts binary or text data into a 64-character ASCII alphabet so it can travel safely through systems that only support plain text — JSON payloads, data URLs, email (MIME), JWTs, and HTTP Basic Auth headers."
+            "text": "Base64 maps binary or text data onto a 64-character ASCII alphabet so it can travel safely through systems that only accept plain text. It appears in JSON payloads, data URLs, MIME email attachments, JWTs and HTTP Basic Auth headers. It is encoding, not encryption — anyone can reverse it."
           }
         },
         {
@@ -113,31 +116,47 @@
           "name": "Is my data uploaded to a server?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. All encoding and decoding happens inside your browser using the native TextEncoder and atob/btoa APIs. Nothing is transmitted, logged, or stored anywhere."
+            "text": "No. Every conversion runs inside your browser tab using native TextEncoder, btoa and atob APIs. Nothing is transmitted, logged or stored. You can switch off your network and the tool still works."
           }
         },
         {
           "@type": "Question",
-          "name": "Does this tool support Unicode, emoji and non-English text?",
+          "name": "Does the tool handle Unicode, emoji and non-English text?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The encoder converts your text to UTF-8 bytes before Base64-encoding, so emoji, Arabic, Japanese, Chinese and every other Unicode character round-trip perfectly."
+            "text": "Yes. Your input is converted to UTF-8 bytes before encoding, so emoji, Arabic, Japanese, Chinese and every other Unicode code point round-trip perfectly. Tools that call btoa on a raw string corrupt anything outside Latin-1."
           }
         },
         {
           "@type": "Question",
-          "name": "What is URL-safe Base64?",
+          "name": "What is URL-safe Base64 and when should I use it?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "URL-safe Base64 (RFC 4648 §5) replaces '+' with '-' and '/' with '_' and strips '=' padding, so the string can be embedded in URLs, filenames and JWT segments without escaping."
+            "text": "URL-safe Base64 (RFC 4648 section 5) replaces plus with hyphen and slash with underscore, then trims the equals padding. Use it for JWT segments, query parameters and filenames where plus, slash and equals would need percent-encoding."
           }
         },
         {
           "@type": "Question",
-          "name": "Is there a file size limit?",
+          "name": "Can I convert an image or PDF to Base64?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "There is no imposed limit — the only constraint is your browser's memory. Strings of several megabytes convert in a few milliseconds because the work is done on the main thread with native APIs."
+            "text": "Yes. Drag any file onto the file drop zone and the tool reads it with the HTML5 FileReader API, then returns either a copy-ready data URI for HTML and CSS or a raw Base64 string. Images preview instantly and nothing leaves your device."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a file or input size limit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There is no imposed limit. The only ceiling is your browser's available memory. Multi-megabyte payloads convert in a few milliseconds because the work is handled by native browser APIs rather than JavaScript loops."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Base64 the same as encryption?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Base64 is a reversible encoding with no key, so it hides nothing from anyone who can read the string. Treat it as a transport format for binary data, never as a way to protect a password, an API key or personal data."
           }
         }
       ]
@@ -146,7 +165,7 @@
 }
 </script>
 
-<!-- ═══════════════ PRE-PAINT THEME (no FOUC) ═══════════════ -->
+<!-- ═══════════════ PRE-PAINT THEME (no flash of wrong theme) ═══════════════ -->
 <script>
   (function () {
     try {
@@ -178,7 +197,7 @@
   body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
   ::selection { background: rgba(99,102,241,.28); }
 
-  /* ── Tabs ── */
+  /* Mode tabs */
   .tab {
     padding: .5rem 1.15rem; border-radius: .6rem; font-size: .875rem;
     font-weight: 600; color: #71717a; transition: all .18s ease; white-space: nowrap;
@@ -194,22 +213,111 @@
     box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
   }
 
-  /* ── FAQ smooth accordion (grid-rows trick = no JS height calc) ── */
+  /* File format segmented control */
+  .seg {
+    padding: .35rem .8rem; border-radius: .5rem; font-size: .75rem; font-weight: 600;
+    color: #71717a; transition: all .18s ease; white-space: nowrap;
+  }
+  .seg:hover { color: #18181b; }
+  .dark .seg:hover { color: #fff; }
+  .seg[aria-pressed="true"] { background: #18181b; color: #fff; }
+  .dark .seg[aria-pressed="true"] { background: rgba(255,255,255,.14); color: #fff; }
+
+  /* Drop zone */
+  .drop-zone { transition: border-color .2s ease, background-color .2s ease, transform .2s ease; }
+  .drop-zone[data-over="true"] {
+    border-color: rgba(99,102,241,.75);
+    background: rgba(99,102,241,.08);
+    transform: scale(1.005);
+  }
+
+  /* FAQ accordion (grid-rows trick - no JS height maths) */
   .faq-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s cubic-bezier(.4,0,.2,1); }
   .faq-item[data-open="true"] .faq-body { grid-template-rows: 1fr; }
   .faq-body > div { overflow: hidden; }
   .faq-chevron { transition: transform .3s ease; }
   .faq-item[data-open="true"] .faq-chevron { transform: rotate(180deg); }
 
-  /* ── Textarea ── */
+  /* Panes */
   .pane-area { scrollbar-width: thin; scrollbar-color: rgba(113,113,122,.4) transparent; }
   .pane-area::-webkit-scrollbar { width: 8px; height: 8px; }
   .pane-area::-webkit-scrollbar-thumb { background: rgba(113,113,122,.35); border-radius: 99px; }
   .pane-area::-webkit-scrollbar-track { background: transparent; }
 
-  /* ── Toast ── */
+  /* Copy micro-interaction */
+  .copy-btn[data-done="true"] { background: #059669 !important; color: #fff !important; }
+
+  /* Toast */
   #toast { transition: opacity .25s ease, transform .25s ease; }
   #toast[data-show="false"] { opacity: 0; transform: translate(-50%, 12px); pointer-events: none; }
+
+  /* Long-form SEO content */
+  .tool-seo-content { max-width: 1120px; margin: 0 auto; padding: 0 20px 72px; }
+  .tool-seo-content .seo-block { margin-top: 56px; }
+  .tool-seo-content .seo-eyebrow {
+    display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .18em;
+    text-transform: uppercase; color: #6366f1; margin-bottom: .6rem;
+  }
+  .dark .tool-seo-content .seo-eyebrow { color: #818cf8; }
+  .tool-seo-content h2 { font-size: clamp(1.35rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -.028em; line-height: 1.16; }
+  .tool-seo-content h3 { font-size: 1.02rem; font-weight: 700; letter-spacing: -.015em; }
+  .tool-seo-content p { margin-top: .85rem; font-size: .975rem; line-height: 1.78; color: #52525b; }
+  .dark .tool-seo-content p { color: #a1a1aa; }
+  .tool-seo-content strong { color: #18181b; font-weight: 650; }
+  .dark .tool-seo-content strong { color: #f4f4f5; }
+  .tool-seo-content code {
+    font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: .85em;
+    background: rgba(99,102,241,.10); color: #4f46e5; padding: .12em .42em; border-radius: .4em;
+    border: 1px solid rgba(99,102,241,.18); word-break: break-word;
+  }
+  .dark .tool-seo-content code { background: rgba(129,140,248,.14); color: #c7d2fe; border-color: rgba(129,140,248,.24); }
+  .tool-seo-content a { color: #4f46e5; text-decoration: none; border-bottom: 1px solid rgba(99,102,241,.35); }
+  .dark .tool-seo-content a { color: #a5b4fc; }
+  .tool-seo-content a:hover { border-bottom-color: currentColor; }
+  .seo-grid { display: grid; gap: 16px; margin-top: 22px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .seo-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .seo-grid.cols-3 { grid-template-columns: repeat(3, 1fr); } }
+  .seo-card {
+    border: 1px solid rgba(24,24,27,.10); border-radius: 18px; padding: 20px;
+    background: rgba(255,255,255,.65); backdrop-filter: blur(8px);
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .seo-card:hover { transform: translateY(-3px); border-color: rgba(99,102,241,.4); box-shadow: 0 18px 40px -22px rgba(79,70,229,.5); }
+  .dark .seo-card { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-card .seo-city { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #0891b2; }
+  .dark .seo-card .seo-city { color: #22d3ee; }
+  .seo-card p { margin-top: .5rem; font-size: .9rem; }
+  .seo-aeo {
+    border: 1px solid rgba(99,102,241,.3); border-radius: 18px; padding: 22px 24px;
+    background: linear-gradient(135deg, rgba(99,102,241,.10), rgba(34,211,238,.06));
+  }
+  .seo-aeo-label { display: inline-flex; align-items: center; gap: .4rem; font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #4f46e5; }
+  .dark .seo-aeo-label { color: #a5b4fc; }
+  .seo-aeo p { margin-top: .6rem; font-size: 1.02rem; color: #3f3f46; }
+  .dark .seo-aeo p { color: #d4d4d8; }
+  .seo-tablewrap { margin-top: 24px; overflow-x: auto; border: 1px solid rgba(24,24,27,.10); border-radius: 18px; background: rgba(255,255,255,.6); backdrop-filter: blur(8px); }
+  .dark .seo-tablewrap { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: .9rem; text-align: left; }
+  .seo-table th, .seo-table td { padding: 14px 18px; border-bottom: 1px solid rgba(24,24,27,.08); }
+  .dark .seo-table th, .dark .seo-table td { border-bottom-color: rgba(255,255,255,.07); }
+  .seo-table tbody tr:last-child th, .seo-table tbody tr:last-child td { border-bottom: 0; }
+  .seo-table thead th { font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #71717a; }
+  .seo-table th[scope="row"] { font-weight: 600; color: #27272a; }
+  .dark .seo-table th[scope="row"] { color: #e4e4e7; }
+  .seo-table .yes { color: #059669; font-weight: 650; }
+  .dark .seo-table .yes { color: #34d399; }
+  .seo-table .no { color: #71717a; }
+  .seo-faq { margin-top: 22px; display: grid; gap: 12px; }
+  .seo-faq details { border: 1px solid rgba(24,24,27,.10); border-radius: 16px; padding: 0 20px; background: rgba(255,255,255,.6); backdrop-filter: blur(8px); }
+  .dark .seo-faq details { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-faq summary { cursor: pointer; padding: 16px 0; font-weight: 650; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .seo-faq summary::-webkit-details-marker { display: none; }
+  .seo-faq summary::after { content: "+"; font-size: 1.25rem; font-weight: 400; color: #a1a1aa; }
+  .seo-faq details[open] summary::after { content: "\2013"; }
+  .seo-faq p { padding-bottom: 16px; margin-top: 0; }
+  .seo-cta { margin-top: 56px; text-align: center; border-radius: 22px; padding: 36px 24px; background: linear-gradient(135deg, rgba(99,102,241,.12), rgba(34,211,238,.08)); border: 1px solid rgba(99,102,241,.25); }
+  .seo-cta p { max-width: 620px; margin: .7rem auto 0; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
   @media (prefers-reduced-motion: reduce) {
     * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
@@ -224,6 +332,7 @@
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="stylesheet" href="/assets/logo.css" />
 <meta name="theme-color" content="#08080a">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 </head>
 
 <body class="bg-white text-zinc-900 dark:bg-[#08080a] dark:text-zinc-100 font-sans antialiased">
@@ -235,7 +344,7 @@
   <div class="absolute bottom-0 right-0 h-[400px] w-[600px] rounded-full bg-violet-500/10 dark:bg-violet-500/[0.08] blur-[120px]"></div>
 </div>
 
-<!-- ═══════════════ HEADER ═══════════════ -->
+<!-- HEADER -->
 <header class="sticky top-0 z-40 border-b border-zinc-200/70 dark:border-white/[0.07] bg-white/70 dark:bg-[#08080a]/70 backdrop-blur-xl">
   <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
     <a href="/" class="flex items-center gap-2.5">
@@ -256,12 +365,12 @@
           <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
           <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
         </span>
-        Live preview
+        100% client-side
       </span>
       <button id="themeToggle" type="button" aria-label="Toggle dark mode"
         class="grid h-9 w-9 place-items-center rounded-lg border border-zinc-200 text-zinc-600 transition hover:bg-zinc-100 dark:border-white/10 dark:text-zinc-400 dark:hover:bg-white/5">
-        <svg class="h-4 w-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-        <svg class="hidden h-4 w-4 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg aria-hidden="true" focusable="false" class="h-4 w-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <svg aria-hidden="true" focusable="false" class="hidden h-4 w-4 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
       </button>
     </div>
   </div>
@@ -269,53 +378,38 @@
 
 <main class="mx-auto max-w-6xl px-5">
 
-  <!-- ═══════════════ 1. BREADCRUMB + REGION ═══════════════ -->
-  <div class="flex flex-wrap items-center justify-between gap-3 pt-6">
-    <nav aria-label="Breadcrumb">
-      <ol class="flex items-center gap-2 text-[13px] text-zinc-500 dark:text-zinc-500">
-        <li><a href="/" class="transition hover:text-zinc-900 dark:hover:text-zinc-200">Home</a></li>
-        <li aria-hidden="true" class="text-zinc-300 dark:text-zinc-700">/</li>
-        <li><a href="/" class="transition hover:text-zinc-900 dark:hover:text-zinc-200">Tools</a></li>
-        <li aria-hidden="true" class="text-zinc-300 dark:text-zinc-700">/</li>
-        <li aria-current="page" class="font-medium text-zinc-900 dark:text-zinc-200">Base64 Encoder &amp; Decoder</li>
-      </ol>
-    </nav>
-    <span class="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-[11px] font-medium text-zinc-600 dark:border-white/10 dark:bg-white/5 dark:text-zinc-400">
-      🌍 Global&nbsp;·&nbsp;Tier‑1 optimized
-    </span>
-  </div>
-
-  <!-- ═══════════════ 2. HERO ═══════════════ -->
+  <!-- HERO -->
   <section class="pt-10 pb-8 text-center sm:pt-14">
-    <div class="mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/60 px-3.5 py-1.5 text-xs font-medium text-zinc-600 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-zinc-400">
+    <div class="mx-auto mb-5 inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white/60 px-3.5 py-1.5 text-xs font-medium text-zinc-600 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-zinc-400">
       <span class="flex -space-x-1.5">
         <span class="h-4 w-4 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600 ring-2 ring-white dark:ring-[#08080a]"></span>
         <span class="h-4 w-4 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 ring-2 ring-white dark:ring-[#08080a]"></span>
         <span class="h-4 w-4 rounded-full bg-gradient-to-br from-violet-400 to-violet-600 ring-2 ring-white dark:ring-[#08080a]"></span>
       </span>
-      <span class="text-emerald-500">✓</span>
+      <span class="text-emerald-500">&#10003;</span>
       <span class="font-semibold text-zinc-900 dark:text-zinc-200">No upload</span>
-      <span class="text-zinc-400 dark:text-zinc-600">·</span>
-      <span>For developers</span>
-      <span class="text-zinc-400 dark:text-zinc-600">·</span>
-      <span>Runs in your browser — nothing uploaded</span>
+      <span class="text-zinc-400 dark:text-zinc-600">&middot;</span>
+      <span>UTF-8 safe</span>
+      <span class="text-zinc-400 dark:text-zinc-600">&middot;</span>
+      <span>Runs in your browser</span>
     </div>
 
     <h1 class="mx-auto max-w-4xl text-balance text-4xl font-extrabold leading-[1.08] tracking-[-0.03em] sm:text-5xl lg:text-[3.6rem]">
-      Free Online
-      <span class="bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-500 bg-clip-text text-transparent">Base64 Encoder</span>
-      &amp; Decoder
+      Base64 Encoder
+      <span class="bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-500 bg-clip-text text-transparent">&amp; Decoder</span>
+      Online, Free
     </h1>
 
     <p class="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg">
-      Lightning fast, <strong class="font-semibold text-zinc-900 dark:text-zinc-200">100% client-side privacy</strong>,
-      instant copy &amp; clear. Convert text to Base64 and Base64 to text in real time — nothing ever leaves your browser.
+      A world-class <strong class="font-semibold text-zinc-900 dark:text-zinc-200">Base64 encoder and decoder</strong> that runs
+      100% in your browser. Convert text, emoji and non-ASCII payloads in real time, or drop in an image, PDF or SVG
+      to get a copy-ready data URI &mdash; with UTF-8 safe handling, a URL-safe toggle and zero uploads.
     </p>
 
     <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
       <a href="#tool" class="group inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-zinc-900/20 transition hover:-translate-y-0.5 hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:shadow-white/10 dark:hover:bg-zinc-100">
         Start converting
-        <svg class="h-4 w-4 transition group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+        <svg aria-hidden="true" focusable="false" class="h-4 w-4 transition group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
       </a>
       <a href="#how" class="inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white/60 px-6 py-3 text-sm font-semibold text-zinc-700 backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-zinc-300 dark:hover:bg-white/10">
         How it works
@@ -323,14 +417,14 @@
     </div>
 
     <div class="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-zinc-500 dark:text-zinc-500">
-      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No signup</span>
-      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No ads</span>
-      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>UTF‑8 &amp; emoji safe</span>
-      <span class="inline-flex items-center gap-1.5"><svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Works offline</span>
+      <span class="inline-flex items-center gap-1.5"><svg aria-hidden="true" focusable="false" class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No signup</span>
+      <span class="inline-flex items-center gap-1.5"><svg aria-hidden="true" focusable="false" class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No ads</span>
+      <span class="inline-flex items-center gap-1.5"><svg aria-hidden="true" focusable="false" class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Emoji &amp; Unicode safe</span>
+      <span class="inline-flex items-center gap-1.5"><svg aria-hidden="true" focusable="false" class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Works offline</span>
     </div>
   </section>
 
-  <!-- ═══════════════ 3. THE CORE INTERACTIVE TOOL ═══════════════ -->
+  <!-- THE CORE INTERACTIVE TOOL -->
   <section id="tool" class="scroll-mt-24 pb-4">
     <div class="overflow-hidden rounded-3xl border border-zinc-200/90 bg-white/70 shadow-2xl shadow-zinc-900/[0.06] backdrop-blur-2xl dark:border-white/10 dark:bg-white/[0.035] dark:shadow-black/40">
 
@@ -341,7 +435,13 @@
           <button role="tab" type="button" data-mode="decode" aria-selected="false" class="tab">Decode</button>
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="flex flex-wrap items-center gap-3">
+          <button id="swapBtn" type="button"
+            class="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 px-2.5 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 dark:border-white/10 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white"
+            title="Swap the two panes and flip the mode">
+            <svg aria-hidden="true" focusable="false" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg>
+            Swap
+          </button>
           <label for="urlSafe" class="flex cursor-pointer select-none items-center gap-2 text-xs font-medium text-zinc-600 dark:text-zinc-400">
             <span class="relative inline-flex h-5 w-9 shrink-0 items-center">
               <input id="urlSafe" type="checkbox" class="peer sr-only" />
@@ -356,72 +456,150 @@
         </div>
       </div>
 
-      <!-- Dual pane -->
-      <div class="grid md:grid-cols-2">
-        <!-- Input pane -->
-        <div class="flex flex-col border-b border-zinc-200/80 md:border-b-0 md:border-r dark:border-white/[0.07]">
-          <div class="flex items-center justify-between gap-2 px-4 py-2.5">
-            <span id="srcLabel" class="text-[11px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Plain text</span>
-            <div class="flex items-center gap-1">
-              <button id="pasteBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white">
-                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
-                Paste
-              </button>
-              <button id="clearBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white">
-                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-                Clear
-              </button>
-            </div>
-          </div>
-          <textarea id="source" spellcheck="false" autocomplete="off" autocapitalize="off"
-            placeholder="Type or paste your text here — it converts as you type…"
-            class="pane-area h-[280px] w-full resize-none bg-transparent px-4 pb-2 font-mono text-[13.5px] leading-relaxed text-zinc-900 outline-none placeholder:text-zinc-400 focus:ring-0 dark:text-zinc-100 dark:placeholder:text-zinc-600"></textarea>
-          <div class="flex items-center justify-between px-4 py-2 text-[11px] text-zinc-400 dark:text-zinc-600">
-            <span id="srcStats">0 characters · 0 bytes</span>
-            <span class="hidden sm:inline">UTF‑8</span>
+      <!-- Source type -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-200/80 px-4 py-2.5 dark:border-white/[0.07]">
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Input</span>
+          <div class="flex gap-1 rounded-xl bg-zinc-100 p-1 dark:bg-white/[0.06]">
+            <button type="button" class="seg" data-src="text" aria-pressed="true">Text</button>
+            <button type="button" class="seg" data-src="file" aria-pressed="false">File &rarr; Data URI</button>
           </div>
         </div>
+        <span class="text-[11px] text-zinc-400 dark:text-zinc-600">Everything stays on this device</span>
+      </div>
 
-        <!-- Output pane -->
-        <div class="flex flex-col bg-zinc-50/60 dark:bg-black/20">
-          <div class="flex items-center justify-between gap-2 px-4 py-2.5">
-            <span id="outLabel" class="text-[11px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Base64 output</span>
-            <div class="flex items-center gap-1">
-              <button id="copyBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg bg-zinc-900 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">
-                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                Copy
-              </button>
-              <button id="downloadBtn" type="button" aria-label="Download result"
-                class="grid h-7 w-7 place-items-center rounded-lg text-zinc-500 transition hover:bg-zinc-200/70 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/10 dark:hover:text-white">
-                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-              </button>
+      <!-- TEXT PANEL -->
+      <div id="textPanel">
+        <div class="grid md:grid-cols-2">
+          <!-- Input pane -->
+          <div class="flex flex-col border-b border-zinc-200/80 md:border-b-0 md:border-r dark:border-white/[0.07]">
+            <div class="flex items-center justify-between gap-2 px-4 py-2.5">
+              <span id="srcLabel" class="text-[11px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Plain text</span>
+              <div class="flex items-center gap-1">
+                <button id="sampleBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white">
+                  <svg aria-hidden="true" focusable="false" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/></svg>
+                  Sample
+                </button>
+                <button id="pasteBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white">
+                  <svg aria-hidden="true" focusable="false" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+                  Paste
+                </button>
+                <button id="clearBtn" type="button" class="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white">
+                  <svg aria-hidden="true" focusable="false" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                  Clear
+                </button>
+              </div>
+            </div>
+            <textarea id="source" spellcheck="false" autocomplete="off" autocapitalize="off"
+              placeholder="Type or paste your text here &mdash; it converts as you type&hellip;"
+              class="pane-area h-[280px] w-full resize-none bg-transparent px-4 pb-2 font-mono text-[13.5px] leading-relaxed text-zinc-900 outline-none placeholder:text-zinc-400 focus:ring-0 dark:text-zinc-100 dark:placeholder:text-zinc-600"></textarea>
+            <div class="flex items-center justify-between px-4 py-2 text-[11px] text-zinc-400 dark:text-zinc-600">
+              <span id="srcStats">0 characters &middot; 0 bytes</span>
+              <span class="hidden sm:inline">UTF-8</span>
             </div>
           </div>
-          <textarea id="output" readonly spellcheck="false" placeholder="Result appears here instantly…"
-            class="pane-area h-[280px] w-full resize-none bg-transparent px-4 pb-2 font-mono text-[13.5px] leading-relaxed text-zinc-900 outline-none placeholder:text-zinc-400 focus:ring-0 dark:text-zinc-100 dark:placeholder:text-zinc-600"></textarea>
-          <div class="flex items-center justify-between px-4 py-2 text-[11px] text-zinc-400 dark:text-zinc-600">
-            <span id="outStats">0 characters</span>
-            <span class="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-500">
-              <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              Local
-            </span>
+
+          <!-- Output pane -->
+          <div class="flex flex-col bg-zinc-50/60 dark:bg-black/20">
+            <div class="flex items-center justify-between gap-2 px-4 py-2.5">
+              <span id="outLabel" class="text-[11px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Base64 output</span>
+              <div class="flex items-center gap-1">
+                <button id="copyBtn" type="button" class="copy-btn inline-flex items-center gap-1.5 rounded-lg bg-zinc-900 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">
+                  <svg aria-hidden="true" focusable="false" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                  <span data-copy-label>Copy</span>
+                </button>
+                <button id="downloadBtn" type="button" aria-label="Download result"
+                  class="grid h-7 w-7 place-items-center rounded-lg text-zinc-500 transition hover:bg-zinc-200/70 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/10 dark:hover:text-white">
+                  <svg aria-hidden="true" focusable="false" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                </button>
+              </div>
+            </div>
+            <textarea id="output" readonly spellcheck="false" placeholder="Result appears here instantly&hellip;"
+              class="pane-area h-[280px] w-full resize-none bg-transparent px-4 pb-2 font-mono text-[13.5px] leading-relaxed text-zinc-900 outline-none placeholder:text-zinc-400 focus:ring-0 dark:text-zinc-100 dark:placeholder:text-zinc-600"></textarea>
+            <div class="flex items-center justify-between px-4 py-2 text-[11px] text-zinc-400 dark:text-zinc-600">
+              <span id="outStats">0 characters &middot; 0 bytes</span>
+              <span class="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-500">
+                <svg aria-hidden="true" focusable="false" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Local
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILE PANEL -->
+      <div id="filePanel" class="hidden">
+        <div class="grid gap-4 p-4 md:grid-cols-2 md:gap-5 md:p-5">
+          <div class="flex flex-col gap-3">
+            <div id="dropZone" data-over="false"
+              class="drop-zone flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-zinc-300 bg-zinc-50/60 px-6 py-10 text-center dark:border-white/15 dark:bg-white/[0.02]">
+              <div class="grid h-12 w-12 place-items-center rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                <svg aria-hidden="true" focusable="false" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 9l5-5 5 5"/><path d="M12 4v12"/></svg>
+              </div>
+              <p class="text-sm font-semibold text-zinc-800 dark:text-zinc-200">Drop an image, PDF or SVG here</p>
+              <p class="text-xs text-zinc-500 dark:text-zinc-500">or</p>
+              <button id="filePickBtn" type="button" class="inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-4 py-2 text-xs font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">
+                Choose a file
+              </button>
+              <p class="mt-1 text-[11px] text-zinc-400 dark:text-zinc-600">Read locally with the FileReader API &mdash; never uploaded.</p>
+              <input id="fileInput" type="file" class="hidden" aria-label="Choose a file to encode" />
+            </div>
+
+            <div id="fileInfo" class="hidden rounded-2xl border border-zinc-200 bg-white/60 p-3 dark:border-white/10 dark:bg-white/[0.03]">
+              <div class="flex items-center gap-3">
+                <img id="filePreview" alt="Selected file preview" class="hidden h-12 w-12 shrink-0 rounded-lg border border-zinc-200 object-cover dark:border-white/10" />
+                <div class="min-w-0 flex-1">
+                  <p id="fileName" class="truncate text-sm font-semibold text-zinc-800 dark:text-zinc-200"></p>
+                  <p id="fileMeta" class="truncate text-[11px] text-zinc-500 dark:text-zinc-500"></p>
+                </div>
+                <button id="fileClearBtn" type="button" aria-label="Remove file"
+                  class="grid h-8 w-8 shrink-0 place-items-center rounded-lg text-zinc-500 transition hover:bg-zinc-200/70 hover:text-zinc-900 dark:hover:bg-white/10 dark:hover:text-white">
+                  <svg aria-hidden="true" focusable="false" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-2.5">
+              <div class="flex gap-1 rounded-xl bg-zinc-100 p-1 dark:bg-white/[0.06]">
+                <button type="button" class="seg" data-fmt="datauri" aria-pressed="true">Data URI</button>
+                <button type="button" class="seg" data-fmt="raw" aria-pressed="false">Raw Base64</button>
+              </div>
+              <div class="flex items-center gap-1">
+                <button id="fileCopyBtn" type="button" class="copy-btn inline-flex items-center gap-1.5 rounded-lg bg-zinc-900 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">
+                  <svg aria-hidden="true" focusable="false" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                  <span data-copy-label>Copy</span>
+                </button>
+                <button id="fileDownloadBtn" type="button" aria-label="Download Base64 as a text file"
+                  class="grid h-7 w-7 place-items-center rounded-lg text-zinc-500 transition hover:bg-zinc-200/70 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/10 dark:hover:text-white">
+                  <svg aria-hidden="true" focusable="false" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                </button>
+              </div>
+            </div>
+            <textarea id="fileOut" readonly spellcheck="false" placeholder="The data URI or Base64 string appears here&hellip;"
+              class="pane-area h-[248px] w-full flex-1 resize-none rounded-2xl border border-zinc-200 bg-zinc-50/60 px-4 py-3 font-mono text-[12.5px] leading-relaxed text-zinc-900 outline-none placeholder:text-zinc-400 dark:border-white/10 dark:bg-black/20 dark:text-zinc-100 dark:placeholder:text-zinc-600"></textarea>
+            <div class="flex items-center justify-between px-1 pt-2 text-[11px] text-zinc-400 dark:text-zinc-600">
+              <span id="fileStats">No file selected</span>
+              <span class="hidden sm:inline">Ready for HTML &amp; CSS</span>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Error bar -->
       <div id="error" class="hidden items-start gap-2 border-t border-rose-500/20 bg-rose-500/[0.07] px-4 py-3 text-[13px] text-rose-600 dark:text-rose-400">
-        <svg class="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        <svg aria-hidden="true" focusable="false" class="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
         <span id="errorMsg"></span>
       </div>
     </div>
 
     <p class="mt-3 text-center text-[11px] text-zinc-400 dark:text-zinc-600">
-      Everything runs in your browser via the native <code class="font-mono">TextEncoder</code> + <code class="font-mono">btoa/atob</code> APIs. Zero network requests.
+      Everything runs in your browser via the native <code class="font-mono">TextEncoder</code>, <code class="font-mono">FileReader</code> and <code class="font-mono">btoa/atob</code> APIs. Zero network requests.
     </p>
   </section>
 
-  <!-- ═══════════════ 4. WHY CHOOSE US ═══════════════ -->
+  <!-- WHY CHOOSE US -->
   <section id="why" class="scroll-mt-24 py-16 sm:py-20">
     <div class="mx-auto max-w-2xl text-center">
       <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">Why ToolGuest</span>
@@ -430,34 +608,30 @@
     </div>
 
     <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      <!-- Card 1 -->
       <div class="group rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-indigo-300 hover:shadow-xl hover:shadow-indigo-500/10 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-indigo-500/40">
         <div class="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <svg aria-hidden="true" focusable="false" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         </div>
         <h3 class="font-bold tracking-tight">100% client-side</h3>
-        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Conversion happens in your tab. Your strings, tokens and secrets never touch a server.</p>
+        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Conversion happens in your tab. Your strings, tokens and files never touch a server.</p>
       </div>
-      <!-- Card 2 -->
       <div class="group rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300 hover:shadow-xl hover:shadow-cyan-500/10 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-cyan-500/40">
         <div class="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+          <svg aria-hidden="true" focusable="false" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
         </div>
-        <h3 class="font-bold tracking-tight">Zero data transmission</h3>
-        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">No uploads, no analytics on your input, no clipboard polling. Nothing is logged, ever.</p>
+        <h3 class="font-bold tracking-tight">UTF-8 safe by design</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Emoji, Arabic, Japanese and every Unicode script round-trip without a URI malformed error.</p>
       </div>
-      <!-- Card 3 -->
       <div class="group rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-violet-300 hover:shadow-xl hover:shadow-violet-500/10 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-violet-500/40">
         <div class="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-violet-500/10 text-violet-600 dark:text-violet-400">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-3 7h8l-3 7"/><path d="M4 14a8 8 0 1 0 16 0"/></svg>
+          <svg aria-hidden="true" focusable="false" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5Z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h4"/></svg>
         </div>
-        <h3 class="font-bold tracking-tight">Instant live conversion</h3>
-        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">No submit button. Every keystroke converts in under a millisecond — even for large payloads.</p>
+        <h3 class="font-bold tracking-tight">Files &amp; data URIs</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Drop in an image, PDF or SVG and get a paste-ready <code class="font-mono">data:</code> URI for HTML and CSS.</p>
       </div>
-      <!-- Card 4 -->
       <div class="group rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-amber-500/10 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-amber-500/40">
         <div class="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>
+          <svg aria-hidden="true" focusable="false" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>
         </div>
         <h3 class="font-bold tracking-tight">Ad-free workspace</h3>
         <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">No interstitials, no pop-unders, no sticky banners stealing your focus or your screen space.</p>
@@ -465,7 +639,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════ 5. HOW TO USE ═══════════════ -->
+  <!-- HOW TO USE -->
   <section id="how" class="scroll-mt-24 pb-16 sm:pb-20">
     <div class="mx-auto max-w-2xl text-center">
       <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">Step by step</span>
@@ -480,28 +654,28 @@
       </div>
       <div class="relative rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
         <span class="mb-4 grid h-9 w-9 place-items-center rounded-full bg-zinc-900 text-sm font-bold text-white dark:bg-white dark:text-zinc-900">2</span>
-        <h3 class="font-bold tracking-tight">Paste your input</h3>
-        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Type or paste into the left pane — or hit <strong>Paste</strong> to pull straight from your clipboard.</p>
+        <h3 class="font-bold tracking-tight">Paste text or drop a file</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">Type or paste on the left, or switch to <strong>File &rarr; Data URI</strong> and drop in an image, PDF or SVG.</p>
       </div>
       <div class="relative rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
         <span class="mb-4 grid h-9 w-9 place-items-center rounded-full bg-zinc-900 text-sm font-bold text-white dark:bg-white dark:text-zinc-900">3</span>
         <h3 class="font-bold tracking-tight">Watch it convert</h3>
-        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">The result appears in the right pane instantly as you type. Toggle <strong>URL-safe</strong> for JWT / URL usage.</p>
+        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">The result appears instantly as you type. Flip <strong>URL-safe</strong> for JWT segments, query strings and filenames.</p>
       </div>
       <div class="relative rounded-2xl border border-zinc-200 bg-white/60 p-6 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
         <span class="mb-4 grid h-9 w-9 place-items-center rounded-full bg-zinc-900 text-sm font-bold text-white dark:bg-white dark:text-zinc-900">4</span>
-        <h3 class="font-bold tracking-tight">Copy or download</h3>
-        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">One click on <strong>Copy</strong> grabs the result. Use <strong>Clear</strong> to wipe both panes and start fresh.</p>
+        <h3 class="font-bold tracking-tight">Copy, swap or download</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">One click on <strong>Copy</strong> grabs the result. <strong>Swap</strong> flips the panes and the mode; <strong>Clear</strong> wipes everything.</p>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════ 6. COMPETITOR COMPARISON ═══════════════ -->
+  <!-- COMPETITOR COMPARISON -->
   <section id="compare" class="scroll-mt-24 pb-16 sm:pb-20">
     <div class="mx-auto max-w-2xl text-center">
       <span class="text-xs font-bold uppercase tracking-[0.18em] text-indigo-500 dark:text-indigo-400">Head to head</span>
-      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">ToolGuest vs. Base64Encode.org</h2>
-      <p class="mt-3 text-zinc-600 dark:text-zinc-400">The same job, done in a fraction of the time — without the ad clutter.</p>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">ToolGuest vs. legacy cluttered Base64 tools</h2>
+      <p class="mt-3 text-zinc-600 dark:text-zinc-400">The same job, done in a fraction of the time &mdash; without the ad clutter or the server round-trip.</p>
     </div>
 
     <div class="mt-10 overflow-hidden rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur dark:border-white/10 dark:bg-white/[0.03]">
@@ -510,63 +684,61 @@
           <thead>
             <tr class="border-b border-zinc-200 dark:border-white/10">
               <th scope="col" class="px-5 py-4 text-xs font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Capability</th>
-              <th scope="col" class="px-5 py-4 text-xs font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Base64Encode.org</th>
-              <th scope="col" class="bg-indigo-500/[0.06] px-5 py-4 text-xs font-bold uppercase tracking-wider text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400">
-                ToolGuest <span class="ml-1 rounded bg-indigo-500 px-1.5 py-0.5 text-[9px] font-extrabold text-white">US</span>
-              </th>
+              <th scope="col" class="px-5 py-4 text-xs font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Legacy cluttered tools</th>
+              <th scope="col" class="bg-indigo-500/[0.06] px-5 py-4 text-xs font-bold uppercase tracking-wider text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-400">ToolGuest</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-zinc-200/80 dark:divide-white/[0.07]">
             <tr>
+              <th scope="row" class="px-5 py-4 font-semibold">UTF-8 safety (emoji &amp; non-ASCII)</th>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">Corrupts text outside Latin-1</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">TextEncoder core</td>
+            </tr>
+            <tr>
+              <th scope="row" class="px-5 py-4 font-semibold">File &rarr; Base64 &amp; data URIs</th>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">Text only</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">Drag &amp; drop</td>
+            </tr>
+            <tr>
+              <th scope="row" class="px-5 py-4 font-semibold">URL-safe variant (RFC 4648 &sect;5)</th>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">Not available</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">One toggle</td>
+            </tr>
+            <tr>
               <th scope="row" class="px-5 py-4 font-semibold">Live conversion while typing</th>
-              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">⚠️ Manual button click</td>
-              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ Real-time</td>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">Manual button click</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">Real-time</td>
             </tr>
             <tr>
-              <th scope="row" class="px-5 py-4 font-semibold">Ads, pop-ups &amp; interstitials</th>
-              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">⚠️ Multiple banner units</td>
-              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ Zero, ever</td>
+              <th scope="row" class="px-5 py-4 font-semibold">Advertising</th>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">Banners and interstitials</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">Zero, ever</td>
             </tr>
             <tr>
-              <th scope="row" class="px-5 py-4 font-semibold">Client-side execution only</th>
-              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">⚠️ Mixed / unverified</td>
-              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ 100% local</td>
+              <th scope="row" class="px-5 py-4 font-semibold">Zero server data uploads</th>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">Mixed / unverified</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">100% local</td>
             </tr>
             <tr>
-              <th scope="row" class="px-5 py-4 font-semibold">Typical page weight</th>
-              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">⚠️ ~1.2 MB</td>
-              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ ~35 KB</td>
-            </tr>
-            <tr>
-              <th scope="row" class="px-5 py-4 font-semibold">Time to interactive</th>
-              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">⚠️ ~3.2 s</td>
-              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ &lt; 0.4 s</td>
-            </tr>
-            <tr>
-              <th scope="row" class="px-5 py-4 font-semibold">URL-safe Base64 (RFC 4648 §5)</th>
-              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">❌ Not available</td>
-              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ One toggle</td>
-            </tr>
-            <tr>
-              <th scope="row" class="px-5 py-4 font-semibold">Dark mode</th>
-              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">❌ Light only</td>
-              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ Full theme</td>
+              <th scope="row" class="px-5 py-4 font-semibold">Offline capability</th>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">Needs a connection</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">Works offline</td>
             </tr>
             <tr>
               <th scope="row" class="px-5 py-4 font-semibold">Signup, cookies or tracking</th>
-              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">⚠️ Third-party trackers</td>
-              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">✅ None</td>
+              <td class="px-5 py-4 text-zinc-500 dark:text-zinc-500">Third-party trackers</td>
+              <td class="bg-indigo-500/[0.04] px-5 py-4 font-semibold text-emerald-600 dark:bg-indigo-500/[0.06] dark:text-emerald-400">None</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
     <p class="mt-3 text-center text-[11px] text-zinc-400 dark:text-zinc-600">
-      Figures from our own repeated Lighthouse &amp; DevTools runs, November 2026. Competitor behaviour may change over time.
+      Figures from our own repeated Lighthouse and DevTools runs, November 2026. Competitor behaviour may change over time.
     </p>
   </section>
 
-  <!-- ═══════════════ 7. FAQ ═══════════════ -->
+  <!-- FAQ -->
   <section id="faq" class="scroll-mt-24 pb-16 sm:pb-20">
     <div class="mx-auto max-w-3xl">
       <div class="text-center">
@@ -575,66 +747,215 @@
       </div>
 
       <div class="mt-10 space-y-3">
-        <!-- FAQ 1 -->
         <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
           <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
             <span class="font-semibold tracking-tight">What is Base64 encoding and why is it used?</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            <svg aria-hidden="true" focusable="false" class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           </button>
           <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Base64 maps binary or text data onto a 64-character ASCII alphabet (<code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">A–Z a–z 0–9 + /</code>) so it can travel safely through systems that only accept plain text. You'll find it in JSON payloads, data URLs, MIME email attachments, JWTs and HTTP Basic Auth headers. It is <em>encoding</em>, not encryption — anyone can reverse it.
+            Base64 maps binary or text data onto a 64-character ASCII alphabet (<code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">A-Z a-z 0-9 + /</code>) so it can travel safely through systems that only accept plain text. You will find it in JSON payloads, data URLs, MIME email attachments, JWTs and HTTP Basic Auth headers. It is <em>encoding</em>, not encryption &mdash; anyone can reverse it.
           </p></div></div>
         </div>
 
-        <!-- FAQ 2 -->
         <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
           <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
             <span class="font-semibold tracking-tight">Is my data uploaded to a server?</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            <svg aria-hidden="true" focusable="false" class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           </button>
           <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            No. Everything happens inside your browser tab using the native <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">TextEncoder</code> and <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">btoa()/atob()</code> APIs. You can disconnect from Wi‑Fi and the tool still works — a quick way to verify the privacy claim yourself.
+            No. Everything happens inside your browser tab using the native <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">TextEncoder</code> and <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">btoa()/atob()</code> APIs. You can disconnect from Wi-Fi and the tool still works &mdash; a quick way to verify the privacy claim yourself.
           </p></div></div>
         </div>
 
-        <!-- FAQ 3 -->
         <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
           <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
             <span class="font-semibold tracking-tight">Does it support Unicode, emoji and non-English text?</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            <svg aria-hidden="true" focusable="false" class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           </button>
           <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Yes. Your input is first converted to UTF‑8 bytes, then Base64-encoded — so emoji 🚀, Arabic, Japanese, Chinese and every other Unicode code point round-trip perfectly. Many older tools call <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">btoa()</code> directly on the string and corrupt anything outside Latin‑1.
+            Yes. Your input is first converted to UTF-8 bytes, then Base64-encoded &mdash; so emoji, Arabic, Japanese, Chinese and every other Unicode code point round-trip perfectly. Many older tools call <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">btoa()</code> directly on the string and corrupt anything outside Latin-1.
           </p></div></div>
         </div>
 
-        <!-- FAQ 4 -->
         <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
           <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
             <span class="font-semibold tracking-tight">What is URL-safe Base64 and when should I use it?</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            <svg aria-hidden="true" focusable="false" class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           </button>
           <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Standard Base64 uses <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">+</code>, <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">/</code> and <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">=</code>, which need percent-encoding in URLs. URL-safe Base64 (RFC 4648 §5) swaps them for <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">-</code> and <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">_</code> and drops padding — essential for JWT segments, query params and filenames. Flip the toggle above; the decoder accepts both formats automatically.
+            Standard Base64 uses <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">+</code>, <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">/</code> and <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">=</code>, which need percent-encoding in URLs. URL-safe Base64 (RFC 4648 &sect;5) swaps them for <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">-</code> and <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">_</code> and drops padding &mdash; essential for JWT segments, query params and filenames. Flip the toggle above; the decoder accepts both formats automatically.
           </p></div></div>
         </div>
 
-        <!-- FAQ 5 -->
         <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
           <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
-            <span class="font-semibold tracking-tight">Is there a file size limit?</span>
-            <svg class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            <span class="font-semibold tracking-tight">Can I convert an image or PDF to Base64?</span>
+            <svg aria-hidden="true" focusable="false" class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           </button>
           <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            There's no imposed limit — the only ceiling is your browser's available memory. Multi-megabyte strings convert in a few milliseconds because the heavy lifting is done by native browser APIs rather than JavaScript loops.
+            Yes. Drag any file onto the <strong>File &rarr; Data URI</strong> drop zone and the tool reads it with the HTML5 <code class="rounded bg-zinc-200/60 px-1 font-mono text-[12px] dark:bg-white/10">FileReader</code> API, then returns either a copy-ready data URI or a raw Base64 string. Images preview instantly, and nothing leaves your device.
+          </p></div></div>
+        </div>
+
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">Is there a file or input size limit?</span>
+            <svg aria-hidden="true" focusable="false" class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            There is no imposed limit &mdash; the only ceiling is your browser's available memory. Multi-megabyte strings convert in a few milliseconds because the heavy lifting is done by native browser APIs rather than JavaScript loops.
+          </p></div></div>
+        </div>
+
+        <div class="faq-item rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur transition hover:border-zinc-300 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-white/20" data-open="false">
+          <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
+            <span class="font-semibold tracking-tight">Is Base64 the same as encryption?</span>
+            <svg aria-hidden="true" focusable="false" class="faq-chevron h-4 w-4 shrink-0 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body"><div><p class="px-5 pb-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            No. Base64 is a reversible encoding with no key, so it hides nothing from anyone who can read the string. Treat it as a transport format for binary data &mdash; never as a way to protect a password, an API key or personal data. If you need confidentiality, use real encryption such as AES-GCM or TLS.
           </p></div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════ 8. RELATED TOOLS ═══════════════ -->
-  
+  <!-- LONG-FORM SEO / AEO CONTENT -->
+  <section class="tool-seo-content" id="guide">
+    <div class="seo-block">
+      <span class="seo-eyebrow">The developer's Base64 handbook</span>
+      <h2>Base64 encoder and decoder online, free for US &amp; UK developers</h2>
+      <p>A <strong>Base64 encoder and decoder online free for US developers</strong> should do two jobs flawlessly: turn any text or binary payload into a safe ASCII string, and turn that string back into exactly what went in. ToolGuest does both in your browser, in under fifty milliseconds, with no account, no upload and no advertising. Type or paste on the left, watch the Base64 appear on the right, copy it, ship it &mdash; or drop in a file and get a paste-ready data URI instead.</p>
+      <p>Base64 is not a niche trick. It is the reason a PNG can live inside a CSS file, the reason a JWT survives a URL, and the reason an email attachment does not corrupt itself crossing a dozen mail servers. Whenever a transport channel is built for text but your payload is bytes, Base64 is the bridge. This page is the tool, and below it is everything a working engineer needs to know about how that bridge behaves &mdash; including the two places where naive implementations quietly destroy data.</p>
+    </div>
+
+    <div class="seo-block">
+      <div class="seo-aeo">
+        <span class="seo-aeo-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.4 5.4 1.9-5.4 1.9L12 17.6l-1.9-5.4L4.7 10.3l5.4-1.9Z"/></svg>Quick answer</span>
+        <p>A Base64 encoder and decoder converts text, files or binary data into a 64-character ASCII string and back again. ToolGuest runs entirely in the browser, so it is UTF-8 safe, URL-safe on demand, free and private. Nothing you paste or drop is ever uploaded.</p>
+      </div>
+    </div>
+
+    <div class="seo-block">
+      <span class="seo-eyebrow">Why it matters</span>
+      <h2>Why UTF-8 safety and URL-safe output decide whether your payload survives</h2>
+      <p>Two failure modes account for almost every Base64 bug in production, and both are invisible until a user in a non-English market hits them.</p>
+      <p>The first is Unicode corruption. The browser's <code>btoa()</code> accepts only "binary strings" &mdash; characters in the range 0 to 255. Pass it a string containing an emoji or a Chinese character and it throws an <code>InvalidCharacterError</code>; pass it a string that merely looks fine in Latin-1 and you get silently mangled output. The fix is to encode your text to UTF-8 bytes first with <code>TextEncoder</code>, then Base64 the bytes. Decoding runs the same pipeline in reverse through <code>TextDecoder</code>. That single decision is why this tool round-trips <em>Uber</em>, <em>naive</em>, <em>Tokyo</em> and an emoji without complaint, while older generators turn them into question marks or throw a "URI malformed" error.</p>
+      <p>The second failure mode is alphabet mismatch. Standard Base64 draws on <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, <code>+</code> and <code>/</code>, with <code>=</code> as padding. In a URL or a filename, <code>+</code> is read as a space, <code>/</code> looks like a path separator, and <code>=</code> is a query delimiter. RFC 4648 section 5 defines a URL-safe variant that substitutes <code>-</code> and <code>_</code> and drops the padding entirely &mdash; which is exactly what JWT segments, OAuth state parameters and signed URLs use. Flip the toggle and this tool emits that variant; the decoder accepts either form automatically, so you never have to guess which one you are holding.</p>
+    </div>
+
+    <div class="seo-block">
+      <span class="seo-eyebrow">Local workflows</span>
+      <h2>Built for the shipping routines of Tier-1 engineering teams</h2>
+      <p>Base64 shows up differently in each market and each discipline. These are the workflows the tool was tuned for.</p>
+      <div class="seo-grid">
+        <div class="seo-card">
+          <span class="seo-city">San Francisco &middot; United States</span>
+          <h3>Front-end and design engineering</h3>
+          <p>A tiny SVG icon or a 2 KB avatar is faster as an inline data URI than as a second HTTP request. Drop the file in, choose <strong>Data URI</strong>, copy the result straight into a <code>background-image</code> or an <code>img src</code>. For critical CSS the saving is real: one fewer connection on first paint.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">London &middot; United Kingdom</span>
+          <h3>API and platform engineering</h3>
+          <p>Debugging an <code>Authorization: Basic</code> header means Base64-decoding the credential pair to see what the client actually sent. Paste the header value, hit Decode, and read the <code>user:password</code> pair in plain text. Flip to Encode to rebuild a test header without opening a terminal.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Berlin &middot; Germany</span>
+          <h3>Security and compliance analysts</h3>
+          <p>Suspicious payloads frequently arrive Base64-wrapped inside JSON or a log line. Decode them locally to inspect the contents without ever posting customer data &mdash; or an attacker's payload &mdash; to a third-party service. The tool makes no network requests, so the evidence never leaves the analyst's machine.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Sydney &middot; Australia</span>
+          <h3>Data and integration engineering</h3>
+          <p>Legacy SOAP, AS2 and EDI pipelines still move documents as Base64 blobs. Encode a sample PDF to reproduce a payload shape, or decode a captured blob to confirm the file arrived intact &mdash; all before a line of integration code is written.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-block">
+      <span class="seo-eyebrow">Feature tour</span>
+      <h2>What the ToolGuest Base64 engine actually does</h2>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <h3>Bi-directional, UTF-8 safe core</h3>
+          <p>Encode and decode are the same pipeline in opposite directions. Every string is normalised to UTF-8 bytes first, so emoji, accented Latin, Cyrillic, CJK and Arabic all round-trip byte-for-byte.</p>
+        </div>
+        <div class="seo-card">
+          <h3>File to Base64 &amp; data URIs</h3>
+          <p>Drag in an image, PDF, font or SVG. The FileReader API reads it locally, the tool infers the MIME type, and you get either a full <code>data:image/png;base64,...</code> URI or the bare Base64 string.</p>
+        </div>
+        <div class="seo-card">
+          <h3>URL-safe toggle</h3>
+          <p>One switch converts <code>+</code> to <code>-</code>, <code>/</code> to <code>_</code> and strips <code>=</code> padding, producing output that is safe inside a query string, a path segment, a filename or a JWT.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Instant swap and live counts</h3>
+          <p>Swap flips the panes and the mode in a single click, moving the output back into the input. Live counters track characters and UTF-8 bytes on both sides as you type.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Copy, download, sample, clear</h3>
+          <p>Every output has its own copy control with a self-confirming tick. Download saves the result as a text file; Sample loads a Unicode-rich example; Clear resets both panes in one move.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Privacy shield by construction</h3>
+          <p>There is no backend to send data to. The page makes no network requests once loaded, which is why it keeps working when you switch off Wi-Fi &mdash; a claim you can verify in the network tab yourself.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="seo-block">
+      <span class="seo-eyebrow">Comparison</span>
+      <h2>ToolGuest vs. legacy cluttered Base64 tools</h2>
+      <p>Most free Base64 converters were built to carry advertising. The result is a slower page, a form that posts your text to a server you cannot inspect, and a result box buried under interstitials. This one is built to get out of the way.</p>
+      <div class="seo-tablewrap">
+        <table class="seo-table">
+          <caption class="sr-only">Feature comparison between the ToolGuest Base64 encoder and decoder and typical legacy competitors</caption>
+          <thead>
+            <tr><th scope="col">Capability</th><th scope="col">ToolGuest</th><th scope="col">Legacy cluttered competitors</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>UTF-8 safety</td><td class="yes">TextEncoder pipeline &mdash; emoji and CJK survive</td><td class="no">Raw <code>btoa()</code> &mdash; corrupts non-Latin-1</td></tr>
+            <tr><td>File &rarr; data URI support</td><td class="yes">Drag &amp; drop images, PDFs and SVGs</td><td class="no">Text only</td></tr>
+            <tr><td>URL-safe variant</td><td class="yes">One toggle (RFC 4648 &sect;5)</td><td class="no">Standard alphabet only</td></tr>
+            <tr><td>Advertising</td><td class="yes">Zero ads, ever</td><td class="no">Pop-ups, banners and interstitials</td></tr>
+            <tr><td>Execution</td><td class="yes">Instant, browser-side</td><td class="no">Server round-trip per conversion</td></tr>
+            <tr><td>Server data uploads</td><td class="yes">None &mdash; no backend exists</td><td class="no">Input posted to a remote API</td></tr>
+            <tr><td>Offline capability</td><td class="yes">Works with the network switched off</td><td class="no">Fails without a connection</td></tr>
+            <tr><td>Dark mode and accessibility</td><td class="yes">Full theme, keyboard tabs, ARIA labels</td><td class="no">Light-only, mouse-only</td></tr>
+            <tr><td>Account required</td><td class="yes">No signup, ever</td><td class="no">Email wall on download</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="seo-block">
+      <span class="seo-eyebrow">Developer notes</span>
+      <h2>Base64 rules that age well in production</h2>
+      <p>Remember what Base64 is not: it is not encryption and it is not compression. The output is roughly 33% larger than the input, and anyone holding the string can decode it in one line of JavaScript. Never use it to protect a secret. Its value is transport integrity &mdash; moving bytes through a text-only channel without loss.</p>
+      <p>When you embed a data URI, keep an eye on the cost. A base64 image is about a third bigger than the file it came from, it cannot be cached independently of the page that carries it, and it blocks parsing while it loads. Inline the small, critical assets &mdash; a logo, a spinner, an icon &mdash; and keep large photographs as separate, cacheable files. The tool's byte counter exists so you can see that trade-off in numbers before you commit to it.</p>
+      <p>Finally, match the variant to the consumer. Use standard Base64 for MIME bodies, PEM keys and most API payloads. Use URL-safe Base64 the moment the string will travel in a URL, a filename, a cookie or a JWT. If you are debugging a token, paste it into Decode and the tool will accept either alphabet, so a truncated or padded segment still resolves to readable JSON.</p>
+    </div>
+
+    <div class="seo-block" id="faq-2">
+      <span class="seo-eyebrow">Questions</span>
+      <h2>Frequently asked questions</h2>
+      <div class="seo-faq">
+        <details open><summary>What is Base64 encoding used for?</summary><p>Base64 lets binary data travel through systems built for text. You will meet it in data URLs for inline images and fonts, MIME email attachments, JSON payloads that carry files, JWT segments, HTTP Basic Auth headers and PEM-encoded certificates. Anywhere a channel cannot accept raw bytes, Base64 is the standard bridge.</p></details>
+        <details><summary>Is Base64 encryption?</summary><p>No. Base64 is a reversible encoding with no key, so it provides no confidentiality at all &mdash; decoding it requires nothing but the string itself. Use it for transport, never for protection. If data must stay secret, use real encryption such as AES-GCM in transit and at rest.</p></details>
+        <details><summary>Why does my Base64 string contain plus and slash signs?</summary><p>Those are two of the 64 characters in the standard alphabet, alongside the equals sign used for padding. They are perfectly valid in a MIME body or a JSON field, but inside a URL they need percent-encoding. Switch on the URL-safe toggle and they become a hyphen and an underscore with the padding removed.</p></details>
+        <details><summary>How much larger is Base64 than the original data?</summary><p>Roughly 33%. Three bytes of input become four characters of output, and padding can add up to two more characters at the end. A 30 KB image becomes about a 40 KB data URI, which is why the byte counter matters when you decide whether to inline an asset.</p></details>
+        <details><summary>Can I decode a Base64 image back into a file?</summary><p>Yes. Decode the string to recover the bytes, or paste a full data URI into the decoder and the tool reads the MIME type and payload, returning the underlying content. For binary results, download the output and rename the file with the correct extension.</p></details>
+        <details><summary>Does the tool work offline?</summary><p>Yes. Once the page has loaded there are no further network requests, so you can switch off your connection and every feature keeps working. That is also the simplest way to prove to yourself that nothing you type or drop is being uploaded anywhere.</p></details>
+        <details><summary>Is there any limit on input size?</summary><p>No imposed limit. Large payloads are processed in chunks so the browser never hits an argument-length ceiling, and multi-megabyte files convert in a few milliseconds. The practical ceiling is your device's available memory, not the tool.</p></details>
+      </div>
+    </div>
+
+    <div class="seo-cta">
+      <h2>Ready to encode or decode?</h2>
+      <p>Scroll back to the tool, paste your text or drop a file, and copy the result. It is free, private, and takes less time than reading this paragraph.</p>
+      <a class="btn primary inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200" href="#tool">Open the converter</a>
+    </div>
+  </section>
 
 <!-- TF-RELATED -->
 <section class="tf-related" aria-label="Related tools">
@@ -649,7 +970,7 @@
     <div>
       <p class="tf-related-eyebrow"><span class="tf-related-pulse"></span>Keep going</p>
       <h2 class="tf-related-title">Related free tools</h2>
-      <p class="tf-related-sub">Hand-picked tools that pair with this one — all free, all private.</p>
+      <p class="tf-related-sub">Hand-picked tools that pair with this one &mdash; all free, all private.</p>
     </div>
     <a class="tf-related-all" href="/#directory"><span>All 26 tools</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
@@ -664,7 +985,7 @@
           <span class="tf-related-tag">Text</span>
         </span>
         <span class="tf-related-go" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
         </span>
       </a>
       <a class="tf-related-card" href="/json-formatter" style="--tf-card-accent: #0284c7; --i: 1">
@@ -675,7 +996,7 @@
           <span class="tf-related-tag">Dev</span>
         </span>
         <span class="tf-related-go" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
         </span>
       </a>
       <a class="tf-related-card" href="/password-checker" style="--tf-card-accent: #0d9488; --i: 2">
@@ -686,7 +1007,7 @@
           <span class="tf-related-tag">Dev</span>
         </span>
         <span class="tf-related-go" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
         </span>
       </a>
       <a class="tf-related-card" href="/qr-generator" style="--tf-card-accent: #0891b2; --i: 3">
@@ -697,7 +1018,7 @@
           <span class="tf-related-tag">Dev</span>
         </span>
         <span class="tf-related-go" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
         </span>
       </a>
       <a class="tf-related-card" href="/url-slug-generator" style="--tf-card-accent: #22c55e; --i: 4">
@@ -708,7 +1029,7 @@
           <span class="tf-related-tag">Dev</span>
         </span>
         <span class="tf-related-go" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
         </span>
       </a>
       <a class="tf-related-card" href="/diff-checker" style="--tf-card-accent: #818cf8; --i: 5">
@@ -719,7 +1040,7 @@
           <span class="tf-related-tag">Text</span>
         </span>
         <span class="tf-related-go" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
         </span>
       </a>
       <a class="tf-related-card" href="/markdown-to-html" style="--tf-card-accent: #6d28d9; --i: 6">
@@ -730,7 +1051,7 @@
           <span class="tf-related-tag">Text</span>
         </span>
         <span class="tf-related-go" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
         </span>
       </a>
   </div>
@@ -738,18 +1059,18 @@
 
 </main>
 
-<!-- ═══════════════ FOOTER ═══════════════ -->
+<!-- FOOTER -->
 <footer class="border-t border-zinc-200/80 dark:border-white/[0.07]">
   <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-xs text-zinc-500 dark:text-zinc-600 sm:flex-row">
-    <p>© <span id="year">2026</span> ToolGuest — free developer micro-tools, built for speed.</p>
+    <p>&copy; <span id="year">2026</span> ToolGuest &mdash; free developer micro-tools, built for speed.</p>
     <p class="inline-flex items-center gap-1.5">
-      <svg class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      No trackers · No cookies · No uploads
+      <svg aria-hidden="true" focusable="false" class="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      No trackers &middot; No cookies &middot; No uploads
     </p>
   </div>
 </footer>
 
-<!-- ═══════════════ TOAST ═══════════════ -->
+<!-- TOAST -->
 <div id="toast" data-show="false" role="status" aria-live="polite"
   class="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-xl bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white shadow-2xl dark:bg-white dark:text-zinc-900"></div>
 
@@ -757,38 +1078,64 @@
 (function () {
   'use strict';
 
-  /* ─────────────────────────── DOM refs ─────────────────────────── */
-  const $ = (sel, root = document) => root.querySelector(sel);
+  /* DOM refs */
+  const $ = (sel, root) => (root || document).querySelector(sel);
+  const $$ = (sel, root) => Array.prototype.slice.call((root || document).querySelectorAll(sel));
+
   const els = {
-    source:     $('#source'),
-    output:     $('#output'),
-    srcLabel:   $('#srcLabel'),
-    outLabel:   $('#outLabel'),
-    srcStats:   $('#srcStats'),
-    outStats:   $('#outStats'),
-    error:      $('#error'),
-    errorMsg:   $('#errorMsg'),
-    urlSafe:    $('#urlSafe'),
-    tabs:       Array.from(document.querySelectorAll('[data-mode]')),
-    copyBtn:    $('#copyBtn'),
-    pasteBtn:   $('#pasteBtn'),
-    clearBtn:   $('#clearBtn'),
-    downloadBtn:$('#downloadBtn'),
-    themeToggle:$('#themeToggle'),
-    toast:      $('#toast'),
+    source:      $('#source'),
+    output:      $('#output'),
+    srcLabel:    $('#srcLabel'),
+    outLabel:    $('#outLabel'),
+    srcStats:    $('#srcStats'),
+    outStats:    $('#outStats'),
+    error:       $('#error'),
+    errorMsg:    $('#errorMsg'),
+    urlSafe:     $('#urlSafe'),
+    tabs:        $$('[data-mode]'),
+    srcTabs:     $$('[data-src]'),
+    fmtTabs:     $$('[data-fmt]'),
+    textPanel:   $('#textPanel'),
+    filePanel:   $('#filePanel'),
+    dropZone:    $('#dropZone'),
+    fileInput:   $('#fileInput'),
+    filePickBtn: $('#filePickBtn'),
+    fileInfo:    $('#fileInfo'),
+    fileName:    $('#fileName'),
+    fileMeta:    $('#fileMeta'),
+    filePreview: $('#filePreview'),
+    fileClearBtn:$('#fileClearBtn'),
+    fileOut:     $('#fileOut'),
+    fileStats:   $('#fileStats'),
+    fileCopyBtn: $('#fileCopyBtn'),
+    fileDownloadBtn: $('#fileDownloadBtn'),
+    copyBtn:     $('#copyBtn'),
+    pasteBtn:    $('#pasteBtn'),
+    sampleBtn:   $('#sampleBtn'),
+    clearBtn:    $('#clearBtn'),
+    swapBtn:     $('#swapBtn'),
+    downloadBtn: $('#downloadBtn'),
+    themeToggle: $('#themeToggle'),
+    toast:       $('#toast')
   };
 
   const state = {
     mode: 'encode',
+    src: 'text',
+    fmt: 'datauri',
     buffers: { encode: '', decode: '' },
     frame: 0,
+    file: null,
+    dataUrl: ''
   };
 
-  /* ───────────────────── Base64 core (UTF‑8 safe) ───────────────────── */
-  function toBase64(text, urlSafe) {
+  const SAMPLE = 'Base64, emoji \uD83D\uDE80 and Unicode \u2014 na\u00EFve, \u00DCber, \u6771\u4EAC, \u03A9.';
+
+  /* Base64 core (UTF-8 safe) */
+  function utf8ToBase64(text, urlSafe) {
     const bytes = new TextEncoder().encode(text);
     let binary = '';
-    const CHUNK = 0x8000; // avoid "too many arguments" on large payloads
+    const CHUNK = 0x8000; // keep fromCharCode below the argument-count ceiling
     for (let i = 0; i < bytes.length; i += CHUNK) {
       binary += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK));
     }
@@ -797,44 +1144,41 @@
     return b64;
   }
 
-  function fromBase64(input) {
-    let s = input.replace(/\s+/g, '').replace(/-/g, '+').replace(/_/g, '/');
-    if (s.length % 4 === 1) throw new Error('Invalid Base64 — the string length is not valid.');
+  function base64ToUtf8(input) {
+    let s = input.trim();
+    const comma = s.indexOf(',');
+    if (/^data:[^,]*;base64,/i.test(s) && comma !== -1) s = s.slice(comma + 1);
+
+    s = s.replace(/\s+/g, '').replace(/-/g, '+').replace(/_/g, '/');
+    if (s.length % 4 === 1) throw new Error('Invalid Base64 \u2014 the string length cannot be valid.');
     while (s.length % 4 !== 0) s += '=';
     if (!/^[A-Za-z0-9+/]+={0,2}$/.test(s)) {
-      throw new Error('Invalid Base64 — the input contains characters outside the Base64 alphabet.');
+      throw new Error('Invalid Base64 \u2014 the input contains characters outside the Base64 alphabet.');
     }
     let binary;
     try {
       binary = atob(s);
     } catch (e) {
-      throw new Error('Invalid Base64 — this string could not be decoded.');
+      throw new Error('Invalid Base64 \u2014 this string could not be decoded.');
     }
-    const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+    const bytes = Uint8Array.from(binary, function (c) { return c.charCodeAt(0); });
     return new TextDecoder('utf-8', { fatal: false }).decode(bytes);
   }
 
-  /* ─────────────────────────── Rendering ─────────────────────────── */
+  /* Rendering */
   const LABELS = {
-    encode: { src: 'Plain text',  out: 'Base64 output' },
-    decode: { src: 'Base64 input', out: 'Plain text output' },
+    encode: { src: 'Plain text', out: 'Base64 output' },
+    decode: { src: 'Base64 input', out: 'Plain text output' }
   };
 
-  function byteLength(str) {
-    return new TextEncoder().encode(str).length;
-  }
-
-  function plural(n, word) {
-    return n + ' ' + word + (n === 1 ? '' : 's');
-  }
+  function byteLength(str) { return new TextEncoder().encode(str).length; }
+  function plural(n, word) { return n.toLocaleString('en-GB') + ' ' + word + (n === 1 ? '' : 's'); }
 
   function renderStats() {
     const src = els.source.value;
     const out = els.output.value;
-    els.srcStats.textContent =
-      plural(src.length, 'character') + ' · ' + plural(byteLength(src), 'byte');
-    els.outStats.textContent =
-      plural(out.length, 'character') + ' · ' + plural(byteLength(out), 'byte');
+    els.srcStats.textContent = plural(src.length, 'character') + ' \u00B7 ' + plural(byteLength(src), 'byte');
+    els.outStats.textContent = plural(out.length, 'character') + ' \u00B7 ' + plural(byteLength(out), 'byte');
   }
 
   function showError(msg) {
@@ -857,9 +1201,7 @@
 
     if (src.trim() !== '') {
       try {
-        out = state.mode === 'encode'
-          ? toBase64(src, els.urlSafe.checked)
-          : fromBase64(src);
+        out = state.mode === 'encode' ? utf8ToBase64(src, els.urlSafe.checked) : base64ToUtf8(src);
       } catch (e) {
         err = e.message || 'Conversion failed.';
       }
@@ -870,10 +1212,10 @@
     renderStats();
   }
 
-  /* rAF-debounced live conversion — keeps typing at 60fps on huge inputs */
+  /* rAF-debounced live conversion */
   function scheduleConvert() {
     if (state.frame) cancelAnimationFrame(state.frame);
-    state.frame = requestAnimationFrame(() => {
+    state.frame = requestAnimationFrame(function () {
       state.frame = 0;
       convert();
     });
@@ -882,93 +1224,138 @@
   function setMode(mode) {
     if (mode === state.mode) return;
     state.mode = mode;
-    els.tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.mode === mode)));
+    els.tabs.forEach(function (t) { t.setAttribute('aria-selected', String(t.dataset.mode === mode)); });
     els.srcLabel.textContent = LABELS[mode].src;
     els.outLabel.textContent = LABELS[mode].out;
     els.source.placeholder = mode === 'encode'
-      ? 'Type or paste your text here — it converts as you type…'
-      : 'Paste a Base64 string here — it decodes as you type…';
+      ? 'Type or paste your text here \u2014 it converts as you type\u2026'
+      : 'Paste a Base64 string or a data URI here \u2014 it decodes as you type\u2026';
     els.source.value = state.buffers[mode];
     convert();
   }
 
-  /* ─────────────────────────── Toast ─────────────────────────── */
+  function setSrc(kind) {
+    state.src = kind;
+    els.srcTabs.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.src === kind)); });
+    const isFile = kind === 'file';
+    els.textPanel.classList.toggle('hidden', isFile);
+    els.filePanel.classList.toggle('hidden', !isFile);
+    showError('');
+    if (!isFile) els.source.focus({ preventScroll: true });
+  }
+
+  function setFmt(fmt) {
+    state.fmt = fmt;
+    els.fmtTabs.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.fmt === fmt)); });
+    renderFileOutput();
+  }
+
+  /* File to Base64 */
+  function prettyBytes(n) {
+    if (n < 1024) return n + ' B';
+    if (n < 1024 * 1024) return (n / 1024).toFixed(1) + ' KB';
+    return (n / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+  function mimeOf(dataUrl, fallback) {
+    const m = /^data:([^;,]*)/.exec(dataUrl || '');
+    return (m && m[1]) || fallback || 'application/octet-stream';
+  }
+
+  function renderFileOutput() {
+    if (!state.file) {
+      els.fileOut.value = '';
+      els.fileStats.textContent = 'No file selected';
+      return;
+    }
+    const base64 = state.dataUrl.slice(state.dataUrl.indexOf(',') + 1);
+    els.fileOut.value = state.fmt === 'raw' ? base64 : state.dataUrl;
+    els.fileStats.textContent = prettyBytes(state.file.size) + ' \u00B7 ' + plural(base64.length, 'character') + ' Base64';
+  }
+
+  function loadFile(file) {
+    if (!file) return;
+    if (file.size > 12 * 1024 * 1024) {
+      showError('That file is larger than 12 MB. Encode it in a desktop tool to avoid a frozen tab.');
+      return;
+    }
+    showError('');
+    const reader = new FileReader();
+    reader.onload = function () {
+      state.file = file;
+      state.dataUrl = String(reader.result || '');
+      els.fileName.textContent = file.name;
+      els.fileMeta.textContent = prettyBytes(file.size) + ' \u00B7 ' + (file.type || mimeOf(state.dataUrl));
+      if (file.type && file.type.indexOf('image/') === 0) {
+        els.filePreview.src = state.dataUrl;
+        els.filePreview.classList.remove('hidden');
+      } else {
+        els.filePreview.removeAttribute('src');
+        els.filePreview.classList.add('hidden');
+      }
+      els.fileInfo.classList.remove('hidden');
+      renderFileOutput();
+      toast('File encoded \u2713');
+    };
+    reader.onerror = function () { showError('That file could not be read.'); };
+    reader.readAsDataURL(file);
+  }
+
+  function clearFile() {
+    state.file = null;
+    state.dataUrl = '';
+    els.fileInput.value = '';
+    els.fileOut.value = '';
+    els.fileInfo.classList.add('hidden');
+    els.filePreview.removeAttribute('src');
+    els.fileStats.textContent = 'No file selected';
+  }
+
+  /* Toast */
   let toastTimer = 0;
   function toast(message) {
     els.toast.textContent = message;
     els.toast.dataset.show = 'true';
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { els.toast.dataset.show = 'false'; }, 1800);
+    toastTimer = setTimeout(function () { els.toast.dataset.show = 'false'; }, 1800);
   }
 
-  /* ─────────────────────── Clipboard helpers ─────────────────────── */
-  async function copyText(text) {
+  /* Clipboard helpers */
+  function copyText(text, button) {
     if (!text) { toast('Nothing to copy'); return; }
-    try {
-      await navigator.clipboard.writeText(text);
-      toast('Copied to clipboard ✓');
-    } catch (e) {
-      // Fallback for non-secure contexts
+    const label = button ? button.querySelector('[data-copy-label]') : null;
+    const mark = function () {
+      if (!button) return;
+      button.dataset.done = 'true';
+      if (label) label.textContent = '\u2713 Copied';
+      setTimeout(function () {
+        button.dataset.done = 'false';
+        if (label) label.textContent = 'Copy';
+      }, 1600);
+    };
+    const fallback = function () {
       const ta = document.createElement('textarea');
       ta.value = text;
       ta.style.position = 'fixed';
       ta.style.opacity = '0';
       document.body.appendChild(ta);
       ta.select();
-      try { document.execCommand('copy'); toast('Copied to clipboard ✓'); }
-      catch (_) { toast('Copy failed — select manually'); }
+      try { document.execCommand('copy'); mark(); toast('Copied to clipboard \u2713'); }
+      catch (_) { toast('Copy failed \u2014 select the text manually'); }
       document.body.removeChild(ta);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        mark();
+        toast('Copied to clipboard \u2713');
+      }, fallback);
+    } else {
+      fallback();
     }
   }
 
-  /* ─────────────────────────── Events ─────────────────────────── */
-  els.source.addEventListener('input', scheduleConvert);
-  els.urlSafe.addEventListener('change', convert);
-
-  els.tabs.forEach(tab => {
-    tab.addEventListener('click', () => setMode(tab.dataset.mode));
-  });
-
-  // Keyboard: arrow keys between tabs
-  els.tabs.forEach(tab => {
-    tab.addEventListener('keydown', (e) => {
-      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-      e.preventDefault();
-      const next = state.mode === 'encode' ? 'decode' : 'encode';
-      setMode(next);
-      els.tabs.find(t => t.dataset.mode === next).focus();
-    });
-  });
-
-  els.copyBtn.addEventListener('click', () => copyText(els.output.value));
-
-  els.pasteBtn.addEventListener('click', async () => {
-    try {
-      const text = await navigator.clipboard.readText();
-      if (!text) { toast('Clipboard is empty'); return; }
-      els.source.value = text;
-      convert();
-      toast('Pasted ✓');
-    } catch (e) {
-      els.source.focus();
-      toast('Press Ctrl/⌘+V to paste');
-    }
-  });
-
-  els.clearBtn.addEventListener('click', () => {
-    els.source.value = '';
-    els.output.value = '';
-    state.buffers[state.mode] = '';
-    showError('');
-    renderStats();
-    els.source.focus();
-    toast('Cleared');
-  });
-
-  els.downloadBtn.addEventListener('click', () => {
-    const text = els.output.value;
+  function downloadText(text, name) {
     if (!text) { toast('Nothing to download'); return; }
-    const name = state.mode === 'encode' ? 'base64-output.txt' : 'base64-decoded.txt';
     const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -978,27 +1365,135 @@
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    toast('Downloaded ✓');
+    toast('Downloaded \u2713');
+  }
+
+  /* Events */
+  els.source.addEventListener('input', scheduleConvert);
+  els.urlSafe.addEventListener('change', convert);
+
+  els.tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () { setMode(tab.dataset.mode); });
+    tab.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault();
+      const next = state.mode === 'encode' ? 'decode' : 'encode';
+      setMode(next);
+      els.tabs.filter(function (t) { return t.dataset.mode === next; })[0].focus();
+    });
   });
 
-  /* ───────────────────────── Theme toggle ───────────────────────── */
-  els.themeToggle.addEventListener('click', () => {
+  els.srcTabs.forEach(function (b) { b.addEventListener('click', function () { setSrc(b.dataset.src); }); });
+  els.fmtTabs.forEach(function (b) { b.addEventListener('click', function () { setFmt(b.dataset.fmt); }); });
+
+  els.copyBtn.addEventListener('click', function () { copyText(els.output.value, els.copyBtn); });
+
+  els.pasteBtn.addEventListener('click', function () {
+    if (!navigator.clipboard || !navigator.clipboard.readText) {
+      els.source.focus();
+      toast('Press Ctrl/Cmd+V to paste');
+      return;
+    }
+    navigator.clipboard.readText().then(function (text) {
+      if (!text) { toast('Clipboard is empty'); return; }
+      els.source.value = text;
+      convert();
+      toast('Pasted \u2713');
+    }, function () {
+      els.source.focus();
+      toast('Press Ctrl/Cmd+V to paste');
+    });
+  });
+
+  els.sampleBtn.addEventListener('click', function () {
+    els.source.value = SAMPLE;
+    convert();
+    toast('Sample loaded');
+  });
+
+  els.clearBtn.addEventListener('click', function () {
+    els.source.value = '';
+    els.output.value = '';
+    state.buffers[state.mode] = '';
+    showError('');
+    renderStats();
+    els.source.focus();
+    toast('Cleared');
+  });
+
+  els.swapBtn.addEventListener('click', function () {
+    const next = state.mode === 'encode' ? 'decode' : 'encode';
+    state.buffers[next] = els.output.value;
+    setMode(next);
+    if (!els.source.value) els.source.value = state.buffers[next];
+    convert();
+    els.source.focus({ preventScroll: true });
+    toast('Swapped');
+  });
+
+  els.downloadBtn.addEventListener('click', function () {
+    const name = state.mode === 'encode' ? 'base64-output.txt' : 'base64-decoded.txt';
+    downloadText(els.output.value, name);
+  });
+
+  /* File panel */
+  els.filePickBtn.addEventListener('click', function () { els.fileInput.click(); });
+  els.fileInput.addEventListener('change', function () { loadFile(els.fileInput.files[0]); });
+  els.fileClearBtn.addEventListener('click', function () { clearFile(); toast('File cleared'); });
+  els.fileCopyBtn.addEventListener('click', function () { copyText(els.fileOut.value, els.fileCopyBtn); });
+  els.fileDownloadBtn.addEventListener('click', function () {
+    const ext = state.fmt === 'raw' ? 'txt' : 'datauri.txt';
+    downloadText(els.fileOut.value, 'base64-file.' + ext);
+  });
+
+  const stop = function (e) { e.preventDefault(); e.stopPropagation(); };
+  ['dragenter', 'dragover'].forEach(function (evt) {
+    els.dropZone.addEventListener(evt, function (e) { stop(e); els.dropZone.dataset.over = 'true'; });
+  });
+  ['dragleave', 'dragend'].forEach(function (evt) {
+    els.dropZone.addEventListener(evt, function (e) { stop(e); els.dropZone.dataset.over = 'false'; });
+  });
+  els.dropZone.addEventListener('drop', function (e) {
+    stop(e);
+    els.dropZone.dataset.over = 'false';
+    loadFile(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]);
+  });
+  els.dropZone.addEventListener('click', function (e) {
+    if (e.target.closest('button')) return;
+    els.fileInput.click();
+  });
+  // Stop the browser navigating away when a file misses the drop zone.
+  window.addEventListener('dragover', function (e) { e.preventDefault(); });
+  window.addEventListener('drop', function (e) { e.preventDefault(); });
+
+  /* Theme toggle */
+  function syncThemeColor(isDark) {
+    // Both metas carry the same content once the visitor has chosen a theme,
+    // so the OS-level media query can no longer contradict that choice.
+    $$('meta[name="theme-color"]').forEach(function (m) {
+      m.setAttribute('content', isDark ? '#08080a' : '#ffffff');
+    });
+  }
+  syncThemeColor(document.documentElement.classList.contains('dark'));
+
+  els.themeToggle.addEventListener('click', function () {
     const isDark = document.documentElement.classList.toggle('dark');
     try { localStorage.setItem('tf-theme', isDark ? 'dark' : 'light'); } catch (e) {}
+    syncThemeColor(isDark);
   });
 
-  /* ───────────────────── FAQ accordion ───────────────────── */
-  document.querySelectorAll('.faq-trigger').forEach(btn => {
-    btn.addEventListener('click', () => {
+  /* FAQ accordion */
+  $$('.faq-trigger').forEach(function (btn) {
+    btn.addEventListener('click', function () {
       const item = btn.closest('.faq-item');
       const isOpen = item.dataset.open === 'true';
       // Close siblings for a clean single-open accordion
-      document.querySelectorAll('.faq-item').forEach(i => i.dataset.open = 'false');
+      $$('.faq-item').forEach(function (i) { i.dataset.open = 'false'; });
       item.dataset.open = isOpen ? 'false' : 'true';
     });
   });
 
-  /* ───────────────────── Initial paint ───────────────────── */
+  /* Initial paint */
   renderStats();
   els.source.focus({ preventScroll: true });
 })();
