@@ -138,31 +138,36 @@ transparency, natural aspect **1.317**). Everything else derives from it, and
   visibly changes the mark's colours. 384 px is ~7x the 40 px header, so it
   stays sharp on retina screens.
 - `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` — the mark centred on
-  a **white rounded plate** at 78% width, natural aspect kept. The plate is
-  there because a transparent icon disappears on a dark browser tab and in
-  Google's dark search results; the mark's own colours are never touched.
-- `icon-maskable-512.png` — the same plate at 56% width, so it survives
-  Android's circular crop. `site.webmanifest` points its `maskable` entry here.
-- `favicon.ico` — the same plate at 16/32/48/64 px.
+  a **fully transparent** canvas at 86% width, natural aspect kept.
+- `icon-maskable-512.png` — the same transparent canvas at 56% width, so it
+  survives Android's circular crop. `site.webmanifest` points its `maskable`
+  entry here.
+- `favicon.ico` — the same transparent mark at 16/32/48/64 px.
+
+No icon carries a plate or any background. The trade-off is deliberate: the
+mark is dark navy-to-cyan, so on a dark browser tab or a dark Google result it
+has little contrast. Transparency was chosen over tab legibility. If tab
+visibility ever needs to win, add a plate (or an outlined variant) in
+`tools/build-icons.py` — never hand-edit the icon files.
 
 ```bash
 python3 tools/build-icons.py   # rebuild the whole icon set from logo.png
 python3 tools/build-og.py      # rebuild assets/og/*.png from each page's own tags
 ```
 
-**The header logo is recoloured on the dark theme, not plated.** The artwork is
-dark navy-to-cyan, and the navy half sinks into a near-black page. `logo.css`
-therefore recolours the mark for dark mode with
-`filter: invert(1) hue-rotate(180deg) brightness(1.6)` — a hue-preserving
-transform that leaves the mark fully transparent, so it sits on any background
-with no white box behind it. The mark keeps its own colours on the light theme.
-Do not reintroduce a `background` or `box-shadow` plate on `.tg-logo`; the
-filter exists precisely so the mark stays background-agnostic.
+**Nothing in the site paints a background behind the mark.** The header logo,
+the Open Graph previews and the icon set are all plate-free:
 
-The *icon set* (`favicon.ico`, `apple-touch-icon.png`, `icon-*.png`) is a
-different case and still uses the white plate: a browser tab or a Google dark
-result has no theme class to hang a filter off, so the plate is the only
-reliable way to keep the mark visible there.
+- **Header** — `.tg-logo` in `logo.css` carries no background, border or plate.
+  The mark is dark navy-to-cyan and its navy half sinks into a near-black page,
+  so `logo.css` recolours it for dark mode with
+  `filter: invert(1) hue-rotate(180deg) brightness(1.6)` — a hue-preserving
+  transform that leaves the mark fully transparent. The mark keeps its own
+  colours on the light theme. Do not reintroduce a `background` or `box-shadow`
+  plate on `.tg-logo`.
+- **Open Graph previews** — the `.brand img` rule in `tools/build-og.py` uses
+  the same filter, because the preview card is dark too.
+- **Icons** — fully transparent, as described above.
 
 Each placement is a single `<img src="/logo.png" class="tg-logo">`. The site has
 three dark-mode conventions — `html.dark` (most pages), `html[data-theme="dark"]`
