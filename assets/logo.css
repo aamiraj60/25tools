@@ -1,11 +1,16 @@
 /* ToolGuest logo mark, used in every page header and footer.
 
-   The artwork is dark navy-to-cyan on transparency. On the light theme it
-   sits on a near-white page and reads correctly. The dark theme puts it on a
-   near-black page, where the navy half would disappear, so the mark is given
-   the same light backdrop there. The backdrop is a white plate drawn with
-   box-shadow, not padding or a recoloured image: the mark keeps its exact
-   colours, size and position, and only the background behind it changes. */
+   The artwork is dark navy-to-cyan on transparency. It reads correctly on the
+   light theme, but the navy half is too dark to see against the near-black
+   dark theme. Rather than paint a white plate behind the mark — which showed
+   as a solid white box on the dark UI — the mark is recoloured for dark mode
+   with a filter.
+
+   invert(1) flips the artwork to light, hue-rotate(180deg) puts the original
+   blue/cyan hue back (inverting a channel mirrors the hue, so a 180deg turn
+   restores it), and brightness(1.6) lifts the whole mark clear of the dark
+   backdrop. The mark keeps its own colours on the light theme and stays fully
+   transparent in both, so it sits on any background. */
 .tg-logo {
   display: block;
   width: auto;
@@ -17,7 +22,5 @@
 .dark .tg-logo,
 [data-theme="dark"] .tg-logo,
 body.dark .tg-logo {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 0 5px #fff;
+  filter: invert(1) hue-rotate(180deg) brightness(1.6);
 }

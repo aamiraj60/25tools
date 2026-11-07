@@ -150,14 +150,25 @@ python3 tools/build-icons.py   # rebuild the whole icon set from logo.png
 python3 tools/build-og.py      # rebuild assets/og/*.png from each page's own tags
 ```
 
-**Never recolour the mark.** The site is dark by default and the navy half of
-the artwork would sink into a near-black page, so `assets/logo.css` gives the
-mark a white backdrop on the dark theme instead of lightening it. The colours
-must look identical on both themes.
+**The header logo is recoloured on the dark theme, not plated.** The artwork is
+dark navy-to-cyan, and the navy half sinks into a near-black page. `logo.css`
+therefore recolours the mark for dark mode with
+`filter: invert(1) hue-rotate(180deg) brightness(1.6)` — a hue-preserving
+transform that leaves the mark fully transparent, so it sits on any background
+with no white box behind it. The mark keeps its own colours on the light theme.
+Do not reintroduce a `background` or `box-shadow` plate on `.tg-logo`; the
+filter exists precisely so the mark stays background-agnostic.
+
+The *icon set* (`favicon.ico`, `apple-touch-icon.png`, `icon-*.png`) is a
+different case and still uses the white plate: a browser tab or a Google dark
+result has no theme class to hang a filter off, so the plate is the only
+reliable way to keep the mark visible there.
 
 Each placement is a single `<img src="/logo.png" class="tg-logo">`. The site has
 three dark-mode conventions — `html.dark` (most pages), `html[data-theme="dark"]`
-and `body.dark` — and `logo.css` covers all three.
+and `body.dark` — and `logo.css` covers all three. All dark modes are
+class-based; no page switches theme with a `prefers-color-scheme` media query,
+so the class selectors cover every case.
 
 ## Open Graph previews
 
