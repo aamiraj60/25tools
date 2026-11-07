@@ -340,6 +340,7 @@
               <svg class="h-2.5 w-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>K
             </kbd>
           </div>
+          <div id="heroSuggest" class="absolute inset-x-0 top-full z-30 mt-2 hidden overflow-hidden rounded-2xl border border-black/10 bg-white shadow-2xl shadow-black/10 dark:border-white/10 dark:bg-[#101014] dark:shadow-black/50"></div>
         </div>
 
         <div id="fastTags" class="mt-5 flex flex-wrap items-center justify-center gap-2"></div>
@@ -995,7 +996,15 @@ function renderPalette() {
 
 function setActive(i) {
   activeIndex = i;
-  document.querySelectorAll("#paletteResults .palette-item").forEach((el, idx) => {
+  // The palette and the hero dropdown show the same result order but are two
+  // separate lists, so highlight each against its own index rather than
+  // against one combined NodeList.
+  applyActive("#paletteResults .palette-item", i);
+  applyActive("#heroSuggest .hero-suggest-item", i);
+}
+
+function applyActive(selector, i) {
+  document.querySelectorAll(selector).forEach((el, idx) => {
     const on = idx === i;
     el.classList.toggle("bg-indigo-500/10", on);
     el.classList.toggle("dark:bg-white/[0.07]", on);
@@ -1013,6 +1022,33 @@ function render() {
   renderTabs();
   renderDirectory();
   renderPalette();
+  renderHeroSuggest();
+}
+
+/* Inline suggestions under the hero search. Without this the only feedback to a
+   keystroke is the directory card list, which sits far below the fold, so a
+   search looks like it did nothing. The dropdown shows the top matches right
+   under the input and links straight to the tool. */
+function renderHeroSuggest() {
+  const box = document.getElementById("heroSuggest");
+  if (!box) return;
+  const q = query.trim();
+  if (!q) { box.classList.add("hidden"); box.innerHTML = ""; return; }
+  const top = results.slice(0, 6);
+  const more = results.length - top.length;
+  box.innerHTML = top.length === 0
+    ? `<div class="px-4 py-6 text-center text-[13px] text-neutral-500 dark:text-neutral-400">No tools match “${escapeHtml(q)}”.</div>`
+    : top.map((t, i) => `
+      <a href="${toolHref(t.slug)}" onmouseenter="setActive(${i})"
+        class="hero-suggest-item flex items-center gap-3 px-4 py-2.5 text-left transition-colors ${i === activeIndex ? "bg-indigo-500/10 dark:bg-white/[0.07]" : "hover:bg-black/[0.03] dark:hover:bg-white/[0.04]"}">
+        <span class="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-to-br ${t.category.accent}">${icon(t.icon, "h-4 w-4 text-white")}</span>
+        <span class="min-w-0 flex-1">
+          <span class="block truncate text-[13.5px] font-medium text-neutral-900 dark:text-white">${t.name}</span>
+          <span class="block truncate text-[11.5px] text-neutral-500 dark:text-neutral-500">${t.desc}</span>
+        </span>
+      </a>`).join("")
+      + (more > 0 ? `<div class="border-t border-black/5 px-4 py-2 text-center text-[11.5px] text-neutral-500 dark:border-white/10 dark:text-neutral-500">${more} more below</div>` : "");
+  box.classList.remove("hidden");
 }
 
 function syncInputs() {
@@ -1078,13 +1114,30 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     closePalette();
     document.getElementById("mobileMenu").classList.add("hidden");
+    const hs = document.getElementById("heroSuggest");
+    if (hs) hs.classList.add("hidden");
     return;
+  }
+  const heroActive = document.activeElement && document.activeElement.id === "heroSearch";
+  const heroSuggestOpen = !document.getElementById("heroSuggest").classList.contains("hidden");
+  if (heroActive && heroSuggestOpen) {
+    if (e.key === "ArrowDown") { e.preventDefault(); setActive(Math.min(activeIndex + 1, results.length - 1)); renderHeroSuggest(); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); setActive(Math.max(activeIndex - 1, 0)); renderHeroSuggest(); }
+    else if (e.key === "Enter" && results[activeIndex]) { e.preventDefault(); window.location.href = toolHref(results[activeIndex].slug); }
   }
   const paletteOpen = !document.getElementById("palette").classList.contains("hidden");
   if (paletteOpen) {
     if (e.key === "ArrowDown") { e.preventDefault(); activeIndex = Math.min(activeIndex + 1, results.length - 1); renderPalette(); }
     else if (e.key === "ArrowUp") { e.preventDefault(); activeIndex = Math.max(activeIndex - 1, 0); renderPalette(); }
     else if (e.key === "Enter" && results[activeIndex]) { e.preventDefault(); window.location.href = toolHref(results[activeIndex].slug); }
+  }
+});
+
+/* Dismiss the hero suggestions when the user clicks anywhere outside them. */
+document.addEventListener("click", (e) => {
+  const box = document.getElementById("heroSuggest");
+  if (box && !box.classList.contains("hidden") && !box.contains(e.target) && e.target.id !== "heroSearch") {
+    box.classList.add("hidden");
   }
 });
 

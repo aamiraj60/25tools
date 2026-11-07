@@ -50,7 +50,7 @@ TEMPLATE = """<!doctype html>
   }}
   .wrap {{ position: relative; height: 100%; padding: 62px 76px; display: flex; flex-direction: column; }}
   .brand {{ display: flex; align-items: center; gap: 16px; }}
-  .brand img {{ height: 52px; width: auto; filter: invert(1) hue-rotate(180deg) brightness(1.6); }}
+  .brand img {{ height: 52px; width: auto; filter: invert(1) hue-rotate(180deg); }}
   .brand b {{ font-size: 30px; font-weight: 800; letter-spacing: -.03em; }}
   .body {{ margin-top: auto; margin-bottom: auto; padding-top: 22px; }}
   h1 {{

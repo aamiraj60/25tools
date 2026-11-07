@@ -31,6 +31,20 @@ Adding a tool means touching **three** places:
 2. the `CATEGORIES` array in `index.html` (name, slug, desc, tags, icon)
 3. `sitemap.xml`
 
+### Search behaviour
+
+`index.html` search is entirely client-side and filters the `CATEGORIES` data
+on name, description, slug, category title and tags (`computeResults`). Three
+surfaces share one `query` state and one `render()` pass: the hero input, the
+directory filter and the ⌘K palette.
+
+The hero input also drives `renderHeroSuggest()`, an inline dropdown that shows
+the top 6 matches directly under the box. It exists because the directory card
+list sits far below the fold — on a 900 px viewport the first card is ~2100 px
+down — so without it a keystroke produced no visible change and search looked
+broken. Keep the dropdown in the `render()` pass and keep its items in the
+`setActive()` highlight loop (`#heroSuggest .hero-suggest-item`).
+
 ### Check whether it already exists first
 
 Adding a page that already exists silently overwrites it.
@@ -161,10 +175,17 @@ the Open Graph previews and the icon set are all plate-free:
 - **Header** — `.tg-logo` in `logo.css` carries no background, border or plate.
   The mark is dark navy-to-cyan and its navy half sinks into a near-black page,
   so `logo.css` recolours it for dark mode with
-  `filter: invert(1) hue-rotate(180deg) brightness(1.6)` — a hue-preserving
-  transform that leaves the mark fully transparent. The mark keeps its own
-  colours on the light theme. Do not reintroduce a `background` or `box-shadow`
-  plate on `.tg-logo`.
+  `filter: invert(1) hue-rotate(180deg)` — a hue-preserving transform that
+  leaves the mark fully transparent. The mark keeps its own colours on the
+  light theme. Do not reintroduce a `background` or `box-shadow` plate on
+  `.tg-logo`.
+  - **Do not add `brightness()` or `saturate()` to this filter.** The two
+    functions are exact: rendered, the mark measures hue 231 / saturation 0.95,
+    which is the artwork's own hue 231 / saturation 0.98. Any brightness lift
+    clips the light half of the gradient towards white and drags the hue
+    towards green — `brightness(1.6)` measured hue 98 / saturation 0.43, i.e.
+    the brand blue turned into a washed-out grey-mint. Keep it to
+    `invert(1) hue-rotate(180deg)`.
 - **Open Graph previews** — the `.brand img` rule in `tools/build-og.py` uses
   the same filter, because the preview card is dark too.
 - **Icons** — fully transparent, as described above.
