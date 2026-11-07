@@ -30,9 +30,9 @@
   <link rel="alternate" hreflang="en" href="https://toolguest.com/youtube-timestamp" />
   <link rel="alternate" hreflang="x-default" href="https://toolguest.com/youtube-timestamp" />
 <meta name="description" content="Create precise YouTube timestamp links, embed codes, and chapter lists instantly. 100% client-side, ad-free, blazing fast." />
-<script src="/assets/tailwind.js"></script>
-<script>tailwind.config = { darkMode: 'class' };</script>
-<script src="/assets/lucide.js"></script>
+
+
+<script src="/assets/lucide.js" defer></script>
 <link href="/assets/fonts.css" rel="stylesheet">
 <style>
   * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
@@ -191,6 +191,7 @@
 </script>
 <link rel="stylesheet" href="/assets/logo.css" />
 <meta name="theme-color" content="#08080a">
+  <link rel="stylesheet" href="/assets/tailwind.css">
 </head>
 <body class="antialiased">
 
@@ -771,7 +772,7 @@
 <script>
 (function(){
   'use strict';
-  lucide.createIcons();
+  if(window.lucide)lucide.createIcons();else document.addEventListener('DOMContentLoaded',function(){lucide.createIcons()},{once:true});
 
   // Elements
   const $ = id => document.getElementById(id);
@@ -928,7 +929,7 @@
         </button>`;
       chapterList.appendChild(row);
     });
-    lucide.createIcons();
+    if(window.lucide)lucide.createIcons();
     chapterList.querySelectorAll('.remove-chapter').forEach(btn => {
       btn.addEventListener('click', () => {
         chapters.splice(parseInt(btn.dataset.index), 1);

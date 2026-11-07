@@ -1,0 +1,4 @@
+# Dependencies and build scratch space for tools/build-css.py
+node_modules/
+tools/_css-build/
+package-lock.json
