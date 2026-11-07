@@ -197,6 +197,42 @@ If a language is ever translated, that is a different job: it needs a real
 localised URL per language and its own `hreflang` pair. Do not fake it by
 adding a `lang` attribute.
 
+## SEO / AEO content block
+
+Every tool page carries one `<section class="tool-seo-content" id="guide">`
+placed immediately before the `<!-- TF-RELATED -->` marker. It is the page's
+long-form, answer-engine-ready content and it is built from a fixed shape so
+the whole site stays consistent:
+
+1. an intro block (`seo-eyebrow` + `h2` + paragraphs);
+2. a **Quick answer** callout (`.seo-aeo`) holding a 40–50 word entity
+   definition — the paragraph an AI answer engine is most likely to quote;
+3. a "Why it matters" block with a `seo-grid cols-3` of `.seo-card`s;
+4. a head-to-head comparison `.seo-table`;
+5. Tier-1 geo cards (`.seo-card` with a `.seo-city` label) for the USA, UK,
+   Germany, Canada, Australia and Spain;
+6. a `.seo-faq` `<details>` accordion mirroring the page's FAQPage JSON-LD.
+
+The supporting CSS lives at the end of each page's `<style>` block, introduced
+by the `/* ---- ToolGuest SEO / AEO content system ---- */` comment. Its
+dark-mode selectors cover all three site conventions at once —
+`html.dark`, `html[data-theme="dark"]` and `body.dark` — so the same CSS works
+on every page.
+
+Rendered visible word count must be **1,200+** on every tool page. The health
+audit measures this from the rendered text, not the source.
+
+Two more requirements sit alongside the content block:
+
+- **`FAQPage` JSON-LD.** Every page's `@graph` needs a `FAQPage` whose
+  `mainEntity` questions match the visible FAQ, and a `SoftwareApplication`
+  (a page may use `"@type": ["WebApplication", "SoftwareApplication"]`).
+- **A theme toggle.** Every page has a `<button id="themeBtn">` (or
+  `#themeToggle`) that flips the theme and persists the choice. Most pages
+  store it under `localStorage['tg-theme']`; `ai-humanizer` uses
+  `localStorage['theme']`. The default is dark, and a tiny inline script in
+  `<head>` applies the stored choice before first paint to avoid a flash.
+
 ## Automations
 
 Two cron automations keep the site healthy. Both run without an LLM.

@@ -469,6 +469,56 @@
     section.blk{padding:56px 0 0}
     .region{margin-left:0}
   }
+
+  /* ---- ToolGuest SEO / AEO content system ---- */
+  .tool-seo-content { max-width: 1120px; margin: 0 auto; padding: 0 20px 72px; }
+  .tool-seo-content .seo-block { margin-top: 56px; }
+  .tool-seo-content .seo-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #6366f1; margin-bottom: .6rem; }
+  html.dark .tool-seo-content .seo-eyebrow, html[data-theme="dark"] .tool-seo-content .seo-eyebrow, body.dark .tool-seo-content .seo-eyebrow { color: #818cf8; }
+  .tool-seo-content h2 { font-size: clamp(1.35rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -.028em; line-height: 1.16; }
+  .tool-seo-content h3 { font-size: 1.02rem; font-weight: 700; letter-spacing: -.015em; }
+  .tool-seo-content p { margin-top: .85rem; font-size: .975rem; line-height: 1.78; color: #52525b; }
+  html.dark .tool-seo-content p, html[data-theme="dark"] .tool-seo-content p, body.dark .tool-seo-content p { color: #a1a1aa; }
+  .tool-seo-content strong { color: #18181b; font-weight: 650; }
+  html.dark .tool-seo-content strong, html[data-theme="dark"] .tool-seo-content strong, body.dark .tool-seo-content strong { color: #f4f4f5; }
+  .tool-seo-content code { font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: .85em; background: rgba(99,102,241,.10); color: #4f46e5; padding: .12em .42em; border-radius: .4em; border: 1px solid rgba(99,102,241,.18); word-break: break-word; }
+  html.dark .tool-seo-content code, html[data-theme="dark"] .tool-seo-content code, body.dark .tool-seo-content code { background: rgba(129,140,248,.14); color: #c7d2fe; border-color: rgba(129,140,248,.24); }
+  .tool-seo-content a { color: #4f46e5; text-decoration: none; border-bottom: 1px solid rgba(99,102,241,.35); }
+  html.dark .tool-seo-content a, html[data-theme="dark"] .tool-seo-content a, body.dark .tool-seo-content a { color: #a5b4fc; }
+  .seo-grid { display: grid; gap: 16px; margin-top: 22px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .seo-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .seo-grid.cols-3 { grid-template-columns: repeat(3, 1fr); } }
+  .seo-card { border: 1px solid rgba(24,24,27,.10); border-radius: 18px; padding: 20px; background: rgba(255,255,255,.65); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .seo-card:hover { transform: translateY(-3px); border-color: rgba(99,102,241,.4); box-shadow: 0 18px 40px -22px rgba(79,70,229,.5); }
+  html.dark .seo-card, html[data-theme="dark"] .seo-card, body.dark .seo-card { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-card .seo-city { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #0891b2; }
+  html.dark .seo-card .seo-city, html[data-theme="dark"] .seo-card .seo-city, body.dark .seo-card .seo-city { color: #22d3ee; }
+  .seo-card p { margin-top: .5rem; font-size: .9rem; }
+  .seo-aeo { border: 1px solid rgba(99,102,241,.3); border-radius: 18px; padding: 22px 24px; background: linear-gradient(135deg, rgba(99,102,241,.10), rgba(34,211,238,.06)); }
+  .seo-aeo-label { display: inline-flex; align-items: center; gap: .4rem; font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #4f46e5; }
+  html.dark .seo-aeo-label, html[data-theme="dark"] .seo-aeo-label, body.dark .seo-aeo-label { color: #a5b4fc; }
+  .seo-aeo p { margin-top: .6rem; font-size: 1.02rem; color: #3f3f46; }
+  html.dark .seo-aeo p, html[data-theme="dark"] .seo-aeo p, body.dark .seo-aeo p { color: #d4d4d8; }
+  .seo-tablewrap { margin-top: 24px; overflow-x: auto; border: 1px solid rgba(24,24,27,.10); border-radius: 18px; background: rgba(255,255,255,.6); }
+  html.dark .seo-tablewrap, html[data-theme="dark"] .seo-tablewrap, body.dark .seo-tablewrap { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: .9rem; text-align: left; }
+  .seo-table th, .seo-table td { padding: 14px 18px; border-bottom: 1px solid rgba(24,24,27,.08); }
+  html.dark .seo-table th, html.dark .seo-table td, html[data-theme="dark"] .seo-table th, html[data-theme="dark"] .seo-table td, body.dark .seo-table th, body.dark .seo-table td { border-bottom-color: rgba(255,255,255,.07); }
+  .seo-table tbody tr:last-child th, .seo-table tbody tr:last-child td { border-bottom: 0; }
+  .seo-table thead th { font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #71717a; }
+  .seo-table th[scope="row"] { font-weight: 600; color: #27272a; }
+  html.dark .seo-table th[scope="row"], html[data-theme="dark"] .seo-table th[scope="row"], body.dark .seo-table th[scope="row"] { color: #e4e4e7; }
+  .seo-table .yes { color: #059669; font-weight: 650; }
+  html.dark .seo-table .yes, html[data-theme="dark"] .seo-table .yes, body.dark .seo-table .yes { color: #34d399; }
+  .seo-table .no { color: #71717a; }
+  .seo-faq { margin-top: 22px; display: grid; gap: 12px; }
+  .seo-faq details { border: 1px solid rgba(24,24,27,.10); border-radius: 16px; padding: 0 20px; background: rgba(255,255,255,.6); }
+  html.dark .seo-faq details, html[data-theme="dark"] .seo-faq details, body.dark .seo-faq details { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-faq summary { cursor: pointer; padding: 16px 0; font-weight: 650; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .seo-faq summary::-webkit-details-marker { display: none; }
+  .seo-faq summary::after { content: "+"; font-size: 1.25rem; font-weight: 400; color: #a1a1aa; }
+  .seo-faq details[open] summary::after { content: "\2013"; }
+  .seo-faq p { padding-bottom: 16px; margin-top: 0; }
 </style>
 <link rel="stylesheet" href="/assets/related.css">
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -782,6 +832,121 @@
   
 
 </div>
+
+  <!-- TOOLGUEST SEO / AEO CONTENT -->
+  <section class="tool-seo-content" id="guide" aria-labelledby="guide-h">
+    <div class="seo-block">
+      <span class="seo-eyebrow">The Shorts hook handbook</span>
+      <h2 id="guide-h">AI hook and title generator for YouTube Shorts, Reels and TikTok</h2>
+      <p>The first three seconds decide whether a short video is watched or scrolled past. A strong hook stops the thumb, sets a promise and pulls the viewer into the next beat. A weak one loses the audience before the content has a chance to prove itself. This free hook generator produces scroll-stopping openers and titles for YouTube Shorts, Instagram Reels and TikTok, so you never stare at a blank caption box again.</p>
+      <p>Enter your topic, choose a tone and the generator returns a batch of hook variations, each written to work as spoken narration or as on-screen text. Every hook comes with an estimated virality score that reflects how well its structure tends to perform, along with title variants to pair with it. Generate a set, pick the strongest, and post with confidence.</p>
+      <p>The whole tool runs in your browser using local templates and language rules. There is no account, no upload and no waiting on a server, so you can iterate through dozens of ideas in the time it used to take to think of one.</p>
+    </div>
+    <div class="seo-block">
+      <div class="seo-aeo">
+        <span class="seo-aeo-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.4 5.4 1.9-5.4 1.9L12 17.6l-1.9-5.4L4.7 10.3l5.4-1.9Z"/></svg>Quick answer</span>
+        <p>A Shorts hook generator creates scroll-stopping opening lines and titles for YouTube Shorts, Reels and TikTok. ToolGuest produces hook variations by topic and tone with estimated virality scores, running entirely in the browser. It is free, needs no sign-up and is completely private.</p>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Why it matters</span>
+      <h2>Why the first three seconds carry the whole video</h2>
+      <p>Short-form platforms show your video to a small test audience first and promote it only if people keep watching. That means the opening seconds are effectively an audition: if viewers drop off immediately, the algorithm reads the video as uninteresting and stops showing it. A strong hook does not just hold attention, it earns the distribution that makes a video take off.</p>
+      <p>Hooks work through structure, not luck. Patterns such as the surprising claim, the direct question, the bold promise and the mid-action start reliably outperform a slow introduction. Generating several variations and comparing their scores teaches the patterns while giving you a usable shortlist for the current video.</p>
+      <p>Titles do a different job from hooks. The hook holds the viewer who is already watching; the title and thumbnail win the click in the first place. Generating both together keeps them aligned, so the promise in the title is the promise the hook delivers.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <h3>Hooks that stop the scroll</h3>
+          <p>A batch of opening lines written to work as spoken narration or on-screen text in the first three seconds.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Virality scoring</h3>
+          <p>Each hook carries an estimated score based on how well its structure tends to perform on short-form feeds.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Tone control</h3>
+          <p>Choose a tone such as curious, bold, funny or educational to match your channel's voice.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Title variants included</h3>
+          <p>Pair every hook with title options so the click promise and the opening line stay aligned.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Instant, local generation</h3>
+          <p>Ideas are produced in your browser with no server round-trip, so you can iterate fast.</p>
+        </div>
+        <div class="seo-card">
+          <h3>No signup, no tracking</h3>
+          <p>No account, no ads and no analytics between you and your next video.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Head to head</span>
+      <h2>ToolGuest vs. legacy hook generators</h2>
+      <p>Instant, private idea generation without the account wall or the credit system.</p>
+      <div class="seo-tablewrap">
+        <table class="seo-table">
+          <thead><tr><th scope="col">Capability</th><th scope="col">Legacy online tools</th><th scope="col">ToolGuest</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Sign-up required</th><td class="no">Almost always</td><td class="yes">Never</td></tr>
+            <tr><th scope="row">Usage credits</th><td class="no">Often limited</td><td class="yes">Unlimited</td></tr>
+            <tr><th scope="row">Virality scoring</th><td class="no">Rare</td><td class="yes">Included</td></tr>
+            <tr><th scope="row">Title variants</th><td class="no">Separate tool</td><td class="yes">Included</td></tr>
+            <tr><th scope="row">Tone selection</th><td class="no">Limited</td><td class="yes">Multiple tones</td></tr>
+            <tr><th scope="row">Advertising</th><td class="no">Banners and upsells</td><td class="yes">Zero, ever</td></tr>
+            <tr><th scope="row">Server data uploads</th><td class="no">Topics sent to servers</td><td class="yes">100% local</td></tr>
+            <tr><th scope="row">Signup or cookies</th><td class="no">Third-party trackers</td><td class="yes">None</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Built for Tier-1 teams</span>
+      <h2>Used by creators in the USA, UK, Germany, Canada, Australia and Spain</h2>
+      <p>One English page serves every Tier-1 market, so a creator in Los Angeles and one in Lisbon write their hooks the same way.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <span class="seo-city">Los Angeles &middot; United States</span>
+          <p>Short-form creators test hook variations before publishing to the feed.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">London &middot; United Kingdom</span>
+          <p>Social teams draft Reels openers and titles in one pass.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Berlin &middot; Germany</span>
+          <p>Educators turn lesson topics into curiosity-driven hooks.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Toronto &middot; Canada</span>
+          <p>Agencies generate hook options for client short-form campaigns.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Sydney &middot; Australia</span>
+          <p>Small businesses script Shorts that stop the scroll in the first seconds.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Madrid &middot; Spain</span>
+          <p>Creators iterate through dozens of ideas without waiting on a server.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">FAQ</span>
+      <h2>Shorts hook questions, answered</h2>
+      <div class="seo-faq">
+        <details><summary>What is a hook in a short video?</summary><p>The hook is the opening line or on-screen text in the first few seconds. Its job is to stop the viewer scrolling and create enough curiosity or promise to carry them into the rest of the video.</p></details>
+        <details><summary>How long should a hook be?</summary><p>Aim for roughly one sentence that can be spoken or read in two to three seconds. Anything longer delays the payoff and gives the viewer a reason to leave.</p></details>
+        <details><summary>What is a virality score?</summary><p>It is an estimate of how well a hook's structure tends to perform, based on patterns seen in high-performing short-form content. Treat it as a guide for ranking options, not a guarantee.</p></details>
+        <details><summary>Which platforms does it work for?</summary><p>The hooks are written to suit YouTube Shorts, Instagram Reels and TikTok, all of which share the same first-three-seconds dynamic.</p></details>
+        <details><summary>Do I need an account?</summary><p>No. There is no sign-up, no credit system and no usage limit. The generator works the moment the page loads.</p></details>
+        <details><summary>Is my topic data stored?</summary><p>No. Ideas are generated locally in your browser. Your topics and drafts are never transmitted, logged or stored.</p></details>
+        <details><summary>Can I generate multiple hooks at once?</summary><p>Yes. Each request returns a batch of variations with scores, so you can compare and choose the strongest.</p></details>
+        <details><summary>Is the tool free?</summary><p>Yes. It is completely free, with no ads and no tracking.</p></details>
+      </div>
+    </div>
+  </section>
 
 <!-- TF-RELATED -->
 <section class="tf-related" aria-label="Related tools">

@@ -173,6 +173,56 @@
     from { opacity: 0; transform: translateY(10px) scale(0.97); }
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
+
+  /* ---- ToolGuest SEO / AEO content system ---- */
+  .tool-seo-content { max-width: 1120px; margin: 0 auto; padding: 0 20px 72px; }
+  .tool-seo-content .seo-block { margin-top: 56px; }
+  .tool-seo-content .seo-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #6366f1; margin-bottom: .6rem; }
+  html.dark .tool-seo-content .seo-eyebrow, html[data-theme="dark"] .tool-seo-content .seo-eyebrow, body.dark .tool-seo-content .seo-eyebrow { color: #818cf8; }
+  .tool-seo-content h2 { font-size: clamp(1.35rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -.028em; line-height: 1.16; }
+  .tool-seo-content h3 { font-size: 1.02rem; font-weight: 700; letter-spacing: -.015em; }
+  .tool-seo-content p { margin-top: .85rem; font-size: .975rem; line-height: 1.78; color: #52525b; }
+  html.dark .tool-seo-content p, html[data-theme="dark"] .tool-seo-content p, body.dark .tool-seo-content p { color: #a1a1aa; }
+  .tool-seo-content strong { color: #18181b; font-weight: 650; }
+  html.dark .tool-seo-content strong, html[data-theme="dark"] .tool-seo-content strong, body.dark .tool-seo-content strong { color: #f4f4f5; }
+  .tool-seo-content code { font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: .85em; background: rgba(99,102,241,.10); color: #4f46e5; padding: .12em .42em; border-radius: .4em; border: 1px solid rgba(99,102,241,.18); word-break: break-word; }
+  html.dark .tool-seo-content code, html[data-theme="dark"] .tool-seo-content code, body.dark .tool-seo-content code { background: rgba(129,140,248,.14); color: #c7d2fe; border-color: rgba(129,140,248,.24); }
+  .tool-seo-content a { color: #4f46e5; text-decoration: none; border-bottom: 1px solid rgba(99,102,241,.35); }
+  html.dark .tool-seo-content a, html[data-theme="dark"] .tool-seo-content a, body.dark .tool-seo-content a { color: #a5b4fc; }
+  .seo-grid { display: grid; gap: 16px; margin-top: 22px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .seo-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .seo-grid.cols-3 { grid-template-columns: repeat(3, 1fr); } }
+  .seo-card { border: 1px solid rgba(24,24,27,.10); border-radius: 18px; padding: 20px; background: rgba(255,255,255,.65); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .seo-card:hover { transform: translateY(-3px); border-color: rgba(99,102,241,.4); box-shadow: 0 18px 40px -22px rgba(79,70,229,.5); }
+  html.dark .seo-card, html[data-theme="dark"] .seo-card, body.dark .seo-card { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-card .seo-city { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #0891b2; }
+  html.dark .seo-card .seo-city, html[data-theme="dark"] .seo-card .seo-city, body.dark .seo-card .seo-city { color: #22d3ee; }
+  .seo-card p { margin-top: .5rem; font-size: .9rem; }
+  .seo-aeo { border: 1px solid rgba(99,102,241,.3); border-radius: 18px; padding: 22px 24px; background: linear-gradient(135deg, rgba(99,102,241,.10), rgba(34,211,238,.06)); }
+  .seo-aeo-label { display: inline-flex; align-items: center; gap: .4rem; font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #4f46e5; }
+  html.dark .seo-aeo-label, html[data-theme="dark"] .seo-aeo-label, body.dark .seo-aeo-label { color: #a5b4fc; }
+  .seo-aeo p { margin-top: .6rem; font-size: 1.02rem; color: #3f3f46; }
+  html.dark .seo-aeo p, html[data-theme="dark"] .seo-aeo p, body.dark .seo-aeo p { color: #d4d4d8; }
+  .seo-tablewrap { margin-top: 24px; overflow-x: auto; border: 1px solid rgba(24,24,27,.10); border-radius: 18px; background: rgba(255,255,255,.6); }
+  html.dark .seo-tablewrap, html[data-theme="dark"] .seo-tablewrap, body.dark .seo-tablewrap { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: .9rem; text-align: left; }
+  .seo-table th, .seo-table td { padding: 14px 18px; border-bottom: 1px solid rgba(24,24,27,.08); }
+  html.dark .seo-table th, html.dark .seo-table td, html[data-theme="dark"] .seo-table th, html[data-theme="dark"] .seo-table td, body.dark .seo-table th, body.dark .seo-table td { border-bottom-color: rgba(255,255,255,.07); }
+  .seo-table tbody tr:last-child th, .seo-table tbody tr:last-child td { border-bottom: 0; }
+  .seo-table thead th { font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #71717a; }
+  .seo-table th[scope="row"] { font-weight: 600; color: #27272a; }
+  html.dark .seo-table th[scope="row"], html[data-theme="dark"] .seo-table th[scope="row"], body.dark .seo-table th[scope="row"] { color: #e4e4e7; }
+  .seo-table .yes { color: #059669; font-weight: 650; }
+  html.dark .seo-table .yes, html[data-theme="dark"] .seo-table .yes, body.dark .seo-table .yes { color: #34d399; }
+  .seo-table .no { color: #71717a; }
+  .seo-faq { margin-top: 22px; display: grid; gap: 12px; }
+  .seo-faq details { border: 1px solid rgba(24,24,27,.10); border-radius: 16px; padding: 0 20px; background: rgba(255,255,255,.6); }
+  html.dark .seo-faq details, html[data-theme="dark"] .seo-faq details, body.dark .seo-faq details { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-faq summary { cursor: pointer; padding: 16px 0; font-weight: 650; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .seo-faq summary::-webkit-details-marker { display: none; }
+  .seo-faq summary::after { content: "+"; font-size: 1.25rem; font-weight: 400; color: #a1a1aa; }
+  .seo-faq details[open] summary::after { content: "\2013"; }
+  .seo-faq p { padding-bottom: 16px; margin-top: 0; }
 </style>
 <link rel="stylesheet" href="/assets/related.css">
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -335,6 +385,11 @@
       <button id="backupBtn" title="Download JSON backup"
         class="grid h-9 w-9 place-items-center rounded-lg border border-[var(--border)] text-[var(--muted)] transition hover:text-[var(--fg)]">
         <i data-lucide="hard-drive-download" class="h-4 w-4"></i>
+      </button>
+
+      <button id="copyBtn" title="Copy invoice details as text"
+        class="inline-flex items-center gap-2 rounded-lg border border-[var(--border)] px-3.5 py-2 text-[13px] font-semibold transition hover:bg-[var(--fg)] hover:text-[var(--bg)]">
+        <i data-lucide="clipboard-copy" class="h-4 w-4"></i> <span data-copy-label>Copy</span>
       </button>
 
       <button id="printBtn"
@@ -742,6 +797,121 @@
 </section>
 
 <!-- ========================= RELATED TOOLS ========================= -->
+
+  <!-- TOOLGUEST SEO / AEO CONTENT -->
+  <section class="tool-seo-content" id="guide" aria-labelledby="guide-h">
+    <div class="seo-block">
+      <span class="seo-eyebrow">The invoicing handbook</span>
+      <h2 id="guide-h">Free invoice generator that turns a browser into a billing desk</h2>
+      <p>An invoice is more than a request for payment. It is a legal record, a cash-flow tool and a piece of your brand, and a badly built one delays the money you are owed. This free invoice generator builds a clean, professional invoice in under a minute: add your business details, the client's, the line items, tax and any discount, and download a crisp PDF ready to send.</p>
+      <p>Three templates cover the common cases, from a minimal modern layout to a corporate blue and a bold dark option. Tax and discount maths is handled for you, line totals update as you type, and your logo can be dropped in to keep the invoice on brand. Everything is generated locally, so the PDF is produced by your browser rather than downloaded from a server.</p>
+      <p>Because nothing is uploaded, the client names, addresses, rates and amounts on the invoice never leave your device. Freelancers billing a confidential client, agencies invoicing under an NDA and contractors handling personal data can all bill with confidence.</p>
+    </div>
+    <div class="seo-block">
+      <div class="seo-aeo">
+        <span class="seo-aeo-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.4 5.4 1.9-5.4 1.9L12 17.6l-1.9-5.4L4.7 10.3l5.4-1.9Z"/></svg>Quick answer</span>
+        <p>An invoice generator creates a professional PDF invoice in the browser. ToolGuest offers three templates, automatic tax and discount calculation, logo upload and instant PDF export, with all data kept on your device. It is free, needs no signup and carries no ads or tracking.</p>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Why it matters</span>
+      <h2>Why a clean invoice gets you paid faster</h2>
+      <p>A confusing invoice is an excuse to delay. When a client cannot find the total, the due date or the payment details, the invoice lands in a pile and waits. A well-structured invoice with a clear header, itemised lines, an obvious total and a prominent due date removes every reason to hesitate.</p>
+      <p>Getting the numbers right protects both sides. Tax must be applied correctly, discounts must be shown transparently and line totals must add up. Manual arithmetic invites errors that either shortchange you or annoy the client. A generator that calculates tax and discount automatically removes that risk.</p>
+      <p>Privacy and ownership matter as much as presentation. Many online invoicing services store your client list and your rates on their servers, sometimes as the price of a free tier. Generating the PDF locally means your billing data never becomes someone else's asset, and the document carries no third-party watermark.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <h3>Three professional templates</h3>
+          <p>Choose minimal, corporate or bold dark layouts and switch between them without re-entering a single field.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Automatic tax and discount</h3>
+          <p>Percentage or flat discounts and configurable tax rates are calculated for you, with the breakdown shown clearly.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Your logo, your brand</h3>
+          <p>Drop in a logo and the invoice carries your identity rather than a generic layout.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Instant PDF export</h3>
+          <p>Download a crisp, print-ready PDF the moment the numbers are right, with no email step or account.</p>
+        </div>
+        <div class="seo-card">
+          <h3>No watermark, ever</h3>
+          <p>The exported PDF is clean, with no branding from the tool forced onto your document.</p>
+        </div>
+        <div class="seo-card">
+          <h3>100% client-side</h3>
+          <p>Your client details and rates are processed locally and never uploaded, stored or logged.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Head to head</span>
+      <h2>ToolGuest vs. hosted invoicing services</h2>
+      <p>A clean PDF without the account, the subscription or the stored client list.</p>
+      <div class="seo-tablewrap">
+        <table class="seo-table">
+          <thead><tr><th scope="col">Capability</th><th scope="col">Legacy online tools</th><th scope="col">ToolGuest</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Account required</th><td class="no">Yes, to save or export</td><td class="yes">None</td></tr>
+            <tr><th scope="row">Watermark on free tier</th><td class="no">Common</td><td class="yes">Never</td></tr>
+            <tr><th scope="row">Client data stored on servers</th><td class="no">Usually</td><td class="yes">Never leaves device</td></tr>
+            <tr><th scope="row">Number of templates</th><td class="no">Locked behind a plan</td><td class="yes">Three, free</td></tr>
+            <tr><th scope="row">Tax and discount maths</th><td class="no">Sometimes manual</td><td class="yes">Automatic</td></tr>
+            <tr><th scope="row">Advertising</th><td class="no">Upsells and banners</td><td class="yes">Zero, ever</td></tr>
+            <tr><th scope="row">Offline capability</th><td class="no">Needs a connection</td><td class="yes">Works offline</td></tr>
+            <tr><th scope="row">Signup or cookies</th><td class="no">Third-party trackers</td><td class="yes">None</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Built for Tier-1 teams</span>
+      <h2>Used by freelancers in the USA, UK, Germany, Canada, Australia and Spain</h2>
+      <p>One English page serves every Tier-1 market, so a contractor in Austin and one in Amsterdam invoice the same way.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <span class="seo-city">Austin &middot; United States</span>
+          <p>Freelancers invoice clients with a clean PDF and no monthly subscription.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">London &middot; United Kingdom</span>
+          <p>Sole traders bill under an NDA without sending client data to a third party.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Berlin &middot; Germany</span>
+          <p>Contractors itemise services with correct tax and discount breakdowns.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Toronto &middot; Canada</span>
+          <p>Consultants produce branded invoices in minutes for each new project.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Sydney &middot; Australia</span>
+          <p>Small agencies generate invoices without committing to a billing platform.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Madrid &middot; Spain</span>
+          <p>Designers add a logo and export a print-ready PDF for every client.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">FAQ</span>
+      <h2>Invoice generator questions, answered</h2>
+      <div class="seo-faq">
+        <details><summary>How do I create an invoice?</summary><p>Enter your business details and the client's, add each line item with a description, quantity and rate, apply any tax or discount, then download the PDF. The totals update as you type.</p></details>
+        <details><summary>Is the invoice legally valid?</summary><p>The generator produces a standard invoice document. Whether a particular format is legally sufficient depends on your jurisdiction and the requirements of your client, so check local rules for fields such as tax registration numbers.</p></details>
+        <details><summary>Can I add my logo?</summary><p>Yes. Upload a logo and it appears on the invoice, keeping the document on brand.</p></details>
+        <details><summary>Does it calculate tax and discounts?</summary><p>Yes. You can set a tax rate and apply either a percentage or a flat discount, and the tool shows the breakdown and the final total automatically.</p></details>
+        <details><summary>Is my client data stored?</summary><p>No. Everything is processed in your browser and the PDF is generated locally. Your client names, addresses and rates are never uploaded or logged.</p></details>
+        <details><summary>Can I edit an invoice after downloading?</summary><p>Yes. Adjust any field and export a fresh PDF. There is no lock-in and no account to update.</p></details>
+        <details><summary>Does the PDF carry a watermark?</summary><p>No. The exported PDF is clean and unbranded, with nothing forced onto your document.</p></details>
+        <details><summary>Is the tool free?</summary><p>Yes. It is completely free, needs no signup and carries no ads or tracking.</p></details>
+      </div>
+    </div>
+  </section>
 
 <!-- TF-RELATED -->
 <section class="tf-related" aria-label="Related tools">
@@ -1451,6 +1621,53 @@ function downloadBackup() {
   }
 }
 
+/* -------------------------------- clipboard ------------------------------ */
+function invoiceAsText() {
+  const t = totals();
+  const money = (n) => {
+    try { return new Intl.NumberFormat(undefined, { style: 'currency', currency: state.currency || 'GBP' }).format(Number(n) || 0); }
+    catch (_) { return String(n); }
+  };
+  const lines = [];
+  lines.push(`INVOICE ${state.meta.number || ''}`.trim());
+  if (state.meta.issueDate) lines.push(`Issued: ${state.meta.issueDate}`);
+  if (state.meta.dueDate) lines.push(`Due: ${state.meta.dueDate}`);
+  lines.push('');
+  if (state.business?.name) lines.push(`From: ${state.business.name}`);
+  if (state.client?.name) lines.push(`Bill to: ${state.client.name}`);
+  lines.push('');
+  (state.items || []).forEach((it) => {
+    if (!it || (!it.description && !it.qty)) return;
+    const qty = Number(it.qty) || 0;
+    const rate = Number(it.rate) || 0;
+    lines.push(`${it.description || 'Item'} | Qty ${qty} | ${money(rate)} | ${money(qty * rate)}`);
+  });
+  lines.push('');
+  lines.push(`Subtotal: ${money(t.sub)}`);
+  if (t.disc) lines.push(`Discount: -${money(t.disc)}`);
+  if (t.tax) lines.push(`Tax (${state.taxRate || 0}%): ${money(t.tax)}`);
+  lines.push(`Total: ${money(t.total)}`);
+  return lines.join('\n');
+}
+
+async function copyInvoice() {
+  const text = invoiceAsText();
+  const label = document.querySelector('#copyBtn [data-copy-label]');
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    }
+    toast('Invoice copied to clipboard');
+    if (label) { const old = label.textContent; label.textContent = 'Copied'; setTimeout(() => { label.textContent = old; }, 1600); }
+  } catch (_) {
+    toast('Could not copy invoice', 'error');
+  }
+}
+
 /* --------------------------------- logo ---------------------------------- */
 function handleLogoFile(file) {
   if (!file) return;
@@ -1608,6 +1825,7 @@ function bind() {
     handlePrint();
   });
   document.getElementById('backupBtn')?.addEventListener('click', downloadBackup);
+  document.getElementById('copyBtn')?.addEventListener('click', copyInvoice);
 
   /* logo */
   document.getElementById('logoInput')?.addEventListener('change', (e) => {

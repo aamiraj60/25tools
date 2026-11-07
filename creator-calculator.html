@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
+<script>(function(){try{if(localStorage.getItem('tg-theme')==='light')document.documentElement.classList.add('light');}catch(e){}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ToolGuest — Free Creator Earnings Calculator</title>
@@ -182,7 +183,89 @@
     #toast.show { transform: translateY(0); opacity: 1; }
 
     .number-flip { transition: color 0.15s; }
-  </style>
+  
+
+    /* ---------- LIGHT THEME ---------- */
+    html.light body { background: #f5f7fb; color: #1e293b; }
+    html.light body::before { background: radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 70%); }
+    html.light body::after { background: radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 70%); }
+    html.light .glass-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,250,252,0.9));
+      border: 1px solid rgba(15,23,42,0.08);
+      box-shadow: 0 20px 40px -20px rgba(15,23,42,0.18), inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+    html.light .glass-panel {
+      background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(248,250,252,0.85));
+      border: 1px solid rgba(15,23,42,0.07);
+      box-shadow: 0 12px 30px -18px rgba(15,23,42,0.15), inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+    html.light .text-white { color: #0f172a !important; }
+    html.light .text-gray-200 { color: #1e293b !important; }
+    html.light .text-gray-300 { color: #334155 !important; }
+    html.light .text-gray-400 { color: #475569 !important; }
+    html.light .text-gray-500 { color: #64748b !important; }
+    html.light .text-gray-600 { color: #94a3b8 !important; }
+    html.light .border-white\/10 { border-color: rgba(15,23,42,0.10) !important; }
+    html.light .border-white\/5 { border-color: rgba(15,23,42,0.06) !important; }
+    html.light .bg-white\/5 { background-color: rgba(15,23,42,0.03) !important; }
+    html.light .gradient-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #4338ca 45%, #7c3aed 75%, #6366f1 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    html.light .gradient-num { background: linear-gradient(135deg, #4338ca, #7c3aed 50%, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    html.light .glow-text { text-shadow: none; }
+    html.light ::-webkit-scrollbar-track { background: #eef2f7; }
+
+  /* ---- ToolGuest SEO / AEO content system ---- */
+  .tool-seo-content { max-width: 1120px; margin: 0 auto; padding: 0 20px 72px; }
+  .tool-seo-content .seo-block { margin-top: 56px; }
+  .tool-seo-content .seo-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #6366f1; margin-bottom: .6rem; }
+  html.dark .tool-seo-content .seo-eyebrow, html[data-theme="dark"] .tool-seo-content .seo-eyebrow, body.dark .tool-seo-content .seo-eyebrow { color: #818cf8; }
+  .tool-seo-content h2 { font-size: clamp(1.35rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -.028em; line-height: 1.16; }
+  .tool-seo-content h3 { font-size: 1.02rem; font-weight: 700; letter-spacing: -.015em; }
+  .tool-seo-content p { margin-top: .85rem; font-size: .975rem; line-height: 1.78; color: #52525b; }
+  html.dark .tool-seo-content p, html[data-theme="dark"] .tool-seo-content p, body.dark .tool-seo-content p { color: #a1a1aa; }
+  .tool-seo-content strong { color: #18181b; font-weight: 650; }
+  html.dark .tool-seo-content strong, html[data-theme="dark"] .tool-seo-content strong, body.dark .tool-seo-content strong { color: #f4f4f5; }
+  .tool-seo-content code { font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: .85em; background: rgba(99,102,241,.10); color: #4f46e5; padding: .12em .42em; border-radius: .4em; border: 1px solid rgba(99,102,241,.18); word-break: break-word; }
+  html.dark .tool-seo-content code, html[data-theme="dark"] .tool-seo-content code, body.dark .tool-seo-content code { background: rgba(129,140,248,.14); color: #c7d2fe; border-color: rgba(129,140,248,.24); }
+  .tool-seo-content a { color: #4f46e5; text-decoration: none; border-bottom: 1px solid rgba(99,102,241,.35); }
+  html.dark .tool-seo-content a, html[data-theme="dark"] .tool-seo-content a, body.dark .tool-seo-content a { color: #a5b4fc; }
+  .seo-grid { display: grid; gap: 16px; margin-top: 22px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .seo-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .seo-grid.cols-3 { grid-template-columns: repeat(3, 1fr); } }
+  .seo-card { border: 1px solid rgba(24,24,27,.10); border-radius: 18px; padding: 20px; background: rgba(255,255,255,.65); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .seo-card:hover { transform: translateY(-3px); border-color: rgba(99,102,241,.4); box-shadow: 0 18px 40px -22px rgba(79,70,229,.5); }
+  html.dark .seo-card, html[data-theme="dark"] .seo-card, body.dark .seo-card { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-card .seo-city { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #0891b2; }
+  html.dark .seo-card .seo-city, html[data-theme="dark"] .seo-card .seo-city, body.dark .seo-card .seo-city { color: #22d3ee; }
+  .seo-card p { margin-top: .5rem; font-size: .9rem; }
+  .seo-aeo { border: 1px solid rgba(99,102,241,.3); border-radius: 18px; padding: 22px 24px; background: linear-gradient(135deg, rgba(99,102,241,.10), rgba(34,211,238,.06)); }
+  .seo-aeo-label { display: inline-flex; align-items: center; gap: .4rem; font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #4f46e5; }
+  html.dark .seo-aeo-label, html[data-theme="dark"] .seo-aeo-label, body.dark .seo-aeo-label { color: #a5b4fc; }
+  .seo-aeo p { margin-top: .6rem; font-size: 1.02rem; color: #3f3f46; }
+  html.dark .seo-aeo p, html[data-theme="dark"] .seo-aeo p, body.dark .seo-aeo p { color: #d4d4d8; }
+  .seo-tablewrap { margin-top: 24px; overflow-x: auto; border: 1px solid rgba(24,24,27,.10); border-radius: 18px; background: rgba(255,255,255,.6); }
+  html.dark .seo-tablewrap, html[data-theme="dark"] .seo-tablewrap, body.dark .seo-tablewrap { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: .9rem; text-align: left; }
+  .seo-table th, .seo-table td { padding: 14px 18px; border-bottom: 1px solid rgba(24,24,27,.08); }
+  html.dark .seo-table th, html.dark .seo-table td, html[data-theme="dark"] .seo-table th, html[data-theme="dark"] .seo-table td, body.dark .seo-table th, body.dark .seo-table td { border-bottom-color: rgba(255,255,255,.07); }
+  .seo-table tbody tr:last-child th, .seo-table tbody tr:last-child td { border-bottom: 0; }
+  .seo-table thead th { font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #71717a; }
+  .seo-table th[scope="row"] { font-weight: 600; color: #27272a; }
+  html.dark .seo-table th[scope="row"], html[data-theme="dark"] .seo-table th[scope="row"], body.dark .seo-table th[scope="row"] { color: #e4e4e7; }
+  .seo-table .yes { color: #059669; font-weight: 650; }
+  html.dark .seo-table .yes, html[data-theme="dark"] .seo-table .yes, body.dark .seo-table .yes { color: #34d399; }
+  .seo-table .no { color: #71717a; }
+  .seo-faq { margin-top: 22px; display: grid; gap: 12px; }
+  .seo-faq details { border: 1px solid rgba(24,24,27,.10); border-radius: 16px; padding: 0 20px; background: rgba(255,255,255,.6); }
+  html.dark .seo-faq details, html[data-theme="dark"] .seo-faq details, body.dark .seo-faq details { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-faq summary { cursor: pointer; padding: 16px 0; font-weight: 650; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .seo-faq summary::-webkit-details-marker { display: none; }
+  .seo-faq summary::after { content: "+"; font-size: 1.25rem; font-weight: 400; color: #a1a1aa; }
+  .seo-faq details[open] summary::after { content: "\2013"; }
+  .seo-faq p { padding-bottom: 16px; margin-top: 0; }
+</style>
 <link rel="stylesheet" href="/assets/related.css">
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
@@ -236,9 +319,15 @@
         <i data-lucide="chevron-right" class="w-3 h-3 text-gray-600"></i>
         <span class="text-indigo-400 font-medium">Creator Social Calculator</span>
       </div>
-      <div class="flex items-center gap-2 bg-indigo-500/10 px-3 py-1.5 rounded-full border border-indigo-400/20">
-        <i data-lucide="globe" class="w-3.5 h-3.5 text-indigo-400"></i>
-        <span class="text-xs font-medium text-indigo-200">USA · UK · DE</span>
+      <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 bg-indigo-500/10 px-3 py-1.5 rounded-full border border-indigo-400/20">
+          <i data-lucide="globe" class="w-3.5 h-3.5 text-indigo-400"></i>
+          <span class="text-xs font-medium text-indigo-200">USA · UK · DE</span>
+        </div>
+        <button id="themeBtn" type="button" aria-label="Toggle light and dark theme" title="Toggle theme" class="grid h-8 w-8 place-items-center rounded-lg border border-white/10 text-gray-300 hover:bg-white/5 transition">
+          <i data-lucide="sun" class="w-4 h-4" data-theme-icon="sun" style="display:none"></i>
+          <i data-lucide="moon" class="w-4 h-4" data-theme-icon="moon"></i>
+        </button>
       </div>
     </div>
 
@@ -637,6 +726,121 @@
     
   
 
+  <!-- TOOLGUEST SEO / AEO CONTENT -->
+  <section class="tool-seo-content" id="guide" aria-labelledby="guide-h">
+    <div class="seo-block">
+      <span class="seo-eyebrow">The creator earnings handbook</span>
+      <h2 id="guide-h">Creator earnings calculator for YouTube, TikTok, Instagram and Twitch</h2>
+      <p>Creator income is never a single number. It is a stack: advertising revenue share, memberships, Super Thanks, brand sponsorships, affiliate commissions and merchandise, each with its own rate and its own seasonality. A creator earnings calculator turns that stack into an estimate you can actually plan around, so you can answer the two questions every creator asks: what might this month pay, and what should I charge for a sponsorship?</p>
+      <p>This free calculator models YouTube, TikTok, Instagram and Twitch together. Move the monthly views, subscriber and follower sliders and watch estimated ad revenue, effective RPM and engagement health update in real time. Enter your niche and audience geography to see how sponsorship rates change, then check the health score to spot whether your engagement rate is healthy for your follower count.</p>
+      <p>Every estimate is computed in your browser with transparent, published assumptions. There is no login, no connected account and no upload, so your channel statistics and revenue figures stay entirely on your device.</p>
+    </div>
+    <div class="seo-block">
+      <div class="seo-aeo">
+        <span class="seo-aeo-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.4 5.4 1.9-5.4 1.9L12 17.6l-1.9-5.4L4.7 10.3l5.4-1.9Z"/></svg>Quick answer</span>
+        <p>A creator earnings calculator estimates income from advertising RPM, memberships and sponsorships across YouTube, TikTok, Instagram and Twitch. ToolGuest models monthly views, subscribers and niche to project revenue, engagement health and brand-deal rates entirely in the browser, free and private.</p>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Why it matters</span>
+      <h2>Why an estimate beats a guess when pricing your work</h2>
+      <p>Brands price sponsorships against reach and engagement, not against how hard you worked. If you cannot quote a defensible rate, you anchor low and stay there. A calculator gives you a range grounded in the same inputs a media buyer uses: views per video, audience size, niche and geography. Walk into the negotiation with a number you can justify and you keep the value you created.</p>
+      <p>Ad revenue is equally misunderstood. RPM, the revenue per thousand views after YouTube's cut, varies wildly by topic. Finance and technology channels routinely earn several times what entertainment channels earn for the same view count, because advertisers pay more to reach that audience. Modelling RPM by niche stops you from extrapolating a viral hit into a permanent income forecast.</p>
+      <p>Engagement is the leading indicator that sits between reach and revenue. A channel with a million followers and a two percent engagement rate will often earn less than a channel with two hundred thousand followers and an eight percent rate, because the smaller audience actually acts. Tracking engagement health next to revenue shows you which lever to pull next.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <h3>Four platforms, one model</h3>
+          <p>Estimate YouTube, TikTok, Instagram and Twitch earnings side by side instead of guessing at each in isolation.</p>
+        </div>
+        <div class="seo-card">
+          <h3>RPM by niche</h3>
+          <p>Apply realistic revenue-per-thousand figures for finance, tech, gaming, beauty, education and lifestyle topics.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Sponsorship rate range</h3>
+          <p>Get a defensible brand-deal price band derived from your reach, niche and audience geography.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Engagement health score</h3>
+          <p>See whether your engagement rate is strong, average or at risk for your follower count before it costs you a deal.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Real-time sliders</h3>
+          <p>Drag views, subscribers and posting frequency and watch every figure recalculate instantly, with no submit button.</p>
+        </div>
+        <div class="seo-card">
+          <h3>100% private</h3>
+          <p>Your channel figures never leave the tab. No account, no API connection, no data upload.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Head to head</span>
+      <h2>ToolGuest vs. legacy creator revenue calculators</h2>
+      <p>Transparent assumptions and no signup, versus opaque tools that want your channel login first.</p>
+      <div class="seo-tablewrap">
+        <table class="seo-table">
+          <thead><tr><th scope="col">Capability</th><th scope="col">Legacy online tools</th><th scope="col">ToolGuest</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Platforms modelled</th><td class="no">Usually one</td><td class="yes">YouTube, TikTok, Instagram, Twitch</td></tr>
+            <tr><th scope="row">RPM by niche</th><td class="no">Single flat rate</td><td class="yes">Topic-specific ranges</td></tr>
+            <tr><th scope="row">Sponsorship rate estimate</th><td class="no">Rarely included</td><td class="yes">Included</td></tr>
+            <tr><th scope="row">Engagement health scoring</th><td class="no">Not offered</td><td class="yes">Built in</td></tr>
+            <tr><th scope="row">Account connection required</th><td class="no">Often demanded</td><td class="yes">Never</td></tr>
+            <tr><th scope="row">Advertising</th><td class="no">Banners and interstitials</td><td class="yes">Zero, ever</td></tr>
+            <tr><th scope="row">Server data uploads</th><td class="no">Channel data sent to servers</td><td class="yes">100% local</td></tr>
+            <tr><th scope="row">Signup or cookies</th><td class="no">Third-party trackers</td><td class="yes">None</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Built for Tier-1 teams</span>
+      <h2>Used by creators across the USA, UK, Germany, Canada, Australia and Spain</h2>
+      <p>Creator economics differ by market, from CPM rates to sponsorship norms. This page serves every Tier-1 market with a single fast, private calculator.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <span class="seo-city">Los Angeles &middot; United States</span>
+          <p>Creators and their managers price brand integrations against reach and engagement before a call.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">London &middot; United Kingdom</span>
+          <p>Full-time creators model a mixed income stack across YouTube, TikTok and Instagram.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Berlin &middot; Germany</span>
+          <p>Gaming and technology channels estimate ad revenue with niche-accurate RPM assumptions.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Toronto &middot; Canada</span>
+          <p>Podcasters and video creators forecast monthly income without exposing channel analytics.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Melbourne &middot; Australia</span>
+          <p>Creators entering their first sponsorship check a defensible rate before replying to a brand.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Barcelona &middot; Spain</span>
+          <p>Multi-platform creators compare earnings across four networks in one view.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">FAQ</span>
+      <h2>Creator earnings questions, answered</h2>
+      <div class="seo-faq">
+        <details><summary>How accurate is the estimate?</summary><p>It is a planning range, not a promise. Real earnings depend on watch time, ad rates, seasonality and your exact audience. The calculator applies transparent, published assumptions so you can see the reasoning and adjust the inputs to match your own analytics.</p></details>
+        <details><summary>What is RPM and how is it different from CPM?</summary><p>CPM is what an advertiser pays per thousand impressions. RPM is what you keep per thousand views after the platform's share and after accounting for views that showed no ad. RPM is the number that matters to a creator, and it varies widely by topic.</p></details>
+        <details><summary>How much should I charge for a sponsorship?</summary><p>A common starting point is a rate tied to your average views per video rather than your follower count. The calculator produces a range based on reach, niche and audience geography that you can use as an anchor in negotiation.</p></details>
+        <details><summary>Which platforms are supported?</summary><p>The model covers YouTube, TikTok, Instagram and Twitch, and you can compare them side by side to see how the same audience performs on each.</p></details>
+        <details><summary>Does it need access to my channel?</summary><p>No. There is no OAuth login and no API connection. You enter approximate figures yourself, and nothing is transmitted to any server.</p></details>
+        <details><summary>Is my data stored?</summary><p>No. Every calculation happens in your browser and disappears when you close the tab. There is no account and no logging.</p></details>
+        <details><summary>Why does niche change the estimate so much?</summary><p>Advertisers pay different prices to reach different audiences. Finance, software and business topics attract high-value advertisers, while general entertainment attracts lower bids, so the same view count produces very different revenue.</p></details>
+        <details><summary>Is the calculator free?</summary><p>Yes. It is free to use, with no account, no ads and no tracking.</p></details>
+      </div>
+    </div>
+  </section>
+
 <!-- TF-RELATED -->
 <section class="tf-related" aria-label="Related tools">
   <div class="tf-related-glow" aria-hidden="true">
@@ -739,7 +943,7 @@
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
+  "@type": ["WebApplication", "SoftwareApplication"],
   "name": "ToolGuest — Free Social Media Earnings Calculator",
   "url": "https://toolguest.com/creator-calculator",
   "description": "Estimate YouTube, TikTok, Instagram, Twitch earnings & engagement health. Free, ad-free, privacy-first.",
@@ -1067,5 +1271,24 @@ Generated with ToolGuest — toolguest.app`;
   </script>
   <script src="/assets/rating-widget.js" defer></script>
 <script src="/assets/related.js" defer></script>
+<script>
+(function(){
+  var btn=document.getElementById('themeBtn'); if(!btn) return;
+  function icons(){ return { sun: btn.querySelector('[data-theme-icon="sun"]'), moon: btn.querySelector('[data-theme-icon="moon"]') }; }
+  function sync(){
+    var light=document.documentElement.classList.contains('light');
+    var ic=icons();
+    if(ic.sun) ic.sun.style.display=light?'block':'none';
+    if(ic.moon) ic.moon.style.display=light?'none':'block';
+  }
+  btn.addEventListener('click',function(){
+    var light=document.documentElement.classList.toggle('light');
+    try{ localStorage.setItem('tg-theme', light?'light':'dark'); }catch(e){}
+    sync();
+  });
+  if(window.lucide && lucide.createIcons) lucide.createIcons();
+  sync();
+})();
+</script>
 </body>
 </html>
