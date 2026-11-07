@@ -33,23 +33,6 @@
 
 <link href="/assets/fonts.css" rel="stylesheet">
 
-<script src="/assets/tailwind.js"></script>
-<script>
-  tailwind.config = {
-    darkMode: 'class',
-    theme: {
-      extend: {
-        fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'] },
-        keyframes: {
-          toastIn: { '0%': { opacity: 0, transform: 'translateY(14px) scale(.96)' }, '100%': { opacity: 1, transform: 'translateY(0) scale(1)' } },
-          floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } }
-        },
-        animation: { toastIn: 'toastIn .28s cubic-bezier(.22,1,.36,1) forwards', floaty: 'floaty 6s ease-in-out infinite' }
-      }
-    }
-  }
-</script>
-
 <style>
   :root { --bg:#ffffff; --fg:#09090b; }
   html.dark { --bg:#08080a; --fg:#fafafa; }
@@ -272,6 +255,7 @@
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="stylesheet" href="/assets/logo.css" />
 <meta name="theme-color" content="#08080a">
+  <link rel="stylesheet" href="/assets/tailwind.css">
 </head>
 
 <body class="font-sans antialiased selection:bg-indigo-500">

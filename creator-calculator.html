@@ -29,8 +29,8 @@
   <link rel="alternate" hreflang="en" href="https://toolguest.com/creator-calculator" />
   <link rel="alternate" hreflang="x-default" href="https://toolguest.com/creator-calculator" />
   <meta name="description" content="Estimate YouTube, TikTok, Instagram, Twitch earnings with real-time sliders. Free, ad-free, privacy-first creator calculator.">
-  <script src="/assets/tailwind.js"></script>
-  <script src="/assets/lucide.js"></script>
+  
+  <script src="/assets/lucide.js" defer></script>
   <link href="/assets/fonts.css" rel="stylesheet">
   <style>
     * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
@@ -301,6 +301,7 @@
 </script>
 <link rel="stylesheet" href="/assets/logo.css" />
 <meta name="theme-color" content="#08080a">
+  <link rel="stylesheet" href="/assets/tailwind.css">
 </head>
 <body class="text-gray-200 antialiased selection:bg-indigo-500/40 min-h-screen">
 
@@ -723,8 +724,6 @@
     </section>
 
     <!-- RELATED TOOLS -->
-    
-  
 
   <!-- TOOLGUEST SEO / AEO CONTENT -->
   <section class="tool-seo-content" id="guide" aria-labelledby="guide-h">
@@ -1032,7 +1031,7 @@
 
   <script>
     // ---------- Init icons ----------
-    lucide.createIcons();
+if(window.lucide)lucide.createIcons();else document.addEventListener('DOMContentLoaded',function(){lucide.createIcons()},{once:true});
 
     // ---------- DOM refs ----------
     const followersSlider = document.getElementById('followers-slider');

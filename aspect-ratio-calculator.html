@@ -65,7 +65,7 @@
 </script>
   <meta name="description" content="Free aspect ratio calculator: find dimensions, simplify ratios and preview proportions instantly. Live video preview and 4K presets.">
   <link href="/assets/fonts.css" rel="stylesheet">
-  <script src="/assets/lucide.js"></script>
+  <script src="/assets/lucide.js" defer></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -759,7 +759,7 @@
 <script>
     (function() {
       // Initialize Icons
-      lucide.createIcons();
+if(window.lucide)lucide.createIcons();else document.addEventListener('DOMContentLoaded',function(){lucide.createIcons()},{once:true});
 
       // --- Dark Mode ---
       const themeToggle = document.getElementById('themeToggle');

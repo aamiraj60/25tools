@@ -78,10 +78,31 @@ Every page is self-contained HTML that pulls a shared bundle:
 
 ```html
 <link rel="stylesheet" href="/assets/fonts.css" />
-<script src="/assets/tailwind.js"></script>
+<link rel="stylesheet" href="/assets/tailwind.css" />
 <script src="/assets/rating-widget.js" defer></script>
 <script src="/assets/related.js" defer></script>
 ```
+
+`assets/tailwind.css` is the precompiled, purged Tailwind build. It replaces the
+Tailwind Play CDN (`assets/tailwind.js`, now deleted) which shipped a ~407 KB
+runtime JIT compiler that had to download, compile and inject styles before the
+first paint. The static sheet is ~110 KB (~18 KB gzipped) and is a plain
+stylesheet, so it renders immediately.
+
+**Put the `tailwind.css` link at the very end of `<head>`.** The Play CDN
+appended its generated `<style>` to the end of `<head>`, so page-level `<style>`
+blocks appear *before* it and win specificity ties against Tailwind utilities
+(e.g. a page's `.pill { display: inline-flex }` must beat Tailwind's
+`.hidden { display: none }`). A link earlier in `<head>` reverses that order and
+breaks such pages.
+
+Rebuild the stylesheet after adding or renaming any utility class — a class that
+is not in the build simply does not exist:
+
+```bash
+python3 tools/build-css.py   # regenerates assets/tailwind.css
+```
+
 
 - `vercel.json` sets `cleanUrls: true`, so pages are served at `/<slug>`, not
   `/<slug>.html`. **Link with clean URLs** (`href="/hash-generator"`), never
@@ -93,6 +114,12 @@ Every page is self-contained HTML that pulls a shared bundle:
 - `assets/fonts.css` holds one `@font-face` per family, weight and subset.
   Keep it deduplicated — repeated rules for the same family and weight are
   dead weight the browser still has to parse.
+- Third-party scripts (`lucide.js`, `jspdf`, `qr-code-styling`, the Markdown
+  engine) carry `defer` so they never block parsing. `defer` scripts execute
+  after the document is parsed but **before** `DOMContentLoaded`, in document
+  order. Any inline code that calls one of these libraries at parse time must
+  therefore guard the call — `if (window.lucide) lucide.createIcons();` — or move
+  it into a `DOMContentLoaded` handler. Otherwise it throws `X is not defined`.
 - `robots.txt` deliberately allows AI crawlers (GPTBot, OAI-SearchBot,
   PerplexityBot, ClaudeBot, Google-Extended, Bingbot, Applebot). Keep it that way.
 - `llms.txt` is a plain-text summary for answer engines.
