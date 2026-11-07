@@ -206,6 +206,56 @@
     * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
     html { scroll-behavior: auto; }
   }
+
+  /* ---- ToolGuest SEO / AEO content system ---- */
+  .tool-seo-content { max-width: 1120px; margin: 0 auto; padding: 0 20px 72px; }
+  .tool-seo-content .seo-block { margin-top: 56px; }
+  .tool-seo-content .seo-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #6366f1; margin-bottom: .6rem; }
+  html.dark .tool-seo-content .seo-eyebrow, html[data-theme="dark"] .tool-seo-content .seo-eyebrow, body.dark .tool-seo-content .seo-eyebrow { color: #818cf8; }
+  .tool-seo-content h2 { font-size: clamp(1.35rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -.028em; line-height: 1.16; }
+  .tool-seo-content h3 { font-size: 1.02rem; font-weight: 700; letter-spacing: -.015em; }
+  .tool-seo-content p { margin-top: .85rem; font-size: .975rem; line-height: 1.78; color: #52525b; }
+  html.dark .tool-seo-content p, html[data-theme="dark"] .tool-seo-content p, body.dark .tool-seo-content p { color: #a1a1aa; }
+  .tool-seo-content strong { color: #18181b; font-weight: 650; }
+  html.dark .tool-seo-content strong, html[data-theme="dark"] .tool-seo-content strong, body.dark .tool-seo-content strong { color: #f4f4f5; }
+  .tool-seo-content code { font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: .85em; background: rgba(99,102,241,.10); color: #4f46e5; padding: .12em .42em; border-radius: .4em; border: 1px solid rgba(99,102,241,.18); word-break: break-word; }
+  html.dark .tool-seo-content code, html[data-theme="dark"] .tool-seo-content code, body.dark .tool-seo-content code { background: rgba(129,140,248,.14); color: #c7d2fe; border-color: rgba(129,140,248,.24); }
+  .tool-seo-content a { color: #4f46e5; text-decoration: none; border-bottom: 1px solid rgba(99,102,241,.35); }
+  html.dark .tool-seo-content a, html[data-theme="dark"] .tool-seo-content a, body.dark .tool-seo-content a { color: #a5b4fc; }
+  .seo-grid { display: grid; gap: 16px; margin-top: 22px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .seo-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .seo-grid.cols-3 { grid-template-columns: repeat(3, 1fr); } }
+  .seo-card { border: 1px solid rgba(24,24,27,.10); border-radius: 18px; padding: 20px; background: rgba(255,255,255,.65); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .seo-card:hover { transform: translateY(-3px); border-color: rgba(99,102,241,.4); box-shadow: 0 18px 40px -22px rgba(79,70,229,.5); }
+  html.dark .seo-card, html[data-theme="dark"] .seo-card, body.dark .seo-card { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-card .seo-city { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #0891b2; }
+  html.dark .seo-card .seo-city, html[data-theme="dark"] .seo-card .seo-city, body.dark .seo-card .seo-city { color: #22d3ee; }
+  .seo-card p { margin-top: .5rem; font-size: .9rem; }
+  .seo-aeo { border: 1px solid rgba(99,102,241,.3); border-radius: 18px; padding: 22px 24px; background: linear-gradient(135deg, rgba(99,102,241,.10), rgba(34,211,238,.06)); }
+  .seo-aeo-label { display: inline-flex; align-items: center; gap: .4rem; font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #4f46e5; }
+  html.dark .seo-aeo-label, html[data-theme="dark"] .seo-aeo-label, body.dark .seo-aeo-label { color: #a5b4fc; }
+  .seo-aeo p { margin-top: .6rem; font-size: 1.02rem; color: #3f3f46; }
+  html.dark .seo-aeo p, html[data-theme="dark"] .seo-aeo p, body.dark .seo-aeo p { color: #d4d4d8; }
+  .seo-tablewrap { margin-top: 24px; overflow-x: auto; border: 1px solid rgba(24,24,27,.10); border-radius: 18px; background: rgba(255,255,255,.6); }
+  html.dark .seo-tablewrap, html[data-theme="dark"] .seo-tablewrap, body.dark .seo-tablewrap { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: .9rem; text-align: left; }
+  .seo-table th, .seo-table td { padding: 14px 18px; border-bottom: 1px solid rgba(24,24,27,.08); }
+  html.dark .seo-table th, html.dark .seo-table td, html[data-theme="dark"] .seo-table th, html[data-theme="dark"] .seo-table td, body.dark .seo-table th, body.dark .seo-table td { border-bottom-color: rgba(255,255,255,.07); }
+  .seo-table tbody tr:last-child th, .seo-table tbody tr:last-child td { border-bottom: 0; }
+  .seo-table thead th { font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #71717a; }
+  .seo-table th[scope="row"] { font-weight: 600; color: #27272a; }
+  html.dark .seo-table th[scope="row"], html[data-theme="dark"] .seo-table th[scope="row"], body.dark .seo-table th[scope="row"] { color: #e4e4e7; }
+  .seo-table .yes { color: #059669; font-weight: 650; }
+  html.dark .seo-table .yes, html[data-theme="dark"] .seo-table .yes, body.dark .seo-table .yes { color: #34d399; }
+  .seo-table .no { color: #71717a; }
+  .seo-faq { margin-top: 22px; display: grid; gap: 12px; }
+  .seo-faq details { border: 1px solid rgba(24,24,27,.10); border-radius: 16px; padding: 0 20px; background: rgba(255,255,255,.6); }
+  html.dark .seo-faq details, html[data-theme="dark"] .seo-faq details, body.dark .seo-faq details { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-faq summary { cursor: pointer; padding: 16px 0; font-weight: 650; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .seo-faq summary::-webkit-details-marker { display: none; }
+  .seo-faq summary::after { content: "+"; font-size: 1.25rem; font-weight: 400; color: #a1a1aa; }
+  .seo-faq details[open] summary::after { content: "\2013"; }
+  .seo-faq p { padding-bottom: 16px; margin-top: 0; }
 </style>
 <link rel="stylesheet" href="/assets/related.css">
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -606,6 +656,121 @@
             <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-500">Spot the difference between two texts</span>
           </span>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLGUEST SEO / AEO CONTENT -->
+  <section class="tool-seo-content" id="guide" aria-labelledby="guide-h">
+    <div class="seo-block">
+      <span class="seo-eyebrow">The JSON handbook</span>
+      <h2 id="guide-h">JSON formatter, validator and minifier for developers</h2>
+      <p>JSON is the lingua franca of modern software, carrying everything from API responses to configuration files and database records. It is also unforgiving: a single stray comma or an unescaped quote turns a perfectly good payload into a parse error. A JSON formatter cleans up messy JSON, and a JSON validator tells you exactly where it broke.</p>
+      <p>This free JSON formatter beautifies compact or minified JSON with proper indentation, validates it against the specification, and points to the precise line and column of any syntax error. It can minify JSON for transport, sort keys alphabetically for stable diffs, and collapse or expand nested objects so you can navigate large structures without losing your place.</p>
+      <p>The tool runs entirely in your browser with the native JSON parser, so your API keys, customer records and proprietary payloads are never uploaded. Paste a response, fix the error, copy the clean result, all without a round-trip to a server.</p>
+    </div>
+    <div class="seo-block">
+      <div class="seo-aeo">
+        <span class="seo-aeo-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.4 5.4 1.9-5.4 1.9L12 17.6l-1.9-5.4L4.7 10.3l5.4-1.9Z"/></svg>Quick answer</span>
+        <p>A JSON formatter beautifies, validates and minifies JSON data. ToolGuest indents nested structures, reports syntax errors with the exact line and column, sorts keys and minifies for transport, running 100% in the browser so payloads are never uploaded. It is free and private.</p>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Why it matters</span>
+      <h2>Why formatting and validation belong together</h2>
+      <p>Reading minified JSON is close to impossible. A single line of thousands of characters hides structure, nesting and the one value you actually need. Indentation restores the hierarchy at a glance, and collapsible nodes let you fold away the parts you are not interested in.</p>
+      <p>Validation catches problems before they reach production. A trailing comma, a missing brace or a smart quote pasted from a document will all break a parser, and the error message from a generic tool is often just a character offset. Reporting the line and column turns a frustrating hunt into a two-second fix.</p>
+      <p>Minification is the reverse trip. Once you are confident the JSON is valid, stripping whitespace shrinks the payload for transport or storage without changing its meaning. Doing both jobs in one tool means you never copy the data between applications and risk introducing a new error.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <h3>Beautify and indent</h3>
+          <p>Turn minified or messy JSON into clean, readable, properly nested output with configurable indentation.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Precise error location</h3>
+          <p>Invalid JSON is reported with the exact line and column, so you fix the fault rather than guess at it.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Minify for transport</h3>
+          <p>Strip whitespace to shrink a validated payload before you send or store it.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Sort keys for stable diffs</h3>
+          <p>Alphabetise object keys so two versions of the same structure compare cleanly.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Collapsible tree</h3>
+          <p>Fold and expand nested objects and arrays to navigate large payloads without losing your place.</p>
+        </div>
+        <div class="seo-card">
+          <h3>100% client-side</h3>
+          <p>Parsing uses the browser's native JSON engine. Your data is never uploaded, logged or stored.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Head to head</span>
+      <h2>ToolGuest vs. legacy JSON tools</h2>
+      <p>Accurate errors and a clean interface, without the ads or the upload.</p>
+      <div class="seo-tablewrap">
+        <table class="seo-table">
+          <thead><tr><th scope="col">Capability</th><th scope="col">Legacy online tools</th><th scope="col">ToolGuest</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Exact error line and column</th><td class="no">Vague or missing</td><td class="yes">Always shown</td></tr>
+            <tr><th scope="row">Minify as well as beautify</th><td class="no">Often one or the other</td><td class="yes">Both</td></tr>
+            <tr><th scope="row">Sort keys</th><td class="no">Rare</td><td class="yes">One click</td></tr>
+            <tr><th scope="row">Collapsible tree view</th><td class="no">Limited</td><td class="yes">Built in</td></tr>
+            <tr><th scope="row">Offline capability</th><td class="no">Needs a connection</td><td class="yes">Works offline</td></tr>
+            <tr><th scope="row">Advertising</th><td class="no">Banners and interstitials</td><td class="yes">Zero, ever</td></tr>
+            <tr><th scope="row">Server data uploads</th><td class="no">Payloads sent to servers</td><td class="yes">100% local</td></tr>
+            <tr><th scope="row">Signup or cookies</th><td class="no">Third-party trackers</td><td class="yes">None</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Built for Tier-1 teams</span>
+      <h2>Used by developers in the USA, UK, Germany, Canada, Australia and Spain</h2>
+      <p>One English page serves every Tier-1 market, so an engineer in Seattle and one in Dublin debug the same way.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <span class="seo-city">Seattle &middot; United States</span>
+          <p>Backend engineers inspect API responses without exposing production data.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">London &middot; United Kingdom</span>
+          <p>Teams validate configuration files before deployment to catch syntax slips.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Berlin &middot; Germany</span>
+          <p>Data engineers format large payloads and sort keys for reproducible diffs.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Toronto &middot; Canada</span>
+          <p>Developers minify validated JSON before sending it over the wire.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Sydney &middot; Australia</span>
+          <p>Mobile developers debug third-party API payloads locally.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Madrid &middot; Spain</span>
+          <p>Analysts pretty-print exported data for review and documentation.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">FAQ</span>
+      <h2>JSON formatter questions, answered</h2>
+      <div class="seo-faq">
+        <details><summary>What does a JSON formatter do?</summary><p>It takes compact or malformed JSON and rewrites it with readable indentation, while validating it against the specification and reporting any syntax error with its exact location.</p></details>
+        <details><summary>What is the difference between formatting and minifying?</summary><p>Formatting adds whitespace and line breaks to make JSON human-readable. Minifying removes that whitespace to make the payload as small as possible for transport or storage. Both preserve the data exactly.</p></details>
+        <details><summary>How does the validator find my error?</summary><p>It parses your input with the native JSON engine. When parsing fails, it reports the line and column where the parser stopped, which is almost always where the fault is.</p></details>
+        <details><summary>Can it sort keys alphabetically?</summary><p>Yes. Sorting keys produces a stable, predictable order that makes two versions of the same structure easier to compare in a diff.</p></details>
+        <details><summary>Is my JSON uploaded to a server?</summary><p>No. Parsing and formatting happen entirely in your browser. Your payloads, including any secrets or personal data they contain, are never transmitted or logged.</p></details>
+        <details><summary>Does it handle large files?</summary><p>Yes. There is no imposed limit, and the practical ceiling is your browser's available memory, which handles payloads far larger than typical API responses.</p></details>
+        <details><summary>Can it validate JSON with comments?</summary><p>Standard JSON does not permit comments, so a file containing them will be flagged. If you work with JSONC or JSON5, remove the comments or use a dedicated tool.</p></details>
+        <details><summary>Is the tool free?</summary><p>Yes. It is completely free, needs no account and carries no ads or tracking.</p></details>
       </div>
     </div>
   </section>

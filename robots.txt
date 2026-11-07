@@ -1,7 +1,28 @@
+# ToolGuest robots.txt — full crawling permission for search and AI answer engines.
+
 User-agent: *
 Allow: /
 
-# Explicitly welcome AI answer engines so the tool can be cited
+# Search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# AI answer engines and crawlers — explicitly welcomed so pages can be cited
 User-agent: GPTBot
 Allow: /
 
@@ -14,19 +35,28 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Perplexity-User
+Allow: /
+
 User-agent: ClaudeBot
 Allow: /
 
 User-agent: Claude-Web
 Allow: /
 
+User-agent: anthropic-ai
+Allow: /
+
 User-agent: Google-Extended
 Allow: /
 
-User-agent: Bingbot
+User-agent: Applebot-Extended
 Allow: /
 
-User-agent: Applebot
+User-agent: cohere-ai
+Allow: /
+
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://toolguest.com/sitemap.xml

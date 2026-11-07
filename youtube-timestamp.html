@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-GB" class="dark">
 <head>
+<script>(function(){try{var t=localStorage.getItem('tg-theme');var d=t?t==='dark':true;document.documentElement.classList.toggle('dark',d);}catch(e){}})();</script>
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Free YouTube Timestamp Generator · Jump-To Link Creator</title>
@@ -29,6 +31,7 @@
   <link rel="alternate" hreflang="x-default" href="https://toolguest.com/youtube-timestamp" />
 <meta name="description" content="Create precise YouTube timestamp links, embed codes, and chapter lists instantly. 100% client-side, ad-free, blazing fast." />
 <script src="/assets/tailwind.js"></script>
+<script>tailwind.config = { darkMode: 'class' };</script>
 <script src="/assets/lucide.js"></script>
 <link href="/assets/fonts.css" rel="stylesheet">
 <style>
@@ -102,6 +105,56 @@
   .scroll-thin::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
   .chapter-row { transition: background .15s; }
   .chapter-row:hover { background: rgba(99,102,241,0.08); }
+
+  /* ---- ToolGuest SEO / AEO content system ---- */
+  .tool-seo-content { max-width: 1120px; margin: 0 auto; padding: 0 20px 72px; }
+  .tool-seo-content .seo-block { margin-top: 56px; }
+  .tool-seo-content .seo-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #6366f1; margin-bottom: .6rem; }
+  html.dark .tool-seo-content .seo-eyebrow, html[data-theme="dark"] .tool-seo-content .seo-eyebrow, body.dark .tool-seo-content .seo-eyebrow { color: #818cf8; }
+  .tool-seo-content h2 { font-size: clamp(1.35rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -.028em; line-height: 1.16; }
+  .tool-seo-content h3 { font-size: 1.02rem; font-weight: 700; letter-spacing: -.015em; }
+  .tool-seo-content p { margin-top: .85rem; font-size: .975rem; line-height: 1.78; color: #52525b; }
+  html.dark .tool-seo-content p, html[data-theme="dark"] .tool-seo-content p, body.dark .tool-seo-content p { color: #a1a1aa; }
+  .tool-seo-content strong { color: #18181b; font-weight: 650; }
+  html.dark .tool-seo-content strong, html[data-theme="dark"] .tool-seo-content strong, body.dark .tool-seo-content strong { color: #f4f4f5; }
+  .tool-seo-content code { font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: .85em; background: rgba(99,102,241,.10); color: #4f46e5; padding: .12em .42em; border-radius: .4em; border: 1px solid rgba(99,102,241,.18); word-break: break-word; }
+  html.dark .tool-seo-content code, html[data-theme="dark"] .tool-seo-content code, body.dark .tool-seo-content code { background: rgba(129,140,248,.14); color: #c7d2fe; border-color: rgba(129,140,248,.24); }
+  .tool-seo-content a { color: #4f46e5; text-decoration: none; border-bottom: 1px solid rgba(99,102,241,.35); }
+  html.dark .tool-seo-content a, html[data-theme="dark"] .tool-seo-content a, body.dark .tool-seo-content a { color: #a5b4fc; }
+  .seo-grid { display: grid; gap: 16px; margin-top: 22px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .seo-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .seo-grid.cols-3 { grid-template-columns: repeat(3, 1fr); } }
+  .seo-card { border: 1px solid rgba(24,24,27,.10); border-radius: 18px; padding: 20px; background: rgba(255,255,255,.65); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .seo-card:hover { transform: translateY(-3px); border-color: rgba(99,102,241,.4); box-shadow: 0 18px 40px -22px rgba(79,70,229,.5); }
+  html.dark .seo-card, html[data-theme="dark"] .seo-card, body.dark .seo-card { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-card .seo-city { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #0891b2; }
+  html.dark .seo-card .seo-city, html[data-theme="dark"] .seo-card .seo-city, body.dark .seo-card .seo-city { color: #22d3ee; }
+  .seo-card p { margin-top: .5rem; font-size: .9rem; }
+  .seo-aeo { border: 1px solid rgba(99,102,241,.3); border-radius: 18px; padding: 22px 24px; background: linear-gradient(135deg, rgba(99,102,241,.10), rgba(34,211,238,.06)); }
+  .seo-aeo-label { display: inline-flex; align-items: center; gap: .4rem; font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #4f46e5; }
+  html.dark .seo-aeo-label, html[data-theme="dark"] .seo-aeo-label, body.dark .seo-aeo-label { color: #a5b4fc; }
+  .seo-aeo p { margin-top: .6rem; font-size: 1.02rem; color: #3f3f46; }
+  html.dark .seo-aeo p, html[data-theme="dark"] .seo-aeo p, body.dark .seo-aeo p { color: #d4d4d8; }
+  .seo-tablewrap { margin-top: 24px; overflow-x: auto; border: 1px solid rgba(24,24,27,.10); border-radius: 18px; background: rgba(255,255,255,.6); }
+  html.dark .seo-tablewrap, html[data-theme="dark"] .seo-tablewrap, body.dark .seo-tablewrap { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: .9rem; text-align: left; }
+  .seo-table th, .seo-table td { padding: 14px 18px; border-bottom: 1px solid rgba(24,24,27,.08); }
+  html.dark .seo-table th, html.dark .seo-table td, html[data-theme="dark"] .seo-table th, html[data-theme="dark"] .seo-table td, body.dark .seo-table th, body.dark .seo-table td { border-bottom-color: rgba(255,255,255,.07); }
+  .seo-table tbody tr:last-child th, .seo-table tbody tr:last-child td { border-bottom: 0; }
+  .seo-table thead th { font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #71717a; }
+  .seo-table th[scope="row"] { font-weight: 600; color: #27272a; }
+  html.dark .seo-table th[scope="row"], html[data-theme="dark"] .seo-table th[scope="row"], body.dark .seo-table th[scope="row"] { color: #e4e4e7; }
+  .seo-table .yes { color: #059669; font-weight: 650; }
+  html.dark .seo-table .yes, html[data-theme="dark"] .seo-table .yes, body.dark .seo-table .yes { color: #34d399; }
+  .seo-table .no { color: #71717a; }
+  .seo-faq { margin-top: 22px; display: grid; gap: 12px; }
+  .seo-faq details { border: 1px solid rgba(24,24,27,.10); border-radius: 16px; padding: 0 20px; background: rgba(255,255,255,.6); }
+  html.dark .seo-faq details, html[data-theme="dark"] .seo-faq details, body.dark .seo-faq details { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-faq summary { cursor: pointer; padding: 16px 0; font-weight: 650; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .seo-faq summary::-webkit-details-marker { display: none; }
+  .seo-faq summary::after { content: "+"; font-size: 1.25rem; font-weight: 400; color: #a1a1aa; }
+  .seo-faq details[open] summary::after { content: "\2013"; }
+  .seo-faq p { padding-bottom: 16px; margin-top: 0; }
 </style>
 <link rel="stylesheet" href="/assets/related.css">
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -154,8 +207,14 @@
     <span>/</span>
     <span class="text-slate-900 dark:text-white font-medium">YouTube Timestamp Generator</span>
   </nav>
-  <div class="hidden sm:flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
-    <i data-lucide="globe" class="w-3.5 h-3.5"></i><span>USA · UK · DE</span>
+  <div class="flex items-center gap-2">
+    <div class="hidden sm:flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+      <i data-lucide="globe" class="w-3.5 h-3.5"></i><span>USA · UK · DE</span>
+    </div>
+    <button id="themeBtn" type="button" aria-label="Toggle light and dark theme" title="Toggle theme" class="grid h-8 w-8 place-items-center rounded-lg border border-slate-200 text-slate-600 transition hover:bg-slate-100 dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/10">
+      <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+      <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+    </button>
   </div>
 </div>
 
@@ -315,6 +374,121 @@
       </div>
     </div>
   </div>
+
+  <!-- TOOLGUEST SEO / AEO CONTENT -->
+  <section class="tool-seo-content" id="guide" aria-labelledby="guide-h">
+    <div class="seo-block">
+      <span class="seo-eyebrow">The timestamp link handbook</span>
+      <h2 id="guide-h">YouTube timestamp generator for jump-to links, embeds and chapters</h2>
+      <p>A YouTube timestamp link takes a viewer straight to the exact second you want them to see. Instead of telling someone to skip to the good part, you send a URL that opens there. It is one of the simplest ways to make a long video useful, whether you are sharing a specific moment in a tutorial, citing a quotation in a podcast, or building a chapter list for a lecture.</p>
+      <p>This free timestamp generator builds jump-to links, embed codes and chapter lists from a video URL and a time. Enter the time in seconds, minutes or the familiar hours-minutes-seconds form, and the tool produces a shareable link, an embeddable player URL that starts at that point, and formatted chapter lines ready to paste into your description.</p>
+      <p>Everything is generated in your browser. Paste a video URL, set your timestamps, copy the results, and share. There is no account, no upload and no tracking, so your links and chapter lists stay entirely on your device.</p>
+    </div>
+    <div class="seo-block">
+      <div class="seo-aeo">
+        <span class="seo-aeo-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.4 5.4 1.9-5.4 1.9L12 17.6l-1.9-5.4L4.7 10.3l5.4-1.9Z"/></svg>Quick answer</span>
+        <p>A YouTube timestamp generator creates jump-to links, embed codes and chapter lists that open a video at an exact time. ToolGuest builds them from a video URL and a time, entirely in the browser, free, ad-free and private, with no account or tracking.</p>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Why it matters</span>
+      <h2>Why timestamps turn a long video into a useful one</h2>
+      <p>Long videos hide their best moments. A forty-minute talk might contain a two-minute explanation that answers a viewer's exact question, but without a timestamp they must scrub through the whole thing to find it. A jump-to link removes that friction and makes the value accessible in one click.</p>
+      <p>Chapters change how a video is navigated and indexed. A chapter list in the description lets viewers jump between sections and gives search engines a structured outline of the content, which can earn key-moment results in search. Generating correctly formatted chapter lines is the fiddly part, and it is exactly what this tool automates.</p>
+      <p>Embeds with a start time serve a different purpose. When you embed a video in a course, an article or a documentation page, starting it at the relevant moment keeps the reader's attention on the point you are making rather than making them wait for it to arrive.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <h3>Jump-to links</h3>
+          <p>Build a shareable URL that opens the video at an exact second, ready to paste into a message or post.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Embed codes with start time</h3>
+          <p>Generate an embeddable player URL that begins at your chosen moment for articles and courses.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Chapter list builder</h3>
+          <p>Produce correctly formatted chapter lines, starting at zero, ready for the video description.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Flexible time input</h3>
+          <p>Enter a time in seconds, minutes or hours-minutes-seconds form and the tool converts it.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Instant, client-side generation</h3>
+          <p>Links are built in your browser with no server round-trip, so they appear as you type.</p>
+        </div>
+        <div class="seo-card">
+          <h3>No account, no tracking</h3>
+          <p>No signup, no ads and no analytics between you and your shareable link.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Head to head</span>
+      <h2>ToolGuest vs. legacy timestamp tools</h2>
+      <p>Links, embeds and chapters in one place, without the account or the ads.</p>
+      <div class="seo-tablewrap">
+        <table class="seo-table">
+          <thead><tr><th scope="col">Capability</th><th scope="col">Legacy online tools</th><th scope="col">ToolGuest</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Jump-to link generation</th><td class="no">Sometimes manual</td><td class="yes">Automatic</td></tr>
+            <tr><th scope="row">Embed code with start time</th><td class="no">Rarely included</td><td class="yes">Included</td></tr>
+            <tr><th scope="row">Chapter list builder</th><td class="no">Usually separate</td><td class="yes">Built in</td></tr>
+            <tr><th scope="row">Flexible time input</th><td class="no">Seconds only</td><td class="yes">Seconds, minutes, HMS</td></tr>
+            <tr><th scope="row">Offline capability</th><td class="no">Needs a connection</td><td class="yes">Works offline</td></tr>
+            <tr><th scope="row">Advertising</th><td class="no">Banners and interstitials</td><td class="yes">Zero, ever</td></tr>
+            <tr><th scope="row">Server data uploads</th><td class="no">URLs sent to servers</td><td class="yes">100% local</td></tr>
+            <tr><th scope="row">Signup or cookies</th><td class="no">Third-party trackers</td><td class="yes">None</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Built for Tier-1 teams</span>
+      <h2>Used by creators in the USA, UK, Germany, Canada, Australia and Spain</h2>
+      <p>One English page serves every Tier-1 market, so a lecturer in Boston and one in Manchester build their chapter lists the same way.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <span class="seo-city">Boston &middot; United States</span>
+          <p>Educators build chapter lists for recorded lectures and course videos.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Manchester &middot; United Kingdom</span>
+          <p>Podcasters create jump-to links that cite an exact moment in an episode.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Berlin &middot; Germany</span>
+          <p>Developers embed tutorial videos that start at the relevant step.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Toronto &middot; Canada</span>
+          <p>Marketers share specific product-demo moments in outreach messages.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Sydney &middot; Australia</span>
+          <p>Creators add chapter markers to long-form videos for better navigation.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Madrid &middot; Spain</span>
+          <p>Journalists cite a precise quotation from a video interview with a timestamped link.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">FAQ</span>
+      <h2>YouTube timestamp questions, answered</h2>
+      <div class="seo-faq">
+        <details><summary>How do I create a YouTube timestamp link?</summary><p>Paste the video URL and enter the time you want to link to. The tool returns a jump-to link that opens the video at that exact second, along with embed and chapter formats.</p></details>
+        <details><summary>What time format does YouTube use in URLs?</summary><p>YouTube uses a parameter that takes a whole number of seconds. The generator converts minutes or hours-minutes-seconds input into that value for you, so you never calculate it by hand.</p></details>
+        <details><summary>How do I add chapters to a video description?</summary><p>List each chapter as a timestamp followed by its title, with the first chapter starting at zero. The chapter builder produces lines in exactly that format, ready to paste into your description.</p></details>
+        <details><summary>Why do my chapters not appear?</summary><p>YouTube requires the first chapter to start at 0:00 and each chapter to be at least ten seconds long. If either rule is broken, the chapter list is ignored.</p></details>
+        <details><summary>Can I link to a moment in a live stream?</summary><p>Once a live stream has ended and been archived, its timestamps work like any other video. While it is still live, jumping to a past moment behaves differently.</p></details>
+        <details><summary>Is my data uploaded?</summary><p>No. The links are generated in your browser from the URL and time you enter. Nothing is transmitted, logged or stored.</p></details>
+        <details><summary>Do I need an account?</summary><p>No. There is no signup, no ads and no limit on how many timestamps you create.</p></details>
+        <details><summary>Is the tool free?</summary><p>Yes. It is completely free and carries no ads or tracking.</p></details>
+      </div>
+    </div>
+  </section>
 
 <!-- TF-RELATED -->
 <section class="tf-related" aria-label="Related tools">
@@ -515,7 +689,7 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
+  "@type": ["WebApplication", "SoftwareApplication"],
   "name": "Free YouTube Timestamp Link Generator",
   "applicationCategory": "MultimediaApplication",
   "operatingSystem": "Any",
@@ -871,5 +1045,15 @@
 </script>
   <script src="/assets/rating-widget.js" defer></script>
 <script src="/assets/related.js" defer></script>
+<script>
+(function(){
+  var btn=document.getElementById('themeBtn');
+  if(!btn) return;
+  btn.addEventListener('click',function(){
+    var dark=document.documentElement.classList.toggle('dark');
+    try{ localStorage.setItem('tg-theme', dark?'dark':'light'); }catch(e){}
+  });
+})();
+</script>
 </body>
 </html>

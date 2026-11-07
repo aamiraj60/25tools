@@ -259,6 +259,56 @@ footer{margin-top:84px;border-top:1px solid var(--border);padding:36px 0;color:v
 @keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 ::selection{background:rgba(124,92,255,.35)}
+
+  /* ---- ToolGuest SEO / AEO content system ---- */
+  .tool-seo-content { max-width: 1120px; margin: 0 auto; padding: 0 20px 72px; }
+  .tool-seo-content .seo-block { margin-top: 56px; }
+  .tool-seo-content .seo-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #6366f1; margin-bottom: .6rem; }
+  html.dark .tool-seo-content .seo-eyebrow, html[data-theme="dark"] .tool-seo-content .seo-eyebrow, body.dark .tool-seo-content .seo-eyebrow { color: #818cf8; }
+  .tool-seo-content h2 { font-size: clamp(1.35rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -.028em; line-height: 1.16; }
+  .tool-seo-content h3 { font-size: 1.02rem; font-weight: 700; letter-spacing: -.015em; }
+  .tool-seo-content p { margin-top: .85rem; font-size: .975rem; line-height: 1.78; color: #52525b; }
+  html.dark .tool-seo-content p, html[data-theme="dark"] .tool-seo-content p, body.dark .tool-seo-content p { color: #a1a1aa; }
+  .tool-seo-content strong { color: #18181b; font-weight: 650; }
+  html.dark .tool-seo-content strong, html[data-theme="dark"] .tool-seo-content strong, body.dark .tool-seo-content strong { color: #f4f4f5; }
+  .tool-seo-content code { font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: .85em; background: rgba(99,102,241,.10); color: #4f46e5; padding: .12em .42em; border-radius: .4em; border: 1px solid rgba(99,102,241,.18); word-break: break-word; }
+  html.dark .tool-seo-content code, html[data-theme="dark"] .tool-seo-content code, body.dark .tool-seo-content code { background: rgba(129,140,248,.14); color: #c7d2fe; border-color: rgba(129,140,248,.24); }
+  .tool-seo-content a { color: #4f46e5; text-decoration: none; border-bottom: 1px solid rgba(99,102,241,.35); }
+  html.dark .tool-seo-content a, html[data-theme="dark"] .tool-seo-content a, body.dark .tool-seo-content a { color: #a5b4fc; }
+  .seo-grid { display: grid; gap: 16px; margin-top: 22px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .seo-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .seo-grid.cols-3 { grid-template-columns: repeat(3, 1fr); } }
+  .seo-card { border: 1px solid rgba(24,24,27,.10); border-radius: 18px; padding: 20px; background: rgba(255,255,255,.65); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .seo-card:hover { transform: translateY(-3px); border-color: rgba(99,102,241,.4); box-shadow: 0 18px 40px -22px rgba(79,70,229,.5); }
+  html.dark .seo-card, html[data-theme="dark"] .seo-card, body.dark .seo-card { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-card .seo-city { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #0891b2; }
+  html.dark .seo-card .seo-city, html[data-theme="dark"] .seo-card .seo-city, body.dark .seo-card .seo-city { color: #22d3ee; }
+  .seo-card p { margin-top: .5rem; font-size: .9rem; }
+  .seo-aeo { border: 1px solid rgba(99,102,241,.3); border-radius: 18px; padding: 22px 24px; background: linear-gradient(135deg, rgba(99,102,241,.10), rgba(34,211,238,.06)); }
+  .seo-aeo-label { display: inline-flex; align-items: center; gap: .4rem; font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #4f46e5; }
+  html.dark .seo-aeo-label, html[data-theme="dark"] .seo-aeo-label, body.dark .seo-aeo-label { color: #a5b4fc; }
+  .seo-aeo p { margin-top: .6rem; font-size: 1.02rem; color: #3f3f46; }
+  html.dark .seo-aeo p, html[data-theme="dark"] .seo-aeo p, body.dark .seo-aeo p { color: #d4d4d8; }
+  .seo-tablewrap { margin-top: 24px; overflow-x: auto; border: 1px solid rgba(24,24,27,.10); border-radius: 18px; background: rgba(255,255,255,.6); }
+  html.dark .seo-tablewrap, html[data-theme="dark"] .seo-tablewrap, body.dark .seo-tablewrap { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: .9rem; text-align: left; }
+  .seo-table th, .seo-table td { padding: 14px 18px; border-bottom: 1px solid rgba(24,24,27,.08); }
+  html.dark .seo-table th, html.dark .seo-table td, html[data-theme="dark"] .seo-table th, html[data-theme="dark"] .seo-table td, body.dark .seo-table th, body.dark .seo-table td { border-bottom-color: rgba(255,255,255,.07); }
+  .seo-table tbody tr:last-child th, .seo-table tbody tr:last-child td { border-bottom: 0; }
+  .seo-table thead th { font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #71717a; }
+  .seo-table th[scope="row"] { font-weight: 600; color: #27272a; }
+  html.dark .seo-table th[scope="row"], html[data-theme="dark"] .seo-table th[scope="row"], body.dark .seo-table th[scope="row"] { color: #e4e4e7; }
+  .seo-table .yes { color: #059669; font-weight: 650; }
+  html.dark .seo-table .yes, html[data-theme="dark"] .seo-table .yes, body.dark .seo-table .yes { color: #34d399; }
+  .seo-table .no { color: #71717a; }
+  .seo-faq { margin-top: 22px; display: grid; gap: 12px; }
+  .seo-faq details { border: 1px solid rgba(24,24,27,.10); border-radius: 16px; padding: 0 20px; background: rgba(255,255,255,.6); }
+  html.dark .seo-faq details, html[data-theme="dark"] .seo-faq details, body.dark .seo-faq details { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-faq summary { cursor: pointer; padding: 16px 0; font-weight: 650; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .seo-faq summary::-webkit-details-marker { display: none; }
+  .seo-faq summary::after { content: "+"; font-size: 1.25rem; font-weight: 400; color: #a1a1aa; }
+  .seo-faq details[open] summary::after { content: "\2013"; }
+  .seo-faq p { padding-bottom: 16px; margin-top: 0; }
 </style>
 <link rel="stylesheet" href="/assets/related.css">
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -534,6 +584,121 @@ footer{margin-top:84px;border-top:1px solid var(--border);padding:36px 0;color:v
     
 
   </div>
+
+  <!-- TOOLGUEST SEO / AEO CONTENT -->
+  <section class="tool-seo-content" id="guide" aria-labelledby="guide-h">
+    <div class="seo-block">
+      <span class="seo-eyebrow">The colour palette handbook</span>
+      <h2 id="guide-h">Colour palette generator with HEX, RGB and WCAG contrast checks</h2>
+      <p>A colour palette is the backbone of a brand. Get it right and every screen, poster and slide feels like it belongs together. Get it wrong and the same assets look like they came from five different companies. A colour palette generator removes the guesswork by producing harmonious sets of colours from a single press, and by checking that the text on top of them is actually readable.</p>
+      <p>This free generator creates balanced palettes with the spacebar, extracts a colour scheme from an uploaded image, and checks every pairing against WCAG contrast rules. Each colour is shown in HEX and RGB, ready to copy, and the whole palette can be exported as CSS custom properties, a Tailwind config or a JSON file.</p>
+      <p>Everything runs in your browser. Images you upload for extraction are read locally and never transmitted, so client brand assets and unreleased designs stay private.</p>
+    </div>
+    <div class="seo-block">
+      <div class="seo-aeo">
+        <span class="seo-aeo-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.4 5.4 1.9-5.4 1.9L12 17.6l-1.9-5.4L4.7 10.3l5.4-1.9Z"/></svg>Quick answer</span>
+        <p>A colour palette generator creates harmonious colour schemes and checks WCAG contrast. ToolGuest generates palettes with the spacebar, extracts colours from images, shows HEX and RGB values, and exports CSS, Tailwind or JSON, running entirely in the browser, free and private.</p>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Why it matters</span>
+      <h2>Why harmony and contrast are the two jobs that matter</h2>
+      <p>Harmony is what makes a set of colours feel intentional. Colours chosen at random clash, while colours drawn from a consistent relationship on the colour wheel sit together comfortably. Generating from a scheme such as analogous, complementary or triadic gives you combinations that look designed rather than accidental.</p>
+      <p>Contrast is what makes a palette usable. A beautiful pairing that fails the WCAG contrast ratio is inaccessible to readers with low vision and uncomfortable for everyone else. Checking contrast as you build, rather than after launch, prevents a redesign later and widens your audience immediately.</p>
+      <p>Export format saves the handoff. A palette locked inside a screenshot must be retyped into code. Exporting the same colours as CSS variables, a Tailwind theme or JSON means the design and the code stay in sync from the first commit.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <h3>Spacebar generation</h3>
+          <p>Press the spacebar to generate a fresh harmonious palette instantly, with locked colours kept in place.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Extract from images</h3>
+          <p>Drop in a photo or logo and pull a matching palette straight from its colours, read locally.</p>
+        </div>
+        <div class="seo-card">
+          <h3>WCAG contrast checking</h3>
+          <p>Every pairing is scored against accessibility contrast rules so your text stays readable.</p>
+        </div>
+        <div class="seo-card">
+          <h3>HEX and RGB values</h3>
+          <p>Each swatch shows its HEX and RGB values, ready to copy with a single click.</p>
+        </div>
+        <div class="seo-card">
+          <h3>CSS, Tailwind and JSON export</h3>
+          <p>Export the palette as CSS custom properties, a Tailwind config or JSON for your build.</p>
+        </div>
+        <div class="seo-card">
+          <h3>100% client-side</h3>
+          <p>Generation and image extraction happen in your browser. Nothing is uploaded or stored.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Head to head</span>
+      <h2>ToolGuest vs. legacy palette tools</h2>
+      <p>Harmony, accessibility and export in one place, without the ads.</p>
+      <div class="seo-tablewrap">
+        <table class="seo-table">
+          <thead><tr><th scope="col">Capability</th><th scope="col">Legacy online tools</th><th scope="col">ToolGuest</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Contrast checking built in</th><td class="no">Rarely</td><td class="yes">Every pairing</td></tr>
+            <tr><th scope="row">Extract from images</th><td class="no">Often paid</td><td class="yes">Free</td></tr>
+            <tr><th scope="row">CSS and Tailwind export</th><td class="no">Screenshot only</td><td class="yes">Included</td></tr>
+            <tr><th scope="row">Spacebar regeneration</th><td class="no">Sometimes</td><td class="yes">Instant</td></tr>
+            <tr><th scope="row">Lock colours</th><td class="no">Limited</td><td class="yes">Supported</td></tr>
+            <tr><th scope="row">Advertising</th><td class="no">Banners and interstitials</td><td class="yes">Zero, ever</td></tr>
+            <tr><th scope="row">Server data uploads</th><td class="no">Images sent to servers</td><td class="yes">100% local</td></tr>
+            <tr><th scope="row">Signup or cookies</th><td class="no">Third-party trackers</td><td class="yes">None</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Built for Tier-1 teams</span>
+      <h2>Used by designers in the USA, UK, Germany, Canada, Australia and Spain</h2>
+      <p>One English page serves every Tier-1 market, so a brand designer in Copenhagen and one in San Francisco build palettes the same way.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <span class="seo-city">San Francisco &middot; United States</span>
+          <p>Product designers build accessible palettes before shipping a redesign.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">London &middot; United Kingdom</span>
+          <p>Brand studios extract palettes from client logos and export them as CSS.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Berlin &middot; Germany</span>
+          <p>Front-end teams check WCAG contrast before committing a theme.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Toronto &middot; Canada</span>
+          <p>Marketing teams generate seasonal palettes for campaigns.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Sydney &middot; Australia</span>
+          <p>Freelance designers build a consistent scheme for each new project.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Madrid &middot; Spain</span>
+          <p>Illustrators extract colour sets from their own artwork.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">FAQ</span>
+      <h2>Colour palette questions, answered</h2>
+      <div class="seo-faq">
+        <details><summary>How does the generator create harmonious palettes?</summary><p>It applies colour theory relationships such as analogous, complementary, triadic and split-complementary schemes, so the colours relate to each other on the colour wheel rather than being chosen at random.</p></details>
+        <details><summary>Can I extract colours from an image?</summary><p>Yes. Drop in a photo or logo and the tool reads it locally to pull out a matching palette. The image is never uploaded.</p></details>
+        <details><summary>What is WCAG contrast and why does it matter?</summary><p>WCAG contrast is a ratio that measures how readable text is against its background. Meeting the recommended ratios makes your interface usable for people with low vision and more comfortable for everyone.</p></details>
+        <details><summary>What formats can I export?</summary><p>You can export the palette as CSS custom properties, a Tailwind configuration or a JSON file, so the colours move straight into your code.</p></details>
+        <details><summary>Can I lock colours I like?</summary><p>Yes. Lock the swatches you want to keep and regenerate the rest, so you can refine a palette without losing the parts that already work.</p></details>
+        <details><summary>Is my data uploaded?</summary><p>No. Generation and image extraction run entirely in your browser. Your images and palettes are never transmitted or stored.</p></details>
+        <details><summary>Do I need an account?</summary><p>No. There is no signup, no ads and no limit on how many palettes you create.</p></details>
+        <details><summary>Is the tool free?</summary><p>Yes. It is completely free and carries no ads or tracking.</p></details>
+      </div>
+    </div>
+  </section>
 
 <!-- TF-RELATED -->
 <section class="tf-related" aria-label="Related tools">

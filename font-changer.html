@@ -496,6 +496,56 @@ footer nav a:hover{color:var(--text)}
   html{scroll-behavior:auto}
   *{animation:none!important}
 }
+
+  /* ---- ToolGuest SEO / AEO content system ---- */
+  .tool-seo-content { max-width: 1120px; margin: 0 auto; padding: 0 20px 72px; }
+  .tool-seo-content .seo-block { margin-top: 56px; }
+  .tool-seo-content .seo-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #6366f1; margin-bottom: .6rem; }
+  html.dark .tool-seo-content .seo-eyebrow, html[data-theme="dark"] .tool-seo-content .seo-eyebrow, body.dark .tool-seo-content .seo-eyebrow { color: #818cf8; }
+  .tool-seo-content h2 { font-size: clamp(1.35rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -.028em; line-height: 1.16; }
+  .tool-seo-content h3 { font-size: 1.02rem; font-weight: 700; letter-spacing: -.015em; }
+  .tool-seo-content p { margin-top: .85rem; font-size: .975rem; line-height: 1.78; color: #52525b; }
+  html.dark .tool-seo-content p, html[data-theme="dark"] .tool-seo-content p, body.dark .tool-seo-content p { color: #a1a1aa; }
+  .tool-seo-content strong { color: #18181b; font-weight: 650; }
+  html.dark .tool-seo-content strong, html[data-theme="dark"] .tool-seo-content strong, body.dark .tool-seo-content strong { color: #f4f4f5; }
+  .tool-seo-content code { font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: .85em; background: rgba(99,102,241,.10); color: #4f46e5; padding: .12em .42em; border-radius: .4em; border: 1px solid rgba(99,102,241,.18); word-break: break-word; }
+  html.dark .tool-seo-content code, html[data-theme="dark"] .tool-seo-content code, body.dark .tool-seo-content code { background: rgba(129,140,248,.14); color: #c7d2fe; border-color: rgba(129,140,248,.24); }
+  .tool-seo-content a { color: #4f46e5; text-decoration: none; border-bottom: 1px solid rgba(99,102,241,.35); }
+  html.dark .tool-seo-content a, html[data-theme="dark"] .tool-seo-content a, body.dark .tool-seo-content a { color: #a5b4fc; }
+  .seo-grid { display: grid; gap: 16px; margin-top: 22px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .seo-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .seo-grid.cols-3 { grid-template-columns: repeat(3, 1fr); } }
+  .seo-card { border: 1px solid rgba(24,24,27,.10); border-radius: 18px; padding: 20px; background: rgba(255,255,255,.65); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .seo-card:hover { transform: translateY(-3px); border-color: rgba(99,102,241,.4); box-shadow: 0 18px 40px -22px rgba(79,70,229,.5); }
+  html.dark .seo-card, html[data-theme="dark"] .seo-card, body.dark .seo-card { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-card .seo-city { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #0891b2; }
+  html.dark .seo-card .seo-city, html[data-theme="dark"] .seo-card .seo-city, body.dark .seo-card .seo-city { color: #22d3ee; }
+  .seo-card p { margin-top: .5rem; font-size: .9rem; }
+  .seo-aeo { border: 1px solid rgba(99,102,241,.3); border-radius: 18px; padding: 22px 24px; background: linear-gradient(135deg, rgba(99,102,241,.10), rgba(34,211,238,.06)); }
+  .seo-aeo-label { display: inline-flex; align-items: center; gap: .4rem; font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #4f46e5; }
+  html.dark .seo-aeo-label, html[data-theme="dark"] .seo-aeo-label, body.dark .seo-aeo-label { color: #a5b4fc; }
+  .seo-aeo p { margin-top: .6rem; font-size: 1.02rem; color: #3f3f46; }
+  html.dark .seo-aeo p, html[data-theme="dark"] .seo-aeo p, body.dark .seo-aeo p { color: #d4d4d8; }
+  .seo-tablewrap { margin-top: 24px; overflow-x: auto; border: 1px solid rgba(24,24,27,.10); border-radius: 18px; background: rgba(255,255,255,.6); }
+  html.dark .seo-tablewrap, html[data-theme="dark"] .seo-tablewrap, body.dark .seo-tablewrap { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: .9rem; text-align: left; }
+  .seo-table th, .seo-table td { padding: 14px 18px; border-bottom: 1px solid rgba(24,24,27,.08); }
+  html.dark .seo-table th, html.dark .seo-table td, html[data-theme="dark"] .seo-table th, html[data-theme="dark"] .seo-table td, body.dark .seo-table th, body.dark .seo-table td { border-bottom-color: rgba(255,255,255,.07); }
+  .seo-table tbody tr:last-child th, .seo-table tbody tr:last-child td { border-bottom: 0; }
+  .seo-table thead th { font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #71717a; }
+  .seo-table th[scope="row"] { font-weight: 600; color: #27272a; }
+  html.dark .seo-table th[scope="row"], html[data-theme="dark"] .seo-table th[scope="row"], body.dark .seo-table th[scope="row"] { color: #e4e4e7; }
+  .seo-table .yes { color: #059669; font-weight: 650; }
+  html.dark .seo-table .yes, html[data-theme="dark"] .seo-table .yes, body.dark .seo-table .yes { color: #34d399; }
+  .seo-table .no { color: #71717a; }
+  .seo-faq { margin-top: 22px; display: grid; gap: 12px; }
+  .seo-faq details { border: 1px solid rgba(24,24,27,.10); border-radius: 16px; padding: 0 20px; background: rgba(255,255,255,.6); }
+  html.dark .seo-faq details, html[data-theme="dark"] .seo-faq details, body.dark .seo-faq details { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-faq summary { cursor: pointer; padding: 16px 0; font-weight: 650; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .seo-faq summary::-webkit-details-marker { display: none; }
+  .seo-faq summary::after { content: "+"; font-size: 1.25rem; font-weight: 400; color: #a1a1aa; }
+  .seo-faq details[open] summary::after { content: "\2013"; }
+  .seo-faq p { padding-bottom: 16px; margin-top: 0; }
 </style>
 <link rel="stylesheet" href="/assets/related.css">
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -724,6 +774,121 @@ footer nav a:hover{color:var(--text)}
 </section>
 
 <!-- ================= RELATED ================= -->
+
+  <!-- TOOLGUEST SEO / AEO CONTENT -->
+  <section class="tool-seo-content" id="guide" aria-labelledby="guide-h">
+    <div class="seo-block">
+      <span class="seo-eyebrow">The fancy text handbook</span>
+      <h2 id="guide-h">Font changer and fancy text generator for every social profile</h2>
+      <p>A font changer turns ordinary letters into stylised Unicode characters that you can copy and paste anywhere. It does not install a font; instead it swaps each plain character for a visually similar symbol from a different Unicode block. Bold, italic, cursive, bubble, small-caps, gothic, double-struck and dozens more become available instantly, and because they are real characters rather than a formatting choice, they survive the paste into Instagram bios, TikTok captions, Discord names and Twitter profiles.</p>
+      <p>This free font changer generates more than two dozen styles from a single line of text. Type once and every style updates live, then copy any variant with a single click. It also builds aesthetic bios for social profiles, pairing decorated text with symbols and line breaks that read cleanly in a cramped bio field.</p>
+      <p>Everything happens in your browser. Your text is transformed locally with a character-mapping table, so nothing is uploaded, no account is required and the tool works even with your connection switched off.</p>
+    </div>
+    <div class="seo-block">
+      <div class="seo-aeo">
+        <span class="seo-aeo-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.4 5.4 1.9-5.4 1.9L12 17.6l-1.9-5.4L4.7 10.3l5.4-1.9Z"/></svg>Quick answer</span>
+        <p>A font changer converts plain text into stylised Unicode characters such as bold, cursive, bubble and small-caps that can be copied and pasted into social bios and captions. ToolGuest generates 26+ styles live in the browser, free, ad-free and private, with no upload or account.</p>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Why it matters</span>
+      <h2>Why Unicode styling survives where real fonts cannot</h2>
+      <p>Most social platforms strip formatting. Paste rich text with a chosen font and the platform discards it, leaving plain letters behind. Unicode styling works differently: the styled glyphs are distinct characters, so the platform sees ordinary text and preserves it exactly. That is why a bubble or gothic name looks the same in an Instagram bio as it does in the message you typed it into.</p>
+      <p>Each style has its own personality and its own best use. Cursive suits elegant, feminine branding. Bold and double-struck read as confident and technical. Small caps are quietly formal. Bubbles feel playful and youthful. Knowing which style fits which audience is half the craft, which is why seeing every variant side by side, updated as you type, beats hunting through a list of names.</p>
+      <p>There is a practical limit worth respecting. Not every Unicode style has a full alphabet, and some older devices render certain blocks as empty boxes. The safe styles, such as bold, italic, monospace and small caps, are widely supported, while the most decorative ones are best kept short and used as accents rather than for whole paragraphs.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <h3>26+ live styles</h3>
+          <p>Bold, italic, cursive, bubble, small caps, gothic, double-struck, monospace and more, all generated from one line of text.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Copy in one click</h3>
+          <p>Tap any style to copy it to the clipboard, ready to paste into a bio, caption or username.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Bio builder</h3>
+          <p>Compose an aesthetic social bio with decorated text, symbols and spacing that fits the character limit.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Works everywhere you can paste</h3>
+          <p>Unicode characters survive the paste into Instagram, TikTok, Discord, X and most other platforms.</p>
+        </div>
+        <div class="seo-card">
+          <h3>100% client-side</h3>
+          <p>Your text is mapped locally and never transmitted, so private notes and usernames stay on your device.</p>
+        </div>
+        <div class="seo-card">
+          <h3>No ads, no account</h3>
+          <p>No banners, no signup and no tracking between you and the styled text you need.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Head to head</span>
+      <h2>ToolGuest vs. legacy fancy text generators</h2>
+      <p>More styles, live preview and a clean interface, without the pop-ups.</p>
+      <div class="seo-tablewrap">
+        <table class="seo-table">
+          <thead><tr><th scope="col">Capability</th><th scope="col">Legacy online tools</th><th scope="col">ToolGuest</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Number of styles</th><td class="no">A handful</td><td class="yes">26+</td></tr>
+            <tr><th scope="row">Live preview as you type</th><td class="no">Often requires a click</td><td class="yes">Real-time</td></tr>
+            <tr><th scope="row">One-click copy</th><td class="no">Sometimes awkward</td><td class="yes">Every style</td></tr>
+            <tr><th scope="row">Bio builder included</th><td class="no">Rarely</td><td class="yes">Yes</td></tr>
+            <tr><th scope="row">Works offline</th><td class="no">Needs a connection</td><td class="yes">Yes</td></tr>
+            <tr><th scope="row">Advertising</th><td class="no">Banners and pop-ups</td><td class="yes">Zero, ever</td></tr>
+            <tr><th scope="row">Server data uploads</th><td class="no">Text sent to servers</td><td class="yes">100% local</td></tr>
+            <tr><th scope="row">Signup or cookies</th><td class="no">Third-party trackers</td><td class="yes">None</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Built for Tier-1 teams</span>
+      <h2>Loved by creators in the USA, UK, Germany, Canada, Australia and Spain</h2>
+      <p>A single fast page serves every Tier-1 market, so a creator in Los Angeles and one in Lisbon get the same instant styling.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <span class="seo-city">Los Angeles &middot; United States</span>
+          <p>Creators brand their profiles and captions with distinctive Unicode styling.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">London &middot; United Kingdom</span>
+          <p>Social managers produce on-brand bios and comment styling for client accounts.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Berlin &middot; Germany</span>
+          <p>Musicians and artists decorate track titles and channel names for release day.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Toronto &middot; Canada</span>
+          <p>Streamers style their display names for Discord and Twitch.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Sydney &middot; Australia</span>
+          <p>Small businesses add flair to Instagram bios without design software.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Madrid &middot; Spain</span>
+          <p>Students and creators style usernames and captions for personal profiles.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">FAQ</span>
+      <h2>Font changer questions, answered</h2>
+      <div class="seo-faq">
+        <details><summary>How does a font changer work without installing fonts?</summary><p>It replaces each ordinary letter with a visually similar character from another Unicode block. The styled glyphs are real characters, so they paste anywhere text is accepted and need no font file.</p></details>
+        <details><summary>Will the styled text work on Instagram and TikTok?</summary><p>Yes. Because the styles are Unicode characters rather than formatting, they paste into bios, captions, comments and display names on most platforms. The safest styles, such as bold and small caps, render on almost every device.</p></details>
+        <details><summary>Why do some characters show as empty boxes?</summary><p>A few decorative Unicode blocks are missing from some older fonts and operating systems, so those glyphs fall back to a placeholder. Choosing widely supported styles avoids the problem entirely.</p></details>
+        <details><summary>Is there a character limit?</summary><p>The platforms impose their own limits, and Unicode styles can count as more than one character each in some counters. Keep bios and captions concise to stay within the field.</p></details>
+        <details><summary>Can I use styled text in usernames?</summary><p>Sometimes. Many platforms accept Unicode in display names but restrict it in login handles. Check the platform's rules before committing.</p></details>
+        <details><summary>Is my text uploaded?</summary><p>No. The transformation happens in your browser using a local character map. Nothing is transmitted, logged or stored.</p></details>
+        <details><summary>Is the tool free?</summary><p>Yes. It is free to use with no account, no ads and no tracking.</p></details>
+        <details><summary>Does it work offline?</summary><p>Yes. Once the page has loaded, the styling runs locally and keeps working without a network connection.</p></details>
+      </div>
+    </div>
+  </section>
 
 <!-- TF-RELATED -->
 <section class="tf-related" aria-label="Related tools">

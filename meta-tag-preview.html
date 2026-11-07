@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
+<script>(function(){try{var t=localStorage.getItem('tg-theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free Meta Tag Generator &amp; Social Preview Tool</title>
@@ -686,7 +687,98 @@
       .score-ring-wrap { width: 150px; height: 150px; }
       .score-ring-num { font-size: 2.2rem; }
     }
-  </style>
+  
+
+    /* ---------- DARK THEME ---------- */
+    html.dark {
+      --bg: #0b1120;
+      --ink: #f1f5f9;
+      --ink-soft: #cbd5e1;
+      --muted: #94a3b8;
+      --line: #1e293b;
+      --glass: rgba(17, 25, 40, 0.72);
+      --glass-border: rgba(255, 255, 255, 0.09);
+      --shadow-lg: 0 30px 60px -20px rgba(0, 0, 0, 0.6), 0 8px 24px -8px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 12px 32px -12px rgba(0, 0, 0, 0.5);
+      --shadow-sm: 0 4px 12px -6px rgba(0, 0, 0, 0.4);
+    }
+    html.dark body { background: var(--bg); color: var(--ink); }
+    html.dark .topbar { background: rgba(11, 17, 32, 0.72); border-color: rgba(255,255,255,0.08); }
+    html.dark .hero h1 { background: linear-gradient(135deg, #e2e8f0 15%, #93c5fd 50%, #60a5fa 80%, #a78bfa 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    html.dark .eyebrow { color: #93c5fd; background: rgba(59,130,246,0.14); border-color: rgba(59,130,246,0.3); }
+    html.dark .pill { background: var(--glass); border-color: var(--glass-border); color: var(--ink-soft); }
+    html.dark .card { background: var(--glass); border-color: var(--glass-border); }
+    html.dark .field input, html.dark .field textarea, html.dark .field select { background: #0f172a; color: var(--ink); border-color: var(--line); }
+    html.dark .field input::placeholder, html.dark .field textarea::placeholder { color: #64748b; }
+    html.dark .badge-count { background: #0f172a; color: var(--muted); }
+    html.dark .meter-track { background: #1e293b; }
+    html.dark .toggle-row { background: #0f172a; border-color: var(--line); }
+    html.dark .toggle-row:hover { border-color: #334155; }
+    html.dark .slider { background: #334155; }
+    html.dark .btn-primary { background: #e2e8f0; color: #0b1120; }
+    html.dark .btn-primary:hover { background: #f8fafc; }
+    html.dark .btn-ghost { background: #0f172a; color: var(--ink-soft); border-color: var(--line); }
+    html.dark .btn-ghost:hover { background: #1e293b; border-color: #334155; }
+    html.dark .preview-tabs { background: rgba(30, 41, 59, 0.85); border-color: rgba(255,255,255,0.06); }
+    html.dark .tab { color: #94a3b8; }
+    html.dark .tab:hover { color: var(--ink); background: rgba(255,255,255,0.06); }
+    html.dark .tab.active { background: #1e293b; color: var(--ink); box-shadow: 0 2px 10px rgba(0,0,0,0.4); }
+    html.dark .social-card, html.dark .g-card { background: #0f172a; border-color: var(--line); }
+    html.dark .social-img, html.dark .g-card .social-img { background: #1e293b; }
+    html.dark .social-desc, html.dark .g-desc { color: #cbd5e1; }
+    html.dark .divider { background: #334155; }
+    html.dark .breakdown-track { background: #1e293b; }
+
+  /* ---- ToolGuest SEO / AEO content system ---- */
+  .tool-seo-content { max-width: 1120px; margin: 0 auto; padding: 0 20px 72px; }
+  .tool-seo-content .seo-block { margin-top: 56px; }
+  .tool-seo-content .seo-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #6366f1; margin-bottom: .6rem; }
+  html.dark .tool-seo-content .seo-eyebrow, html[data-theme="dark"] .tool-seo-content .seo-eyebrow, body.dark .tool-seo-content .seo-eyebrow { color: #818cf8; }
+  .tool-seo-content h2 { font-size: clamp(1.35rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -.028em; line-height: 1.16; }
+  .tool-seo-content h3 { font-size: 1.02rem; font-weight: 700; letter-spacing: -.015em; }
+  .tool-seo-content p { margin-top: .85rem; font-size: .975rem; line-height: 1.78; color: #52525b; }
+  html.dark .tool-seo-content p, html[data-theme="dark"] .tool-seo-content p, body.dark .tool-seo-content p { color: #a1a1aa; }
+  .tool-seo-content strong { color: #18181b; font-weight: 650; }
+  html.dark .tool-seo-content strong, html[data-theme="dark"] .tool-seo-content strong, body.dark .tool-seo-content strong { color: #f4f4f5; }
+  .tool-seo-content code { font-family: ui-monospace, 'JetBrains Mono', monospace; font-size: .85em; background: rgba(99,102,241,.10); color: #4f46e5; padding: .12em .42em; border-radius: .4em; border: 1px solid rgba(99,102,241,.18); word-break: break-word; }
+  html.dark .tool-seo-content code, html[data-theme="dark"] .tool-seo-content code, body.dark .tool-seo-content code { background: rgba(129,140,248,.14); color: #c7d2fe; border-color: rgba(129,140,248,.24); }
+  .tool-seo-content a { color: #4f46e5; text-decoration: none; border-bottom: 1px solid rgba(99,102,241,.35); }
+  html.dark .tool-seo-content a, html[data-theme="dark"] .tool-seo-content a, body.dark .tool-seo-content a { color: #a5b4fc; }
+  .seo-grid { display: grid; gap: 16px; margin-top: 22px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .seo-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .seo-grid.cols-3 { grid-template-columns: repeat(3, 1fr); } }
+  .seo-card { border: 1px solid rgba(24,24,27,.10); border-radius: 18px; padding: 20px; background: rgba(255,255,255,.65); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .seo-card:hover { transform: translateY(-3px); border-color: rgba(99,102,241,.4); box-shadow: 0 18px 40px -22px rgba(79,70,229,.5); }
+  html.dark .seo-card, html[data-theme="dark"] .seo-card, body.dark .seo-card { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-card .seo-city { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #0891b2; }
+  html.dark .seo-card .seo-city, html[data-theme="dark"] .seo-card .seo-city, body.dark .seo-card .seo-city { color: #22d3ee; }
+  .seo-card p { margin-top: .5rem; font-size: .9rem; }
+  .seo-aeo { border: 1px solid rgba(99,102,241,.3); border-radius: 18px; padding: 22px 24px; background: linear-gradient(135deg, rgba(99,102,241,.10), rgba(34,211,238,.06)); }
+  .seo-aeo-label { display: inline-flex; align-items: center; gap: .4rem; font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #4f46e5; }
+  html.dark .seo-aeo-label, html[data-theme="dark"] .seo-aeo-label, body.dark .seo-aeo-label { color: #a5b4fc; }
+  .seo-aeo p { margin-top: .6rem; font-size: 1.02rem; color: #3f3f46; }
+  html.dark .seo-aeo p, html[data-theme="dark"] .seo-aeo p, body.dark .seo-aeo p { color: #d4d4d8; }
+  .seo-tablewrap { margin-top: 24px; overflow-x: auto; border: 1px solid rgba(24,24,27,.10); border-radius: 18px; background: rgba(255,255,255,.6); }
+  html.dark .seo-tablewrap, html[data-theme="dark"] .seo-tablewrap, body.dark .seo-tablewrap { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: .9rem; text-align: left; }
+  .seo-table th, .seo-table td { padding: 14px 18px; border-bottom: 1px solid rgba(24,24,27,.08); }
+  html.dark .seo-table th, html.dark .seo-table td, html[data-theme="dark"] .seo-table th, html[data-theme="dark"] .seo-table td, body.dark .seo-table th, body.dark .seo-table td { border-bottom-color: rgba(255,255,255,.07); }
+  .seo-table tbody tr:last-child th, .seo-table tbody tr:last-child td { border-bottom: 0; }
+  .seo-table thead th { font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #71717a; }
+  .seo-table th[scope="row"] { font-weight: 600; color: #27272a; }
+  html.dark .seo-table th[scope="row"], html[data-theme="dark"] .seo-table th[scope="row"], body.dark .seo-table th[scope="row"] { color: #e4e4e7; }
+  .seo-table .yes { color: #059669; font-weight: 650; }
+  html.dark .seo-table .yes, html[data-theme="dark"] .seo-table .yes, body.dark .seo-table .yes { color: #34d399; }
+  .seo-table .no { color: #71717a; }
+  .seo-faq { margin-top: 22px; display: grid; gap: 12px; }
+  .seo-faq details { border: 1px solid rgba(24,24,27,.10); border-radius: 16px; padding: 0 20px; background: rgba(255,255,255,.6); }
+  html.dark .seo-faq details, html[data-theme="dark"] .seo-faq details, body.dark .seo-faq details { border-color: rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+  .seo-faq summary { cursor: pointer; padding: 16px 0; font-weight: 650; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .seo-faq summary::-webkit-details-marker { display: none; }
+  .seo-faq summary::after { content: "+"; font-size: 1.25rem; font-weight: 400; color: #a1a1aa; }
+  .seo-faq details[open] summary::after { content: "\2013"; }
+  .seo-faq p { padding-bottom: 16px; margin-top: 0; }
+</style>
 <link rel="stylesheet" href="/assets/related.css">
 <script type="application/ld+json">
 {
@@ -710,7 +802,7 @@
       ]
     },
     {
-      "@type": "WebApplication",
+      "@type": ["WebApplication", "SoftwareApplication"],
       "name": "Meta Tag Generator & Social Preview Tool",
       "applicationCategory": "SEOApplication",
       "operatingSystem": "Any",
@@ -745,8 +837,77 @@
       ],
       "dateModified": "2026-11-05",
       "datePublished": "2026-11-05"
-    }
-  ]
+    },
+{
+      "@type": "FAQPage",
+      "mainEntity": [
+            {
+                  "@type": "Question",
+                  "name": "What are meta tags?",
+                  "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Meta tags are pieces of HTML in a page's head that describe the page to search engines and social platforms. They control the title, the description snippet and the image shown when the link is shared."
+                  }
+            },
+            {
+                  "@type": "Question",
+                  "name": "What is the difference between standard meta tags and Open Graph?",
+                  "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Standard tags such as title and description serve search engines. Open Graph tags serve social platforms, defining the title, description and image used in a shared link card. Twitter cards are a parallel set for X."
+                  }
+            },
+            {
+                  "@type": "Question",
+                  "name": "Why does my shared link show the wrong image?",
+                  "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Most commonly the og:image URL is missing, too small, or has the wrong aspect ratio, so the platform falls back to another image or none at all. The preview here shows the recommended dimensions so you can fix it."
+                  }
+            },
+            {
+                  "@type": "Question",
+                  "name": "How long should a title and description be?",
+                  "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Keep titles within roughly sixty characters and descriptions within about one hundred and sixty so they are not truncated. The live preview shows exactly where the cut-off falls for each platform."
+                  }
+            },
+            {
+                  "@type": "Question",
+                  "name": "Does it check my tags for problems?",
+                  "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. The site health audit scores your tags against common SEO and content fundamentals and lists specific improvements."
+                  }
+            },
+            {
+                  "@type": "Question",
+                  "name": "Is my data uploaded?",
+                  "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "No. Everything is processed in your browser. Your draft URLs and copy are never transmitted, logged or stored."
+                  }
+            },
+            {
+                  "@type": "Question",
+                  "name": "Can I copy the generated tags?",
+                  "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. The complete tag set is produced in copy-ready form so you can paste it straight into your page head."
+                  }
+            },
+            {
+                  "@type": "Question",
+                  "name": "Is the tool free?",
+                  "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. It is completely free, needs no signup and carries no ads or tracking."
+                  }
+            }
+      ]
+}
+    ]
 }
 </script>
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -770,6 +931,9 @@
       </div>
     </div>
     <div class="topbar-actions">
+      <button id="themeBtn" type="button" aria-label="Toggle light and dark theme" title="Toggle theme" style="display:inline-flex;align-items:center;gap:.45rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:100px;padding:.42rem .9rem;font-size:.74rem;font-weight:600;color:var(--ink-soft);cursor:pointer">
+        <i class="fas fa-sun" id="themeIconSun" style="display:none"></i><i class="fas fa-moon" id="themeIconMoon"></i>
+      </button>
       <div class="pill"><i class="fas fa-shield-halved"></i> Privacy-first</div>
       <div class="pill live"><i class="fas fa-circle"></i> Live engine</div>
     </div>
@@ -1038,6 +1202,121 @@
   <!-- TOAST -->
   <div class="toast" id="toast"><i class="fas fa-check-circle"></i> <span id="toastMsg">Done</span></div>
 </div>
+
+  <!-- TOOLGUEST SEO / AEO CONTENT -->
+  <section class="tool-seo-content" id="guide" aria-labelledby="guide-h">
+    <div class="seo-block">
+      <span class="seo-eyebrow">The meta tag handbook</span>
+      <h2 id="guide-h">Meta tag generator and social preview tool for every platform</h2>
+      <p>Meta tags are the invisible instructions that tell search engines and social platforms how to present your page. Get them right and your link shows a compelling title, a clear description and a properly sized image. Get them wrong and it appears as a bare URL or, worse, a truncated mess with the wrong picture. A meta tag generator and preview tool removes the guesswork by showing you the result before you publish.</p>
+      <p>This free tool generates the full set of tags you need, from the classic title and description through Open Graph for Facebook and LinkedIn, Twitter cards for X, and the smaller details that matter for WhatsApp, Discord and Slack. Every change updates a live preview of each platform's card, so you see exactly what your audience will see and can tune the wording and image dimensions until the card looks right.</p>
+      <p>There is also a site health audit that scores your tags against common SEO and content fundamentals and suggests specific improvements. Everything runs in your browser, so your draft URLs and copy are never uploaded, and the generated tags can be copied straight into your page head.</p>
+    </div>
+    <div class="seo-block">
+      <div class="seo-aeo">
+        <span class="seo-aeo-label"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.4 5.4 1.9-5.4 1.9L12 17.6l-1.9-5.4L4.7 10.3l5.4-1.9Z"/></svg>Quick answer</span>
+        <p>A meta tag generator creates title, description, Open Graph and Twitter Card tags and previews how a link appears on Google, Facebook, X, LinkedIn, WhatsApp, Discord and Slack. ToolGuest builds and audits tags live in the browser, free, with no signup and no upload.</p>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Why it matters</span>
+      <h2>Why previewing your tags beats guessing</h2>
+      <p>Each platform renders a link differently. Google shows a title, a URL and a description snippet. Facebook and LinkedIn draw a large card with an image, a title and a description. X switches between a large image card and a compact summary. Discord and Slack render an embed with their own styling. Writing one set of tags and hoping it suits all of them is how links end up looking broken.</p>
+      <p>Truncation is the silent killer. A title that runs past the platform's limit is cut off mid-sentence, and a description that is too long loses its call to action. A live preview shows exactly where the cut falls, so you can front-load the words that matter and keep the meaning intact.</p>
+      <p>Images decide whether anyone clicks. A card image that is too small is replaced by a fallback, one with the wrong aspect ratio is cropped, and one that is missing entirely leaves an empty box. Previewing the card against the recommended dimensions catches all three problems before they reach your audience.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <h3>Full tag set generated</h3>
+          <p>Title, description, canonical, Open Graph, Twitter cards and the extras platforms expect.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Live preview per platform</h3>
+          <p>See how the link appears on Google, Facebook, X, LinkedIn, WhatsApp, Discord and Slack as you type.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Site health audit</h3>
+          <p>A scored check of your tags against SEO and content fundamentals, with specific suggestions to fix.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Copy-ready output</h3>
+          <p>Copy the generated tags straight into your page head, formatted and complete.</p>
+        </div>
+        <div class="seo-card">
+          <h3>Image guidance</h3>
+          <p>Recommended dimensions and aspect ratios are shown so your card image is never cropped or replaced.</p>
+        </div>
+        <div class="seo-card">
+          <h3>100% client-side</h3>
+          <p>Your draft URLs and copy are processed locally and never uploaded, logged or stored.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Head to head</span>
+      <h2>ToolGuest vs. legacy meta tag tools</h2>
+      <p>Preview and generation in one place, without the account or the ads.</p>
+      <div class="seo-tablewrap">
+        <table class="seo-table">
+          <thead><tr><th scope="col">Capability</th><th scope="col">Legacy online tools</th><th scope="col">ToolGuest</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Number of platform previews</th><td class="no">Two or three</td><td class="yes">Seven</td></tr>
+            <tr><th scope="row">Open Graph and Twitter cards</th><td class="no">Sometimes one only</td><td class="yes">Both</td></tr>
+            <tr><th scope="row">Site health audit</th><td class="no">Rarely included</td><td class="yes">Built in</td></tr>
+            <tr><th scope="row">Image dimension guidance</th><td class="no">Vague</td><td class="yes">Explicit</td></tr>
+            <tr><th scope="row">Copy-ready tag output</th><td class="no">Manual assembly</td><td class="yes">One click</td></tr>
+            <tr><th scope="row">Advertising</th><td class="no">Banners and interstitials</td><td class="yes">Zero, ever</td></tr>
+            <tr><th scope="row">Server data uploads</th><td class="no">URLs sent to servers</td><td class="yes">100% local</td></tr>
+            <tr><th scope="row">Signup or cookies</th><td class="no">Third-party trackers</td><td class="yes">None</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">Built for Tier-1 teams</span>
+      <h2>Used by marketers in the USA, UK, Germany, Canada, Australia and Spain</h2>
+      <p>One English page serves every Tier-1 market, so a campaign team in Chicago and one in Copenhagen tune their cards the same way.</p>
+      <div class="seo-grid cols-3">
+        <div class="seo-card">
+          <span class="seo-city">Chicago &middot; United States</span>
+          <p>Growth teams preview link cards before a product launch across social channels.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">London &middot; United Kingdom</span>
+          <p>Content marketers check Google and LinkedIn previews before publishing a report.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Berlin &middot; Germany</span>
+          <p>Developers generate complete tag sets and drop them into the page head.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Toronto &middot; Canada</span>
+          <p>Agencies audit client pages for missing or truncated meta tags.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Sydney &middot; Australia</span>
+          <p>Publishers confirm their article cards render correctly on X and Facebook.</p>
+        </div>
+        <div class="seo-card">
+          <span class="seo-city">Madrid &middot; Spain</span>
+          <p>E-commerce teams tune product page descriptions for higher click-through.</p>
+        </div>
+      </div>
+    </div>
+    <div class="seo-block">
+      <span class="seo-eyebrow">FAQ</span>
+      <h2>Meta tag questions, answered</h2>
+      <div class="seo-faq">
+        <details><summary>What are meta tags?</summary><p>Meta tags are pieces of HTML in a page's head that describe the page to search engines and social platforms. They control the title, the description snippet and the image shown when the link is shared.</p></details>
+        <details><summary>What is the difference between standard meta tags and Open Graph?</summary><p>Standard tags such as title and description serve search engines. Open Graph tags serve social platforms, defining the title, description and image used in a shared link card. Twitter cards are a parallel set for X.</p></details>
+        <details><summary>Why does my shared link show the wrong image?</summary><p>Most commonly the og:image URL is missing, too small, or has the wrong aspect ratio, so the platform falls back to another image or none at all. The preview here shows the recommended dimensions so you can fix it.</p></details>
+        <details><summary>How long should a title and description be?</summary><p>Keep titles within roughly sixty characters and descriptions within about one hundred and sixty so they are not truncated. The live preview shows exactly where the cut-off falls for each platform.</p></details>
+        <details><summary>Does it check my tags for problems?</summary><p>Yes. The site health audit scores your tags against common SEO and content fundamentals and lists specific improvements.</p></details>
+        <details><summary>Is my data uploaded?</summary><p>No. Everything is processed in your browser. Your draft URLs and copy are never transmitted, logged or stored.</p></details>
+        <details><summary>Can I copy the generated tags?</summary><p>Yes. The complete tag set is produced in copy-ready form so you can paste it straight into your page head.</p></details>
+        <details><summary>Is the tool free?</summary><p>Yes. It is completely free, needs no signup and carries no ads or tracking.</p></details>
+      </div>
+    </div>
+  </section>
 
 <!-- TF-RELATED -->
 <section class="tf-related" aria-label="Related tools">
@@ -1727,5 +2006,14 @@
 </script>
   <script src="/assets/rating-widget.js" defer></script>
 <script src="/assets/related.js" defer></script>
+<script>
+(function(){
+  var btn=document.getElementById('themeBtn'); if(!btn) return;
+  var sun=document.getElementById('themeIconSun'), moon=document.getElementById('themeIconMoon');
+  function sync(){ var d=document.documentElement.classList.contains('dark'); if(sun) sun.style.display=d?'inline':'none'; if(moon) moon.style.display=d?'none':'inline'; }
+  sync();
+  btn.addEventListener('click',function(){ var d=document.documentElement.classList.toggle('dark'); try{localStorage.setItem('tg-theme',d?'dark':'light');}catch(e){} sync(); });
+})();
+</script>
 </body>
 </html>
